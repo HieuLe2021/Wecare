@@ -9,6 +9,9 @@ const nextConfig = {
     // Available on both server and client
     theme: "DEFAULT",
   },
+  images: {
+    domains: ["wecare.com.vn"],
+  },
 };
 
 module.exports = nextConfig;

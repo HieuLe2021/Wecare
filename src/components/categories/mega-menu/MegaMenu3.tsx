@@ -11,9 +11,10 @@ import { StyledMegaMenu1 } from "./styles";
 import { MegaMenu3Props } from "./type";
 
 import bagImage from "../../../../public/assets/images/products/paper-bag.png";
+import { clsm } from "@component/index";
 
 export default function MegaMenu3({
-  data: { categories, rightImage },
+  data: { categories },
   minWidth = "760px"
 }: MegaMenu3Props) {
   return categories ? (
@@ -21,7 +22,7 @@ export default function MegaMenu3({
       <Card ml="1rem" minWidth={minWidth} boxShadow="regular" overflow="hidden" borderRadius={8}>
         <FlexBox px="1.25rem" py="0.875rem">
           <Box flex="1 1 0">
-            <Grid container spacing={4}>
+            <Grid container spacing={4} className="min-w-[600px]">
               {categories?.map((item, ind) => (
                 <Grid item md={3} key={ind}>
                   {item.href ? (
@@ -29,7 +30,18 @@ export default function MegaMenu3({
                       {item.title}
                     </NavLink>
                   ) : (
-                    <SemiSpan className="title-link">{item.title}</SemiSpan>
+                    <div className={clsm("border rounded-md flex items-center flex-col p-2 h-full gap-2 cursor-pointer", "hover:scale-105")}>
+                      <div className="w-[80px] h-[80px] relative">
+                        {item.imgUrl &&
+                          <NextImage src={item.imgUrl} fill
+                            sizes="80px"
+                            alt={item.title} className="object-cover" />
+                        }
+                      </div>
+                      <SemiSpan className="title-link text-center">
+                        {item.title}
+                      </SemiSpan>
+                    </div>
                   )}
                   {item.subCategories?.map((sub, ind) => (
                     <NavLink key={ind} className="child-link" href={sub.href}>
@@ -40,14 +52,6 @@ export default function MegaMenu3({
               ))}
             </Grid>
           </Box>
-
-          {rightImage && (
-            <Link href={rightImage.href}>
-              <Box position="relative" width="153px" height="100%">
-                <NextImage src={rightImage.imgUrl} fill alt="bonik" />
-              </Box>
-            </Link>
-          )}
         </FlexBox>
 
         <Link href="/sale-page-2">

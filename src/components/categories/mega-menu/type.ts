@@ -1,16 +1,13 @@
-type Image = { href: string; imgUrl: string };
-
 type SubCategory = { href: string; title: string };
 
 type Category = {
   title: string;
   href?: string;
+  imgUrl?: string;
   subCategories: SubCategory[];
 };
 
 type MegaMenu1 = {
-  rightImage?: Image;
-  bottomImage?: Image;
   categories: Category[];
 };
 
@@ -25,6 +22,14 @@ type MegaMenu2 = {
 
 export type MegaMenu2Props = { data: MegaMenu2[] };
 
-type MegaMenu3 = { rightImage?: Image; categories: Category[] };
+type MegaMenu3 = {
+  categories: Category[]
+};
 
 export type MegaMenu3Props = { data: MegaMenu3; minWidth?: string };
+
+export type MenuItem = {
+  icon: string,
+  title: string
+  href: string
+} & (MegaMenu1 | MegaMenu2 | MegaMenu3)

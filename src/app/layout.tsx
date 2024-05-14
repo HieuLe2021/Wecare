@@ -5,6 +5,7 @@ import StyledComponentsRegistry from "@lib/registry";
 // APP PROVIDER
 import { AppProvider } from "@context/app-context";
 import StyledContext from "@context/StyledContext";
+import './global.css'
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
