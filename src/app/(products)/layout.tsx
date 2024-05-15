@@ -1,15 +1,15 @@
-import { PropsWithChildren } from "react";
 import AppLayout from "@component/layout/layout-1";
-import Sticky from "@component/sticky";
-import Navbar from "./_components/Navbar";
 import Container from "@component/Container";
-import { StyledAppLayout } from "./styles";
-import Sidebar from "./_components/Sidebar";
 import Grid from "@component/grid/Grid";
-import Icon from "@component/icon/Icon";
-import Typography from "@component/Typography";
 // import Collections from "./_components/Collections";
 import { Header } from "./_components/header";
+import Icon from "@component/icon/Icon";
+import Navbar from "./_components/Navbar";
+import { PropsWithChildren } from "react";
+import Sidebar from "./_components/Sidebar";
+import Sticky from "@component/sticky";
+import { StyledAppLayout } from "./styles";
+import Typography from "@component/Typography";
 
 export default function Layout({ children }: PropsWithChildren) {
   return <StyledAppLayout>

@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
-import { debounce } from "lodash";
 
 import Box from "@component/Box";
-import Menu from "@component/Menu";
 import Card from "@component/Card";
-import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
+import Icon from "@component/icon/Icon";
+import Link from "next/link";
+import Menu from "@component/Menu";
 import MenuItem from "@component/MenuItem";
 import { Span } from "@component/Typography";
-import TextField from "@component/text-field";
 import StyledSearchBox from "./styled";
+import TextField from "@component/text-field";
+import { debounce } from "lodash";
 
 export default function SearchInputWithCategory() {
   const [resultList, setResultList] = useState<string[]>([]);
-  const [category, setCategory] = useState("All Categories");
+  const [category, setCategory] = useState("Tất cả danh mục");
 
   const handleCategoryChange = (cat: string) => () => setCategory(cat);
 
@@ -48,7 +48,7 @@ export default function SearchInputWithCategory() {
           fullwidth
           onChange={hanldeSearch}
           className="search-field"
-          placeholder="Search and hit enter..."
+          placeholder="Tìm kiếm và nhấn enter..."
         />
 
         <Menu
@@ -84,14 +84,13 @@ export default function SearchInputWithCategory() {
 }
 
 const categories = [
-  "All Categories",
-  "Car",
-  "Clothes",
-  "Electronics",
-  "Laptop",
-  "Desktop",
-  "Camera",
-  "Toys"
+  "Tất cả danh mục",
+  "Hoá chất",
+  "Vật tư tiêu hao",
+  "Kim khí & phụ kiện",
+  "Bao bì",
+  "Công cụ - dụng cụ",
+  "Phụ tùng thay thế"
 ];
 
 const dummySearchResult = ["Macbook Air 13", "Ksus K555LA", "Acer Aspire X453", "iPad Mini 3"];
