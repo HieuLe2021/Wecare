@@ -1,24 +1,23 @@
+import { Breadcrumb } from "@components/breadcrumb";
+import { CarouselProduct } from "./_components/Carousel";
+import CustomTable from "./_components/Table";
 import { Fragment } from "react";
-// API FUNCTIONS
-import api from "@utils/__api__/shops";
 // GLOBAL CUSTOM COMPONENTS
 import Grid from "@component/grid/Grid";
+import Icon from "@component/icon/Icon";
+import { MenuItem } from "@component/categories/mega-menu/type";
+import ProductDetails from "@sections/shop/ProductDetails";
 import ProductFilterCard from "@component/products/ProductFilterCard";
 // PAGE SECTION COMPONENTS
 import ShopIntroCard from "@sections/shop/ShopIntroCard";
-import ProductDetails from "@sections/shop/ProductDetails";
+import Sidebar from "../_components/Sidebar";
+import { SlugParams } from "interfaces";
+import Typography from "@component/Typography";
+// API FUNCTIONS
+import api from "@utils/__api__/shops";
 // CUSTOM DATA MODEL
 import { createClient } from "@utils/supabase/server";
-
-import { SlugParams } from "interfaces";
-import Sidebar from "../_components/Sidebar";
 import navigations from "@data/navigations";
-import { MenuItem } from "@component/categories/mega-menu/type";
-import Icon from "@component/icon/Icon";
-import Typography from "@component/Typography";
-import CustomTable from "./_components/Table";
-import { CarouselProduct } from "./_components/Carousel";
-import { Breadcrumb } from "@components/breadcrumb";
 
 export default async function ProductsPage({
   searchParams,
@@ -37,6 +36,10 @@ export default async function ProductsPage({
   const customerId = searchParams.customer;
   const productGroups = await supabase.from("product_groups").select();
   let productGroupsList = productGroups.data || [];
+  const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
 
   const allBusinessSectors = Array.from(
     new Set<string>(
@@ -180,7 +183,7 @@ export default async function ProductsPage({
 
       {/* <ShopIntroCard /> */}
 
-      <Grid container spacing={6}>
+      <Grid container spacing={6} className="w-[1280px] px-10">
         {/* SHOW IN LARGE DEVICE */}
         {/* <Hidden as={Grid} item md={3} xs={12} down={1024}>
           <ProductFilterCard />
@@ -204,9 +207,9 @@ export default async function ProductsPage({
 
         <Grid item md={9} xs={12}>
 
-        <Breadcrumb data={path} customerId={customerId} />
+          <Breadcrumb data={path} customerId={customerId} />
 
-          <div className="w-full">
+          <div className="w-full px-4">
             <div className="text-4xl font-medium leading-7 text-gray-800 max-md:max-w-full">
               {selectedGroup?.name}
             </div>
@@ -249,10 +252,26 @@ export default async function ProductsPage({
                       <CustomTable data={item.productByMaterial}></CustomTable>
                       {item.children &&
                         item.children.map((grandChild: any) => (
-                          <>
-                            <h6 className="font-semibold text-1xl pl-2">
-                              {grandChild.name ? grandChild.name : "Khác"}
-                            </h6>
+                          <div className="bg-white p-2 rounded-lg	">
+                            <div className="flex gap-4 pl-2 text-xs leading-4 text-gray-800 bg-blend-normal max-md:flex-wrap">
+                              <img
+                                loading="lazy"
+                                srcSet="https://wecare.com.vn/wp-content/uploads/2023/04/Ban_le_xe_tai-removebg-preview-247x296.png"
+                                className="shrink-0 aspect-square w-[120px]"
+                              />
+                              <div className="p-2">
+                                <p className="text-sx underline underline-offset-1 text-blue-500 pb-1 cursor-pointer">Băng keo</p>
+                                <h6 className="font-semibold text-base">
+                                  {grandChild.name ? grandChild.name : "Khác"}
+                                </h6>
+                                <div className="self-start max-md:max-w-full text-sm">
+                                  Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng mẫu
+                                  mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
+                                  nghiệm khách hàng tốt nhất.
+                                </div>
+                                <div className="text-red-500 pt-2 text-base">{formatter.format(40000)} - {formatter.format(140000)}</div>
+                              </div>
+                            </div>
                             <div className="flex mb-2 pl-2">
                               {groupId &&
                                 grandChild.productByMaterial < 1 &&
@@ -285,7 +304,7 @@ export default async function ProductsPage({
                                   </>
                                 )
                               )}
-                          </>
+                          </div>
                         ))}
                     </>
                   ))}
