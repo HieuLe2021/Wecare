@@ -178,12 +178,9 @@ export default async function ProductsPage({
 
   return (
     <Fragment>
-      <div>
-      </div>
 
       {/* <ShopIntroCard /> */}
 
-      <Grid container spacing={6} className="w-[1280px] px-10">
         {/* SHOW IN LARGE DEVICE */}
         {/* <Hidden as={Grid} item md={3} xs={12} down={1024}>
           <ProductFilterCard />
@@ -191,16 +188,7 @@ export default async function ProductsPage({
 
         {/* <Grid item md={3} xs={12}> */}
         {/* </Grid> */}
-        <Grid item md={3} xs={12} className="bg-white rounded-md" spacing={24}>
-          <div className="flex items-center py-2 px-6 bg-blue-50 shadow-md">
-            <Icon>categories</Icon>
-            <Typography ml="10px" flex="1 1 0" fontWeight="600" textAlign="left" color="text.muted">
-              Categories
-            </Typography>
-          </div>
-          <Sidebar menuItems={menuItems} x={sidebarGroups} z={productGroups.data} />
-        </Grid>
-
+        
         {/* <Grid item md={3} xs={12}> */}
         {/*   <ProductFilterCard /> */}
         {/* </Grid> */}
@@ -217,8 +205,8 @@ export default async function ProductsPage({
               <>
                 <div className="mt-2 text-xs leading-4 text-gray-400 max-md:max-w-full">
                   {`${childOfSelectedGroup?.length
-                      ? childOfSelectedGroup?.length
-                      : "0"
+                    ? childOfSelectedGroup?.length
+                    : "0"
                     }`}{" "}
                   loại sản phẩm
                 </div>
@@ -313,7 +301,6 @@ export default async function ProductsPage({
           </div>
           {/*   <ProductDetails shop={shop} /> */}
         </Grid>
-      </Grid>
 
       {/* <Sidebar menuItems={navigations} x={sidebarGroups} z={productGroups.data} /> */}
     </Fragment>
@@ -504,25 +491,25 @@ function genTreeData(productGroupsList: Category[]): MenuItem[] {
         return grandChildItem
       })
 
-      // const childItem = {
-      //   title: child.name,
-      //   href: "",
-      //   subCategories: level_2,
-      // }
-      const childItem: MenuChild = {
-        icon: "man",
+      const childItem = {
         title: child.name,
         href: "",
-        // subCategories: level_2,
-        ...(level_2.length > 0 ? {
-          megaMenu: "MegaMenu1",
-          menuData: {
-            categories: level_2
-          },
-        } : {
-          megaMenu: index,
-        })
+        subCategories: level_2,
       }
+      // const childItem: MenuChild = {
+      //   icon: "man",
+      //   title: child.name,
+      //   href: "",
+      //   // subCategories: level_2,
+      //   ...(level_2.length > 0 ? {
+      //     megaMenu: "MegaMenu1",
+      //     menuData: {
+      //       categories: level_2
+      //     },
+      //   } : {
+      //     megaMenu: index,
+      //   })
+      // }
       return childItem
     })
 
@@ -530,8 +517,8 @@ function genTreeData(productGroupsList: Category[]): MenuItem[] {
       icon: "laptop",
       href: "",
       title: root.name,
-      // ...(level_1.length > 0 ? { menuComponent: "MegaMenu1", menuData: { categories: level_1 } } : { menuComponent: "MegaMenu2", menuData: [] })
-      ...(level_1.length > 0 ? { menuComponent: "MegaMenu2", menuData: level_1 } : { menuComponent: "MegaMenu2", menuData: [] })
+      ...(level_1.length > 0 ? { menuComponent: "MegaMenu1", menuData: { categories: level_1 } } : { menuComponent: "MegaMenu2", menuData: [] })
+      // ...(level_1.length > 0 ? { menuComponent: "MegaMenu2", menuData: level_1 } : { menuComponent: "MegaMenu2", menuData: [] })
     }
     return menuItem
   })
