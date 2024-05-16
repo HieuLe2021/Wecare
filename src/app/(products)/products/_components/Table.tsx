@@ -75,13 +75,13 @@ export default function CustomTable({ data }: { data: any }) {
                 {product.options &&
                   product.options.map((productItem: any) => (
                     <TableRow key={productItem.id}>
-                      <TableCell className="py-2 pr-0">
+                      <TableCell className="p-2">
                         {productItem.thuong_hieu || "----"}
                       </TableCell>
-                      <TableCell className="p-2 px-0 table-cell lg:hidden">
+                      <TableCell className="py-2 pl-2 px-0 table-cell lg:hidden">
                         {productItem.quy_cach} / {productItem.hoan_thien || " "}
                       </TableCell>
-                      <TableCell className="p-2  hidden lg:table-cell">
+                      <TableCell className="py-2  hidden lg:table-cell">
                         {productItem.chat_lieu || "----"}
                       </TableCell>
                       <TableCell className="p-2  hidden lg:table-cell">

@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@components/ui/carousel";
 import { useRouter, useSearchParams } from "next/navigation";
+
 import { cn } from "@utils";
 
 export function CarouselProduct({
@@ -49,7 +50,7 @@ export function CarouselProduct({
                 console.log("item", item);
               }}
               className={cn(
-                "group basis-1/2 md:basis-1/3 lg:basis-1/6 cursor-pointer hover:border-gray-500 border-transparent border rounded-md pt-2 mb-1 mr-1",
+                "group basis-1/2 md:basis-1/3 lg:basis-1/5 cursor-pointer hover:border-gray-500 border-transparent border rounded-md pt-2 mb-1 mr-1",
                 currentChildId === item.id ? "border-gray-500" : "text-gray-400"
               )}
             >
@@ -63,7 +64,7 @@ export function CarouselProduct({
                           ? item.image_url
                           : "https://placehold.co/400"
                       }
-                      className="self-center aspect-[1.11] w-[90px] h-[90px] object-cover group-hover:scale-125 pt-1"
+                      className="self-center aspect-[1.11] w-[80px] h-[80px] object-cover group-hover:scale-125 pt-1"
                     />
                     <div
                       className={cn(

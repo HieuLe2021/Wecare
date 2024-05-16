@@ -37,7 +37,7 @@ const Render = async ({ children }: PropsWithChildren) => {
       {/* <MobileNavigationBar /> */}
 
       <Container my="2rem">
-        <Grid container spacing={6} className="w-[1280px] px-10">
+        <Grid container spacing={6} className="lg:w-[1280px] lg:px-10">
           <Grid
             item
             md={3}
@@ -77,7 +77,7 @@ export default function Layout({ children }) {
     <Suspense
       fallback={
         <Container my="2rem">
-          <Grid container spacing={6} className="w-[1280px] px-10">
+          <Grid container spacing={6} >
             <Grid
               item
               md={3}
@@ -85,7 +85,7 @@ export default function Layout({ children }) {
               className="rounded-md bg-white"
               spacing={24}
             >
-              <div className="flex items-center bg-blue-50 px-6 py-2 shadow-md">
+              {/* <div className="flex items-center bg-blue-50 px-6 py-2 shadow-md">
                 <Icon>categories</Icon>
                 <Typography
                   ml="10px"
@@ -96,7 +96,7 @@ export default function Layout({ children }) {
                 >
                   Categories
                 </Typography>
-              </div>
+              </div> */}
               <CollectionsSkeleton />
               {/* <Sidebar menuItems={menuItems} x={sidebarGroups} z={productGroups.data} /> */}
             </Grid>

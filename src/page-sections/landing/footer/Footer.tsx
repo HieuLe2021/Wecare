@@ -1,5 +1,5 @@
-import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
+import Icon from "@component/icon/Icon";
 // STYLED COMPONENT
 import { Wrapper } from "./styles";
 

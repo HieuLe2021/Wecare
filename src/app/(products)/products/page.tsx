@@ -1,24 +1,23 @@
+import { Breadcrumb } from "@components/breadcrumb";
+import { CarouselProduct } from "./_components/Carousel";
+import CustomTable from "./_components/Table";
 import { Fragment } from "react";
-import { MenuItem } from "@component/categories/mega-menu/type";
 // GLOBAL CUSTOM COMPONENTS
 import Grid from "@component/grid/Grid";
 import Icon from "@component/icon/Icon";
-import ProductFilterCard from "@component/products/ProductFilterCard";
-import Typography from "@component/Typography";
-import { Breadcrumb } from "@components/breadcrumb";
-import navigations from "@data/navigations";
+import { MenuItem } from "@component/categories/mega-menu/type";
 import ProductDetails from "@sections/shop/ProductDetails";
+import ProductFilterCard from "@component/products/ProductFilterCard";
 // PAGE SECTION COMPONENTS
 import ShopIntroCard from "@sections/shop/ShopIntroCard";
+import Sidebar from "../_components/Sidebar";
+import { SlugParams } from "interfaces";
+import Typography from "@component/Typography";
 // API FUNCTIONS
 import api from "@utils/__api__/shops";
 // CUSTOM DATA MODEL
 import { createClient } from "@utils/supabase/server";
-import { SlugParams } from "interfaces";
-
-import Sidebar from "../_components/Sidebar";
-import { CarouselProduct } from "./_components/Carousel";
-import CustomTable from "./_components/Table";
+import navigations from "@data/navigations";
 
 export default async function ProductsPage({
   searchParams,
@@ -185,18 +184,18 @@ export default async function ProductsPage({
       {/* <ShopIntroCard /> */}
 
       {/* SHOW IN LARGE DEVICE */}
-      {/* <Hidden as={Grid} item md={3} xs={12} down={1024}>
-          <ProductFilterCard />
-        </Hidden> */}
+      {/* <Hidden as={Grid} item md={3} xs={12} down={1024}> */}
+          {/* <ProductFilterCard /> */}
+        {/* </Hidden> */}
 
       {/* <Grid item md={3} xs={12}> */}
       {/* </Grid> */}
 
       {/* <Grid item md={3} xs={12}> */}
-      {/*   <ProductFilterCard /> */}
+        {/* <ProductFilterCard /> */}
       {/* </Grid> */}
 
-      <div className="w-full px-4">
+      <div className="w-full lg:px-4">
         <div className="text-4xl font-medium leading-7 text-gray-800 max-md:max-w-full">
           {selectedGroup?.name}
         </div>
