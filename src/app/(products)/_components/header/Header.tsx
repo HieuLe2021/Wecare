@@ -64,7 +64,6 @@ export default function Header({ isFixed, className }: HeaderProps) {
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/" className="flex items-center">
             <Image src="/assets/images/logo.svg" alt="logo" />
-            {/* <p className="text-base bg-gradient-to-r from-sky-500 to-indigo-500">WECARE</p> */}
             <h6 className="text-3xl font-bold bg-gradient-to-r from-sky-400 to-sky-800 text-transparent bg-clip-text leading-[30px]">
               WECARE
             </h6>

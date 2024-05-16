@@ -93,4 +93,4 @@ const categories = [
   "Phụ tùng thay thế"
 ];
 
-const dummySearchResult = ["Macbook Air 13", "Ksus K555LA", "Acer Aspire X453", "iPad Mini 3"];
+const dummySearchResult = ["Băng keo xốp", "Băng keo 2 mặt", "Băng keo giấy", "Băng keo điện"];

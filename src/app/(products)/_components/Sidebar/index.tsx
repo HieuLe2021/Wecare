@@ -1,12 +1,13 @@
 "use client";
 
-import navigations from "@data/navigations";
-import { useRef, useState, useEffect, cloneElement, ReactElement } from "react";
-import styled from "styled-components";
+import { ReactElement, cloneElement, useEffect, useRef, useState } from "react";
 import { getTheme, isValidProp } from "@utils/utils";
-import MenuItem from "./MenuItem";
+
 import MegaMenu1 from "@component/categories/mega-menu/MegaMenu1";
 import MegaMenu2 from "@component/categories/mega-menu/MegaMenu2";
+import MenuItem from "./MenuItem";
+import navigations from "@data/navigations";
+import styled from "styled-components";
 
 // =====================================================================
 type CategoriesProps = {

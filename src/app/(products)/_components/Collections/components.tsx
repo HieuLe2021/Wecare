@@ -1,4 +1,5 @@
 import { getTheme, isValidProp } from "@utils/utils";
+
 import styled from "styled-components";
 
 type CategoryDropdownProps = {
@@ -19,7 +20,7 @@ export const StyledCategoryDropdown = styled.div.withConfig({
   background-color: ${getTheme("colors.body.paper")};
   box-shadow: ${getTheme("shadows.regular")};
   transition: all 250ms ease-in-out;
-  z-index: 98;
+  z-index: 1;
 max-width: 278px;
 `;
 

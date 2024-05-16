@@ -1,17 +1,18 @@
 export const aboutLinks = [
-  "Careers",
-  "Our Stores",
-  "Our Cares",
-  "Terms & Conditions",
-  "Privacy Policy"
+  "Kim khí phụ kiện",
+  "bao bì",
+  "Hoá chất",
+  "Vật tư tiêu hao",
+  "Công cụ - dụng cụ",
+  "Phụ tùng thay thế"
 ];
 
 export const customerCareLinks = [
-  "Help Center",
-  "How to Buy",
-  "Track Your Order",
-  "Corporate & Bulk Purchasing",
-  "Returns & Refunds"
+  "Hướng dẫn mua hàng",
+  "Hình thức thanh toán",
+  "Chính sách giao hàng",
+  "Chính sách bảo hành đổi trả",
+  "Chính sách bảo mật thông tin"
 ];
 
 export const iconList = [

@@ -45,16 +45,16 @@ const Render = async ({ children }: PropsWithChildren) => {
             className="rounded-md bg-white"
             spacing={24}
           >
-            <div className="flex items-center bg-blue-50 px-6 py-2 shadow-md">
+            <div className="flex items-center bg-blue-50 px-3 py-2 shadow-md">
               <Icon>categories</Icon>
               <Typography
                 ml="10px"
                 flex="1 1 0"
                 fontWeight="600"
                 textAlign="left"
-                color="text.muted"
+                // color="text.muted"
               >
-                Categories
+                Danh mục sản phẩm
               </Typography>
             </div>
             <Collections collections={collections} />

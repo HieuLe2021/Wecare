@@ -41,8 +41,8 @@ export default function CustomTable({ data }: { data: any }) {
             </div> */}
             <Table>
               <colgroup>
+                <col width={200} />
                 <col width={140} />
-                <col width={280} />
                 <col width={140} className="table-cell lg:hidden " />
                 <col width={140} className="table-cell sm:hidden" />
                 <col width={300} />
@@ -50,22 +50,22 @@ export default function CustomTable({ data }: { data: any }) {
               </colgroup>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="h-10 px-2 font-medium text-sm">
+                  <TableHead className="h-10 px-2 font-medium text-sm text-black-500">
                     Thương hiệu
                   </TableHead>
-                  <TableHead className="h-10 px-0 font-medium table-cell lg:hidden">
+                  <TableHead className="h-10 px-0 font-medium text-black-500 table-cell lg:hidden">
                     Quy cách / hoàn thiện
                   </TableHead>
-                  <TableHead className="h-10 px-2 text-sm font-medium hidden lg:table-cell ">
-                    Quy cách
-                  </TableHead>
-                  <TableHead className="h-10 px-2 font-medium hidden lg:table-cell">
+                  <TableHead className="h-10 px-2 text-sm font-medium text-black-500 hidden lg:table-cell ">
                     Chất liệu
                   </TableHead>
-                  <TableHead className="h-10 px-2 font-medium hidden lg:table-cell ">
+                  <TableHead className="h-10 px-2 font-medium hidden text-black-500 text-black-500 lg:table-cell">
+                    Quy cách
+                  </TableHead>
+                  <TableHead className="h-10 px-2 font-medium hidden text-black-500 lg:table-cell ">
                     Hoàn thiện
                   </TableHead>
-                  <TableHead className="h-10 px-2 font-medium text-end">
+                  <TableHead className="h-10 px-2 font-medium text-end text-black-500">
                     Giá
                   </TableHead>
                   <TableHead className="h-10 px-2 font-medium"></TableHead>
@@ -82,10 +82,10 @@ export default function CustomTable({ data }: { data: any }) {
                         {productItem.quy_cach} / {productItem.hoan_thien || " "}
                       </TableCell>
                       <TableCell className="p-2  hidden lg:table-cell">
-                        {productItem.quy_cach}
+                        {productItem.chat_lieu || "----"}
                       </TableCell>
                       <TableCell className="p-2  hidden lg:table-cell">
-                        {productItem.chat_lieu || "----"}
+                        {productItem.quy_cach || "----"}
                       </TableCell>
                       <TableCell className="p-2 hidden lg:table-cell">
                         {productItem.hoan_thien || "----"}
