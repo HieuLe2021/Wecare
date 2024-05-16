@@ -196,20 +196,20 @@ export default async function ProductsPage({
       {/* </Grid> */}
 
       <div className="w-full lg:px-4">
-        <div className="text-4xl font-medium leading-7 text-gray-800 max-md:max-w-full">
+        {/* <div className="text-4xl font-medium leading-7 text-gray-800 max-md:max-w-full">
           {selectedGroup?.name}
-        </div>
+        </div> */}
         {childOfSelectedGroup?.length === 0 ? null : (
           <>
             <div className="mt-2 text-xs leading-4 text-gray-400 max-md:max-w-full">
-              {`${
+              {/* {`${
                 childOfSelectedGroup?.length
                   ? childOfSelectedGroup?.length
                   : "0"
               }`}{" "}
-              loại sản phẩm
+              loại sản phẩm */}
             </div>
-            <div className="relative h-40 w-full">
+            <div className="relative h-32 w-full mb-4">
               <div className="absolute inset-0 rounded-xl bg-white max-md:max-w-full max-sm:px-10">
                 <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
                   <CarouselProduct

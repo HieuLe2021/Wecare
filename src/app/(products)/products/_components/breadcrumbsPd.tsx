@@ -6,7 +6,7 @@ import Select from "@component/Select";
 export default function BreadcrumbsPd({resGroups}){
 
     return (
-        <div className="flex col justify-between lg:mx-4 lg:px-4 py-2 mb-2 rounded-lg bg-white">
+        <div className="flex col justify-between lg:mx-4 lg:px-4 pb-2 mb-4 rounded-lg bg-white">
             <div>
                 <Breadcrumb resGroups={resGroups} />
                 <p>30 sản phẩm</p>
