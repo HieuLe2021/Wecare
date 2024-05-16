@@ -2,6 +2,7 @@ import { PropsWithChildren, Suspense } from "react";
 
 import AppLayout from "@component/layout/layout-1";
 import { Breadcrumb } from "./_components/breadcrumbs";
+import BreadcrumbsPd from "./products/_components/breadcrumbsPd";
 import { Category } from "./_components/Collections/types";
 import Collections from "./_components/Collections";
 import { CollectionsSkeleton } from "./_components/Collections/Skeleton";
@@ -11,6 +12,7 @@ import Grid from "@component/grid/Grid";
 import { Header } from "./_components/header";
 import Icon from "@component/icon/Icon";
 import Navbar from "./_components/Navbar";
+import Select from "@component/Select";
 import Sidebar from "./_components/Sidebar";
 import Sticky from "@component/sticky";
 import { StyledAppLayout } from "./styles";
@@ -61,8 +63,7 @@ const Render = async ({ children }: PropsWithChildren) => {
             {/* <Sidebar menuItems={menuItems} x={sidebarGroups} z={productGroups.data} /> */}
           </Grid>
           <Grid item md={9} xs={12}>
-            <Breadcrumb resGroups={resGroups} />
-
+            <BreadcrumbsPd resGroups={resGroups} />
             {children}
           </Grid>
         </Grid>

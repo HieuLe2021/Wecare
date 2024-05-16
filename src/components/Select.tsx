@@ -1,7 +1,7 @@
-import { SpaceProps } from "styled-system";
 import ReactSelect, { Props } from "react-select";
 
 import Box from "@component/Box";
+import { SpaceProps } from "styled-system";
 import Typography from "@component/Typography";
 import { colors } from "@utils/themeColors";
 
@@ -34,6 +34,7 @@ const Select = ({ options, isMulti = false, id, label, errorText, ...props }: Se
       )}
 
       <ReactSelect
+        className="min-w-36"
         isMulti={isMulti}
         options={options}
         styles={customStyles}
