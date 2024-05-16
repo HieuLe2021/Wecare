@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
-import { debounce } from "lodash";
 
 import Box from "@component/Box";
+import { Button } from "@component/buttons";
 import Card from "@component/Card";
 import Icon from "@component/icon/Icon";
+import Link from "next/link";
 import MenuItem from "@component/MenuItem";
-import { Button } from "@component/buttons";
+import SearchBoxStyle from "./styled";
 import { Span } from "@component/Typography";
 import TextField from "@component/text-field";
-import SearchBoxStyle from "./styled";
+import { debounce } from "lodash";
 
 export default function SearchInput() {
   const [resultList, setResultList] = useState<string[]>([]);
@@ -44,7 +44,7 @@ export default function SearchInput() {
           fullwidth
           onChange={hanldeSearch}
           className="search-field"
-          placeholder="Search and hit enter..."
+          placeholder="Tìm kiếm và nhấn enter..."
         />
 
         <Button className="search-button" variant="contained" color="primary">

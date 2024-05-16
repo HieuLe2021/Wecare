@@ -1,30 +1,13 @@
 import { getTheme, isValidProp } from "@utils/utils";
 import styled from "styled-components";
 
-type StyledCategoryProps = { open: boolean };
-
 type CategoryDropdownProps = {
   open: boolean;
   position?: "absolute" | "relative";
 };
-
-export const StyledCategory = styled.div.withConfig({
-  shouldForwardProp: (prop: string) => isValidProp(prop),
-})<StyledCategoryProps>`
-  position: relative;
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  .dropdown-icon {
-    margin-left: 0.25rem;
-    transition: all 250ms ease-in-out;
-    transform: rotate(${(props) => (props.open ? "90deg" : "0deg")});
-  }
-`;
-
 export const StyledCategoryDropdown = styled.div.withConfig({
-  shouldForwardProp: (prop: string) => isValidProp(prop),
-})<CategoryDropdownProps>`
+  shouldForwardProp: (prop: string) => isValidProp(prop)
+}) <CategoryDropdownProps>`
   left: 0;
   right: auto;
   border-radius: 4px;
@@ -32,12 +15,12 @@ export const StyledCategoryDropdown = styled.div.withConfig({
   transform-origin: top;
   position: ${({ position }) => position};
   transform: ${({ open }) => (open ? "scaleY(1)" : "scaleY(0)")};
-  top: ${({ position }) =>
-    position === "absolute" ? "calc(100% + 0.7rem)" : "0.5rem"};
+  top: ${({ position }) => (position === "absolute" ? "calc(100% + 0.7rem)" : "0.5rem")};
   background-color: ${getTheme("colors.body.paper")};
   box-shadow: ${getTheme("shadows.regular")};
   transition: all 250ms ease-in-out;
   z-index: 98;
+max-width: 278px;
 `;
 
 export const StyledMenuItem = styled.div`
@@ -68,3 +51,4 @@ export const StyledMenuItem = styled.div`
     }
   }
 `;
+
