@@ -23,13 +23,15 @@ type MegaMenu2 = {
 export type MegaMenu2Props = { data: MegaMenu2[] };
 
 type MegaMenu3 = {
-  categories: Category[]
+  categories: Category[];
 };
 
 export type MegaMenu3Props = { data: MegaMenu3; minWidth?: string };
 
 export type MenuItem = {
-  icon: string,
-  title: string
-  href: string
-} & (MegaMenu1 | MegaMenu2 | MegaMenu3)
+  icon: string;
+  title: string;
+  href: string;
+  menuData?: any;
+  menuComponent?: any;
+} & (MegaMenu1 | MegaMenu2 | MegaMenu3);
