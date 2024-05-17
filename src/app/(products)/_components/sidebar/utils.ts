@@ -1,9 +1,12 @@
 import { MenuItem } from "@component/categories/mega-menu/type";
+import { Tables } from "@lib/supabase/types";
 import { DANH_MUC_SAN_PHAM_URL } from "app/(products)/config";
 
 import { Category } from "./types";
 
-export function getCollections(productGroupsList: Category[]): MenuItem[] {
+export function getCollections(
+  productGroupsList: Tables<"product_groups">[],
+): MenuItem[] {
   // const menuItems: MenuItem[] = []
   const menuItems = productGroupsList
     .filter((group) => !group.parent_id && group.name)

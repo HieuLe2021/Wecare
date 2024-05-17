@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TRPCReactProvider } from "~/trpc/react";
 import { Open_Sans } from "next/font/google";
 // THEME PROVIDER
 import StyledComponentsRegistry from "@lib/registry";
@@ -23,7 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={openSans.className}>
         <StyledComponentsRegistry>
           <AppProvider>
-            <StyledContext>{children}</StyledContext>
+            <StyledContext>
+              <TRPCReactProvider>{children}</TRPCReactProvider></StyledContext>
           </AppProvider>
         </StyledComponentsRegistry>
       </body>

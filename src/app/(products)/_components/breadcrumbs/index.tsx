@@ -4,10 +4,14 @@ import * as React from "react";
 
 import { useParams, useRouter } from "next/navigation";
 
-import { Category } from "../Collections/types";
-import {getPathOfCurrentSelectedGroup} from './utils'
+import { Tables } from "~/lib/supabase/types";
+import { getPathOfCurrentSelectedGroup } from "./utils";
 
-export function Breadcrumb({ resGroups }: { resGroups: Category[] }) {
+export function Breadcrumb({
+  resGroups,
+}: {
+  resGroups: Tables<"product_groups">[];
+}) {
   const params = useParams();
   console.log("pa", params);
   const customerId = params.customerId || "123123";
