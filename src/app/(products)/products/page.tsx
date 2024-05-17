@@ -7,16 +7,16 @@ import ProductFilterCard from "@component/products/ProductFilterCard";
 import Typography from "@component/Typography";
 import { Breadcrumb } from "@components/breadcrumb";
 import navigations from "@data/navigations";
+// CUSTOM DATA MODEL
+import { createClient } from "@lib/supabase/server";
 import ProductDetails from "@sections/shop/ProductDetails";
 // PAGE SECTION COMPONENTS
 import ShopIntroCard from "@sections/shop/ShopIntroCard";
 // API FUNCTIONS
 import api from "@utils/__api__/shops";
-// CUSTOM DATA MODEL
-import { createClient } from "@utils/supabase/server";
 import { SlugParams } from "interfaces";
 
-import Sidebar from "../_components/Sidebar";
+import Sidebar from "../_components/sidebar_old";
 import { CarouselProduct } from "./_components/Carousel";
 import CustomTable from "./_components/Table";
 
@@ -59,19 +59,18 @@ export default async function ProductsPage({
   }
 
   const groups = prepareTreeData(productGroupsList);
-  const sidebarGroups = JSON.parse(JSON.stringify(groups));
-  const menuItems = genTreeData(productGroupsList);
-  let selectedGroup =
-    groupId &&
-    productGroupsList?.find((group: any) => group.id == groupId && group.name);
-  if (!groupId) {
-    selectedGroup = {
-      name: "Danh mục sản phẩm",
-      id: null,
-      children: groups,
-      productByMaterial: [],
-    };
-  }
+  // let selectedGroup =
+  //   groupId &&
+  //   productGroupsList?.find((group: any) => group.id == groupId && group.name);
+  // let selectedGroup = {}
+  // if (!groupId) {
+  let selectedGroup = {
+    name: "Danh mục sản phẩm",
+    id: null,
+    children: groups,
+    productByMaterial: [],
+  };
+  // }
 
   // calculate path for current selected group
 

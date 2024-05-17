@@ -1,29 +1,25 @@
 import { PropsWithChildren, Suspense } from "react";
-
-import AppLayout from "@component/layout/layout-1";
-import { Breadcrumb } from "./_components/breadcrumbs";
-import BreadcrumbsPd from "./products/_components/breadcrumbsPd";
-import { Category } from "./_components/Collections/types";
-import Collections from "./_components/Collections";
-import { CollectionsSkeleton } from "./_components/Collections/Skeleton";
 import Container from "@component/Container";
-import Footer from "./_components/footer";
 import Grid from "@component/grid/Grid";
-import { Header } from "./_components/header";
 import Icon from "@component/icon/Icon";
-import Navbar from "./_components/Navbar";
-import Select from "@component/Select";
-import Sidebar from "./_components/Sidebar";
+import AppLayout from "@component/layout/layout-1";
 import Sticky from "@component/sticky";
-import { StyledAppLayout } from "./styles";
 import Typography from "@component/Typography";
-import { createClient } from "@utils/supabase/server";
-import { getCollections } from "./_components/Collections/utils";
+import { createClient } from "@lib/supabase/server";
+
+import { Breadcrumb } from "./_components/breadcrumbs";
+import Footer from "./_components/footer";
+import { Header } from "./_components/header";
+import Navbar from "./_components/Navbar";
+import { Sidebar } from "./_components/sidebar";
+import { CollectionsSkeleton } from "./_components/sidebar/Skeleton";
+import { getCollections } from "./_components/sidebar/utils";
+import BreadcrumbsPd from "./products/_components/breadcrumbsPd";
+import { StyledAppLayout } from "./styles";
 
 const Render = async ({ children }: PropsWithChildren) => {
   const supabase = createClient();
-  const resGroups = ((await supabase.from("product_groups").select()).data ??
-    []) as Category[];
+  const resGroups = (await supabase.from("product_groups").select()).data ?? [];
   const collections = getCollections(resGroups);
 
   return (
@@ -59,8 +55,7 @@ const Render = async ({ children }: PropsWithChildren) => {
                 Danh mục sản phẩm
               </Typography>
             </div>
-            <Collections collections={collections} />
-            {/* <Sidebar menuItems={menuItems} x={sidebarGroups} z={productGroups.data} /> */}
+            <Sidebar collections={collections} />
           </Grid>
           <Grid item md={9} xs={12}>
             <BreadcrumbsPd resGroups={resGroups} />
@@ -78,7 +73,7 @@ export default function Layout({ children }) {
     <Suspense
       fallback={
         <Container my="2rem">
-          <Grid container spacing={6} >
+          <Grid container spacing={6}>
             <Grid
               item
               md={3}
