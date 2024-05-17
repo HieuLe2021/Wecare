@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import Box from "@component/Box";
+import Card from "@component/Card";
+import FlexBox from "@component/FlexBox";
+import Icon from "@component/icon/Icon";
+import Menu from "@component/Menu";
+import MenuItem from "@component/MenuItem";
+import TextField from "@component/text-field";
+import { Span } from "@component/Typography";
 import { debounce } from "lodash";
 
-import Box from "@component/Box";
-import Menu from "@component/Menu";
-import Card from "@component/Card";
-import Icon from "@component/icon/Icon";
-import FlexBox from "@component/FlexBox";
-import MenuItem from "@component/MenuItem";
-import { Span } from "@component/Typography";
-import TextField from "@component/text-field";
 import StyledSearchBox from "./styled";
 
 export default function SearchInputWithCategory() {
   const [resultList, setResultList] = useState<string[]>([]);
-  const [category, setCategory] = useState("All Categories");
+  const [category, setCategory] = useState("Tất cả danh mục");
 
   const handleCategoryChange = (cat: string) => () => setCategory(cat);
 
@@ -48,7 +48,7 @@ export default function SearchInputWithCategory() {
           fullwidth
           onChange={hanldeSearch}
           className="search-field"
-          placeholder="Search and hit enter..."
+          placeholder="Tìm kiếm và nhấn enter..."
         />
 
         <Menu
@@ -59,7 +59,8 @@ export default function SearchInputWithCategory() {
               <span>{category}</span>
               <Icon variant="small">chevron-down</Icon>
             </FlexBox>
-          }>
+          }
+        >
           {categories.map((item) => (
             <MenuItem key={item} onClick={handleCategoryChange(item)}>
               {item}
@@ -68,7 +69,7 @@ export default function SearchInputWithCategory() {
         </Menu>
       </StyledSearchBox>
 
-      {!!resultList.length && (
+      {/* {!!resultList.length && (
         <Card position="absolute" top="100%" py="0.5rem" width="100%" boxShadow="large" zIndex={99}>
           {resultList.map((item) => (
             <Link href={`/product/search/${item}`} key={item}>
@@ -78,20 +79,24 @@ export default function SearchInputWithCategory() {
             </Link>
           ))}
         </Card>
-      )}
+      )} */}
     </Box>
   );
 }
 
 const categories = [
-  "All Categories",
-  "Car",
-  "Clothes",
-  "Electronics",
-  "Laptop",
-  "Desktop",
-  "Camera",
-  "Toys"
+  "Tất cả danh mục",
+  "Hoá chất",
+  "Vật tư tiêu hao",
+  "Kim khí & phụ kiện",
+  "Bao bì",
+  "Công cụ - dụng cụ",
+  "Phụ tùng thay thế",
 ];
 
-const dummySearchResult = ["Macbook Air 13", "Ksus K555LA", "Acer Aspire X453", "iPad Mini 3"];
+const dummySearchResult = [
+  "Băng keo xốp",
+  "Băng keo 2 mặt",
+  "Băng keo giấy",
+  "Băng keo điện",
+];

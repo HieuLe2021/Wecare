@@ -185,32 +185,32 @@ export default async function ProductsPage({
       {/* <ShopIntroCard /> */}
 
       {/* SHOW IN LARGE DEVICE */}
-      {/* <Hidden as={Grid} item md={3} xs={12} down={1024}>
-          <ProductFilterCard />
-        </Hidden> */}
+      {/* <Hidden as={Grid} item md={3} xs={12} down={1024}> */}
+      {/* <ProductFilterCard /> */}
+      {/* </Hidden> */}
 
       {/* <Grid item md={3} xs={12}> */}
       {/* </Grid> */}
 
       {/* <Grid item md={3} xs={12}> */}
-      {/*   <ProductFilterCard /> */}
+      {/* <ProductFilterCard /> */}
       {/* </Grid> */}
 
-      <div className="w-full px-4">
-        <div className="text-4xl font-medium leading-7 text-gray-800 max-md:max-w-full">
+      <div className="w-full lg:px-4">
+        {/* <div className="text-4xl font-medium leading-7 text-gray-800 max-md:max-w-full">
           {selectedGroup?.name}
-        </div>
+        </div> */}
         {childOfSelectedGroup?.length === 0 ? null : (
           <>
             <div className="mt-2 text-xs leading-4 text-gray-400 max-md:max-w-full">
-              {`${
+              {/* {`${
                 childOfSelectedGroup?.length
                   ? childOfSelectedGroup?.length
                   : "0"
               }`}{" "}
-              loại sản phẩm
+              loại sản phẩm */}
             </div>
-            <div className="relative h-40 w-full">
+            <div className="relative mb-4 h-32 w-full">
               <div className="absolute inset-0 rounded-xl bg-white max-md:max-w-full max-sm:px-10">
                 <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
                   <CarouselProduct
