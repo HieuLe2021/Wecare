@@ -1,22 +1,23 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import Box from "@component/Box";
+import { IconButton } from "@component/buttons";
 import Categories from "@component/categories/Categories";
 import Container from "@component/Container";
 import FlexBox from "@component/FlexBox";
 import Icon from "@component/icon/Icon";
-import { IconButton } from "@component/buttons";
 import Image from "@component/Image";
-import Link from "next/link";
-import Login from "@sections/auth/Login";
 import MiniCart from "@component/mini-cart";
 import { SearchInputWithCategory } from "@component/search-box";
 import Sidenav from "@component/sidenav/Sidenav";
-import StyledHeader from "./styles";
 import { Tiny } from "@component/Typography";
-import UserLoginDialog from "./LoginDialog";
 import { useAppContext } from "@context/app-context";
-import { useState } from "react";
+import Login from "@sections/auth/Login";
+
+import UserLoginDialog from "./LoginDialog";
+import StyledHeader from "./styles";
 
 // ====================================================================
 type HeaderProps = { isFixed?: boolean; className?: string };
@@ -43,7 +44,8 @@ export default function Header({ isFixed, className }: HeaderProps) {
           borderRadius="50%"
           alignItems="center"
           position="absolute"
-          justifyContent="center">
+          justifyContent="center"
+        >
           <Tiny color="white" fontWeight="600" lineHeight={1}>
             {state.cart.length}
           </Tiny>
@@ -60,11 +62,16 @@ export default function Header({ isFixed, className }: HeaderProps) {
 
   return (
     <StyledHeader className={className}>
-      <Container display="flex" alignItems="center" justifyContent="space-between" height="100%">
-        <FlexBox className="logo" alignItems="center" mr="1rem">
+      <Container
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        height="100%"
+      >
+        <FlexBox className="px-10" alignItems="center" mr="1rem">
           <Link href="/" className="flex items-center">
             <Image src="/assets/images/logo.svg" alt="logo" />
-            <h6 className="text-3xl font-bold bg-gradient-to-r from-sky-400 to-sky-800 text-transparent bg-clip-text leading-[30px]">
+            <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
               WECARE
             </h6>
           </Link>
@@ -97,7 +104,8 @@ export default function Header({ isFixed, className }: HeaderProps) {
             width={380}
             position="right"
             handle={CART_HANDLE}
-            toggleSidenav={toggleSidenav}>
+            toggleSidenav={toggleSidenav}
+          >
             <MiniCart toggleSidenav={toggleSidenav} />
           </Sidenav>
         </FlexBox>
