@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
-
+import Link from "next/link";
 import Box from "@component/Box";
 import Card from "@component/Card";
 import FlexBox from "@component/FlexBox";
 import Icon from "@component/icon/Icon";
-import Link from "next/link";
 import Menu from "@component/Menu";
 import MenuItem from "@component/MenuItem";
-import { Span } from "@component/Typography";
-import StyledSearchBox from "./styled";
 import TextField from "@component/text-field";
+import { Span } from "@component/Typography";
 import { debounce } from "lodash";
+
+import StyledSearchBox from "./styled";
 
 export default function SearchInputWithCategory() {
   const [resultList, setResultList] = useState<string[]>([]);
@@ -59,7 +59,8 @@ export default function SearchInputWithCategory() {
               <span>{category}</span>
               <Icon variant="small">chevron-down</Icon>
             </FlexBox>
-          }>
+          }
+        >
           {categories.map((item) => (
             <MenuItem key={item} onClick={handleCategoryChange(item)}>
               {item}
@@ -68,7 +69,7 @@ export default function SearchInputWithCategory() {
         </Menu>
       </StyledSearchBox>
 
-      {!!resultList.length && (
+      {/* {!!resultList.length && (
         <Card position="absolute" top="100%" py="0.5rem" width="100%" boxShadow="large" zIndex={99}>
           {resultList.map((item) => (
             <Link href={`/product/search/${item}`} key={item}>
@@ -78,7 +79,7 @@ export default function SearchInputWithCategory() {
             </Link>
           ))}
         </Card>
-      )}
+      )} */}
     </Box>
   );
 }
@@ -90,7 +91,12 @@ const categories = [
   "Kim khí & phụ kiện",
   "Bao bì",
   "Công cụ - dụng cụ",
-  "Phụ tùng thay thế"
+  "Phụ tùng thay thế",
 ];
 
-const dummySearchResult = ["Băng keo xốp", "Băng keo 2 mặt", "Băng keo giấy", "Băng keo điện"];
+const dummySearchResult = [
+  "Băng keo xốp",
+  "Băng keo 2 mặt",
+  "Băng keo giấy",
+  "Băng keo điện",
+];

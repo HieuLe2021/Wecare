@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-
+import Link from "next/link";
 import Box from "@component/Box";
 import { Button } from "@component/buttons";
 import Card from "@component/Card";
 import Icon from "@component/icon/Icon";
-import Link from "next/link";
 import MenuItem from "@component/MenuItem";
-import SearchBoxStyle from "./styled";
-import { Span } from "@component/Typography";
 import TextField from "@component/text-field";
+import { Span } from "@component/Typography";
 import { debounce } from "lodash";
+
+import SearchBoxStyle from "./styled";
 
 export default function SearchInput() {
   const [resultList, setResultList] = useState<string[]>([]);
@@ -57,18 +57,30 @@ export default function SearchInput() {
       </SearchBoxStyle>
 
       {!!resultList.length && (
-        <Card position="absolute" top="100%" py="0.5rem" width="100%" boxShadow="large" zIndex={99}>
-          {resultList.map((item) => (
+        <Card
+          position="absolute"
+          top="100%"
+          py="0.5rem"
+          width="100%"
+          boxShadow="large"
+          zIndex={99}
+        >
+          {/* {resultList.map((item) => (
             <Link href={`/product/search/${item}`} key={item}>
               <MenuItem key={item}>
                 <Span fontSize="14px">{item}</Span>
               </MenuItem>
             </Link>
-          ))}
+          ))} */}
         </Card>
       )}
     </Box>
   );
 }
 
-const dummySearchResult = ["Macbook Air 13", "Ksus K555LA", "Acer Aspire X453", "iPad Mini 3"];
+const dummySearchResult = [
+  "Macbook Air 13",
+  "Ksus K555LA",
+  "Acer Aspire X453",
+  "iPad Mini 3",
+];
