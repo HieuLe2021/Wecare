@@ -1,23 +1,24 @@
-import { Breadcrumb } from "@components/breadcrumb";
-import { CarouselProduct } from "./_components/Carousel";
-import CustomTable from "./_components/Table";
 import { Fragment } from "react";
+import { MenuItem } from "@component/categories/mega-menu/type";
 // GLOBAL CUSTOM COMPONENTS
 import Grid from "@component/grid/Grid";
 import Icon from "@component/icon/Icon";
-import { MenuItem } from "@component/categories/mega-menu/type";
-import ProductDetails from "@sections/shop/ProductDetails";
 import ProductFilterCard from "@component/products/ProductFilterCard";
+import Typography from "@component/Typography";
+import { Breadcrumb } from "@components/breadcrumb";
+import navigations from "@data/navigations";
+import ProductDetails from "@sections/shop/ProductDetails";
 // PAGE SECTION COMPONENTS
 import ShopIntroCard from "@sections/shop/ShopIntroCard";
-import Sidebar from "../_components/Sidebar";
-import { SlugParams } from "interfaces";
-import Typography from "@component/Typography";
 // API FUNCTIONS
 import api from "@utils/__api__/shops";
 // CUSTOM DATA MODEL
 import { createClient } from "@utils/supabase/server";
-import navigations from "@data/navigations";
+import { SlugParams } from "interfaces";
+
+import Sidebar from "../_components/Sidebar";
+import { CarouselProduct } from "./_components/Carousel";
+import CustomTable from "./_components/Table";
 
 export default async function ProductsPage({
   searchParams,
@@ -185,14 +186,14 @@ export default async function ProductsPage({
 
       {/* SHOW IN LARGE DEVICE */}
       {/* <Hidden as={Grid} item md={3} xs={12} down={1024}> */}
-          {/* <ProductFilterCard /> */}
-        {/* </Hidden> */}
+      {/* <ProductFilterCard /> */}
+      {/* </Hidden> */}
 
       {/* <Grid item md={3} xs={12}> */}
       {/* </Grid> */}
 
       {/* <Grid item md={3} xs={12}> */}
-        {/* <ProductFilterCard /> */}
+      {/* <ProductFilterCard /> */}
       {/* </Grid> */}
 
       <div className="w-full lg:px-4">
@@ -209,7 +210,7 @@ export default async function ProductsPage({
               }`}{" "}
               loại sản phẩm */}
             </div>
-            <div className="relative h-32 w-full mb-4">
+            <div className="relative mb-4 h-32 w-full">
               <div className="absolute inset-0 rounded-xl bg-white max-md:max-w-full max-sm:px-10">
                 <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
                   <CarouselProduct

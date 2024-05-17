@@ -26,13 +26,32 @@ export function CarouselProduct({
   const currentChildId = searchParams.get("child");
 
   const router = useRouter();
-  const onClickItem = (id: any) => {
-    const url = groupId
-      ? `/home?group=${groupId}&customer=${customerId}&child=${id}`
-      : `/home?customer=${customerId}&group=${id}`;
-    router.push(url);
-  };
-  const [arrCheckItem, setArrCheckItem] = React.useState([]);
+  // const onClickItem = (id: any) => {
+  //   const url = groupId
+  //     ? `/home?group=${groupId}&customer=${customerId}&child=${id}`
+  //     : `/home?customer=${customerId}&group=${id}`;
+  //   router.push(url);
+  // };
+  const groupIds = searchParams.get("group_ids")?.split(",") ?? [];
+
+  const onSelectLeafGroupHandler = React.useCallback(
+    (selectedId: string) => {
+      console.log("???", selectedId);
+      let newGroupIds = [...groupIds];
+      if (newGroupIds.includes(selectedId)) {
+        newGroupIds = newGroupIds.filter((x) => x !== selectedId);
+      } else {
+        newGroupIds.push(selectedId);
+      }
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("group_ids", newGroupIds.join(","));
+
+      console.log("aaa", params.toString());
+      router.push(`/products?${params.toString()}`);
+    },
+    [searchParams, groupIds],
+  );
+
   return (
     <Carousel
       opts={{
@@ -46,25 +65,20 @@ export function CarouselProduct({
             <CarouselItem
               key={item.id}
               onClick={() => {
-                // onClickItem(item.id);
-                if (arrCheckItem.includes(item.id)) {
-                  setArrCheckItem((pre) => pre.filter((x) => x !== item.id));
-                } else {
-                  setArrCheckItem((pre) => [...pre, item.id]);
-                }
+                onSelectLeafGroupHandler(item.id);
               }}
               className={cn(
                 "group relative mb-1 mr-1 basis-1/2 cursor-pointer rounded-md border border-transparent pt-2 hover:border-blue-500 md:basis-1/3 lg:basis-1/5",
                 currentChildId === item.id
                   ? "border-blue-500"
                   : "text-gray-400",
-                arrCheckItem.includes(item.id) && "border-blue-500",
+                groupIds.includes(item.id) && "border-blue-500",
               )}
             >
               <div className="flex justify-center">
                 <div className="flex w-[125px] flex-col">
                   <div className="flex grow flex-col bg-white py-0.5 text-center text-xs font-medium leading-4 text-sky-700 max-md:mt-4">
-                    {arrCheckItem.includes(item.id) && (
+                    {groupIds.includes(item.id) && (
                       <Image
                         className="absolute right-0 top-0 h-5 w-5"
                         src="/assets/images/wc-icon/check-tick.svg"
