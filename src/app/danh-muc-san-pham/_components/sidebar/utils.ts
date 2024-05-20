@@ -39,10 +39,20 @@ export function getCollections(
           return childItem;
         });
 
+      let count = 0;
+      level_1.forEach((x) => {
+        if (x.subCategories.length === 0) {
+          count += 1;
+        } else {
+          count += x.subCategories.length;
+        }
+      });
+
       const menuItem: MenuItem = {
         icon: "laptop",
         href: "/" + DANH_MUC_SAN_PHAM_URL + "/" + root.id,
         title: root.name || "",
+        count: count,
         ...(level_1.length > 0
           ? { menuComponent: "MegaMenu1", menuData: { categories: level_1 } }
           : { menuComponent: "MegaMenu2", menuData: [] }),
