@@ -9,10 +9,15 @@ import { PriceTable } from "./PriceTable";
 export const Content = async ({
   params,
 }: {
-  params: { level1Slug: string };
+  params: { level1Slug?: string; level2Slug?: string };
 }) => {
   const supabase = createClient();
-  const childNodes = await getLeafNode(params.level1Slug);
+  const childNodes = await getLeafNode(
+    params.level1Slug ?? params.level2Slug ?? "",
+  );
+
+  console.log("params.level1Slug:", params.level1Slug);
+  console.log("params.level2Slug:", params.level2Slug);
 
   const priceTablesQuery = await Promise.all(
     childNodes.map((node) => {

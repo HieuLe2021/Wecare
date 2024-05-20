@@ -4,7 +4,7 @@ import Select from "@component/Select";
 
 import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
 
-export const Topbar = ({ resGroups }) => {
+export const Topbar = ({ resGroups }: any) => {
   return (
     <div className="col mb-4 flex justify-between rounded-lg bg-white pb-2 lg:mx-4 lg:px-4">
       <div>
