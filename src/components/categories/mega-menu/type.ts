@@ -32,6 +32,7 @@ export type MenuItem = {
   icon: string;
   title: string;
   href: string;
+  count: number;
   menuData?: any;
-  menuComponent?: any;
+  menuComponent: "MegaMenu1" | "MegaMenu2";
 } & (MegaMenu1 | MegaMenu2 | MegaMenu3);

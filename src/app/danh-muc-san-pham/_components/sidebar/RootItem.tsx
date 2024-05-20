@@ -3,18 +3,17 @@ import Icon from "@component/icon/Icon";
 
 import { StyledMenuItem } from "./components";
 
-// ===============================================================
-type CategoryMenuItemProps = {
+type CategoryRootItemProps = {
   href: string;
   icon?: string;
   title: string;
   caret?: boolean;
+  count: number;
   children: any;
 };
-// ===============================================================
 
-export default function RootItem(props: CategoryMenuItemProps) {
-  const { href, icon, title, caret = true, children } = props;
+export default function RootItem(props: CategoryRootItemProps) {
+  const { href, icon, title, caret = true, children, count } = props;
 
   return (
     <StyledMenuItem>
@@ -22,6 +21,7 @@ export default function RootItem(props: CategoryMenuItemProps) {
         <div className="category-dropdown-link">
           {icon && <Icon variant="small">{icon}</Icon>}
           <span className="title">{title}</span>
+          <span>({count})</span>
           {caret && <Icon variant="small">chevron-right</Icon>}
         </div>
       </Link>

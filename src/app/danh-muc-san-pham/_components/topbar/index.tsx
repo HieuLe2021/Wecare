@@ -1,9 +1,10 @@
 "use client";
 
 import Select from "@component/Select";
-import { Breadcrumb } from "app/(products)/_components/breadcrumbs";
 
-export default function BreadcrumbsPd({ resGroups }) {
+import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
+
+export const Topbar = ({ resGroups }) => {
   return (
     <div className="col mb-4 flex justify-between rounded-lg bg-white pb-2 lg:mx-4 lg:px-4">
       <div>
@@ -20,7 +21,7 @@ export default function BreadcrumbsPd({ resGroups }) {
       </div>
     </div>
   );
-}
+};
 
 const sortOptions = [
   { label: "Tất cả", value: "Tất cả" },

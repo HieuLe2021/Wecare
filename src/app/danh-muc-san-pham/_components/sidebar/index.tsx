@@ -22,6 +22,7 @@ export const Sidebar = ({ collections }: { collections: MenuItem[] }) => {
             icon={item.icon}
             title={item.title}
             caret={!!item.menuData}
+            count={item.count}
           >
             <MegaMenu data={item.menuData || {}} />
           </RootItem>
