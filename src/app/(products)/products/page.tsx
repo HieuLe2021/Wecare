@@ -16,8 +16,8 @@ import ShopIntroCard from "@sections/shop/ShopIntroCard";
 import api from "@utils/__api__/shops";
 import { SlugParams } from "interfaces";
 
+import { LeafCarousel } from "../_components/leaf-carousel";
 import Sidebar from "../_components/sidebar_old";
-import { CarouselProduct } from "./_components/Carousel";
 import CustomTable from "./_components/Table";
 
 export default async function ProductsPage({
@@ -212,7 +212,7 @@ export default async function ProductsPage({
             <div className="relative mb-4 h-32 w-full">
               <div className="absolute inset-0 rounded-xl bg-white max-md:max-w-full max-sm:px-10">
                 <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
-                  <CarouselProduct
+                  <LeafCarousel
                     data={childOfSelectedGroup || []}
                     customerId={customerId}
                     groupId={groupId}

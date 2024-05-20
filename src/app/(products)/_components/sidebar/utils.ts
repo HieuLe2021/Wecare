@@ -2,8 +2,6 @@ import { MenuItem } from "@component/categories/mega-menu/type";
 import { Tables } from "@lib/supabase/types";
 import { DANH_MUC_SAN_PHAM_URL } from "app/(products)/config";
 
-import { Category } from "./types";
-
 export function getCollections(
   productGroupsList: Tables<"product_groups">[],
 ): MenuItem[] {
@@ -49,8 +47,8 @@ export function getCollections(
 
       const menuItem: MenuItem = {
         icon: "laptop",
-        href: DANH_MUC_SAN_PHAM_URL + root.id,
-        title: root.name,
+        href: "/" + DANH_MUC_SAN_PHAM_URL + root.id,
+        title: root.name || "",
         ...(level_1.length > 0
           ? { menuComponent: "MegaMenu1", menuData: { categories: level_1 } }
           : { menuComponent: "MegaMenu2", menuData: [] }),
