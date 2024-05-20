@@ -128,7 +128,6 @@ export type Database = {
       }
       product_groups: {
         Row: {
-          code: number | null
           id: string
           image_url: string | null
           is_leaf: boolean | null
@@ -137,9 +136,9 @@ export type Database = {
           name: string | null
           nganh_nghe: string | null
           parent_id: string | null
+          pos: number | null
         }
         Insert: {
-          code?: number | null
           id?: string
           image_url?: string | null
           is_leaf?: boolean | null
@@ -148,9 +147,9 @@ export type Database = {
           name?: string | null
           nganh_nghe?: string | null
           parent_id?: string | null
+          pos?: number | null
         }
         Update: {
-          code?: number | null
           id?: string
           image_url?: string | null
           is_leaf?: boolean | null
@@ -159,6 +158,7 @@ export type Database = {
           name?: string | null
           nganh_nghe?: string | null
           parent_id?: string | null
+          pos?: number | null
         }
         Relationships: []
       }
@@ -341,7 +341,7 @@ export type Database = {
       node_info: {
         id: string | null
         name: string | null
-        image: string | null
+        image_url: string | null
         pos: number | null
       }
     }

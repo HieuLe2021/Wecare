@@ -1,6 +1,8 @@
 import { createClient } from "@lib/supabase/server";
 
 import { Tables } from "~/lib/supabase/types";
+import { getLeafNode } from "../../utils";
+import { LeafCarousel } from "../leaf-carousel";
 import { PriceTable } from "./PriceTable";
 
 export const Content = async ({
@@ -9,14 +11,7 @@ export const Content = async ({
   params: { level1Slug: string };
 }) => {
   const supabase = createClient();
-  const menuNodesQuery = await supabase
-    .from("menu_nodes")
-    .select("*")
-    .eq("id", params.level1Slug)
-    .order("pos", { ascending: true });
-
-  // const childNodes = menuNodesQuery.data && menuNodesQuery.data[0]  && menuNodesQuery.data[0].child_nodes ?  menuNodesQuery.data[0].child_nodes : []
-  const childNodes = menuNodesQuery?.data?.[0]?.child_nodes ?? [];
+  const childNodes = await getLeafNode(params.level1Slug);
 
   const priceTablesQuery = await Promise.all(
     childNodes.map((node) => {
@@ -28,24 +23,9 @@ export const Content = async ({
     }),
   );
 
-  console.log(
-    "xxxx",
-    childNodes.length,
-    priceTablesQuery.length,
-    priceTablesQuery[7]?.data,
-  );
   return (
     <>
-      {params.level1Slug}
-      {childNodes.map((node, index) => {
-        return (
-          <div>
-            {index}
-            {node.id}
-            {node.name}
-          </div>
-        );
-      })}
+      {/* {params.level1Slug} */}
 
       {/* <PriceTable */}
       {/*   material="123" */}
@@ -54,7 +34,7 @@ export const Content = async ({
       {/*     .map((query) => query!.data![0]!)} */}
       {/* /> */}
       {priceTablesQuery
-        .filter((query) => !!query?.data?.[0])
+        // .filter((query) => !!query?.data?.[0])
         .map((query, index) => {
           const products = query.data ?? [];
           const groupedByChatLieu: Record<string, Tables<"products">[]> = {};
