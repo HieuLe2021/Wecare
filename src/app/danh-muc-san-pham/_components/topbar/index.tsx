@@ -1,7 +1,8 @@
 "use client";
 
 import Select from "@component/Select";
-import { Breadcrumb } from "app/(products)/_components/breadcrumbs";
+
+import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
 
 export const Topbar = ({ resGroups }) => {
   return (

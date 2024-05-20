@@ -16,8 +16,8 @@ import ShopIntroCard from "@sections/shop/ShopIntroCard";
 import api from "@utils/__api__/shops";
 import { SlugParams } from "interfaces";
 
-import { LeafCarousel } from "../_components/leaf-carousel";
-import Sidebar from "../_components/sidebar_old";
+import Sidebar from "../(products)/_components/sidebar_old";
+import { LeafCarousel } from "./_components/leaf-carousel";
 import CustomTable from "./_components/Table";
 
 export default async function ProductsPage({
