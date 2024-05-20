@@ -68,7 +68,7 @@ export default function Header({ isFixed, className }: HeaderProps) {
         justifyContent="space-between"
         height="100%"
       >
-        <FlexBox className="px-10" alignItems="center" mr="1rem">
+        <FlexBox className="pl-[2.7rem] pr-20" alignItems="center" mr="1rem">
           <Link href="/" className="flex items-center">
             <Image src="/assets/images/logo.svg" alt="logo" />
             <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">

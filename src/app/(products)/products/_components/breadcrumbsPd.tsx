@@ -6,14 +6,18 @@ import { Breadcrumb } from "app/(products)/_components/breadcrumbs";
 export default function BreadcrumbsPd({ resGroups }) {
   return (
     <div className="col mb-4 flex justify-between rounded-lg bg-white pb-2 lg:mx-4 lg:px-4">
-      {/* <div>
-                <Breadcrumb resGroups={resGroups} />
-                <p>30 sản phẩm</p>
-            </div>
-            <div className="flex row items-center">
-                <p className="pr-2">Ngành nghề:</p>
-                <Select placeholder="Tất cả" defaultValue={sortOptions[0]} options={sortOptions} />
-            </div> */}
+      <div>
+        <Breadcrumb resGroups={resGroups} />
+        <p>30 sản phẩm</p>
+      </div>
+      <div className="row flex items-center">
+        <p className="pr-2">Ngành nghề:</p>
+        <Select
+          placeholder="Tất cả"
+          defaultValue={sortOptions[0]}
+          options={sortOptions}
+        />
+      </div>
     </div>
   );
 }
