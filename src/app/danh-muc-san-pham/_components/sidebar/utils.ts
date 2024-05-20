@@ -31,9 +31,18 @@ export function getCollections(
               return grandChildItem;
             });
 
+          const href =
+            level_2.length === 0
+              ? "/" +
+                DANH_MUC_SAN_PHAM_URL +
+                "/" +
+                root.id +
+                "?groupIds=" +
+                child.id
+              : "/" + DANH_MUC_SAN_PHAM_URL + "/" + root.id + "/" + child.id;
           const childItem = {
             title: child.name,
-            href: "/" + DANH_MUC_SAN_PHAM_URL + "/" + root.id + "/" + child.id,
+            href,
             subCategories: level_2,
           };
           return childItem;
