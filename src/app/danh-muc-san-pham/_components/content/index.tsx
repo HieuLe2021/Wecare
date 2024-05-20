@@ -47,7 +47,7 @@ export const Content = async ({
             groupedByChatLieu[chatLieu]!.push(product);
           });
           return (
-            <div>
+            <div key={childNodes[index]!.id}>
               <div>{childNodes[index]!.name}</div>
               {Object.entries(groupedByChatLieu).map(([key, value]) => {
                 return <PriceTable material={key} key={index} data={value} />;
