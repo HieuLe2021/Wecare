@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
 import { Tables } from "~/lib/supabase/types";
@@ -28,19 +29,28 @@ export function Breadcrumb({
   const onClickItem = (id: any) => {
     let url = `/danh-muc-san-pham?group=${id}&customer=${customerId}`;
     if (!id) {
-      url = `/danh-muc-san-pham?customer=${customerId}`;
+      url = `/danh-muc-san-pham`;
     }
     router.push(url);
   };
+
   return (
-    <div className="flex cursor-pointer items-center gap-1 py-1.5 text-sm font-semibold leading-5 text-sky-800 bg-blend-normal max-md:flex-wrap">
-      <div onClick={() => onClickItem(null)}>Danh mục sản phẩm</div>
-      <div onClick={() => onClickItem(params.level1Slug)}>
+    <div className="flex items-center gap-1 py-1.5 text-sm font-semibold leading-5 text-sky-800 bg-blend-normal max-md:flex-wrap">
+      <Link className="text-sky-800" href="/danh-muc-san-pham">
+        Danh mục sản phẩm
+      </Link>
+      <Link
+        className="text-sky-800"
+        href={`/danh-muc-san-pham?group=${params.level1Slug}&customer=${customerId}`}
+      >
         {grandParentlevel1Slug && `/ ${grandParentlevel1Slug["name"]}`}
-      </div>
-      <div onClick={() => onClickItem(params.level1Slug)}>
+      </Link>
+      <Link
+        className="text-sky-800"
+        href={`/danh-muc-san-pham?group=${params.level2Slug}&customer=${customerId}`}
+      >
         {grandParentlevel2Slug && `/ ${grandParentlevel2Slug["name"]}`}
-      </div>
+      </Link>
       {grandParent && (
         <>
           <div className="my-auto leading-[186%] text-gray-400">/</div>

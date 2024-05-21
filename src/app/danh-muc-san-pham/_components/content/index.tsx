@@ -16,9 +16,6 @@ export const Content = async ({
     params.level1Slug ?? params.level2Slug ?? "",
   );
 
-  console.log("params.level1Slug:", params.level1Slug);
-  console.log("params.level2Slug:", params.level2Slug);
-
   const priceTablesQuery = await Promise.all(
     childNodes.map((node) => {
       return supabase
