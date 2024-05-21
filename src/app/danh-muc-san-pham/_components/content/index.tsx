@@ -1,3 +1,4 @@
+import { match } from "assert";
 import { createClient } from "@lib/supabase/server";
 
 import { Tables } from "~/lib/supabase/types";
@@ -33,6 +34,11 @@ export const Content = async ({
           return productsById(node.id!);
         }),
   );
+
+  const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
 
   return (
     <div className="p-4">
