@@ -137,6 +137,7 @@ export type Database = {
           nganh_nghe: string | null
           parent_id: string | null
           pos: number | null
+          slug: string | null
         }
         Insert: {
           id?: string
@@ -148,6 +149,7 @@ export type Database = {
           nganh_nghe?: string | null
           parent_id?: string | null
           pos?: number | null
+          slug?: string | null
         }
         Update: {
           id?: string
@@ -159,6 +161,7 @@ export type Database = {
           nganh_nghe?: string | null
           parent_id?: string | null
           pos?: number | null
+          slug?: string | null
         }
         Relationships: []
       }
@@ -310,7 +313,33 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      generate_unique_slug:
+        | {
+            Args: {
+              name: string
+              id: string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              name: string
+              record_id: string
+            }
+            Returns: string
+          }
+      unaccent: {
+        Args: {
+          "": string
+        }
+        Returns: string
+      }
+      unaccent_init: {
+        Args: {
+          "": unknown
+        }
+        Returns: unknown
+      }
     }
     Enums: {
       [_ in never]: never
@@ -342,6 +371,7 @@ export type Database = {
         image_url: string
         id: string | null
         name: string | null
+        slug: string | null
         image_url: string | null
         pos: number | null
       }
