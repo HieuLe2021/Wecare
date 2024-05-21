@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -9,6 +8,7 @@ import {
 } from "@components/ui/table";
 
 import { Tables } from "~/lib/supabase/types";
+import { vndFormatter } from "~/utils/vndFormatter";
 
 export const PriceTable = ({
   material,
@@ -17,13 +17,6 @@ export const PriceTable = ({
   material: string | "unknown";
   data: Tables<"products">[];
 }) => {
-  const formatter = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  });
-
-  // console.log("dddd", data);
-
   return (
     <div className="py-4">
       <div className=" border-b">
@@ -86,8 +79,8 @@ export const PriceTable = ({
                 </TableCell>
                 <TableCell className="px-0 py-2 text-end">{`${
                   productItem.gia
-                    ? formatter.format(productItem.gia)
-                    : formatter.format(10000)
+                    ? vndFormatter.format(productItem.gia)
+                    : "Đang cập nhật"
                 }`}</TableCell>
                 <TableCell className="py-2 pl-1 pr-0">
                   /&nbsp;{productItem.don_vi || " "}

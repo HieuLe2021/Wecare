@@ -2,28 +2,39 @@ import { match } from "assert";
 import { createClient } from "@lib/supabase/server";
 
 import { Tables } from "~/lib/supabase/types";
+import { vndFormatter } from "~/utils/vndFormatter";
 import { getLeafNode } from "../../utils";
 import { LeafCarousel } from "../leaf-carousel";
 import { PriceTable } from "./PriceTable";
 
+export type DefaultProductListContentProps = {
+  params: { level1Slug: string };
+  searchParams: { groups?: string };
+};
 export const Content = async ({
   params,
-}: {
-  params: { level1Slug?: string; level2Slug?: string };
-}) => {
+  searchParams,
+}: DefaultProductListContentProps) => {
   const supabase = createClient();
   const childNodes = await getLeafNode(
     params.level1Slug ?? params.level2Slug ?? "",
   );
 
+  const productsById = (id: string) => {
+    return supabase
+      .from("products")
+      .select("*")
+      .eq("product_group_id", id)
+      .order("id", { ascending: true });
+  };
   const priceTablesQuery = await Promise.all(
-    childNodes.map((node) => {
-      return supabase
-        .from("products")
-        .select("*")
-        .eq("product_group_id", node.id!)
-        .order("id", { ascending: true });
-    }),
+    searchParams.groups
+      ? searchParams.groups.split(",").map((id) => {
+          return productsById(id);
+        })
+      : childNodes.map((node) => {
+          return productsById(node.id!);
+        }),
   );
 
   const formatter = new Intl.NumberFormat("vi-VN", {
@@ -33,16 +44,14 @@ export const Content = async ({
 
   return (
     <div className="p-4">
-      {params.level1Slug}
-      {childNodes.map((node, index) => {
-        return (
-          <div>
-            {index}
-            {node.id}
-            {node.name}
+      <div className="relative mb-4 h-32 w-full">
+        <div className="absolute inset-0 rounded-xl bg-white max-md:max-w-full max-sm:px-10">
+          <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
+            <LeafCarousel data={childNodes} />
           </div>
-        );
-      })}
+        </div>
+      </div>
+
       {priceTablesQuery.map((query, index) => {
         const products = query.data ?? [];
         const groupedByChatLieu: Record<string, Tables<"products">[]> = {};
@@ -85,7 +94,8 @@ export const Content = async ({
                   nghiệm khách hàng tốt nhất.
                 </div>
                 <div className="pt-2 text-base text-red-500">
-                  {formatter.format(priceMin)} - {formatter.format(priceMax)}
+                  {vndFormatter.format(priceMin)} -{" "}
+                  {vndFormatter.format(priceMax)}
                 </div>
               </div>
             </div>

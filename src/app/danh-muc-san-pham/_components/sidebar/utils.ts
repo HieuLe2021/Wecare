@@ -20,11 +20,11 @@ export function getCollections(
                   "/" +
                   DANH_MUC_SAN_PHAM_URL +
                   "/" +
-                  root.id +
+                  root.slug +
                   "/" +
-                  child.id +
-                  "?groupIds=" +
-                  grandChild.id,
+                  child.slug +
+                  "?groups=" +
+                  grandChild.slug,
                 imgUrl: grandChild.image_url,
               };
               return grandChildItem;
@@ -35,10 +35,15 @@ export function getCollections(
               ? "/" +
                 DANH_MUC_SAN_PHAM_URL +
                 "/" +
-                root.id +
-                "?groupIds=" +
-                child.id
-              : "/" + DANH_MUC_SAN_PHAM_URL + "/" + root.id + "/" + child.id;
+                root.slug +
+                "?groups=" +
+                child.slug
+              : "/" +
+                DANH_MUC_SAN_PHAM_URL +
+                "/" +
+                root.slug +
+                "/" +
+                child.slug;
           const childItem = {
             title: child.name,
             href,
@@ -58,7 +63,7 @@ export function getCollections(
 
       const menuItem: MenuItem = {
         icon: "laptop",
-        href: "/" + DANH_MUC_SAN_PHAM_URL + "/" + root.id,
+        href: "/" + DANH_MUC_SAN_PHAM_URL + "/" + root.slug,
         title: root.name || "",
         count: count,
         ...(level_1.length > 0
