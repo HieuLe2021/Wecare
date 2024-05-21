@@ -368,7 +368,6 @@ export type Database = {
         icon: string | null
       }
       node_info: {
-        image_url: string
         id: string | null
         name: string | null
         slug: string | null

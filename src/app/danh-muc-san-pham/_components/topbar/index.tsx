@@ -3,13 +3,20 @@
 import Select from "@component/Select";
 
 import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
+import { Tables } from "~/lib/supabase/types";
 
-export const Topbar = ({ resGroups }: any) => {
+export const Topbar = ({
+  resGroups,
+  leafCount,
+}: {
+  resGroups: any;
+  leafCount: number;
+}) => {
   return (
     <div className="col mb-4 flex justify-between rounded-lg bg-white pb-2 lg:mx-4 lg:px-4">
       <div>
         <Breadcrumb resGroups={resGroups} />
-        <p>30 sản phẩm</p>
+        <p>{leafCount} nhóm sản phẩm</p>
       </div>
       <div className="row flex items-center">
         <p className="pr-2">Ngành nghề:</p>

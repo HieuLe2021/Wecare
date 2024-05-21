@@ -17,10 +17,10 @@ export function Breadcrumb({
     params.customerId || "ee5a7760-8b65-ed11-9561-000d3a856e52";
   const router = useRouter();
   const grandParentlevel1Slug = resGroups.find(
-    (resGroups) => resGroups.id === params.level1Slug,
+    (resGroups) => resGroups.slug === params.level1Slug,
   );
   const grandParentlevel2Slug = resGroups.find(
-    (resGroups) => resGroups.id === params.level2Slug,
+    (resGroups) => resGroups.slug === params.level2Slug,
   );
 
   const path = getPathOfCurrentSelectedGroup(resGroups, "123123");
