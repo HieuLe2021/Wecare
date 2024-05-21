@@ -1,9 +1,8 @@
-import ReactSelect, { Props } from "react-select";
-
 import Box from "@component/Box";
-import { SpaceProps } from "styled-system";
 import Typography from "@component/Typography";
 import { colors } from "@utils/themeColors";
+import ReactSelect, { Props } from "react-select";
+import { SpaceProps } from "styled-system";
 
 // ==============================================================
 type SelectOption = { label: any; value: any };
@@ -18,11 +17,19 @@ interface SelectProps extends Props, SpaceProps {
 }
 // ==============================================================
 
-const Select = ({ options, isMulti = false, id, label, errorText, ...props }: SelectProps) => {
+const Select = ({
+  options,
+  isMulti = false,
+  id,
+  label,
+  errorText,
+  ...props
+}: SelectProps) => {
   // extract spacing props
   let spacingProps = {};
   for (const key in props) {
-    if (key.startsWith("m") || key.startsWith("p")) spacingProps[key] = props[key];
+    if (key.startsWith("m") || key.startsWith("p"))
+      spacingProps[key] = props[key];
   }
 
   return (
@@ -43,9 +50,9 @@ const Select = ({ options, isMulti = false, id, label, errorText, ...props }: Se
           colors: {
             ...theme.colors,
             primary50: colors.gray[100],
-            primary: colors.primary.main,
-            neutral20: colors.text.disabled
-          }
+            // primary: colors.primary.main,
+            neutral20: colors.text.disabled,
+          },
         })}
         {...props}
       />
@@ -60,13 +67,13 @@ const Select = ({ options, isMulti = false, id, label, errorText, ...props }: Se
 };
 
 const customStyles = {
-  input: (styles) => ({ ...styles, height: 30 }),
-  option: (provided, state) => ({
+  input: (styles: any) => ({ ...styles, height: 30 }),
+  option: (provided: any, state: { isFocused: any }) => ({
     ...provided,
     color: "inherit",
     cursor: "pointer",
-    backgroundColor: state.isFocused ? "rgba(0,0,0, 0.015)" : "inherit"
-  })
+    backgroundColor: state.isFocused ? "rgba(0,0,0, 0.015)" : "inherit",
+  }),
 };
 
 export default Select;

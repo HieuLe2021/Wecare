@@ -1,16 +1,21 @@
-import { cache } from "react";
-
 import "server-only";
 
+import { cache } from "react";
 import { createClient } from "~/lib/supabase/server";
+
+export const getAllProductGroups = cache(async () => {
+  const supabase = createClient();
+  return (await supabase.from("product_groups").select()).data ?? [];
+});
+
 
 export const preloadLeafNode = (id: string | null) => {
   void getLeafNode(id);
 };
 
-export const getLeafNode = cache(async (id: string | null) => {
+export const getLeafNode = cache(async (slug: string | null) => {
   const supabase = createClient();
-  const childNodes = !id
+  const childNodes = !slug
     ? (
         await supabase
           .from("product_groups")
@@ -22,7 +27,7 @@ export const getLeafNode = cache(async (id: string | null) => {
         await supabase
           .from("menu_nodes")
           .select("*")
-          .eq("id", id)
+          .eq("slug", slug)
           .order("pos", { ascending: true })
       )?.data?.[0]?.child_nodes ?? [];
   return childNodes;

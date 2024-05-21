@@ -12,12 +12,12 @@ import { Sidebar } from "./_components/sidebar";
 import { getCollections } from "./_components/sidebar/utils";
 import { Topbar } from "./_components/topbar";
 import { StyledAppLayout } from "./styles";
+import { getAllProductGroups } from "./utils";
 
 export default async function Layout(props: { children: ReactNode }) {
   const { children } = props;
-  const supabase = createClient();
-  const resGroups = (await supabase.from("product_groups").select()).data ?? [];
-  const collections = getCollections(resGroups);
+  const allProductGroups = await getAllProductGroups();
+  const collections = getCollections(allProductGroups);
 
   return (
     <StyledAppLayout>
@@ -54,8 +54,6 @@ export default async function Layout(props: { children: ReactNode }) {
             <Sidebar collections={collections} />
           </Grid>
           <Grid item md={9} xs={12}>
-            <Topbar resGroups={resGroups} />
-
             {children}
           </Grid>
         </Grid>
