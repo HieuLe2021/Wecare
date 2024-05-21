@@ -21,7 +21,7 @@ export default function RootItem(props: CategoryRootItemProps) {
         <div className="category-dropdown-link">
           {icon && <Icon variant="small">{icon}</Icon>}
           <span className="title">{title}</span>
-          <span>({count})</span>
+          <span className="text-xs text-gray-400">({count})</span>
           {caret && <Icon variant="small">chevron-right</Icon>}
         </div>
       </Link>
