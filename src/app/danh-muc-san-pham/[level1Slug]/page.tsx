@@ -1,17 +1,15 @@
-import { createClient } from "@lib/supabase/server";
-
-import { Tables } from "~/lib/supabase/types";
-import { Content } from "../_components/content";
-import { PriceTable } from "../_components/content/PriceTable";
+import {
+  Content,
+  DefaultProductListContentProps,
+} from "../_components/content";
 
 export default async function Page({
   params,
-}: {
-  params: { level1Slug: string };
-}) {
+  searchParams,
+}: DefaultProductListContentProps) {
   return (
     <>
-      <Content params={params} />
+      <Content params={params} searchParams={searchParams} />
     </>
   );
 }

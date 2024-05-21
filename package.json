@@ -31,6 +31,7 @@
     "date-fns": "^3.6.0",
     "drizzle-orm": "^0.30.10",
     "embla-carousel-react": "^8.0.4",
+    "embla-carousel-wheel-gestures": "^8.0.0-rc05",
     "formik": "^2.4.6",
     "lodash": "^4.17.21",
     "lucide-react": "^0.378.0",
