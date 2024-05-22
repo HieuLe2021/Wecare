@@ -55,8 +55,6 @@ export default [
           },
         ],
 
-        "@typescript-eslint/prefer-nullish-coalescing": "off",
-        // "@typescript-eslint/no-non-null-assertion": "error",
         "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
 
         /*
@@ -71,6 +69,10 @@ export default [
          * that rules allowed by Nextjs
          */
         // "@typescript-eslint/unbound-method": "off",
+        // "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/prefer-nullish-coalescing": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
       },
     },
     {

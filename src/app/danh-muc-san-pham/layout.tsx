@@ -1,20 +1,23 @@
 import type { ReactNode } from "react";
 import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
-import Icon from "@component/icon/Icon";
 import Sticky from "@component/sticky";
-import Typography from "@component/Typography";
 
 import Footer from "./_components/footer";
 import { Header } from "./_components/header";
 import { Sidebar } from "./_components/sidebar";
 import { getCollections } from "./_components/sidebar/utils";
+import { Topbar } from "./_components/topbar";
+import { getAllProductGroups, getLevel1Nodes } from "./_utils/server";
 import { StyledAppLayout } from "./styles";
-import { getAllProductGroups } from "./utils";
 
 export default async function Layout(props: { children: ReactNode }) {
   const { children } = props;
-  const allProductGroups = await getAllProductGroups();
+  const [allProductGroups, level1Nodes] = await Promise.all([
+    getAllProductGroups(),
+    getLevel1Nodes(),
+  ]);
+
   const collections = getCollections(allProductGroups);
 
   return (
@@ -38,21 +41,14 @@ export default async function Layout(props: { children: ReactNode }) {
             className="rounded-md bg-white"
             spacing={24}
           >
-            <div className="flex items-center bg-blue-50 px-3 py-2 shadow-md">
-              <Icon>categories</Icon>
-              <Typography
-                ml="10px"
-                flex="1 1 0"
-                fontWeight="600"
-                textAlign="left"
-              >
-                Danh mục sản phẩm
-              </Typography>
-            </div>
             <Sidebar collections={collections} />
           </Grid>
-          <Grid item md={9} xs={12}>
-            {children}
+          <Grid item md={9} xs={12} className="!px-6 !py-0">
+            <Topbar
+              allProductGroups={allProductGroups}
+              level1Nodes={level1Nodes}
+            />
+            <div>{children}</div>
           </Grid>
         </Grid>
       </Container>
