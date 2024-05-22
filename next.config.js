@@ -10,7 +10,7 @@ const nextConfig = {
     theme: "DEFAULT",
   },
   images: {
-    domains: ["wecare.com.vn"],
+    domains: ["wecare.com.vn", "placehold.co"],
   },
 };
 

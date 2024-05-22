@@ -1,3 +1,4 @@
+import type { Tables } from "~/lib/supabase/types";
 import {
   Table,
   TableBody,
@@ -5,16 +6,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@components/ui/table";
-
-import { Tables } from "~/lib/supabase/types";
+} from "~/components/ui/table";
 import { vndFormatter } from "~/utils/vndFormatter";
 
 export const PriceTable = ({
   material,
   data,
 }: {
-  material: string | "unknown";
+  material: string;
   data: Tables<"products">[];
 }) => {
   return (
@@ -90,7 +89,6 @@ export const PriceTable = ({
           </TableBody>
         </Table>
       </div>
-      {/* <div className="mb-1 h-[1px] w-full border border-b border-dashed"></div> */}
     </div>
   );
 };

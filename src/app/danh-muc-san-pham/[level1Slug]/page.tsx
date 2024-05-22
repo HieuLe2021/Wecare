@@ -1,7 +1,5 @@
-import {
-  Content,
-  DefaultProductListContentProps,
-} from "../_components/content";
+import type { DefaultProductListContentProps } from "../_components/content";
+import { Content } from "../_components/content";
 
 export default async function Page({
   params,

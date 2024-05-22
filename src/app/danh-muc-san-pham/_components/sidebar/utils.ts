@@ -1,6 +1,7 @@
+import type { MenuItem } from "@component/categories/mega-menu/type";
+import type { Tables } from "@lib/supabase/types";
+
 import { DANH_MUC_SAN_PHAM_URL } from "../../config";
-import { MenuItem } from "@component/categories/mega-menu/type";
-import { Tables } from "@lib/supabase/types";
 
 export function getCollections(
   productGroupsList: Tables<"product_groups">[],
