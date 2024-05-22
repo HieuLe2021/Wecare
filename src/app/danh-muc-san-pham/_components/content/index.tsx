@@ -1,16 +1,18 @@
 import { match } from "assert";
 import { createClient } from "@lib/supabase/server";
 
+import FlexBox from "~/components/FlexBox";
 import { Tables } from "~/lib/supabase/types";
 import { vndFormatter } from "~/utils/vndFormatter";
 import { getAllProductGroups, getLeafNode } from "../../utils";
 import { LeafCarousel } from "../leaf-carousel";
+import Pagination from "../pagination/Pagination";
 import { Topbar } from "../topbar";
 import { PriceTable } from "./PriceTable";
 
 export type DefaultProductListContentProps = {
   params: { level1Slug?: string; level2Slug?: string };
-  searchParams: { groups?: string };
+  searchParams: { groups?: string; page?: string };
 };
 export const Content = async ({
   params,
@@ -22,13 +24,18 @@ export const Content = async ({
     params.level2Slug ?? params.level1Slug ?? "",
   );
 
-  const productsById = (id: string) => {
-    return supabase
+  const productsById = async (id: string) => {
+    const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
+
+    const res = await supabase
       .from("products")
       .select("*")
       .eq("product_group_id", id)
       .order("id", { ascending: true });
+    console.log("data, count:", res.count);
+    return res;
   };
+
   const priceTablesQuery = await Promise.all(
     searchParams.groups
       ? searchParams.groups.split(",").map((id) => {
@@ -119,6 +126,21 @@ export const Content = async ({
           );
         })}
       </div>
+      <FlexBox justifyContent="end" mt="2.5rem">
+        <Pagination
+          pageCount={3}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={3}
+        />
+      </FlexBox>
     </>
   );
+};
+
+const getPagination = (page: number, size: number) => {
+  const limit = size ? +size : 3;
+  const from = page ? page * limit : 0;
+  const to = page ? from + size - 1 : size - 1;
+
+  return { from, to };
 };
