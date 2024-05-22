@@ -1,12 +1,12 @@
+import { pages } from "next/dist/build/templates/app-page";
 import Image from "next/image";
 import { createClient } from "@lib/supabase/server";
 
-import FlexBox from "~/components/FlexBox";
+import { Pagination } from "~/components/ui/pagination";
 import { Tables } from "~/lib/supabase/types";
 import { vndFormatter } from "~/utils/vndFormatter";
 import { getAllProductGroups, getLeafNode } from "../../utils";
 import { LeafCarousel } from "../leaf-carousel";
-import Pagination from "../pagination/Pagination";
 import { Topbar } from "../topbar";
 import { PriceTable } from "./PriceTable";
 
@@ -30,19 +30,17 @@ export const Content = async ({
       .select("*")
       .eq("product_group_slug", slug)
       .order("id", { ascending: true });
-    console.log("data, count:", res.count);
-    return res;
   };
   const selectedGroups = searchParams.groups?.split(",");
   const groups = searchParams.groups
     ? childNodes.filter((x) => selectedGroups?.includes(x.slug!))
     : childNodes;
+  const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
   const priceTablesQuery = await Promise.all(
-    groups.map((node) => {
+    groups.slice(from, to).map((node) => {
       return productsBySlug(node.slug!);
     }),
   );
-
   return (
     <>
       <Topbar
@@ -114,18 +112,13 @@ export const Content = async ({
           );
         })}
       </div>
-      <FlexBox justifyContent="end" mt="2.5rem">
-        <Pagination
-          pageCount={3}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={3}
-        />
-      </FlexBox>
+      <Pagination total={groups.length} />
     </>
   );
 };
 
-const getPagination = (page: number, size: number) => {
+const getPagination = (p: number, size: number) => {
+  const page = p - 1;
   const limit = size ? +size : 3;
   const from = page ? page * limit : 0;
   const to = page ? from + size - 1 : size - 1;
