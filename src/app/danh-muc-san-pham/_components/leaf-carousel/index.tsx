@@ -109,7 +109,7 @@ export const LeafCarousel = ({
                           <div className="flex grow flex-col bg-white py-0.5 text-center text-xs font-medium leading-4 text-sky-700 max-md:mt-4">
                             {isActive && (
                               <Image
-                                className="absolute right-0 top-0 h-5 w-5"
+                                className="absolute right-0 top-0 z-10 h-5 w-5"
                                 src="/assets/images/wc-icon/check-tick.svg"
                                 alt="check-tick"
                               />
@@ -121,7 +121,7 @@ export const LeafCarousel = ({
                                   ? item.image_url
                                   : "https://placehold.co/400"
                               }
-                              className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-125"
+                              className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-110"
                             />
                             <div
                               className={cn(
