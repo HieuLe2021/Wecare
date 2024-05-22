@@ -1,4 +1,4 @@
-import { match } from "assert";
+import Image from "next/image";
 import { createClient } from "@lib/supabase/server";
 
 import FlexBox from "~/components/FlexBox";
@@ -24,48 +24,38 @@ export const Content = async ({
     params.level2Slug ?? params.level1Slug ?? "",
   );
 
-  const productsById = async (id: string) => {
-    const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
-
-    const res = await supabase
+  const productsBySlug = (slug: string) => {
+    return supabase
       .from("products")
       .select("*")
-      .eq("product_group_id", id)
+      .eq("product_group_slug", slug)
       .order("id", { ascending: true });
     console.log("data, count:", res.count);
     return res;
   };
-
+  const selectedGroups = searchParams.groups?.split(",");
+  const groups = searchParams.groups
+    ? childNodes.filter((x) => selectedGroups?.includes(x.slug!))
+    : childNodes;
   const priceTablesQuery = await Promise.all(
-    searchParams.groups
-      ? searchParams.groups.split(",").map((id) => {
-          return productsById(id);
-        })
-      : childNodes.map((node) => {
-          return productsById(node.id!);
-        }),
+    groups.map((node) => {
+      return productsBySlug(node.slug!);
+    }),
   );
-
-  const formatter = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  });
 
   return (
     <>
-      <Topbar resGroups={allProductGroups} leafCount={childNodes.length} />
+      <Topbar
+        allProductGroups={allProductGroups}
+        leafCount={childNodes.length}
+      />
 
       <div className="p-4">
-        <div className="relative mb-4 h-36 w-full">
-          <div className="absolute inset-0 rounded-xl bg-white max-md:max-w-full max-sm:px-10">
-            <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
-              <LeafCarousel data={childNodes} />
-            </div>
-          </div>
-        </div>
+        <LeafCarousel data={childNodes} />
 
         {priceTablesQuery.map((query, index) => {
           const products = query.data ?? [];
+          // if (products.length === 0) return null;
           const groupedByChatLieu: Record<string, Tables<"products">[]> = {};
           products.forEach((product) => {
             const { chat_lieu } = product;
@@ -80,26 +70,24 @@ export const Content = async ({
           const priceMin = Math.min(...prices);
           const priceMax = Math.max(...prices);
 
+          const data = groups[index]!;
           return (
-            <div
-              key={childNodes[index]?.id}
-              className="mb-4 rounded-lg bg-white p-4"
-            >
+            <div key={data.id} className="mb-4 rounded-lg bg-white p-4">
               <div className="flex gap-4 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-md:flex-wrap">
-                <img
+                <Image
                   loading="lazy"
-                  srcSet={
-                    childNodes[index]?.image_url ||
-                    "https://placehold.co/600x400/png"
-                  }
-                  className="aspect-square h-[120px] w-[120px] shrink-0"
+                  src={data.image_url || "https://placehold.co/600x400/png"}
+                  className="aspect-square shrink-0"
+                  alt={data.name!}
+                  width={120}
+                  height={120}
                 />
                 <div className="">
                   <p className="text-sx cursor-pointer pb-1 text-blue-500 underline underline-offset-1">
                     Băng keo
                   </p>
                   <h6 className="text-base font-semibold">
-                    {childNodes[index]?.name ?? "Đang cập nhật"}
+                    {data.name ?? "Đang cập nhật"}
                   </h6>
                   <div className="self-start text-sm max-md:max-w-full">
                     Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng

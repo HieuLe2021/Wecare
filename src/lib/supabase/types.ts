@@ -102,27 +102,30 @@ export type Database = {
             | Database["public"]["CompositeTypes"]["node_info"][]
             | null
           id: string
-          image: string | null
+          image_url: string | null
           name: string | null
           pos: number | null
+          slug: string | null
         }
         Insert: {
           child_nodes?:
             | Database["public"]["CompositeTypes"]["node_info"][]
             | null
           id: string
-          image?: string | null
+          image_url?: string | null
           name?: string | null
           pos?: number | null
+          slug?: string | null
         }
         Update: {
           child_nodes?:
             | Database["public"]["CompositeTypes"]["node_info"][]
             | null
           id?: string
-          image?: string | null
+          image_url?: string | null
           name?: string | null
           pos?: number | null
+          slug?: string | null
         }
         Relationships: []
       }
@@ -174,6 +177,7 @@ export type Database = {
           id: string
           last_synced: string
           product_group_id: string | null
+          product_group_slug: string | null
           quy_cach: string | null
           ten_sp: string | null
           thuong_hieu: string | null
@@ -186,6 +190,7 @@ export type Database = {
           id?: string
           last_synced?: string
           product_group_id?: string | null
+          product_group_slug?: string | null
           quy_cach?: string | null
           ten_sp?: string | null
           thuong_hieu?: string | null
@@ -198,6 +203,7 @@ export type Database = {
           id?: string
           last_synced?: string
           product_group_id?: string | null
+          product_group_slug?: string | null
           quy_cach?: string | null
           ten_sp?: string | null
           thuong_hieu?: string | null
@@ -372,6 +378,7 @@ export type Database = {
         name: string | null
         slug: string | null
         image_url: string | null
+        parent_id: string | null
         pos: number | null
       }
     }

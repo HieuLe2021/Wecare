@@ -1,16 +1,14 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
 import Icon from "@component/icon/Icon";
 import Sticky from "@component/sticky";
 import Typography from "@component/Typography";
-import { createClient } from "@lib/supabase/server";
 
 import Footer from "./_components/footer";
 import { Header } from "./_components/header";
 import { Sidebar } from "./_components/sidebar";
 import { getCollections } from "./_components/sidebar/utils";
-import { Topbar } from "./_components/topbar";
 import { StyledAppLayout } from "./styles";
 import { getAllProductGroups } from "./utils";
 

@@ -1,13 +1,13 @@
 import "server-only";
 
 import { cache } from "react";
+
 import { createClient } from "~/lib/supabase/server";
 
 export const getAllProductGroups = cache(async () => {
   const supabase = createClient();
   return (await supabase.from("product_groups").select()).data ?? [];
 });
-
 
 export const preloadLeafNode = (id: string | null) => {
   void getLeafNode(id);
@@ -29,6 +29,6 @@ export const getLeafNode = cache(async (slug: string | null) => {
           .select("*")
           .eq("slug", slug)
           .order("pos", { ascending: true })
-      )?.data?.[0]?.child_nodes ?? [];
+      ).data?.[0]?.child_nodes ?? [];
   return childNodes;
 });
