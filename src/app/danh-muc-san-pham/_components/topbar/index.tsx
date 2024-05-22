@@ -4,6 +4,7 @@ import Select from "@component/Select";
 
 import type { Tables } from "~/lib/supabase/types";
 import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
+import { Tables } from "~/lib/supabase/types";
 
 export const Topbar = ({
   allProductGroups: resGroups,
