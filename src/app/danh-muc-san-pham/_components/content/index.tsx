@@ -49,7 +49,7 @@ export const Content = async ({
       <Topbar resGroups={allProductGroups} leafCount={childNodes.length} />
 
       <div className="p-4">
-        <div className="relative mb-4 h-32 w-full">
+        <div className="relative mb-4 h-36 w-full">
           <div className="absolute inset-0 rounded-xl bg-white max-md:max-w-full max-sm:px-10">
             <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
               <LeafCarousel data={childNodes} />
@@ -72,6 +72,7 @@ export const Content = async ({
           const prices = products.map((i) => i.gia ?? 0);
           const priceMin = Math.min(...prices);
           const priceMax = Math.max(...prices);
+
           return (
             <div
               key={childNodes[index]?.id}
@@ -98,10 +99,16 @@ export const Content = async ({
                     mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo
                     trải nghiệm khách hàng tốt nhất.
                   </div>
-                  <div className="pt-2 text-base text-red-500">
-                    {vndFormatter.format(priceMin)} -{" "}
-                    {vndFormatter.format(priceMax)}
-                  </div>
+                  {prices.length < 1 ? (
+                    <div className="pt-2 text-xs text-red-500">
+                      Vui lòng liên hệ để báo giá
+                    </div>
+                  ) : (
+                    <div className="pt-2 text-base text-red-500">
+                      {vndFormatter.format(priceMin)} -{" "}
+                      {vndFormatter.format(priceMax)}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="mb-1 h-[1px] w-full border border-b border-dashed"></div>
