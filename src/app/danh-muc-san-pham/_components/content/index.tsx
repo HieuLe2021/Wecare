@@ -4,14 +4,15 @@ import Link from "next/link";
 import { createClient } from "@lib/supabase/server";
 import { ScanText } from "lucide-react";
 
-import type { Tables } from "~/lib/supabase/types";
+import { Pagination } from "~/components/ui/pagination";
+import { Tables } from "~/lib/supabase/types";
 import { vndFormatter } from "~/utils/vndFormatter";
 import { getLeafNode } from "../../_utils/server";
 import { PriceTable } from "./PriceTable";
 
 export type DefaultProductListContentProps = {
   params: { level1Slug?: string; level2Slug?: string };
-  searchParams: { groups?: string };
+  searchParams: { groups?: string; page?: string };
 };
 export const Content = async ({
   params,
@@ -44,12 +45,13 @@ export const Content = async ({
   const groups = searchParams.groups
     ? childNodes.filter((x) => selectedGroups?.includes(x.slug!))
     : childNodes;
+  const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
+  console.log("???", from, to);
   const priceTablesQuery = await Promise.all(
-    groups.map((node) => {
+    groups.slice(from, to).map((node) => {
       return productsBySlug(node.slug!);
     }),
   );
-
   return (
     <>
       {priceTablesQuery.map((query, index) => {
@@ -108,10 +110,16 @@ export const Content = async ({
                   mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
                   nghiệm khách hàng tốt nhất.
                 </div>
-                <div className="pt-2 text-base text-red-500">
-                  {vndFormatter.format(priceMin)} -{" "}
-                  {vndFormatter.format(priceMax)}
-                </div>
+                {prices.length < 1 ? (
+                  <div className="pt-2 text-xs text-red-500">
+                    Vui lòng liên hệ để báo giá
+                  </div>
+                ) : (
+                  <div className="pt-2 text-base text-red-500">
+                    {vndFormatter.format(priceMin)} -{" "}
+                    {vndFormatter.format(priceMax)}
+                  </div>
+                )}
               </div>
             </div>
             <div className="mb-1 h-[1px] w-full border border-b border-dashed"></div>
@@ -128,6 +136,16 @@ export const Content = async ({
           </div>
         );
       })}
+      <Pagination total={groups.length} />
     </>
   );
+};
+
+const getPagination = (p: number, size: number) => {
+  const page = p - 1;
+  const limit = size ? +size : 3;
+  const from = page ? page * limit : 0;
+  const to = page ? from + size - 1 : size - 1;
+
+  return { from, to };
 };
