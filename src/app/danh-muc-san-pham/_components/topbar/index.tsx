@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Select from "@component/Select";
 
-import type { Tables } from "~/lib/supabase/types";
 import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
 import { LeafCarousel } from "../leaf-carousel";
 
