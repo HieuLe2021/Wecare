@@ -1,13 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import Image from "@component/Image";
 import { cn } from "@utils";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import type { Tables } from "~/lib/supabase/types";
-import { SwiperContainer, SwiperSlide } from "~/components/swiper";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "~/components/ui/carousel";
 
 export const LeafCarousel = ({
   data,
@@ -42,29 +48,26 @@ export const LeafCarousel = ({
     return currentPath + (query ? "?" + query : "");
   };
 
-  const onWheelHandler = (e: WheelEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-  };
-  useEffect(() => {
-    return () => {
-      return window.removeEventListener("wheel", onWheelHandler);
-    };
-  }, [searchParams]);
-
   return (
-    <>
-      <div className=" bg-white">
-        <div className="">
-          <div className="">
-            <SwiperContainer mousewheel freeMode pagination slidesPerView={5}>
+    <div className="relative mb-4 h-36 w-full rounded-md bg-white">
+      <div className="absolute left-4 right-4 top-[11px]">
+        <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
+          <Carousel
+            opts={{
+              align: "start",
+              dragFree: true,
+              loop: false,
+            }}
+            className="w-full"
+            plugins={[WheelGesturesPlugin()]}
+          >
+            <CarouselContent>
               {data.map((item) => {
                 const isActive = item.slug && groupSlugs.includes(item.slug);
                 return (
-                  <SwiperSlide
+                  <CarouselItem
                     key={item.slug}
-                    // className="md:basis-1/3 lg:basis-1/5"
+                    className="md:basis-1/3 lg:basis-1/5"
                   >
                     <div
                       className={cn(
@@ -114,13 +117,19 @@ export const LeafCarousel = ({
                         </div>
                       </Link>
                     </div>
-                  </SwiperSlide>
+                  </CarouselItem>
                 );
               })}
-            </SwiperContainer>
-          </div>
+            </CarouselContent>
+            {data.length > 0 && (
+              <>
+                <CarouselPrevious />
+                <CarouselNext />
+              </>
+            )}
+          </Carousel>
         </div>
       </div>
-    </>
+    </div>
   );
 };
