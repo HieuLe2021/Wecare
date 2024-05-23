@@ -378,8 +378,10 @@ export type Database = {
         name: string | null
         slug: string | null
         image_url: string | null
-        parent_id: string | null
         pos: number | null
+        parent_id: string | null
+        parent_name: string | null
+        parent_slug: string | null
       }
     }
   }

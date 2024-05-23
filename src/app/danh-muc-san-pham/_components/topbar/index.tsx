@@ -1,32 +1,49 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import Select from "@component/Select";
 
 import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
-import { Tables } from "~/lib/supabase/types";
+import { LeafCarousel } from "../leaf-carousel";
 
 export const Topbar = ({
-  allProductGroups: resGroups,
-  leafCount,
+  allProductGroups,
+  level1Nodes,
 }: {
   allProductGroups: Tables<"product_groups">[];
-  leafCount: number;
+  level1Nodes: Tables<"menu_nodes">[];
 }) => {
+  const params = useParams<{ level1Slug?: string; level2Slug?: string }>();
+  const [childNodes, setChildNodes] = useState<
+    NonNullable<Tables<"menu_nodes">["child_nodes"]>
+  >([]);
+
+  useEffect(() => {
+    const slug = params.level2Slug ?? params.level1Slug ?? "";
+    setChildNodes(level1Nodes.find((x) => x.slug === slug)?.child_nodes ?? []);
+  }, [params]);
+
+  const leafCount = childNodes.length;
+
   return (
-    <div className="col mb-4 flex justify-between rounded-lg bg-white pb-2 lg:mx-4 lg:px-4">
-      <div>
-        <Breadcrumb resGroups={resGroups} />
-        <p>{leafCount} nhóm sản phẩm</p>
+    <>
+      <div className="col mb-4 flex justify-between rounded-md bg-white py-1 lg:px-4">
+        <div>
+          <Breadcrumb allProductGroups={allProductGroups} />
+          <p>{leafCount} nhóm sản phẩm</p>
+        </div>
+        <div className="row flex items-center">
+          <p className="pr-2">Ngành nghề:</p>
+          <Select
+            placeholder="Tất cả"
+            defaultValue={sortOptions[0]}
+            options={sortOptions}
+          />
+        </div>
       </div>
-      <div className="row flex items-center">
-        <p className="pr-2">Ngành nghề:</p>
-        <Select
-          placeholder="Tất cả"
-          defaultValue={sortOptions[0]}
-          options={sortOptions}
-        />
-      </div>
-    </div>
+      <LeafCarousel data={childNodes} />
+    </>
   );
 };
 
