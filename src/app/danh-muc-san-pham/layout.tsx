@@ -6,7 +6,6 @@ import Sticky from "@component/sticky";
 import Footer from "./_components/footer";
 import { Header } from "./_components/header";
 import { Sidebar } from "./_components/sidebar";
-import { getCollections } from "./_components/sidebar/utils";
 import { Topbar } from "./_components/topbar";
 import { getAllProductGroups, getLevel1Nodes } from "./_utils/server";
 import { StyledAppLayout } from "./styles";
@@ -17,8 +16,6 @@ export default async function Layout(props: { children: ReactNode }) {
     getAllProductGroups(),
     getLevel1Nodes(),
   ]);
-
-  const collections = getCollections(allProductGroups);
 
   return (
     <StyledAppLayout>
@@ -41,7 +38,7 @@ export default async function Layout(props: { children: ReactNode }) {
             className="rounded-md bg-white"
             spacing={24}
           >
-            <Sidebar collections={collections} />
+            <Sidebar allProductGroups={allProductGroups} />
           </Grid>
           <Grid item md={9} xs={12} className="!px-6 !py-0">
             <Topbar

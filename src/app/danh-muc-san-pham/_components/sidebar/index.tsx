@@ -1,16 +1,27 @@
 "use client";
 
-import type { MenuItem } from "@component/categories/mega-menu/type";
 import React from "react";
+import { useSearchParams } from "next/navigation";
 import MegaMenu1 from "@component/categories/mega-menu/MegaMenu1";
 import MegaMenu2 from "@component/categories/mega-menu/MegaMenu2";
 
+import type { Tables } from "~/lib/supabase/types";
 import Icon from "~/components/icon/Icon";
 import Typography from "~/components/Typography";
 import { StyledCategoryDropdown } from "./components";
 import RootItem from "./RootItem";
+import { getCollections } from "./utils";
 
-export const Sidebar = ({ collections }: { collections: MenuItem[] }) => {
+export const Sidebar = ({
+  allProductGroups,
+}: {
+  allProductGroups: Tables<"product_groups">[];
+}) => {
+  const searchParams = useSearchParams();
+  const collections = getCollections(
+    allProductGroups,
+    searchParams.get("customer"),
+  );
   const megaMenu = { MegaMenu1, MegaMenu2 };
   return (
     <>

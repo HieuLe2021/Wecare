@@ -5,16 +5,9 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import Image from "@component/Image";
 import { cn } from "@utils";
-import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import type { Tables } from "~/lib/supabase/types";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "~/components/ui/carousel";
+import { SwiperContainer, SwiperSlide } from "~/components/swiper";
 
 export const LeafCarousel = ({
   data,
@@ -61,33 +54,17 @@ export const LeafCarousel = ({
   }, [searchParams]);
 
   return (
-    <div className="relative mb-4 h-36 w-full rounded-md bg-white">
-      <div className="absolute left-4 right-4 top-[11px]">
-        <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
-          <Carousel
-            opts={{
-              align: "start",
-              dragFree: true,
-              loop: false,
-            }}
-            className="w-full"
-            plugins={[WheelGesturesPlugin()]}
-            onMouseEnter={() => {
-              window.addEventListener("wheel", onWheelHandler, {
-                passive: false,
-              });
-            }}
-            onMouseLeave={() => {
-              window.removeEventListener("wheel", onWheelHandler);
-            }}
-          >
-            <CarouselContent>
+    <>
+      <div className=" bg-white">
+        <div className="">
+          <div className="">
+            <SwiperContainer mousewheel freeMode pagination slidesPerView={5}>
               {data.map((item) => {
                 const isActive = item.slug && groupSlugs.includes(item.slug);
                 return (
-                  <CarouselItem
+                  <SwiperSlide
                     key={item.slug}
-                    className="md:basis-1/3 lg:basis-1/5"
+                    // className="md:basis-1/3 lg:basis-1/5"
                   >
                     <div
                       className={cn(
@@ -137,19 +114,13 @@ export const LeafCarousel = ({
                         </div>
                       </Link>
                     </div>
-                  </CarouselItem>
+                  </SwiperSlide>
                 );
               })}
-            </CarouselContent>
-            {data.length > 0 && (
-              <>
-                <CarouselPrevious />
-                <CarouselNext />
-              </>
-            )}
-          </Carousel>
+            </SwiperContainer>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

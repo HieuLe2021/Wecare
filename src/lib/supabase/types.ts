@@ -44,31 +44,31 @@ export type Database = {
       }
       customer_products: {
         Row: {
-          customerid: string | null
+          customer_id: string | null
           don_vi: string | null
           gia: number | null
           hieu_luc_toi_ngay: string | null
           id: number
           last_synced: string
-          productid: string | null
+          product_id: string
         }
         Insert: {
-          customerid?: string | null
+          customer_id?: string | null
           don_vi?: string | null
           gia?: number | null
           hieu_luc_toi_ngay?: string | null
           id?: number
           last_synced?: string
-          productid?: string | null
+          product_id: string
         }
         Update: {
-          customerid?: string | null
+          customer_id?: string | null
           don_vi?: string | null
           gia?: number | null
           hieu_luc_toi_ngay?: string | null
           id?: number
           last_synced?: string
-          productid?: string | null
+          product_id?: string
         }
         Relationships: []
       }
@@ -78,6 +78,7 @@ export type Database = {
           last_synced: string | null
           name: string | null
           nganh_nghe: string | null
+          product_prices: Json | null
           sdt: string | null
         }
         Insert: {
@@ -85,6 +86,7 @@ export type Database = {
           last_synced?: string | null
           name?: string | null
           nganh_nghe?: string | null
+          product_prices?: Json | null
           sdt?: string | null
         }
         Update: {
@@ -92,6 +94,7 @@ export type Database = {
           last_synced?: string | null
           name?: string | null
           nganh_nghe?: string | null
+          product_prices?: Json | null
           sdt?: string | null
         }
         Relationships: []
@@ -131,6 +134,7 @@ export type Database = {
       }
       product_groups: {
         Row: {
+          icon: string | null
           id: string
           image_url: string | null
           is_leaf: boolean | null
@@ -143,6 +147,7 @@ export type Database = {
           slug: string | null
         }
         Insert: {
+          icon?: string | null
           id?: string
           image_url?: string | null
           is_leaf?: boolean | null
@@ -155,6 +160,7 @@ export type Database = {
           slug?: string | null
         }
         Update: {
+          icon?: string | null
           id?: string
           image_url?: string | null
           is_leaf?: boolean | null

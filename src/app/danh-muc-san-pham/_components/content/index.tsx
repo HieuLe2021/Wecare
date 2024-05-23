@@ -4,15 +4,15 @@ import Link from "next/link";
 import { createClient } from "@lib/supabase/server";
 import { ScanText } from "lucide-react";
 
+import type { Tables } from "~/lib/supabase/types";
 import { Pagination } from "~/components/ui/pagination";
-import { Tables } from "~/lib/supabase/types";
 import { vndFormatter } from "~/utils/vndFormatter";
-import { getLeafNode } from "../../_utils/server";
+import { getCustomerProductPrices, getLeafNode } from "../../_utils/server";
 import { PriceTable } from "./PriceTable";
 
 export type DefaultProductListContentProps = {
   params: { level1Slug?: string; level2Slug?: string };
-  searchParams: { groups?: string; page?: string };
+  searchParams: { groups?: string; page?: string; customer?: string };
 };
 export const Content = async ({
   params,
@@ -46,12 +46,15 @@ export const Content = async ({
     ? childNodes.filter((x) => selectedGroups?.includes(x.slug!))
     : childNodes;
   const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
-  console.log("???", from, to);
-  const priceTablesQuery = await Promise.all(
-    groups.slice(from, to).map((node) => {
+  const [customerProductPrices, ...priceTablesQuery] = await Promise.all([
+    searchParams.customer
+      ? getCustomerProductPrices(searchParams.customer)
+      : null,
+    ...groups.slice(from, to).map((node) => {
       return productsBySlug(node.slug!);
     }),
-  );
+  ]);
+
   return (
     <>
       {priceTablesQuery.map((query, index) => {
@@ -76,12 +79,6 @@ export const Content = async ({
           : params.level1Slug
             ? pathnameSplited.slice(0, 3).join("/")
             : "xx";
-        console.log(
-          "?????/",
-          pathnameSplited,
-          pathnameSplited.slice(0, 2),
-          parentPath,
-        );
 
         const data = groups[index]!;
         return (
@@ -130,7 +127,14 @@ export const Content = async ({
               </div>
             ) : (
               Object.entries(groupedByChatLieu).map(([key, value]) => {
-                return <PriceTable material={key} key={index} data={value} />;
+                return (
+                  <PriceTable
+                    key={index}
+                    material={key}
+                    data={value}
+                    customerProductPrices={customerProductPrices}
+                  />
+                );
               })
             )}
           </div>

@@ -68,3 +68,26 @@ export const getLevel1Nodes = cache(async () => {
   //     ).data?.[0]?.child_nodes ?? [];
   // return childNodes;
 });
+
+export const getCustomerProductPrices = cache(async (customerId: string) => {
+  const supabase = createClient();
+  const res =
+    (
+      await supabase
+        .from("customers")
+        .select("product_prices")
+        .eq("id", customerId)
+    ).data ?? [];
+  if (res.length > 0) {
+    return res[0]?.product_prices;
+  }
+  return [];
+  // return (
+  //   (
+  //     await supabase
+  //       .from("customers")
+  //       .select("product_prices")
+  //       .eq("id", customerId)
+  //   ).data ?? []
+  // );
+});

@@ -5,6 +5,7 @@ import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 
 export function getCollections(
   productGroupsList: Tables<"product_groups">[],
+  customerId: string | null,
 ): MenuItem[] {
   const menuItems = productGroupsList
     .filter((group) => !group.parent_id && group.name)
@@ -24,7 +25,8 @@ export function getCollections(
                   root.slug +
                   "/" +
                   child.slug +
-                  "?groups=" +
+                  (customerId ? `?customer=${customerId}&` : "?") +
+                  "groups=" +
                   grandChild.slug,
                 imgUrl: grandChild.image_url,
               };
@@ -44,7 +46,8 @@ export function getCollections(
                 "/" +
                 root.slug +
                 "/" +
-                child.slug;
+                child.slug +
+                (customerId ? `?customer=${customerId}` : "");
           const childItem = {
             title: child.name,
             href,
@@ -64,7 +67,12 @@ export function getCollections(
 
       const menuItem: MenuItem = {
         icon: "laptop",
-        href: "/" + DANH_MUC_SAN_PHAM_URL + "/" + root.slug,
+        href:
+          "/" +
+          DANH_MUC_SAN_PHAM_URL +
+          "/" +
+          root.slug +
+          (customerId ? `?customer=${customerId}` : ""),
         title: root.name || "",
         count: count,
         ...(level_1.length > 0
