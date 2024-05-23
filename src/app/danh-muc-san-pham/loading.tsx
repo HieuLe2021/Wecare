@@ -20,7 +20,12 @@ export default function Loading() {
               </div>
               <div className="mb-4 h-[1px] w-full border border-b border-dashed"></div>
               <Skeleton className="ml-2 h-6 w-[150px]" />
-              <PriceTable skeleton material={""} data={[]} />
+              <PriceTable
+                customerProductPrices={[]}
+                skeleton
+                material={""}
+                data={[]}
+              />
             </div>
           );
         })}

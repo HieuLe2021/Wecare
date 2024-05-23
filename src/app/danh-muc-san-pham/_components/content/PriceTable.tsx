@@ -13,10 +13,12 @@ import { vndFormatter } from "~/utils/vndFormatter";
 export const PriceTable = ({
   material,
   data,
+  customerProductPrices = {},
   skeleton,
 }: {
   material: string;
   data: Tables<"products">[];
+  customerProductPrices: Tables<"customers">["product_prices"] | undefined;
   skeleton?: boolean;
 }) => {
   return (
@@ -103,33 +105,38 @@ export const PriceTable = ({
                 {data.length === 0 ? (
                   <>Chưa có dữ liệu</>
                 ) : (
-                  data.map((productItem) => (
-                    <TableRow key={productItem.id}>
-                      <TableCell className="py-2 pl-2 pr-0">
-                        {productItem.thuong_hieu || "Đang cập nhật"}
-                      </TableCell>
-                      <TableCell className="table-cell p-2 px-0 lg:hidden">
-                        {productItem.quy_cach} / {productItem.hoan_thien || " "}
-                      </TableCell>
-                      <TableCell className="hidden  p-2 lg:table-cell">
-                        {productItem.quy_cach || "Đang cập nhật"}
-                      </TableCell>
-                      <TableCell className="hidden  p-2 lg:table-cell">
-                        {productItem.chat_lieu || "Khác"}
-                      </TableCell>
-                      <TableCell className="hidden p-2 lg:table-cell">
-                        {productItem.hoan_thien || "Đang cập nhật"}
-                      </TableCell>
-                      <TableCell className="px-0 py-2 text-end">{`${
-                        productItem.gia
-                          ? vndFormatter.format(productItem.gia)
-                          : "Đang cập nhật"
-                      }`}</TableCell>
-                      <TableCell className="py-2 pl-1 pr-0">
-                        /&nbsp;{productItem.don_vi || " "}
-                      </TableCell>
-                    </TableRow>
-                  ))
+                  data.map((productItem) => {
+                    const price =
+                      (
+                        customerProductPrices as Record<string, number> | null
+                      )?.[productItem.id] ?? productItem.gia;
+                    return (
+                      <TableRow key={productItem.id}>
+                        <TableCell className="py-2 pl-2 pr-0">
+                          {productItem.thuong_hieu || "Đang cập nhật"}
+                        </TableCell>
+                        <TableCell className="table-cell p-2 px-0 lg:hidden">
+                          {productItem.quy_cach} /{" "}
+                          {productItem.hoan_thien || " "}
+                        </TableCell>
+                        <TableCell className="hidden  p-2 lg:table-cell">
+                          {productItem.quy_cach || "Đang cập nhật"}
+                        </TableCell>
+                        <TableCell className="hidden  p-2 lg:table-cell">
+                          {productItem.chat_lieu || "Khác"}
+                        </TableCell>
+                        <TableCell className="hidden p-2 lg:table-cell">
+                          {productItem.hoan_thien || "Đang cập nhật"}
+                        </TableCell>
+                        <TableCell className="px-0 py-2 text-end">{`${
+                          price ? vndFormatter.format(price) : "Đang cập nhật"
+                        }`}</TableCell>
+                        <TableCell className="py-2 pl-1 pr-0">
+                          /&nbsp;{productItem.don_vi || " "}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
                 )}
               </>
             )}

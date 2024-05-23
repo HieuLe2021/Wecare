@@ -29,34 +29,16 @@
     "baseUrl": "src",
     "paths": {
       "~/*": ["./*"],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@data/*": [
-        "data/*"
-      ],
-      "@hook/*": [
-        "hooks/*"
-      ],
+      "@lib/*": ["lib/*"],
+      "@data/*": ["data/*"],
+      "@hook/*": ["hooks/*"],
       "@utils": ["utils/index.ts"],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@context/*": [
-        "contexts/*"
-      ],
-      "@reducer/*": [
-        "reducers/*"
-      ],
-      "@component/*": [
-        "components/*"
-      ],
-      "@sections/*": [
-        "page-sections/*"
-      ],
-      "@models/*": [
-        "models/*"
-      ]
+      "@utils/*": ["utils/*"],
+      "@context/*": ["contexts/*"],
+      "@reducer/*": ["reducers/*"],
+      "@component/*": ["components/*"],
+      "@sections/*": ["page-sections/*"],
+      "@models/*": ["models/*"]
     }
   },
   "include": [
@@ -66,10 +48,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "./src/components/swiper/swiper.d.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "./src/components/icon/Icon.tsx"
-  ]
+  "exclude": ["node_modules", "./src/components/icon/Icon.tsx"]
 }
