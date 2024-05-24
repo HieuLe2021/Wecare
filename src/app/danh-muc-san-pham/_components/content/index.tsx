@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@lib/supabase/server";
@@ -11,28 +10,15 @@ import { getCustomerProductPrices, getLeafNode } from "../../_utils/server";
 import { PriceTable } from "./PriceTable";
 
 export type DefaultProductListContentProps = {
-  params: { level1Slug?: string; level2Slug?: string };
+  params: { slug: string[] };
   searchParams: { groups?: string; page?: string; customer?: string };
 };
 export const Content = async ({
   params,
   searchParams,
 }: DefaultProductListContentProps) => {
-  const heads = headers();
-  const pathnameSplited =
-    heads
-      .get("referer")
-      ?.replace(heads.get("x-forwarded-proto") + "://", "")
-      .replace(heads.get("x-forwarded-host") || "", "")
-      .split("/")
-      .join("/")
-      .split("?")[0]
-      ?.split("/") ?? [];
-  console.log("a", heads.get("referer"));
   const supabase = createClient();
-  const childNodes = await getLeafNode(
-    params.level2Slug ?? params.level1Slug ?? "",
-  );
+  const childNodes = await getLeafNode(params.slug.at(-1)!);
 
   const productsBySlug = (slug: string) => {
     return supabase
@@ -43,7 +29,7 @@ export const Content = async ({
   };
   const selectedGroups = searchParams.groups?.split(",");
   const groups = searchParams.groups
-    ? childNodes.filter((x) => selectedGroups?.includes(x.slug!))
+    ? childNodes.filter((x) => selectedGroups?.includes(x.slug))
     : childNodes;
   const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
   const [customerProductPrices, ...priceTablesQuery] = await Promise.all([
@@ -51,7 +37,7 @@ export const Content = async ({
       ? getCustomerProductPrices(searchParams.customer)
       : null,
     ...groups.slice(from, to).map((node) => {
-      return productsBySlug(node.slug!);
+      return productsBySlug(node.slug);
     }),
   ]);
 
@@ -74,12 +60,6 @@ export const Content = async ({
         const priceMin = Math.min(...prices);
         const priceMax = Math.max(...prices);
 
-        const parentPath = params.level2Slug
-          ? pathnameSplited.slice(0, 4).join("/")
-          : params.level1Slug
-            ? pathnameSplited.slice(0, 3).join("/")
-            : "xx";
-
         const data = groups[index]!;
         return (
           <div key={data.id} className="mb-4 rounded-lg bg-white p-4">
@@ -88,20 +68,18 @@ export const Content = async ({
                 loading="lazy"
                 src={data.image_url || "https://placehold.co/600x400/png"}
                 className="aspect-square shrink-0"
-                alt={data.name!}
+                alt={data.name}
                 width={120}
                 height={120}
               />
               <div className="">
                 <Link
                   className="text-sx cursor-pointer pb-1 text-blue-500 underline underline-offset-1"
-                  href={parentPath}
+                  href={data.parent_slug}
                 >
                   {data.parent_name}
                 </Link>
-                <h6 className="text-base font-semibold">
-                  {data.name ?? "Đang cập nhật"}
-                </h6>
+                <h6 className="text-base font-semibold">{data.name}</h6>
                 <div className="self-start text-sm max-md:max-w-full">
                   Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng
                   mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
