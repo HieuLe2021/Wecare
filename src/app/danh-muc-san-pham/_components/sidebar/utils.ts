@@ -76,6 +76,7 @@ export function getCollections(
         menuNodes.find((n) => n.id === root.id)?.child_nodes.length || 0;
 
       const menuItem: MenuItem = {
+        id: root.id,
         icon: "laptop",
         href:
           "/" +
