@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 
+import type { DefaultProductListContentProps } from "../content";
 import type { Tables } from "~/lib/supabase/types";
 
 export function Breadcrumb({
@@ -11,14 +12,8 @@ export function Breadcrumb({
 }: {
   allProductGroups: Tables<"product_groups">[];
 }) {
-  const params = useParams();
+  const params = useParams<DefaultProductListContentProps["params"]>();
   const pathSplited = usePathname().split("/");
-  const grandParentlevel1Slug = allProductGroups.find(
-    (resGroups) => resGroups.slug === params.level1Slug,
-  );
-  const grandParentlevel2Slug = allProductGroups.find(
-    (resGroups) => resGroups.slug === params.level2Slug,
-  );
   const searchParams = useSearchParams();
   const customerId = searchParams.get("customer");
 
@@ -33,23 +28,20 @@ export function Breadcrumb({
       >
         Danh mục sản phẩm
       </Link>
-      <Link
-        className="text-sky-800"
-        href={
-          pathSplited.slice(0, 3).join("/") +
-          (customerId ? `?customer=${customerId}` : "")
-        }
-      >
-        {grandParentlevel1Slug && `/ ${grandParentlevel1Slug.name}`}
-      </Link>
-      <Link
-        className="text-sky-800"
-        href={
-          pathSplited.join("/") + (customerId ? `?customer=${customerId}` : "")
-        }
-      >
-        {grandParentlevel2Slug && `/ ${grandParentlevel2Slug.name}`}
-      </Link>
+      {params.slug.map((s, index) => {
+        const d = allProductGroups.find((resGroups) => resGroups.slug === s);
+        return (
+          <Link
+            className="text-sky-800"
+            href={
+              pathSplited.slice(0, index + 3).join("/") +
+              (customerId ? `?customer=${customerId}` : "")
+            }
+          >
+            / {d?.name}
+          </Link>
+        );
+      })}
     </div>
   );
 }

@@ -5,23 +5,26 @@ import { useParams } from "next/navigation";
 import Select from "@component/Select";
 
 import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
+import { Tables } from "~/lib/supabase/types";
+import { DefaultProductListContentProps } from "../content";
 import { LeafCarousel } from "../leaf-carousel";
 
 export const Topbar = ({
   allProductGroups,
-  level1Nodes,
+  menuNodes,
 }: {
   allProductGroups: Tables<"product_groups">[];
-  level1Nodes: Tables<"menu_nodes">[];
+  menuNodes: Tables<"menu_nodes_matview">[];
 }) => {
-  const params = useParams<{ level1Slug?: string; level2Slug?: string }>();
+  const params = useParams<DefaultProductListContentProps["params"]>();
   const [childNodes, setChildNodes] = useState<
-    NonNullable<Tables<"menu_nodes">["child_nodes"]>
+    Tables<"menu_nodes_matview">["child_nodes"]
   >([]);
 
   useEffect(() => {
-    const slug = params.level2Slug ?? params.level1Slug ?? "";
-    setChildNodes(level1Nodes.find((x) => x.slug === slug)?.child_nodes ?? []);
+    const slug = params.slug.at(-1);
+
+    setChildNodes(menuNodes.find((x) => x.slug === slug)?.child_nodes ?? []);
   }, [params]);
 
   const leafCount = childNodes.length;

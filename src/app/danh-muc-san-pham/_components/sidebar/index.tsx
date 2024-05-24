@@ -14,12 +14,15 @@ import { getCollections } from "./utils";
 
 export const Sidebar = ({
   allProductGroups,
+  menuNodes,
 }: {
   allProductGroups: Tables<"product_groups">[];
+  menuNodes: Tables<"menu_nodes_matview">[];
 }) => {
   const searchParams = useSearchParams();
   const collections = getCollections(
     allProductGroups,
+    menuNodes,
     searchParams.get("customer"),
   );
   const megaMenu = { MegaMenu1, MegaMenu2 };

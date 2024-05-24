@@ -7,14 +7,14 @@ import Footer from "./_components/footer";
 import { Header } from "./_components/header";
 import { Sidebar } from "./_components/sidebar";
 import { Topbar } from "./_components/topbar";
-import { getAllProductGroups, getLevel1Nodes } from "./_utils/server";
+import { getAllProductGroups, getMenuNodes } from "./_utils/server";
 import { StyledAppLayout } from "./styles";
 
 export default async function Layout(props: { children: ReactNode }) {
   const { children } = props;
-  const [allProductGroups, level1Nodes] = await Promise.all([
+  const [allProductGroups, menuNodes] = await Promise.all([
     getAllProductGroups(),
-    getLevel1Nodes(),
+    getMenuNodes(),
   ]);
 
   return (
@@ -38,13 +38,13 @@ export default async function Layout(props: { children: ReactNode }) {
             className="rounded-md bg-white"
             spacing={24}
           >
-            <Sidebar allProductGroups={allProductGroups} />
+            <Sidebar
+              allProductGroups={allProductGroups}
+              menuNodes={menuNodes}
+            />
           </Grid>
           <Grid item md={9} xs={12} className="!px-6 !py-0">
-            <Topbar
-              allProductGroups={allProductGroups}
-              level1Nodes={level1Nodes}
-            />
+            <Topbar allProductGroups={allProductGroups} menuNodes={menuNodes} />
             <div>{children}</div>
           </Grid>
         </Grid>
