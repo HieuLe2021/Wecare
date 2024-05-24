@@ -22,7 +22,7 @@ export const PriceTable = ({
   skeleton?: boolean;
 }) => {
   return (
-    <div className="py-2">
+    <div className="mt-4 py-2">
       <div className=" border-b">
         <div className="pl-2 text-base font-medium">
           {!skeleton && (
@@ -30,7 +30,10 @@ export const PriceTable = ({
               {material && material !== "unknown" ? (
                 <div>Chất liệu: {`${material}`}</div>
               ) : (
-                "Chất liệu: Khác"
+                <div className="flex">
+                  <p className="text-gray-400">Chất liệu: &nbsp;</p>
+                  <p>Khác</p>
+                </div>
               )}
             </>
           )}

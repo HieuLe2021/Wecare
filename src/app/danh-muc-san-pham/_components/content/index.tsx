@@ -109,7 +109,7 @@ export const Content = async ({
                 </div>
                 {prices.length < 1 ? (
                   <div className="pt-2 text-xs text-red-500">
-                    Vui lòng liên hệ để báo giá
+                    Liên hệ để được báo giá
                   </div>
                 ) : (
                   <div className="pt-2 text-base text-red-500">
@@ -123,7 +123,7 @@ export const Content = async ({
             {Object.entries(groupedByChatLieu).length === 0 ? (
               <div className="flex w-full flex-col items-center justify-center gap-2 p-12 text-gray-300">
                 <ScanText size={40} strokeWidth={2} />
-                <span>Bảng giá chưa được cập nhật</span>
+                <span>Bảng giá đang cập nhật</span>
               </div>
             ) : (
               Object.entries(groupedByChatLieu).map(([key, value]) => {
