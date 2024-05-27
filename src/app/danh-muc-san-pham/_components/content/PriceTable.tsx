@@ -136,14 +136,18 @@ export const PriceTable = ({
                       }
                     >
                       {header.isPlaceholder ? null : (
-                        <div className="flex items-center gap-1">
+                        <div
+                          className={cn(
+                            "flex items-center gap-1",
+                            header.column.id === "gia" && "justify-end",
+                          )}
+                        >
                           <span>
                             {{
                               asc: "🔼",
                               desc: "🔽",
                             }[header.column.getIsSorted() as string] ?? null}
                           </span>
-
                           <span>
                             {flexRender(
                               header.column.columnDef.header,
@@ -173,7 +177,7 @@ export const PriceTable = ({
                     {/* first row is a normal row */}
                     {row.getVisibleCells().map((cell) => {
                       return (
-                        <TableCell key={cell.id} className="p-2">
+                        <TableCell key={cell.id} className="p-2 text-xs">
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext(),
@@ -187,7 +191,7 @@ export const PriceTable = ({
                       {/* 2nd row is a custom 1 cell row */}
                       <TableCell
                         colSpan={row.getVisibleCells().length}
-                        className="border-b border-l border-r px-2"
+                        className="border-b border-l border-r px-2 text-xs"
                       >
                         {renderSubComponent({ row })}
                       </TableCell>
