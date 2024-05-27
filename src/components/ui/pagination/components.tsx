@@ -57,9 +57,13 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
+      "h-8 w-8 p-0",
+      "rounded-full border border-transparent hover:border-blue-700 hover:text-blue-700",
       className,
-      "border:transparent h-8 w-8 rounded-full border hover:border-blue-700 hover:text-blue-700",
-      isActive ? "border border-blue-700 text-blue-700" : "",
+      isActive ? "border-blue-700 text-blue-700" : "",
+      disabled
+        ? "pointer-events-none rounded-full border border-blue-100 text-blue-100"
+        : "",
     )}
     {...props}
   >
@@ -77,7 +81,7 @@ const PaginationPrevious = ({
     className={cn(className)}
     {...props}
   >
-    <Icon className="text-blue-500" defaultcolor="currentColor" variant="small">
+    <Icon defaultcolor="currentColor" variant="small">
       chevron-left
     </Icon>
   </PaginationLink>
@@ -93,7 +97,7 @@ const PaginationNext = ({
     className={cn(className)}
     {...props}
   >
-    <Icon className="text-blue-500" defaultcolor="currentColor" variant="small">
+    <Icon defaultcolor="currentColor" variant="small">
       chevron-right
     </Icon>
   </PaginationLink>
