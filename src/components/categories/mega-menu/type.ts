@@ -29,6 +29,7 @@ type MegaMenu3 = {
 export type MegaMenu3Props = { data: MegaMenu3; minWidth?: string };
 
 export type MenuItem = {
+  id: string;
   icon: string;
   title: string;
   href: string;

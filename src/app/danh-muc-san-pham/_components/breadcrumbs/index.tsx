@@ -28,7 +28,7 @@ export function Breadcrumb({
       >
         Danh mục sản phẩm
       </Link>
-      {params.slug.map((s, index) => {
+      {params.slug?.map((s, index) => {
         const d = allProductGroups.find((resGroups) => resGroups.slug === s);
         return (
           <Link

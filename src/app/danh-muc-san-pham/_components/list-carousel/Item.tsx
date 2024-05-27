@@ -6,7 +6,9 @@ import Image from "@component/Image";
 import { cn } from "@utils";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
+import type { MenuItem } from "~/components/categories/mega-menu/type";
 import type { Tables } from "~/lib/supabase/types";
+import Icon from "~/components/icon/Icon";
 import {
   Carousel,
   CarouselContent,
@@ -15,64 +17,32 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel";
 
-export const LeafCarousel = ({
+export const Item = ({
+  info,
   data,
   leafCount,
 }: {
+  info: MenuItem;
   data: NonNullable<Tables<"menu_nodes">["child_nodes"]>;
   leafCount: number;
 }) => {
   const searchParams = useSearchParams();
-
   const currentPath = usePathname();
-  const groupSlugs = searchParams.get("groups")?.split(",") ?? [];
-
-  const genSelectedGroupsPath = (
-    selectedGroupSlug: string,
-    currentGroupSlugs: string[],
-    currentPath: string,
-    searchParams: URLSearchParams,
-  ) => {
-    let newGroupSlugs = [...currentGroupSlugs];
-    if (newGroupSlugs.includes(selectedGroupSlug)) {
-      newGroupSlugs = newGroupSlugs.filter((x) => x !== selectedGroupSlug);
-    } else {
-      newGroupSlugs.push(selectedGroupSlug);
-    }
-    const params = new URLSearchParams(searchParams.toString());
-    if (newGroupSlugs.length === 0) {
-      params.delete("groups");
-    } else {
-      params.set("groups", newGroupSlugs.join(","));
-    }
-
-    // delete page if exists
-    params.delete("page");
-
-    const query = params.toString();
-    return currentPath + (query ? "?" + query : "");
-  };
-
-  const f = data.filter((x) => x.slug && groupSlugs.includes(x.slug))[0];
-  const d = f ? data.findIndex((x) => x.id === f.id) : 0;
-  const startIndex = d > 4 ? d - 4 : 0;
 
   return (
     <div className="mb-4 w-full rounded-md bg-white">
       <div className="flex items-end justify-between px-6 py-2">
-        <p>{leafCount} nhóm sản phẩm</p>
-        {groupSlugs.length > 0 && (
-          <Link
-            href={
-              currentPath + searchParams.get("customer")
-                ? "?customer=" + searchParams.get("customer")
-                : ""
-            }
-            className="text-xs text-blue-500 hover:text-blue-700"
-          >
-            Xoá mục chọn
-          </Link>
-        )}
+        <Link href={info.href}>
+          <Icon>{info.icon}</Icon>
+          {info.title}
+          {leafCount}
+        </Link>
+        <Link
+          href={info.href}
+          className="text-xs text-blue-500 hover:text-blue-700"
+        >
+          Xem tất cả
+        </Link>
       </div>
       <div className="relative h-36 w-full rounded-md bg-white">
         <div className="absolute left-4 right-4 top-[11px]">
@@ -82,14 +52,12 @@ export const LeafCarousel = ({
                 align: "start",
                 dragFree: true,
                 loop: false,
-                startIndex,
               }}
               className="w-full"
               plugins={[WheelGesturesPlugin()]}
             >
               <CarouselContent>
                 {data.map((item) => {
-                  const isActive = item.slug && groupSlugs.includes(item.slug);
                   return (
                     <CarouselItem
                       key={item.slug}
@@ -99,27 +67,24 @@ export const LeafCarousel = ({
                         className={cn(
                           "p-1",
                           "group relative cursor-pointer rounded-md border border-transparent",
-                          isActive ? "border-blue-500" : "text-gray-400",
+                          "text-gray-400",
                         )}
                       >
                         <Link
-                          href={genSelectedGroupsPath(
-                            item.slug!,
-                            groupSlugs,
-                            currentPath,
-                            searchParams,
-                          )}
+                          href={
+                            currentPath +
+                            "/" +
+                            item.parent_slug! +
+                            "?groups=" +
+                            item.slug +
+                            (searchParams.get("customer")
+                              ? "&customer=" + searchParams.get("customer")
+                              : "")
+                          }
                           className="flex justify-center"
                         >
                           <div className="flex w-[125px] flex-col">
                             <div className="flex grow flex-col bg-white py-0.5 text-center text-xs font-medium leading-4 text-sky-700 max-md:mt-4">
-                              {isActive && (
-                                <Image
-                                  className="absolute right-0 top-0 z-10 h-5 w-5"
-                                  src="/assets/images/wc-icon/check-tick.svg"
-                                  alt="check-tick"
-                                />
-                              )}
                               <Image
                                 loading="lazy"
                                 srcSet={
@@ -129,14 +94,7 @@ export const LeafCarousel = ({
                                 }
                                 className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-110"
                               />
-                              <div
-                                className={cn(
-                                  "mt-2",
-                                  isActive
-                                    ? "text-sm font-semibold text-sky-700"
-                                    : "text-gray-400",
-                                )}
-                              >
+                              <div className={cn("mt-2", "text-gray-400")}>
                                 {item.name}
                               </div>
                             </div>
