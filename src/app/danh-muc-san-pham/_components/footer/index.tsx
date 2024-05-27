@@ -20,64 +20,10 @@ export default function Footer() {
         <Container p="1rem" color="white">
           <Box py="5rem" overflow="hidden">
             <Grid container spacing={6}>
-              <Grid item lg={4} md={6} sm={6} xs={12}>
-                <Link href="/" className="flex items-center">
-                  <Image src="/assets/images/logo.svg" alt="logo" />
-                  <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
-                    WECARE
-                  </h6>
-                </Link>
-
-                <Paragraph mb="1.25rem" color="gray.500" className="py-3">
-                  Cung cấp giải pháp cung ứng toàn diện về vật tư, nguyên vật
-                  liệu, phụ kiện, phụ trợ cho các nhà máy, ngành công nghiệp.
-                </Paragraph>
-
-                {/* <AppStore /> */}
-              </Grid>
-
-              <Grid item lg={2} md={6} sm={6} xs={12}>
-                <Typography
-                  mb="1.25rem"
-                  lineHeight="1"
-                  fontSize="25px"
-                  fontWeight="600"
-                >
-                  Ngành hàng
-                </Typography>
-
-                <div>
-                  {aboutLinks.map((item, ind) => (
-                    <StyledLink href="/" key={ind}>
-                      {item}
-                    </StyledLink>
-                  ))}
-                </div>
-              </Grid>
-
               <Grid item lg={3} md={6} sm={6} xs={12}>
                 <Typography
                   mb="1.25rem"
-                  lineHeight="1"
-                  fontSize="25px"
-                  fontWeight="600"
-                >
-                  Chính sách
-                </Typography>
-
-                <div>
-                  {customerCareLinks.map((item, ind) => (
-                    <StyledLink href="/" key={ind}>
-                      {item}
-                    </StyledLink>
-                  ))}
-                </div>
-              </Grid>
-
-              <Grid item lg={3} md={6} sm={6} xs={12}>
-                <Typography
-                  mb="1.25rem"
-                  lineHeight="1"
+                  lineHeight="1.3"
                   fontSize="25px"
                   fontWeight="600"
                 >
@@ -96,29 +42,60 @@ export default function Footer() {
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
                   Phone: +84 965 167 350
                 </Typography>
+              </Grid>
 
-                {/* <FlexBox className="flex" mx="-5px">
-                  {iconList.map((item) => (
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      key={item.iconName}
-                      rel="noreferrer noopenner"
-                    >
-                      <Box
-                        m="5px"
-                        p="10px"
-                        size="small"
-                        borderRadius="50%"
-                        bg="rgba(0,0,0,0.2)"
-                      >
-                        <Icon size="12px" defaultcolor="auto">
-                          {item.iconName}
-                        </Icon>
-                      </Box>
-                    </a>
+              <Grid item lg={2} md={6} sm={6} xs={12}>
+                <Typography
+                  mb="1.25rem"
+                  lineHeight="1.3"
+                  fontSize="25px"
+                  fontWeight="600"
+                >
+                  Ngành hàng
+                </Typography>
+
+                <div>
+                  {aboutLinks.map((item, ind) => (
+                    <StyledLink href="/" key={ind}>
+                      {item}
+                    </StyledLink>
                   ))}
-                </FlexBox> */}
+                </div>
+              </Grid>
+
+              <Grid item lg={3} md={6} sm={6} xs={12}>
+                <Typography
+                  mb="1.25rem"
+                  lineHeight="1.3"
+                  fontSize="25px"
+                  fontWeight="600"
+                >
+                  Chính sách
+                </Typography>
+
+                <div>
+                  {customerCareLinks.map((item, ind) => (
+                    <StyledLink href="/" key={ind}>
+                      {item}
+                    </StyledLink>
+                  ))}
+                </div>
+              </Grid>
+
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <Link href="/" className="flex items-center">
+                  <Image src="/assets/images/logo.svg" alt="logo" />
+                  <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
+                    WECARE
+                  </h6>
+                </Link>
+
+                <Paragraph mb="1.25rem" color="gray.500" className="py-3">
+                  Cung cấp giải pháp cung ứng toàn diện về vật tư, nguyên vật
+                  liệu, phụ kiện, phụ trợ cho các nhà máy, ngành công nghiệp.
+                </Paragraph>
+
+                {/* <AppStore /> */}
               </Grid>
             </Grid>
           </Box>

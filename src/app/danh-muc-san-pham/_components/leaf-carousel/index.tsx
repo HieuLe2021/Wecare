@@ -71,7 +71,7 @@ export const LeafCarousel = ({
           </Link>
         )}
       </div>
-      <div className="relative h-36 w-full rounded-md bg-white">
+      <div className="relative h-40 w-full rounded-md bg-white">
         <div className="absolute left-4 right-4 top-[11px]">
           <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
             <Carousel
@@ -94,7 +94,7 @@ export const LeafCarousel = ({
                       <div
                         className={cn(
                           "p-1",
-                          "group relative cursor-pointer rounded-md border border-transparent",
+                          "group relative h-36 cursor-pointer rounded-md border border-transparent",
                           isActive ? "border-blue-500" : "text-gray-400",
                         )}
                       >
