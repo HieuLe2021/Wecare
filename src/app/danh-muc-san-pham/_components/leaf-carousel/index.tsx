@@ -23,7 +23,6 @@ export const LeafCarousel = ({
   leafCount: number;
 }) => {
   const searchParams = useSearchParams();
-  // const currentChildId = searchParams.get("child");
 
   const currentPath = usePathname();
   const groupSlugs = searchParams.get("groups")?.split(",") ?? [];
@@ -54,6 +53,10 @@ export const LeafCarousel = ({
     return currentPath + (query ? "?" + query : "");
   };
 
+  const f = data.filter((x) => x.slug && groupSlugs.includes(x.slug))[0];
+  const d = f ? data.findIndex((x) => x.id === f.id) : 0;
+  const startIndex = d > 4 ? d - 4 : 0;
+
   return (
     <div className="mb-4 w-full rounded-md bg-white">
       <div className="flex items-end justify-between px-6 py-2">
@@ -79,6 +82,7 @@ export const LeafCarousel = ({
                 align: "start",
                 dragFree: true,
                 loop: false,
+                startIndex,
               }}
               className="w-full"
               plugins={[WheelGesturesPlugin()]}

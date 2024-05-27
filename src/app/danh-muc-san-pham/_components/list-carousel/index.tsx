@@ -7,8 +7,6 @@ import { Item } from "./Item";
 
 export const ListCarousel = async ({
   searchParams,
-  // data,
-  // leafCount,
 }: DefaultProductListContentProps) => {
   const [allProductGroups, menuNodes] = await Promise.all([
     getAllProductGroups(),
