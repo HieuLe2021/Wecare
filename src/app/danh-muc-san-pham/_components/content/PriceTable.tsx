@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-table";
 
 import type { Tables } from "~/lib/supabase/types";
+import Image from "~/components/Image";
 import TextField from "~/components/text-field";
 import { Button } from "~/components/ui/button";
 import { Skeleton } from "~/components/ui/skeleton";
@@ -30,11 +31,13 @@ export const PriceTable = ({
   data,
   customerProductPrices = {},
   skeleton,
+  img,
 }: {
   material: string;
   data: Tables<"products">[];
   customerProductPrices: Tables<"customers">["product_prices"] | undefined;
   skeleton?: boolean;
+  img: string;
 }) => {
   const onRowClick = (row: Row<Tables<"products">>) => {
     row.getToggleExpandedHandler()();
@@ -123,7 +126,7 @@ export const PriceTable = ({
                     <TableHead
                       key={header.id}
                       colSpan={header.colSpan}
-                      className="p-2"
+                      className="p-2 pl-1"
                       onClick={header.column.getToggleSortingHandler()}
                       title={
                         header.column.getCanSort()
@@ -177,7 +180,7 @@ export const PriceTable = ({
                     {/* first row is a normal row */}
                     {row.getVisibleCells().map((cell) => {
                       return (
-                        <TableCell key={cell.id} className="p-2 text-xs">
+                        <TableCell key={cell.id} className="p-2 text-[13px]">
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext(),
@@ -191,9 +194,9 @@ export const PriceTable = ({
                       {/* 2nd row is a custom 1 cell row */}
                       <TableCell
                         colSpan={row.getVisibleCells().length}
-                        className="border-b border-l border-r px-2 text-xs"
+                        className="border-b border-l border-r px-2 text-[13px]"
                       >
-                        {renderSubComponent({ row })}
+                        {renderSubComponent({ row, img })}
                       </TableCell>
                     </TableRow>
                   )}
@@ -315,11 +318,49 @@ export const PriceTable = ({
   );
 };
 
-const renderSubComponent = ({ row }: { row: Row<Tables<"products">> }) => {
+const renderSubComponent = ({
+  row,
+  img,
+}: {
+  row: Row<Tables<"products">>;
+  img: string;
+}) => {
   const record = row.original;
+  console.log("record:", record, row.original);
   return (
     <div className="flex items-center justify-between">
-      <div className="font-bold">{record.ten_sp}</div>
+      <div>
+        <div className="flex">
+          <Image
+            loading="lazy"
+            src={img}
+            className="aspect-square shrink-0"
+            alt={img}
+            width={120}
+            height={120}
+          />
+          <div className="pl-2">
+            <div className="mb-1 text-sm font-medium">{record.ten_sp}</div>
+            <div className="mb-1 flex text-sm font-medium">
+              <p className="font-normal text-gray-400">Thương hiệu:&nbsp;</p>
+              {record.thuong_hieu}
+            </div>
+            <div className="mb-1 flex text-sm font-medium">
+              <p className="font-normal text-gray-400">Quy cách:&nbsp;</p>
+              {record.quy_cach}
+            </div>
+            <div className="mb-1 flex text-sm font-medium">
+              <p className="font-normal text-gray-400">Chất liệu:&nbsp;</p>
+              {record.chat_lieu || "Khác"}
+            </div>
+            <div className="flex text-sm font-medium">
+              <p className="font-normal text-gray-400">Giá:&nbsp;</p>
+              {record.gia ? vndFormatter.format(record.gia) : "Đang cập nhật"}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="flex items-center gap-1">
         <span>Số lượng:</span>
         <TextField placeholder="0" type="number" className="!w-20" />

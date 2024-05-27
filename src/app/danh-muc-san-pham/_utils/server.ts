@@ -1,12 +1,11 @@
 import "server-only";
 
 import { cache } from "react";
-
 import { createClient } from "~/lib/supabase/server";
 
 export const getAllProductGroups = cache(async () => {
   const supabase = createClient();
-  return (await supabase.from("product_groups").select()).data ?? [];
+  return (await supabase.from("product_groups").select().order("pos", { ascending: true })).data ?? [];
 });
 
 // export const preloadLeafNode = (id: string | null) => {
