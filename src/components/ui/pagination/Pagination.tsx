@@ -320,17 +320,11 @@ export const Pagination = (props: PaginationProps) => {
 
   const prevDisabled = !hasPrev || !allPages;
   const prev = (
-    <PaginationItem
-      aria-disabled={prevDisabled}
-      className={
-        prevDisabled
-          ? "pointer-events-none rounded-full border border-blue-300"
-          : "rounded-full border border-blue-700"
-      }
-    >
+    <PaginationItem aria-disabled={prevDisabled}>
       <PaginationPrevious
         href={createPageURL(prevPage)}
         disabled={prevDisabled}
+        className="border-blue-500 text-blue-500"
       />
     </PaginationItem>
   );
@@ -345,15 +339,12 @@ export const Pagination = (props: PaginationProps) => {
     nextDisabled = !hasNext || !allPages;
   }
   const next = (
-    <PaginationItem
-      aria-disabled={nextDisabled}
-      className={
-        nextDisabled
-          ? "pointer-events-none rounded-full border border-blue-300"
-          : "rounded-full border border-blue-700"
-      }
-    >
-      <PaginationNext href={createPageURL(nextPage)} disabled={nextDisabled} />
+    <PaginationItem aria-disabled={nextDisabled}>
+      <PaginationNext
+        href={createPageURL(nextPage)}
+        disabled={nextDisabled}
+        className="border-blue-500 text-blue-500"
+      />
     </PaginationItem>
   );
 
