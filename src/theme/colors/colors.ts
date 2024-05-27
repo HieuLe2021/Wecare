@@ -8,7 +8,7 @@ const gray = {
   300: "#E3E9EF",
   200: "#F3F5F9", // Line Stroke
   100: "#F6F9FC",
-  white: "#FFFFFF"
+  white: "#FFFFFF",
 };
 
 const textColor = {
@@ -16,18 +16,18 @@ const textColor = {
   muted: gray[600],
   primary: gray[900],
   disabled: gray[400],
-  secondary: gray[800]
+  secondary: gray[800],
 };
 
 const bodyColor = {
   default: gray[100],
-  paper: gray["white"],
-  text: textColor.primary
+  paper: gray.white,
+  text: textColor.primary,
 };
 
 const primaryColor = {
   light: "#FFE1E6",
-  main: "#E94560",
+  main: "rgb(2 132 199)",
   dark: "#4F4CB6",
   text: "#ffffff",
   100: "#FCE9EC",
@@ -38,7 +38,7 @@ const primaryColor = {
   600: "#E63E58",
   700: "#E3364E",
   800: "#DF2E44",
-  900: "#D91F33"
+  900: "#D91F33",
 };
 
 const secondaryColor = {
@@ -47,45 +47,45 @@ const secondaryColor = {
   dark: "#303A47",
   text: "#ffffff",
   900: "#041533",
-  100: "#F3F6F9"
+  100: "#F3F6F9",
 };
 
 const dark = { main: "#222" };
 
 const warningColor = {
   main: "#FFCD4E",
-  text: textColor.primary
+  text: textColor.primary,
 };
 
 const errorColor = {
   main: "#E94560",
   light: "#FFE1E6",
-  text: textColor.primary
+  text: textColor.primary,
 };
 
 const successColor = {
   text: textColor.primary,
   main: "rgba(51, 208, 103, 1)",
-  light: "rgba(51, 208, 103, 0.15)"
+  light: "rgba(51, 208, 103, 0.15)",
 };
 
 const defaultColor = {
   main: textColor.primary,
   dark: textColor.primary,
   text: textColor.primary,
-  light: textColor.secondary
+  light: textColor.secondary,
 };
 
 const paste = {
   50: "#F5F5F5",
   100: "#DDFBF1",
-  main: "#4BB4B4"
+  main: "#4BB4B4",
 };
 
 const marron = {
   50: "#f3f5f9",
   100: "#F6F2ED",
-  main: "#BE7374"
+  main: "#BE7374",
 };
 
 export const blue = {
@@ -98,7 +98,7 @@ export const blue = {
   700: "#2756B6",
   800: "#183C92",
   900: "#0E2979",
-  main: "#4E97FD"
+  main: "#4E97FD",
 };
 
 export const colors = {
@@ -114,5 +114,5 @@ export const colors = {
   success: successColor,
   default: defaultColor,
   primary: primaryColor,
-  secondary: secondaryColor
+  secondary: secondaryColor,
 };
