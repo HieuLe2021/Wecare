@@ -20,6 +20,7 @@
     "@styled-system/theme-get": "^5.1.2",
     "@supabase/ssr": "latest",
     "@t3-oss/env-nextjs": "^0.10.1",
+    "@tanstack/react-table": "^8.17.3",
     "@trpc/client": "next",
     "@trpc/react-query": "next",
     "@trpc/server": "next",

@@ -6,7 +6,9 @@ import Image from "@component/Image";
 import { cn } from "@utils";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
+import type { MenuItem } from "~/components/categories/mega-menu/type";
 import type { Tables } from "~/lib/supabase/types";
+import Icon from "~/components/icon/Icon";
 import {
   Carousel,
   CarouselContent,
@@ -15,10 +17,12 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel";
 
-export const LeafCarousel = ({
+export const Item = ({
+  info,
   data,
   leafCount,
 }: {
+  info: MenuItem;
   data: NonNullable<Tables<"menu_nodes">["child_nodes"]>;
   leafCount: number;
 }) => {
@@ -57,19 +61,17 @@ export const LeafCarousel = ({
   return (
     <div className="mb-4 w-full rounded-md bg-white">
       <div className="flex items-end justify-between px-6 py-2">
-        <p>{leafCount} nhóm sản phẩm</p>
-        {groupSlugs.length > 0 && (
-          <Link
-            href={
-              currentPath + searchParams.get("customer")
-                ? "?customer=" + searchParams.get("customer")
-                : ""
-            }
-            className="text-xs text-blue-500 hover:text-blue-700"
-          >
-            Xoá mục chọn
-          </Link>
-        )}
+        <div>
+          <Icon>{info.icon}</Icon>
+          {info.title}
+          {leafCount}
+        </div>
+        <Link
+          href={info.href}
+          className="text-xs text-blue-500 hover:text-blue-700"
+        >
+          View All
+        </Link>
       </div>
       <div className="relative h-36 w-full rounded-md bg-white">
         <div className="absolute left-4 right-4 top-[11px]">
