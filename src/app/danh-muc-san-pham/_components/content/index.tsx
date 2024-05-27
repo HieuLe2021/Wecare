@@ -84,23 +84,23 @@ export const Content = async ({
               />
               <div className="">
                 <Link
-                  className="text-sx cursor-pointer pb-1 text-blue-500 underline underline-offset-1"
+                  className="text-sx cursor-pointer pb-2 text-blue-500 underline underline-offset-1"
                   href={data.parent_slug}
                 >
                   {data.parent_name}
                 </Link>
                 <h6 className="text-base font-semibold">{data.name}</h6>
-                <div className="self-start text-sm max-md:max-w-full">
+                <div className="self-start pt-1 text-[13px] leading-5 max-md:max-w-full	">
                   Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng
                   mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
                   nghiệm khách hàng tốt nhất.
                 </div>
                 {prices.length === 0 ? null : prices.length === 1 ? (
-                  <div className="pt-2 text-xs text-red-500">
+                  <div className="pt-2 text-sm text-red-500">
                     {vndFormatter.format(prices[0]!)}
                   </div>
                 ) : (
-                  <div className="pt-2 text-base text-red-500">
+                  <div className="pt-2 text-sm text-red-500">
                     {vndFormatter.format(priceMin)} -{" "}
                     {vndFormatter.format(priceMax)}
                   </div>
@@ -123,6 +123,7 @@ export const Content = async ({
                     customerProductPrices={customerProductPrices}
                     sortBy={sortBy}
                     sortOrder={sortOrder}
+                    img={data.image_url}
                   />
                 );
               })
