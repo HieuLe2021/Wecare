@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-table";
 
 import type { Tables } from "~/lib/supabase/types";
+import Image from "~/components/Image";
 import TextField from "~/components/text-field";
 import { Button } from "~/components/ui/button";
 import { Skeleton } from "~/components/ui/skeleton";
@@ -33,6 +34,7 @@ export const PriceTable = ({
   skeleton,
   sortBy,
   sortOrder,
+  img,
 }: {
   material: string;
   data: Tables<"products">[];
@@ -40,6 +42,7 @@ export const PriceTable = ({
   skeleton?: boolean;
   sortBy?: keyof NonNullable<Tables<"products">>;
   sortOrder?: "asc" | "desc";
+  img: string;
 }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -122,15 +125,18 @@ export const PriceTable = ({
   });
 
   return (
-    <div className="py-2">
+    <div className="mt-4 py-2">
       <div className=" border-b">
-        <div className="pl-2 text-base font-medium">
+        <div className="pl-2 text-base font-semibold">
           {!skeleton && (
             <>
               {material && material !== "unknown" ? (
                 <div>Chất liệu: {`${material}`}</div>
               ) : (
-                "Chất liệu: Khác"
+                <div className="flex">
+                  <p className="text-gray-400">Chất liệu: &nbsp;</p>
+                  <p>Khác</p>
+                </div>
               )}
             </>
           )}
@@ -153,7 +159,7 @@ export const PriceTable = ({
                         <TableHead
                           key={header.id}
                           colSpan={header.colSpan}
-                          className="p-2"
+                          className="p-2 pl-1"
                           onClick={header.column.getToggleSortingHandler()}
                           title={
                             header.column.getCanSort()
@@ -166,7 +172,12 @@ export const PriceTable = ({
                           }
                         >
                           {header.isPlaceholder ? null : (
-                            <div className="flex cursor-pointer items-center gap-1">
+                            <div
+                              className={cn(
+                                "flex items-center gap-1",
+                                header.column.id === "gia" && "justify-end",
+                              )}
+                            >
                               <span>
                                 {{
                                   asc: "🔼",
@@ -204,7 +215,10 @@ export const PriceTable = ({
                         {/* first row is a normal row */}
                         {row.getVisibleCells().map((cell) => {
                           return (
-                            <TableCell key={cell.id} className="p-2">
+                            <TableCell
+                              key={cell.id}
+                              className="p-2 text-[13px]"
+                            >
                               {flexRender(
                                 cell.column.columnDef.cell,
                                 cell.getContext(),
@@ -218,9 +232,9 @@ export const PriceTable = ({
                           {/* 2nd row is a custom 1 cell row */}
                           <TableCell
                             colSpan={row.getVisibleCells().length}
-                            className="border-b border-l border-r px-2"
+                            className="border-b border-l border-r px-2 text-[13px]"
                           >
-                            {renderSubComponent({ row })}
+                            {renderSubComponent({ row, img })}
                           </TableCell>
                         </TableRow>
                       )}
@@ -263,124 +277,54 @@ export const PriceTable = ({
             </TableBody>
           )}
         </Table>
-
-        {/* <Table> */}
-        {/*   <colgroup> */}
-        {/*     <col width={140} /> */}
-        {/*     <col width={280} /> */}
-        {/*     <col width={100} className="table-cell lg:hidden " /> */}
-        {/*     <col width={140} className="table-cell sm:hidden" /> */}
-        {/*     <col width={100} /> */}
-        {/*     <col width={140} /> */}
-        {/*   </colgroup> */}
-        {/*   <TableHeader className={skeleton ? "hidden" : ""}> */}
-        {/*     <TableRow> */}
-        {/*       <TableHead className="text-black-400 h-10 px-2 text-sm font-medium"> */}
-        {/*         Thương hiệu */}
-        {/*       </TableHead> */}
-        {/*       <TableHead className="text-black-400 table-cell h-10 px-0 font-medium lg:hidden"> */}
-        {/*         Quy cách / hoàn thiện */}
-        {/*       </TableHead> */}
-        {/*       <TableHead className="text-black-400 hidden h-10 px-2 text-sm font-medium lg:table-cell "> */}
-        {/*         Quy cách */}
-        {/*       </TableHead> */}
-        {/*       <TableHead className="text-black-400 hidden h-10 px-2 font-medium lg:table-cell"> */}
-        {/*         Chất liệu */}
-        {/*       </TableHead> */}
-        {/*       <TableHead className="text-black-400 hidden h-10 px-2 font-medium lg:table-cell "> */}
-        {/*         Hoàn thiện */}
-        {/*       </TableHead> */}
-        {/*       <TableHead className="text-black-400 h-10 px-2 text-end font-medium"> */}
-        {/*         Giá */}
-        {/*       </TableHead> */}
-        {/*       <TableHead className="text-black-400 h-10 px-2 font-medium"></TableHead> */}
-        {/*     </TableRow> */}
-        {/*   </TableHeader> */}
-        {/*   <TableBody> */}
-        {/*     {skeleton ? ( */}
-        {/*       <> */}
-        {/*         {Array(5) */}
-        {/*           .fill(0) */}
-        {/*           .map((_, index) => { */}
-        {/*             return ( */}
-        {/*               <TableRow key={index}> */}
-        {/*                 <TableCell className="py-2 pl-2 pr-0"> */}
-        {/*                   <Skeleton className="h-4 w-full" /> */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="table-cell p-2 px-0 lg:hidden"> */}
-        {/*                   <Skeleton className="h-4 w-full" /> */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="hidden  p-2 lg:table-cell"> */}
-        {/*                   <Skeleton className="h-4 w-full" /> */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="hidden  p-2 lg:table-cell"> */}
-        {/*                   <Skeleton className="h-4 w-full" /> */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="hidden p-2 lg:table-cell"> */}
-        {/*                   <Skeleton className="h-4 w-full" /> */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="px-0 py-2 text-end"> */}
-        {/*                   <Skeleton className="h-4 w-full" /> */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="py-2 pl-1 pr-0"> */}
-        {/*                   <Skeleton className="h-4 w-full" /> */}
-        {/*                 </TableCell> */}
-        {/*               </TableRow> */}
-        {/*             ); */}
-        {/*           })} */}
-        {/*       </> */}
-        {/*     ) : ( */}
-        {/*       <> */}
-        {/*         {data.length === 0 ? ( */}
-        {/*           <>Chưa có dữ liệu</> */}
-        {/*         ) : ( */}
-        {/*           data.map((productItem) => { */}
-        {/*             const price = */}
-        {/*               ( */}
-        {/*                 customerProductPrices as Record<string, number> | null */}
-        {/*               )?.[productItem.id] ?? productItem.gia; */}
-        {/*             return ( */}
-        {/*               <TableRow key={productItem.id}> */}
-        {/*                 <TableCell className="py-2 pl-2 pr-0"> */}
-        {/*                   {productItem.thuong_hieu || "Đang cập nhật"} */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="table-cell p-2 px-0 lg:hidden"> */}
-        {/*                   {productItem.quy_cach} /{" "} */}
-        {/*                   {productItem.hoan_thien || " "} */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="hidden  p-2 lg:table-cell"> */}
-        {/*                   {productItem.quy_cach || "Đang cập nhật"} */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="hidden  p-2 lg:table-cell"> */}
-        {/*                   {productItem.chat_lieu || "Khác"} */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="hidden p-2 lg:table-cell"> */}
-        {/*                   {productItem.hoan_thien || "Đang cập nhật"} */}
-        {/*                 </TableCell> */}
-        {/*                 <TableCell className="px-0 py-2 text-end">{`${ */}
-        {/*                   price ? vndFormatter.format(price) : "Đang cập nhật" */}
-        {/*                 }`}</TableCell> */}
-        {/*                 <TableCell className="py-2 pl-1 pr-0"> */}
-        {/*                   /&nbsp;{productItem.don_vi || " "} */}
-        {/*                 </TableCell> */}
-        {/*               </TableRow> */}
-        {/*             ); */}
-        {/*           }) */}
-        {/*         )} */}
-        {/*       </> */}
-        {/*     )} */}
-        {/*   </TableBody> */}
-        {/* </Table> */}
       </div>
     </div>
   );
 };
 
-const renderSubComponent = ({ row }: { row: Row<Tables<"products">> }) => {
+const renderSubComponent = ({
+  row,
+  img,
+}: {
+  row: Row<Tables<"products">>;
+  img: string;
+}) => {
   const record = row.original;
+  console.log("record:", record, row.original);
   return (
     <div className="flex items-center justify-between">
-      <div className="font-bold">{record.ten_sp}</div>
+      <div>
+        <div className="flex">
+          <Image
+            loading="lazy"
+            src={img}
+            className="aspect-square shrink-0"
+            alt={img}
+            width={120}
+            height={120}
+          />
+          <div className="pl-2">
+            <div className="mb-1 text-sm font-medium">{record.ten_sp}</div>
+            <div className="mb-1 flex text-sm font-medium">
+              <p className="font-normal text-gray-400">Thương hiệu:&nbsp;</p>
+              {record.thuong_hieu || "Đang cập nhật"}
+            </div>
+            <div className="mb-1 flex text-sm font-medium">
+              <p className="font-normal text-gray-400">Quy cách:&nbsp;</p>
+              {record.quy_cach || "Đang cập nhật"}
+            </div>
+            <div className="mb-1 flex text-sm font-medium">
+              <p className="font-normal text-gray-400">Chất liệu:&nbsp;</p>
+              {record.chat_lieu || "Khác"}
+            </div>
+            <div className="flex text-sm font-medium">
+              <p className="font-normal text-gray-400">Giá:&nbsp;</p>
+              {record.gia ? vndFormatter.format(record.gia) : "Đang cập nhật"}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="flex items-center gap-1">
         <span>Số lượng:</span>
         <TextField placeholder="0" type="number" className="!w-20" />

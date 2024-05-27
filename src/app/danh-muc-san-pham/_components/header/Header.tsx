@@ -16,6 +16,7 @@ import { Tiny } from "@component/Typography";
 import { useAppContext } from "@context/app-context";
 import Login from "@sections/auth/Login";
 
+import { cn } from "~/utils";
 import UserLoginDialog from "./LoginDialog";
 import StyledHeader from "./styles";
 
@@ -61,12 +62,14 @@ export default function Header({ isFixed, className }: HeaderProps) {
   );
 
   return (
-    <StyledHeader className={className}>
+    <StyledHeader
+      className={cn(className, "bg-gray-500 shadow-lg shadow-gray-300/30")}
+    >
       <Container
         display="flex"
         alignItems="center"
         justifyContent="space-between"
-        height="100%"
+        width="100%"
       >
         <FlexBox className="pl-[2.7rem] pr-20" alignItems="center" mr="1rem">
           <Link href="/" className="flex items-center">
@@ -87,11 +90,9 @@ export default function Header({ isFixed, className }: HeaderProps) {
             </div>
           )}
         </FlexBox>
-
         <FlexBox justifyContent="center" flex="1 1 0">
           <SearchInputWithCategory />
         </FlexBox>
-
         <FlexBox className="header-right" alignItems="center">
           <UserLoginDialog handle={LOGIN_HANDLE}>
             <div>
@@ -109,6 +110,38 @@ export default function Header({ isFixed, className }: HeaderProps) {
             <MiniCart toggleSidenav={toggleSidenav} />
           </Sidenav>
         </FlexBox>
+      </Container>
+      <Container
+        display="flex"
+        alignItems="center"
+        justifyContent="space-start"
+        width="100%"
+        className="mt-8"
+      >
+        <Link
+          href={""}
+          className="text-black-700 pl-11 text-base font-medium hover:text-sky-700 "
+        >
+          Trang chủ
+        </Link>
+        <Link
+          href={""}
+          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
+        >
+          Sản phẩm
+        </Link>
+        <Link
+          href={""}
+          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
+        >
+          Về chúng tôi
+        </Link>
+        <Link
+          href={""}
+          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
+        >
+          Tin tức
+        </Link>
       </Container>
     </StyledHeader>
   );

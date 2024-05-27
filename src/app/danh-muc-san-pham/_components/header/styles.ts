@@ -1,12 +1,16 @@
-import styled from "styled-components";
-import { layoutConstant } from "utils/constants";
 import { getTheme } from "@utils/utils";
+import { layoutConstant } from "utils/constants";
+import styled from "styled-components";
 
 const StyledHeader = styled.header`
   z-index: 111;
   position: relative;
   height: ${layoutConstant.headerHeight};
   background: ${getTheme("colors.body.paper")};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 
   .logo {
     img {
