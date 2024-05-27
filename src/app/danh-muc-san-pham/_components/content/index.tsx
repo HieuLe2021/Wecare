@@ -11,12 +11,21 @@ import { PriceTable } from "./PriceTable";
 
 export type DefaultProductListContentProps = {
   params: { slug?: string[] };
-  searchParams: { groups?: string; page?: string; customer?: string };
+  searchParams: {
+    groups?: string;
+    page?: string;
+    customer?: string;
+    sort_by?: keyof Tables<"products">;
+    sort_order?: "asc" | "desc";
+  };
 };
 export const Content = async ({
   params,
   searchParams,
 }: DefaultProductListContentProps) => {
+  const sortBy = searchParams.sort_by ?? "thuong_hieu";
+  const sortOrder = searchParams.sort_order ?? "asc";
+
   const supabase = createClient();
   const childNodes = await getLeafNode(params.slug!.at(-1)!);
 
@@ -112,6 +121,8 @@ export const Content = async ({
                     material={key}
                     data={value}
                     customerProductPrices={customerProductPrices}
+                    sortBy={sortBy}
+                    sortOrder={sortOrder}
                   />
                 );
               })
