@@ -96,7 +96,7 @@ export const Content = async ({
                   nghiệm khách hàng tốt nhất.
                 </div>
                 {prices.length === 0 ? null : prices.length === 1 ? (
-                  <div className="pt-2 text-xs text-red-500">
+                  <div className="pt-2 text-sm text-red-500">
                     {vndFormatter.format(prices[0]!)}
                   </div>
                 ) : (
