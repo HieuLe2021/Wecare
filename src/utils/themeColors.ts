@@ -21,13 +21,13 @@ const textColor = {
 
 const bodyColor = {
   default: gray[100],
-  paper: gray["white"],
+  paper: gray.white,
   text: textColor.primary,
 };
 
 const primaryColor = {
   light: "#FFE1E6",
-  main: "#E94560",
+  main: "rgb(2 132 199)",
   dark: "#4F4CB6",
   text: "#ffffff",
   100: "#FCE9EC",
@@ -54,7 +54,11 @@ const dark = { main: "#222" };
 
 const warningColor = { main: "#FFCD4E", text: textColor.primary };
 
-const errorColor = { main: "#E94560", light: "#FFE1E6", text: textColor.primary };
+const errorColor = {
+  main: "#E94560",
+  light: "#FFE1E6",
+  text: textColor.primary,
+};
 
 const successColor = {
   text: textColor.primary,
