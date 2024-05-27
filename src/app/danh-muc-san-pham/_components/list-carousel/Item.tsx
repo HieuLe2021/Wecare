@@ -27,50 +27,21 @@ export const Item = ({
   leafCount: number;
 }) => {
   const searchParams = useSearchParams();
-  // const currentChildId = searchParams.get("child");
-
   const currentPath = usePathname();
-  const groupSlugs = searchParams.get("groups")?.split(",") ?? [];
-
-  const genSelectedGroupsPath = (
-    selectedGroupSlug: string,
-    currentGroupSlugs: string[],
-    currentPath: string,
-    searchParams: URLSearchParams,
-  ) => {
-    let newGroupSlugs = [...currentGroupSlugs];
-    if (newGroupSlugs.includes(selectedGroupSlug)) {
-      newGroupSlugs = newGroupSlugs.filter((x) => x !== selectedGroupSlug);
-    } else {
-      newGroupSlugs.push(selectedGroupSlug);
-    }
-    const params = new URLSearchParams(searchParams.toString());
-    if (newGroupSlugs.length === 0) {
-      params.delete("groups");
-    } else {
-      params.set("groups", newGroupSlugs.join(","));
-    }
-
-    // delete page if exists
-    params.delete("page");
-
-    const query = params.toString();
-    return currentPath + (query ? "?" + query : "");
-  };
 
   return (
     <div className="mb-4 w-full rounded-md bg-white">
       <div className="flex items-end justify-between px-6 py-2">
-        <div>
+        <Link href={info.href}>
           <Icon>{info.icon}</Icon>
           {info.title}
           {leafCount}
-        </div>
+        </Link>
         <Link
           href={info.href}
           className="text-xs text-blue-500 hover:text-blue-700"
         >
-          View All
+          Xem tất cả
         </Link>
       </div>
       <div className="relative h-36 w-full rounded-md bg-white">
@@ -87,7 +58,6 @@ export const Item = ({
             >
               <CarouselContent>
                 {data.map((item) => {
-                  const isActive = item.slug && groupSlugs.includes(item.slug);
                   return (
                     <CarouselItem
                       key={item.slug}
@@ -97,27 +67,24 @@ export const Item = ({
                         className={cn(
                           "p-1",
                           "group relative cursor-pointer rounded-md border border-transparent",
-                          isActive ? "border-blue-500" : "text-gray-400",
+                          "text-gray-400",
                         )}
                       >
                         <Link
-                          href={genSelectedGroupsPath(
-                            item.slug!,
-                            groupSlugs,
-                            currentPath,
-                            searchParams,
-                          )}
+                          href={
+                            currentPath +
+                            "/" +
+                            item.parent_slug! +
+                            "?groups=" +
+                            item.slug +
+                            (searchParams.get("customer")
+                              ? "&customer=" + searchParams.get("customer")
+                              : "")
+                          }
                           className="flex justify-center"
                         >
                           <div className="flex w-[125px] flex-col">
                             <div className="flex grow flex-col bg-white py-0.5 text-center text-xs font-medium leading-4 text-sky-700 max-md:mt-4">
-                              {isActive && (
-                                <Image
-                                  className="absolute right-0 top-0 z-10 h-5 w-5"
-                                  src="/assets/images/wc-icon/check-tick.svg"
-                                  alt="check-tick"
-                                />
-                              )}
                               <Image
                                 loading="lazy"
                                 srcSet={
@@ -127,14 +94,7 @@ export const Item = ({
                                 }
                                 className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-110"
                               />
-                              <div
-                                className={cn(
-                                  "mt-2",
-                                  isActive
-                                    ? "text-sm font-semibold text-sky-700"
-                                    : "text-gray-400",
-                                )}
-                              >
+                              <div className={cn("mt-2", "text-gray-400")}>
                                 {item.name}
                               </div>
                             </div>
