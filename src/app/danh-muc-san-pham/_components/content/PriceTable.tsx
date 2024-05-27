@@ -307,11 +307,11 @@ const renderSubComponent = ({
             <div className="mb-1 text-sm font-medium">{record.ten_sp}</div>
             <div className="mb-1 flex text-sm font-medium">
               <p className="font-normal text-gray-400">Thương hiệu:&nbsp;</p>
-              {record.thuong_hieu}
+              {record.thuong_hieu || "Đang cập nhật"}
             </div>
             <div className="mb-1 flex text-sm font-medium">
               <p className="font-normal text-gray-400">Quy cách:&nbsp;</p>
-              {record.quy_cach}
+              {record.quy_cach || "Đang cập nhật"}
             </div>
             <div className="mb-1 flex text-sm font-medium">
               <p className="font-normal text-gray-400">Chất liệu:&nbsp;</p>
