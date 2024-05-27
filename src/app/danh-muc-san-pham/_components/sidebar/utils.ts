@@ -1,7 +1,6 @@
+import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 import type { MenuItem } from "@component/categories/mega-menu/type";
 import type { Tables } from "@lib/supabase/types";
-
-import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 
 export function getCollections(
   productGroupsList: Tables<"product_groups">[],
@@ -77,7 +76,7 @@ export function getCollections(
 
       const menuItem: MenuItem = {
         id: root.id,
-        icon: "laptop",
+        icon: root.icon ?? "",
         href:
           "/" +
           DANH_MUC_SAN_PHAM_URL +

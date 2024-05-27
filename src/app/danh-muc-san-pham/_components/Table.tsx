@@ -19,8 +19,8 @@ export default function CustomTable({ data }: { data: any }) {
     <div>
       {products &&
         products.map((product: any) => (
-          <div className="mt-2 border-b mb-4">
-            <div className="font-medium text-base pl-2">
+          <div className="mb-4 mt-2 border-b">
+            <div className="pl-2 text-base font-medium">
               {product.label && product.label !== "null" ? (
                 <div>Chất liệu: {`${product.label}`}</div>
               ) : (
@@ -50,22 +50,22 @@ export default function CustomTable({ data }: { data: any }) {
               </colgroup>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="h-10 px-2 font-medium text-sm text-black-500">
+                  <TableHead className="text-black-500 h-10 px-2 text-sm font-medium">
                     Thương hiệu
                   </TableHead>
-                  <TableHead className="h-10 px-0 font-medium text-black-500 table-cell lg:hidden">
+                  <TableHead className="text-black-500 table-cell h-10 px-0 font-medium lg:hidden">
                     Quy cách / hoàn thiện
                   </TableHead>
-                  <TableHead className="h-10 px-2 text-sm font-medium text-black-500 hidden lg:table-cell ">
+                  <TableHead className="text-black-500 hidden h-10 px-2 text-sm font-medium lg:table-cell ">
                     Chất liệu
                   </TableHead>
-                  <TableHead className="h-10 px-2 font-medium hidden text-black-500 text-black-500 lg:table-cell">
+                  <TableHead className="text-black-500 text-black-500 hidden h-10 px-2 font-medium lg:table-cell">
                     Quy cách
                   </TableHead>
-                  <TableHead className="h-10 px-2 font-medium hidden text-black-500 lg:table-cell ">
+                  <TableHead className="text-black-500 hidden h-10 px-2 font-medium lg:table-cell ">
                     Hoàn thiện
                   </TableHead>
-                  <TableHead className="h-10 px-2 font-medium text-end text-black-500">
+                  <TableHead className="text-black-500 h-10 px-2 text-end font-medium">
                     Giá
                   </TableHead>
                   <TableHead className="h-10 px-2 font-medium"></TableHead>
@@ -78,19 +78,19 @@ export default function CustomTable({ data }: { data: any }) {
                       <TableCell className="p-2">
                         {productItem.thuong_hieu || "----"}
                       </TableCell>
-                      <TableCell className="py-2 pl-2 px-0 table-cell lg:hidden">
+                      <TableCell className="table-cell px-0 py-2 pl-2 lg:hidden">
                         {productItem.quy_cach} / {productItem.hoan_thien || " "}
                       </TableCell>
-                      <TableCell className="py-2  hidden lg:table-cell">
+                      <TableCell className="hidden  py-2 lg:table-cell">
                         {productItem.chat_lieu || "----"}
                       </TableCell>
-                      <TableCell className="p-2  hidden lg:table-cell">
+                      <TableCell className="hidden  p-2 lg:table-cell">
                         {productItem.quy_cach || "----"}
                       </TableCell>
-                      <TableCell className="p-2 hidden lg:table-cell">
+                      <TableCell className="hidden p-2 lg:table-cell">
                         {productItem.hoan_thien || "----"}
                       </TableCell>
-                      <TableCell className="py-2 px-0 text-end">{`${
+                      <TableCell className="px-0 py-2 text-end">{`${
                         productItem.gia
                           ? formatter.format(productItem.gia)
                           : formatter.format(10000)
@@ -107,4 +107,3 @@ export default function CustomTable({ data }: { data: any }) {
     </div>
   );
 }
-

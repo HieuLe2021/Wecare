@@ -92,7 +92,7 @@ export const PriceTable = ({
   return (
     <div className="mt-4 py-2">
       <div className=" border-b">
-        <div className="pl-2 text-base font-medium">
+        <div className="pl-2 text-base font-semibold">
           {!skeleton && (
             <>
               {material && material !== "unknown" ? (
@@ -199,7 +199,7 @@ export const PriceTable = ({
           </TableBody>
         </Table>
 
-        <Table>
+        {/* <Table>
           <colgroup>
             <col width={140} />
             <col width={280} />
@@ -305,7 +305,7 @@ export const PriceTable = ({
               </>
             )}
           </TableBody>
-        </Table>
+        </Table> */}
       </div>
     </div>
   );

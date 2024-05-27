@@ -63,7 +63,7 @@ export const Item = ({
     <div className="bg mb-4 w-full rounded-md bg-transparent">
       <div className="flex items-end justify-between px-6 py-2 ">
         <div className="flex items-center">
-          <Icon>{info.icon}</Icon>
+          <Image alt="" src={info.icon} width={24} height={24} />
           <p className="text-lg font-semibold">&nbsp; {info.title}</p>
           <p className="ml-1 text-base font-normal">({leafCount})</p>
         </div>
