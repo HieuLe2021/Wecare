@@ -47,7 +47,7 @@ export const getCustomerProductPrices = cache(async (customerId: string) => {
         .eq("id", customerId)
     ).data ?? [];
   if (res.length > 0) {
-    return res[0]?.product_prices;
+    return res[0]?.product_prices as Record<string, number> | null ;
   }
   return [];
 });
