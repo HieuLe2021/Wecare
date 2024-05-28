@@ -120,25 +120,25 @@ export default function Header({ isFixed, className }: HeaderProps) {
       >
         <Link
           href={""}
-          className="text-black-700 pl-11 text-base font-medium hover:text-sky-700 "
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500 "
         >
           Trang chủ
         </Link>
         <Link
           href={""}
-          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
           Sản phẩm
         </Link>
         <Link
           href={""}
-          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
           Về chúng tôi
         </Link>
         <Link
           href={""}
-          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
           Tin tức
         </Link>
