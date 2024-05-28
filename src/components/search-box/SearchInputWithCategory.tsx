@@ -86,10 +86,10 @@ export default function SearchInputWithCategory() {
 
 const categories = [
   "Tất cả danh mục",
-  "Hoá chất",
-  "Vật tư tiêu hao",
   "Kim khí & phụ kiện",
   "Bao bì",
+  "Hoá chất",
+  "Vật tư tiêu hao",
   "Công cụ - dụng cụ",
   "Phụ tùng thay thế",
 ];
