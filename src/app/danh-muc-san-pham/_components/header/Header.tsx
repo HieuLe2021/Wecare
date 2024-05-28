@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import Box from "@component/Box";
 import { IconButton } from "@component/buttons";
 import Categories from "@component/categories/Categories";
@@ -28,6 +29,9 @@ export default function Header({ isFixed, className }: HeaderProps) {
   const { state } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
+  const searchParams = useSearchParams();
+  const customerId = searchParams.get("customer");
+  const pathSplited = usePathname().split("/");
 
   const CART_HANDLE = (
     <Box ml="20px" position="relative">
@@ -120,27 +124,30 @@ export default function Header({ isFixed, className }: HeaderProps) {
       >
         <Link
           href={""}
-          className="text-black-700 pl-11 text-base font-medium hover:text-sky-700 "
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
-          Trang chủ
+          TRANG CHỦ
+        </Link>
+        <Link
+          href={
+            pathSplited.slice(0, 2).join("/") +
+            (customerId ? `?customer=${customerId}` : "")
+          }
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
+        >
+          SẢN PHẨM
         </Link>
         <Link
           href={""}
-          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
-          Sản phẩm
+          VỀ CHÚNG TÔI
         </Link>
         <Link
           href={""}
-          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
-          Về chúng tôi
-        </Link>
-        <Link
-          href={""}
-          className="text-black-700 pl-6 text-base font-medium hover:text-sky-700"
-        >
-          Tin tức
+          TIN TỨC
         </Link>
       </Container>
     </StyledHeader>

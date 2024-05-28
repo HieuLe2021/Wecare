@@ -38,7 +38,7 @@ export const PriceTable = ({
 }: {
   material: string;
   data: Tables<"products">[];
-  customerProductPrices: Tables<"customers">["product_prices"] | undefined;
+  customerProductPrices: Record<string, number> | null | undefined;
   skeleton?: boolean;
   sortBy?: keyof NonNullable<Tables<"products">>;
   sortOrder?: "asc" | "desc";
@@ -97,9 +97,7 @@ export const PriceTable = ({
       accessorKey: "gia",
       cell: ({ row }) => {
         const price =
-          (customerProductPrices as Record<string, number> | null)?.[
-            row.original.id
-          ] ?? row.original.gia;
+          customerProductPrices?.[row.original.id] ?? row.original.gia;
 
         return (
           <div className="text-end">
@@ -234,7 +232,11 @@ export const PriceTable = ({
                             colSpan={row.getVisibleCells().length}
                             className="border-b border-l border-r px-2 text-[13px]"
                           >
-                            {renderSubComponent({ row, img })}
+                            {renderSubComponent({
+                              row,
+                              img,
+                              customerProductPrices,
+                            })}
                           </TableCell>
                         </TableRow>
                       )}
@@ -285,9 +287,11 @@ export const PriceTable = ({
 const renderSubComponent = ({
   row,
   img,
+  customerProductPrices,
 }: {
   row: Row<Tables<"products">>;
   img: string;
+  customerProductPrices: Record<string, number> | null;
 }) => {
   const record = row.original;
   console.log("record:", record, row.original);
@@ -304,22 +308,27 @@ const renderSubComponent = ({
             height={120}
           />
           <div className="pl-2">
-            <div className="mb-1 text-sm font-medium">{record.ten_sp}</div>
-            <div className="mb-1 flex text-sm font-medium">
-              <p className="font-normal text-gray-400">Thương hiệu:&nbsp;</p>
+            <div className="mb-2 text-[15px] font-semibold">
+              {record.ten_sp}
+            </div>
+            <div className="mb-1 flex text-[13px] font-normal">
+              <p className="w-24 font-normal text-gray-400">
+                Thương hiệu:&nbsp;
+              </p>
               {record.thuong_hieu || "Đang cập nhật"}
             </div>
-            <div className="mb-1 flex text-sm font-medium">
-              <p className="font-normal text-gray-400">Quy cách:&nbsp;</p>
+            <div className=" mb-1 flex text-[13px] font-normal">
+              <p className="w-24 font-normal text-gray-400">Quy cách:&nbsp;</p>
               {record.quy_cach || "Đang cập nhật"}
             </div>
-            <div className="mb-1 flex text-sm font-medium">
-              <p className="font-normal text-gray-400">Chất liệu:&nbsp;</p>
+            <div className="mb-1 flex text-[13px] font-normal">
+              <p className="w-24 font-normal text-gray-400">Chất liệu:&nbsp;</p>
               {record.chat_lieu || "Khác"}
             </div>
-            <div className="flex text-sm font-medium">
-              <p className="font-normal text-gray-400">Giá:&nbsp;</p>
-              {record.gia ? vndFormatter.format(record.gia) : "Đang cập nhật"}
+            <div className="flex text-[13px] font-normal">
+              <p className="w-24 font-normal text-gray-400">Giá:&nbsp;</p>
+              {/* {record.gia ? vndFormatter.format(record.gia) : "Đang cập nhật"} */}
+              {privatePrice(record, customerProductPrices)}
             </div>
           </div>
         </div>
@@ -332,6 +341,20 @@ const renderSubComponent = ({
           Thêm vào giỏ hàng
         </Button>
       </div>
+    </div>
+  );
+};
+
+const privatePrice = (
+  record: Tables<"products">,
+  customerProductPrices: Record<string, number> | null,
+) => {
+  const price = customerProductPrices?.[record.id] ?? record.gia;
+
+  return (
+    <div className="text-end">
+      {price ? vndFormatter.format(price) : "Đang cập nhật"}
+      {record.don_vi ? "/" + record.don_vi : ""}
     </div>
   );
 };
