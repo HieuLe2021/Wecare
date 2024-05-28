@@ -75,8 +75,12 @@ export default function Header({ isFixed, className }: HeaderProps) {
         justifyContent="space-between"
         width="100%"
       >
-        <FlexBox className="pl-[2.7rem] pr-20" alignItems="center" mr="1rem">
-          <Link href="/" className="flex items-center">
+        <FlexBox
+          className="justify-center pb-4 lg:pb-0 lg:pl-[2.7rem] lg:pr-20"
+          alignItems="center"
+          mr="1rem"
+        >
+          <Link href="/danh-muc-san-pham" className="flex items-center">
             <Image src="/assets/images/logo.svg" alt="logo" />
             <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
               WECARE
@@ -94,7 +98,7 @@ export default function Header({ isFixed, className }: HeaderProps) {
             </div>
           )}
         </FlexBox>
-        <FlexBox justifyContent="center" flex="1 1 0">
+        <FlexBox justifyContent="center" flex="1 1 0" className="px-3">
           <SearchInputWithCategory />
         </FlexBox>
         <FlexBox className="header-right" alignItems="center">
@@ -120,7 +124,7 @@ export default function Header({ isFixed, className }: HeaderProps) {
         alignItems="center"
         justifyContent="space-start"
         width="100%"
-        className="mt-8"
+        className="mt-8 !hidden sm:block"
       >
         <Link
           href={""}

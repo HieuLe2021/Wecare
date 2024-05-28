@@ -31,9 +31,18 @@ export const Topbar = ({
 
   return (
     <>
-      <div className="col mb-4 flex justify-between rounded-md bg-white py-4 lg:px-4">
+      <div className="col mb-4 flex justify-center rounded-md bg-white py-4 lg:justify-between lg:px-4 ">
         <Breadcrumb allProductGroups={allProductGroups} />
-        {params.slug && (
+        {(params.slug && (
+          <div className="row flex items-center">
+            <p className="pr-2">Ngành nghề:</p>
+            <Select
+              placeholder="Tất cả"
+              defaultValue={sortOptions[0]}
+              options={sortOptions}
+            />
+          </div>
+        )) || (
           <div className="row flex items-center">
             <p className="pr-2">Ngành nghề:</p>
             <Select

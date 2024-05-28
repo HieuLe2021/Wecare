@@ -3,6 +3,7 @@ import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
 import Sticky from "@component/sticky";
 
+import MobileNavigationBar from "~/components/mobile-navigation";
 import Footer from "./_components/footer";
 import { Header } from "./_components/header";
 import { Sidebar } from "./_components/sidebar";
@@ -27,7 +28,7 @@ export default async function Layout(props: { children: ReactNode }) {
 
       {/* {!navbar ? <div className="section-after-sticky">{children}</div> : children} */}
 
-      {/* <MobileNavigationBar /> */}
+      <MobileNavigationBar />
 
       <Container my="2rem">
         <Grid container spacing={6} className="lg:w-[1280px] lg:px-10">
@@ -35,7 +36,7 @@ export default async function Layout(props: { children: ReactNode }) {
             item
             md={3}
             xs={12}
-            className="rounded-md bg-white"
+            className="hidden rounded-md bg-white sm:block"
             spacing={24}
           >
             <Sidebar
@@ -43,7 +44,7 @@ export default async function Layout(props: { children: ReactNode }) {
               menuNodes={menuNodes}
             />
           </Grid>
-          <Grid item md={9} xs={12} className="!px-6 !py-0">
+          <Grid item md={9} xs={12} className="!px-3 !py-0 md:!px-6">
             <Topbar allProductGroups={allProductGroups} menuNodes={menuNodes} />
             <div>{children}</div>
           </Grid>

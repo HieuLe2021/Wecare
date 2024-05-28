@@ -31,12 +31,14 @@ export const Item = ({
   const currentPath = usePathname();
 
   return (
-    <div className="mb-4 w-full rounded-md bg-transparent">
-      <div className="flex items-end justify-between px-6 py-2">
+    <div className="mb-4 w-full rounded-md bg-transparent px-2">
+      <div className="flex items-end justify-between pt-4 md:px-6">
         <Link href={info.href} className="flex items-center">
           <Image alt="" src={info.icon} width={24} height={24} />
-          <p className="text-lg font-semibold">&nbsp; {info.title}</p>
-          <p className="ml-1 text-base font-normal">({leafCount})</p>
+          <p className="text-base font-semibold md:text-lg ">
+            &nbsp; {info.title}
+          </p>
+          <p className="ml-1 text-sm font-normal md:text-base">({leafCount})</p>
         </Link>
         <Link
           href={info.href}
@@ -48,7 +50,7 @@ export const Item = ({
       </div>
       <div className="relative h-40 w-full rounded-md bg-transparent">
         <div className="absolute left-4 right-4 top-[11px]">
-          <div className="flex w-full bg-transparent  sm:px-2 md:px-12 lg:px-12">
+          <div className="flex w-full bg-transparent px-3 md:px-12 lg:px-12">
             <Carousel
               opts={{
                 align: "start",
@@ -63,7 +65,7 @@ export const Item = ({
                   return (
                     <CarouselItem
                       key={item.slug}
-                      className="bg-transparent md:basis-1/3 lg:basis-1/5"
+                      className="basis-1/2 bg-transparent md:basis-1/3 lg:basis-1/5"
                     >
                       <div
                         className={cn(
@@ -96,12 +98,12 @@ export const Item = ({
                                 }
                                 className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-110"
                               />
-                              <div className={cn("mt-2", "text-gray-400")}>
+                              <div className={cn("mt-6", "text-gray-400")}>
                                 {item.name}
                               </div>
-                              <p className="  pt-2 text-red-500">
+                              {/* <p className="  pt-2 text-red-500">
                                 Đang cập nhật
-                              </p>
+                              </p> */}
                             </div>
                           </div>
                         </Link>

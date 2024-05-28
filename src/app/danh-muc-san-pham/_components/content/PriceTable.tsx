@@ -143,7 +143,7 @@ export const PriceTable = ({
           <colgroup>
             <col width={130} />
             <col width={270} />
-            <col width={130} />
+            <col width={130} className="table-cell sm:hidden" />
             <col width={130} />
             <col width={160} />
           </colgroup>
@@ -157,7 +157,11 @@ export const PriceTable = ({
                         <TableHead
                           key={header.id}
                           colSpan={header.colSpan}
-                          className="p-2 pl-1"
+                          className={cn(
+                            "p-2 pl-1 pr-0",
+                            header.column.id === "chat_lieu" &&
+                              "hidden sm:table-cell",
+                          )}
                           onClick={header.column.getToggleSortingHandler()}
                           title={
                             header.column.getCanSort()
@@ -215,7 +219,12 @@ export const PriceTable = ({
                           return (
                             <TableCell
                               key={cell.id}
-                              className="p-2 text-[13px]"
+                              // className="p-2 text-[13px]"
+                              className={cn(
+                                "p-2 pr-0 text-[13px]",
+                                cell.column.id === "chat_lieu" &&
+                                  "hidden sm:table-cell",
+                              )}
                             >
                               {flexRender(
                                 cell.column.columnDef.cell,
@@ -296,7 +305,7 @@ const renderSubComponent = ({
   const record = row.original;
   console.log("record:", record, row.original);
   return (
-    <div className="flex items-center justify-between">
+    <div className="items-center justify-between lg:flex">
       <div>
         <div className="flex">
           <Image
@@ -304,8 +313,8 @@ const renderSubComponent = ({
             src={img}
             className="aspect-square shrink-0"
             alt={img}
-            width={120}
-            height={120}
+            width={100}
+            height={100}
           />
           <div className="pl-2">
             <div className="mb-2 text-[15px] font-semibold">
@@ -334,7 +343,7 @@ const renderSubComponent = ({
         </div>
       </div>
 
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 pt-4 lg:pt-0">
         <span>Số lượng:</span>
         <TextField placeholder="0" type="number" className="!w-20" />
         <Button className="ml-auto bg-sky-800" size="sm">

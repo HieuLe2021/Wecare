@@ -1,24 +1,23 @@
 "use client";
 
+import { layoutConstant } from "@utils/constants";
+import { isValidProp } from "@utils/utils";
+import styled from "styled-components";
 import {
   color,
-  space,
-  layout,
-  flexbox,
-  position,
   ColorProps,
-  SpaceProps,
-  LayoutProps,
+  flexbox,
   FlexboxProps,
-  PositionProps
+  layout,
+  LayoutProps,
+  position,
+  PositionProps,
+  space,
+  SpaceProps,
 } from "styled-system";
-import styled from "styled-components";
-
-import { isValidProp } from "@utils/utils";
-import { layoutConstant } from "@utils/constants";
 
 const Container = styled.div.withConfig({
-  shouldForwardProp: (prop: string) => isValidProp(prop)
+  shouldForwardProp: (prop: string) => isValidProp(prop),
 })<LayoutProps & ColorProps & PositionProps & SpaceProps & FlexboxProps>`
   margin-left: auto;
   margin-right: auto;
@@ -27,6 +26,7 @@ const Container = styled.div.withConfig({
   @media only screen and (max-width: 1199px) {
     margin-left: 1rem;
     margin-right: 1rem;
+    display: block;
   }
 
   ${color}
