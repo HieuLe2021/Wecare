@@ -308,22 +308,24 @@ const renderSubComponent = ({
             height={120}
           />
           <div className="pl-2">
-            <div className="mb-1 text-sm font-medium">{record.ten_sp}</div>
-            <div className="mb-1 flex text-sm font-medium">
+            <div className="mb-2 text-[15px] font-semibold">
+              {record.ten_sp}
+            </div>
+            <div className="mb-1 flex text-[13px] font-normal">
               <p className="w-24 font-normal text-gray-400">
                 Thương hiệu:&nbsp;
               </p>
               {record.thuong_hieu || "Đang cập nhật"}
             </div>
-            <div className=" mb-1 flex text-sm font-medium">
+            <div className=" mb-1 flex text-[13px] font-normal">
               <p className="w-24 font-normal text-gray-400">Quy cách:&nbsp;</p>
               {record.quy_cach || "Đang cập nhật"}
             </div>
-            <div className="mb-1 flex text-sm font-medium">
+            <div className="mb-1 flex text-[13px] font-normal">
               <p className="w-24 font-normal text-gray-400">Chất liệu:&nbsp;</p>
               {record.chat_lieu || "Khác"}
             </div>
-            <div className="flex text-sm font-medium">
+            <div className="flex text-[13px] font-normal">
               <p className="w-24 font-normal text-gray-400">Giá:&nbsp;</p>
               {/* {record.gia ? vndFormatter.format(record.gia) : "Đang cập nhật"} */}
               {privatePrice(record, customerProductPrices)}

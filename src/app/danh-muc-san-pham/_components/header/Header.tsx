@@ -126,7 +126,7 @@ export default function Header({ isFixed, className }: HeaderProps) {
           href={""}
           className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
-          Trang chủ
+          TRANG CHỦ
         </Link>
         <Link
           href={
@@ -135,19 +135,19 @@ export default function Header({ isFixed, className }: HeaderProps) {
           }
           className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
-          Sản phẩm
+          SẢN PHẨM
         </Link>
         <Link
           href={""}
           className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
-          Về chúng tôi
+          VỀ CHÚNG TÔI
         </Link>
         <Link
           href={""}
           className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
-          Tin tức
+          TIN TỨC
         </Link>
       </Container>
     </StyledHeader>

@@ -37,7 +37,7 @@ export const getMenuNodes = cache(async () => {
   );
 });
 
-export const getCustomerProductPrices = cache(async (customerId: string) => {
+export const getCustomerProductPrices = cache(async (customerId: string)  => {
   const supabase = createClient();
   const res =
     (
@@ -47,7 +47,7 @@ export const getCustomerProductPrices = cache(async (customerId: string) => {
         .eq("id", customerId)
     ).data ?? [];
   if (res.length > 0) {
-    return res[0]?.product_prices as Record<string, number> | null ;
+    return res[0]?.product_prices as Record<string, number> | null;
   }
-  return [];
+  return {} as Record<string, number> | null;
 });
