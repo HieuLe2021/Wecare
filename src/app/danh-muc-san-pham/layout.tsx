@@ -4,7 +4,6 @@ import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
 import Sticky from "@component/sticky";
 
-import MobileNavigationBar from "~/components/mobile-navigation";
 import Footer from "./_components/footer";
 import { Header } from "./_components/header";
 import { MobileNavigationBar } from "./_components/mobile-navigation";

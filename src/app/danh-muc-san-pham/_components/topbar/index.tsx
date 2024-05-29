@@ -52,32 +52,21 @@ export const Topbar = ({
     <>
       <div className="col mb-4 flex justify-center rounded-md bg-white py-4 lg:justify-between lg:px-4 ">
         <Breadcrumb allProductGroups={allProductGroups} />
-        {(params.slug && (
-          <div className="row flex items-center">
-            <p className="pr-2">Ngành nghề:</p>
-            <Select
-              placeholder="Tất cả"
-              defaultValue={sortOptions[0]}
-              options={sortOptions}
-            />
-          </div>
-        )) || (
-          <div className="row flex items-center">
-            <p className="pr-2">Ngành nghề:</p>
-            <Select defaultValue={sortOptions[0]?.value}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Tất cả" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {sortOptions.map((x) => (
-                    <SelectItem value={x.value}>{x.label}</SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        )}
+        <div className="row flex items-center">
+          <p className="pr-2">Ngành nghề:</p>
+          <Select defaultValue={sortOptions[0]?.value}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Tất cả" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {sortOptions.map((x) => (
+                  <SelectItem value={x.value}>{x.label}</SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       {params.slug && <LeafCarousel data={childNodes} leafCount={leafCount} />}
     </>

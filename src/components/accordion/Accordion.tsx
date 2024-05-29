@@ -15,14 +15,12 @@ import { AccordionWrapper } from "./styles";
 type AccordionProps = {
   expanded?: boolean;
   children: ReactElement[] | any;
-  title: any;
 };
 // ==========================================
 
 export default function Accordion({
   expanded = false,
   children,
-  title,
 }: AccordionProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(expanded);
@@ -36,14 +34,6 @@ export default function Accordion({
 
     if (parent && !parentHeight) {
       setHeaderHeight(parent.children[0]?.scrollHeight || 0);
-      if (title === "Vật tư kim khí") {
-        console.log(
-          "hhh",
-          parent.clientHeight,
-          parent.offsetHeight,
-          parent.scrollHeight,
-        );
-      }
 
       setParentHeight(parent.scrollHeight);
     }

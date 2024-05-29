@@ -8,7 +8,6 @@ import Box from "@component/Box";
 import Divider from "@component/Divider";
 import Grid from "@component/grid/Grid";
 import Image from "@component/Image";
-import MobileNavigationBar from "@component/mobile-navigation";
 import Scrollbar from "@component/Scrollbar";
 import Typography from "@component/Typography";
 import navigations from "@data/navigations";
@@ -17,6 +16,7 @@ import clsx from "clsx";
 
 import type { Tables } from "~/lib/supabase/types";
 import Header from "../danh-muc-san-pham/_components/header/Header";
+import { MobileNavigationBar } from "../danh-muc-san-pham/_components/mobile-navigation";
 import { getCollections } from "../danh-muc-san-pham/_components/sidebar/utils";
 import MobileCategoryImageBox from "./MobileCategoryImageBox";
 import { MobileCategoryNavStyle } from "./styles";
@@ -36,9 +36,11 @@ interface Suggestion {
 export default function MobileCategoryNav({
   allProductGroups,
   menuNodes,
+  customer,
 }: {
   allProductGroups: Tables<"product_groups">[];
   menuNodes: Tables<"menu_nodes_matview">[];
+  customer: Tables<"customers_matview"> | undefined;
 }) {
   const width = useWindowSize();
   const [category, setCategory] = useState<any>(navigations[0]);
@@ -55,7 +57,7 @@ export default function MobileCategoryNav({
   useEffect(() => setSuggestedList(suggestion), []);
 
   // HIDDEN IN LARGE DEVICE
-  if (width > 900) return null;
+  if (width && width > 900) return null;
 
   //
   const searchParams = useSearchParams();
@@ -63,6 +65,7 @@ export default function MobileCategoryNav({
     allProductGroups,
     menuNodes,
     searchParams.get("customer"),
+    customer,
   );
 
   return (
@@ -105,7 +108,7 @@ export default function MobileCategoryNav({
             <Fragment key={ind}>
               <Divider />
               {item.subCategories.length > 0 ? (
-                <Accordion title={item.title}>
+                <Accordion>
                   <AccordionHeader px="0px" py="10px">
                     <Typography fontWeight="600" fontSize="15px">
                       {item.title}
