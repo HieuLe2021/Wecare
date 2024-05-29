@@ -1,12 +1,13 @@
-import styled from "styled-components";
+"use client";
 
 import { Chip } from "@component/Chip";
 import Icon from "@component/icon/Icon";
 import NavLink from "@component/nav-link";
 import { useAppContext } from "@context/app-context";
 import useWindowSize from "@hook/useWindowSize";
-import { getTheme } from "@utils/utils";
 import { layoutConstant } from "@utils/constants";
+import { getTheme } from "@utils/utils";
+import styled from "styled-components";
 
 // STYLED COMPONENT
 const Wrapper = styled.div`
@@ -44,7 +45,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function MobileNavigationBar() {
+export const MobileNavigationBar = () => {
   const width = useWindowSize();
   const { state } = useAppContext();
 
@@ -67,7 +68,8 @@ export default function MobileNavigationBar() {
                 bg="primary.main"
                 position="absolute"
                 color="primary.text"
-                left="calc(50% + 8px)">
+                left="calc(50% + 8px)"
+              >
                 {state.cart.length}
               </Chip>
             )}
@@ -78,11 +80,11 @@ export default function MobileNavigationBar() {
   }
 
   return null;
-}
+};
 
 const list = [
   { title: "Home", icon: "home", href: "/" },
   { title: "Category", icon: "category", href: "/mobile-category-nav" },
   { title: "Cart", icon: "bag", href: "/cart" },
-  { title: "Account", icon: "user-2", href: "/profile" }
+  { title: "Account", icon: "user-2", href: "/profile" },
 ];

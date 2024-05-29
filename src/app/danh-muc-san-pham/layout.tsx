@@ -5,6 +5,7 @@ import Sticky from "@component/sticky";
 
 import Footer from "./_components/footer";
 import { Header } from "./_components/header";
+import { MobileNavigationBar } from "./_components/mobile-navigation";
 import { Sidebar } from "./_components/sidebar";
 import { Topbar } from "./_components/topbar";
 import { getAllProductGroups, getMenuNodes } from "./_utils/server";
@@ -27,7 +28,7 @@ export default async function Layout(props: { children: ReactNode }) {
 
       {/* {!navbar ? <div className="section-after-sticky">{children}</div> : children} */}
 
-      {/* <MobileNavigationBar /> */}
+      <MobileNavigationBar />
 
       <Container my="2rem">
         <Grid container spacing={6} className="lg:w-[1280px] lg:px-10">

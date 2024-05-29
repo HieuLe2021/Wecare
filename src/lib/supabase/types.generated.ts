@@ -99,217 +99,7 @@ export type Database = {
         }
         Relationships: []
       }
-      menu_nodes: {
-        Row: {
-          child_nodes:
-            | Database["public"]["CompositeTypes"]["node_info"][]
-            | null
-          id: string
-          image_url: string | null
-          name: string | null
-          pos: number | null
-          slug: string | null
-        }
-        Insert: {
-          child_nodes?:
-            | Database["public"]["CompositeTypes"]["node_info"][]
-            | null
-          id: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Update: {
-          child_nodes?:
-            | Database["public"]["CompositeTypes"]["node_info"][]
-            | null
-          id?: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Relationships: []
-      }
-      menu_nodes_11: {
-        Row: {
-          child_nodes: Json | null
-          id: string
-          image_url: string | null
-          name: string | null
-          pos: number | null
-          slug: string | null
-        }
-        Insert: {
-          child_nodes?: Json | null
-          id: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Update: {
-          child_nodes?: Json | null
-          id?: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Relationships: []
-      }
-      menu_nodes_3: {
-        Row: {
-          child_nodes: Json | null
-          id: string
-          image_url: string | null
-          name: string | null
-          pos: number | null
-          slug: string | null
-        }
-        Insert: {
-          child_nodes?: Json | null
-          id: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Update: {
-          child_nodes?: Json | null
-          id?: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Relationships: []
-      }
-      menu_nodes_4: {
-        Row: {
-          child_nodes: Json | null
-          id: string
-          image_url: string | null
-          name: string | null
-          pos: number | null
-          slug: string | null
-        }
-        Insert: {
-          child_nodes?: Json | null
-          id: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Update: {
-          child_nodes?: Json | null
-          id?: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Relationships: []
-      }
-      menu_nodes_5: {
-        Row: {
-          child_nodes: Json | null
-          id: string
-          image_url: string | null
-          name: string | null
-          pos: number | null
-          slug: string | null
-        }
-        Insert: {
-          child_nodes?: Json | null
-          id: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Update: {
-          child_nodes?: Json | null
-          id?: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Relationships: []
-      }
-      menu_nodes_6: {
-        Row: {
-          child_nodes: Json | null
-          id: string
-          image_url: string | null
-          name: string | null
-          pos: number | null
-          slug: string | null
-        }
-        Insert: {
-          child_nodes?: Json | null
-          id: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Update: {
-          child_nodes?: Json | null
-          id?: string
-          image_url?: string | null
-          name?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Relationships: []
-      }
       product_groups: {
-        Row: {
-          icon: string | null
-          id: string
-          image_url: string | null
-          is_leaf: boolean | null
-          last_synced: string
-          level: number | null
-          name: string | null
-          nganh_nghe: string | null
-          parent_id: string | null
-          pos: number | null
-          slug: string | null
-        }
-        Insert: {
-          icon?: string | null
-          id?: string
-          image_url?: string | null
-          is_leaf?: boolean | null
-          last_synced?: string
-          level?: number | null
-          name?: string | null
-          nganh_nghe?: string | null
-          parent_id?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Update: {
-          icon?: string | null
-          id?: string
-          image_url?: string | null
-          is_leaf?: boolean | null
-          last_synced?: string
-          level?: number | null
-          name?: string | null
-          nganh_nghe?: string | null
-          parent_id?: string | null
-          pos?: number | null
-          slug?: string | null
-        }
-        Relationships: []
-      }
-      product_groups_temp_0: {
         Row: {
           icon: string | null
           id: string
@@ -443,6 +233,17 @@ export type Database = {
       }
     }
     Views: {
+      customers_matview: {
+        Row: {
+          id: string | null
+          last_synced: string | null
+          name: string | null
+          nganh_nghe: string | null
+          products: Json | null
+          sdt: string | null
+        }
+        Relationships: []
+      }
       menu_nodes_matview: {
         Row: {
           child_nodes: Json | null
