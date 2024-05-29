@@ -74,7 +74,7 @@ export const LeafCarousel = ({
           </Link>
         )}
       </div>
-      <div className="relative h-40 w-full rounded-md bg-white">
+      <div className="relative h-44 w-full rounded-md bg-white">
         <div className="absolute left-4 right-4 top-[11px]">
           <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
             <Carousel
@@ -97,8 +97,8 @@ export const LeafCarousel = ({
                     >
                       <div
                         className={cn(
-                          "p-1",
-                          "group relative h-36 cursor-pointer rounded-md border border-transparent",
+                          "min-h-[138px] min-w-[138px] p-1",
+                          "group relative cursor-pointer rounded-md border border-transparent",
                           isActive ? "border-blue-500" : "text-gray-400",
                         )}
                       >
@@ -111,8 +111,8 @@ export const LeafCarousel = ({
                           )}
                           className="flex justify-center"
                         >
-                          <div className="flex w-[125px] flex-col">
-                            <div className="flex grow flex-col bg-white py-0.5 text-center text-xs font-medium leading-4 text-sky-700 max-md:mt-4">
+                          <div className="flex flex-col">
+                            <div className="flex grow flex-col bg-white text-center text-xs font-medium leading-4 text-sky-700 max-md:mt-4">
                               {isActive && (
                                 <Image
                                   className="absolute right-0 top-0 z-10 h-5 w-5"
@@ -131,10 +131,10 @@ export const LeafCarousel = ({
                               />
                               <div
                                 className={cn(
-                                  "mt-2",
+                                  "mt-2 font-semibold",
                                   isActive
-                                    ? "text-sm font-semibold text-sky-700"
-                                    : "text-gray-400",
+                                    ? "text-sm text-sky-700"
+                                    : "text-gray-600",
                                 )}
                               >
                                 {item.name}

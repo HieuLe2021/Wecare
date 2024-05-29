@@ -1,7 +1,12 @@
 "use client";
 
-import type { ColumnDef, Row, SortingState } from "@tanstack/react-table";
-import { Fragment, useEffect, useState } from "react";
+import type {
+  ColumnDef,
+  Row,
+  SortingState,
+  Table as TableDef,
+} from "@tanstack/react-table";
+import { Fragment, useMemo } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   flexRender,
@@ -30,44 +35,30 @@ import { vndFormatter } from "~/utils/vndFormatter";
 export const PriceTable = ({
   material,
   data,
-  customerProductPrices = {},
+  customerProducts = [],
   skeleton,
-  sortBy,
-  sortOrder,
   img,
 }: {
   material: string;
   data: Tables<"products">[];
-  customerProductPrices: Record<string, number> | null | undefined;
+  customerProducts: Tables<"customers_matview">["products"];
   skeleton?: boolean;
-  sortBy?: keyof NonNullable<Tables<"products">>;
-  sortOrder?: "asc" | "desc";
   img: string;
 }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [sorting, setSorting] = useState<SortingState>(
-    sortBy ? [{ id: sortBy, desc: sortOrder === "desc" }] : [],
-  );
-  useEffect(() => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    if (sorting.length > 0) {
-      newSearchParams.set("sort_by", sorting[0]!.id);
-      newSearchParams.set("sort_order", sorting[0]!.desc ? "desc" : "asc");
-      // router.replace(pathname + "?" + newSearchParams.toString());
-      // change url searchParams without refresh
-      window.history.replaceState(
-        null,
-        "",
-        pathname + "?" + newSearchParams.toString(),
-      );
-    } else {
-      newSearchParams.delete("sort_by");
-      newSearchParams.delete("sort_order");
-    }
-  }, [sorting]);
 
-  const onRowClick = (row: Row<Tables<"products">>) => {
+  const sortBy = searchParams.get("sort_by") ?? "thuong_hieu";
+  const sortOrder = searchParams.get("sort_order") ?? "asc";
+  const sorting = useMemo(() => {
+    return [{ id: sortBy, desc: sortOrder === "desc" }];
+  }, [sortBy, sortOrder]);
+
+  const onRowClick = (
+    row: Row<Tables<"products">>,
+    table: TableDef<Tables<"products">>,
+  ) => {
+    table.resetExpanded();
     row.getToggleExpandedHandler()();
   };
   const columns: ColumnDef<Tables<"products">>[] = [
@@ -97,7 +88,8 @@ export const PriceTable = ({
       accessorKey: "gia",
       cell: ({ row }) => {
         const price =
-          customerProductPrices?.[row.original.id] ?? row.original.gia;
+          customerProducts.find((x) => x.id === row.original.id)?.gia ??
+          row.original.gia;
 
         return (
           <div className="text-end">
@@ -116,7 +108,34 @@ export const PriceTable = ({
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
+    onSortingChange: (
+      old: SortingState | ((old: SortingState) => SortingState),
+    ) => {
+      let s = null;
+      if (typeof old === "function") {
+        s = old(sorting);
+      } else {
+        s = old;
+      }
+      if (s[0]!.id !== sorting[0]!.id || s[0]!.desc !== sorting[0]!.desc) {
+        const newSearchParams = new URLSearchParams(searchParams.toString());
+        if (s.length > 0) {
+          newSearchParams.set("sort_by", s[0]!.id);
+          newSearchParams.set("sort_order", s[0]!.desc ? "desc" : "asc");
+          // router.replace(pathname + "?" + newSearchParams.toString());
+          // change url searchParams without refresh
+          window.history.replaceState(
+            null,
+            "",
+            pathname + "?" + newSearchParams.toString(),
+          );
+        } else {
+          newSearchParams.delete("sort_by");
+          newSearchParams.delete("sort_order");
+        }
+      }
+    },
+    enableSortingRemoval: false,
     state: {
       sorting,
     },
@@ -128,14 +147,14 @@ export const PriceTable = ({
         <div className="pl-2 text-base font-semibold">
           {!skeleton && (
             <>
-              {material && material !== "unknown" ? (
-                <div>Chất liệu: {`${material}`}</div>
-              ) : (
-                <div className="flex">
-                  <p className="text-gray-400">Chất liệu: &nbsp;</p>
-                  <p>Khác</p>
-                </div>
-              )}
+              <div className="flex">
+                <span className="text-gray-500">Chất liệu:&nbsp;</span>
+                {material && material !== "unknown" ? (
+                  <span>{material}</span>
+                ) : (
+                  <span>Khác</span>
+                )}
+              </div>
             </>
           )}
         </div>
@@ -157,7 +176,10 @@ export const PriceTable = ({
                         <TableHead
                           key={header.id}
                           colSpan={header.colSpan}
-                          className="p-2 pl-1"
+                          className={cn(
+                            "p-2 pl-1",
+                            header.column.getCanSort() && "cursor-pointer",
+                          )}
                           onClick={header.column.getToggleSortingHandler()}
                           title={
                             header.column.getCanSort()
@@ -204,7 +226,7 @@ export const PriceTable = ({
                     <Fragment key={row.id}>
                       <TableRow
                         onClick={() => {
-                          onRowClick(row);
+                          onRowClick(row, table);
                         }}
                         className={cn(
                           row.getIsExpanded() ? "border-l border-r" : "",
@@ -235,7 +257,7 @@ export const PriceTable = ({
                             {renderSubComponent({
                               row,
                               img,
-                              customerProductPrices,
+                              customerProducts,
                             })}
                           </TableCell>
                         </TableRow>
@@ -287,14 +309,13 @@ export const PriceTable = ({
 const renderSubComponent = ({
   row,
   img,
-  customerProductPrices,
+  customerProducts,
 }: {
   row: Row<Tables<"products">>;
   img: string;
-  customerProductPrices: Record<string, number> | null;
+  customerProducts: Tables<"customers_matview">["products"];
 }) => {
   const record = row.original;
-  console.log("record:", record, row.original);
   return (
     <div className="flex items-center justify-between">
       <div>
@@ -328,7 +349,7 @@ const renderSubComponent = ({
             <div className="flex text-[13px] font-normal">
               <p className="w-24 font-normal text-gray-400">Giá:&nbsp;</p>
               {/* {record.gia ? vndFormatter.format(record.gia) : "Đang cập nhật"} */}
-              {privatePrice(record, customerProductPrices)}
+              {privatePrice(record, customerProducts)}
             </div>
           </div>
         </div>
@@ -347,9 +368,10 @@ const renderSubComponent = ({
 
 const privatePrice = (
   record: Tables<"products">,
-  customerProductPrices: Record<string, number> | null,
+  customerProducts: Tables<"customers_matview">["products"],
 ) => {
-  const price = customerProductPrices?.[record.id] ?? record.gia;
+  const price =
+    customerProducts.find((x) => x.id === record.id)?.gia ?? record.gia;
 
   return (
     <div className="text-end">

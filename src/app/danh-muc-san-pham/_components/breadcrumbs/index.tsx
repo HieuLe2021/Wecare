@@ -32,6 +32,7 @@ export function Breadcrumb({
         const d = allProductGroups.find((resGroups) => resGroups.slug === s);
         return (
           <Link
+            key={index}
             className="text-sky-800"
             href={
               pathSplited.slice(0, index + 3).join("/") +

@@ -8,7 +8,24 @@ export type Database = MergeDeep<
   DatabaseGenerated,
   {
     public: {
+      Tables: {
+        customers: {
+          Row: {
+            product_prices: Record<string, number> | null;
+          };
+        };
+      };
       Views: {
+        customers_matview: {
+          Row: {
+            products: {
+              id: string;
+              gia: number;
+              parent_id?: string;
+              parent_slug?: string;
+            }[];
+          };
+        };
         menu_nodes_matview: {
           Row: {
             child_nodes: {

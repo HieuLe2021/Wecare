@@ -10,7 +10,14 @@ const nextConfig = {
     theme: "DEFAULT",
   },
   images: {
-    domains: ["wecare.com.vn", "placehold.co"],
+    remotePatterns: [
+      {
+        hostname: "wecare.com.vn",
+      },
+      {
+        hostname: "placehold.co",
+      },
+    ],
   },
 };
 
