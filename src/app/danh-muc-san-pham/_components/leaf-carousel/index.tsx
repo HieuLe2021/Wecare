@@ -59,7 +59,7 @@ export const LeafCarousel = ({
 
   return (
     <div className="mb-4 w-full rounded-md bg-white">
-      <div className="flex items-end justify-between px-6 py-2">
+      <div className="flex items-end justify-between px-3 py-2 md:px-6">
         <p className="font-medium">{leafCount} nhóm sản phẩm</p>
         {groupSlugs.length > 0 && (
           <Link
@@ -74,9 +74,9 @@ export const LeafCarousel = ({
           </Link>
         )}
       </div>
-      <div className="relative h-44 w-full rounded-md bg-white">
+      <div className="relative h-[180px] w-full rounded-md bg-white lg:h-44">
         <div className="absolute left-4 right-4 top-[11px]">
-          <div className="flex w-full sm:px-2  md:px-12 lg:px-12">
+          <div className="flex w-full px-4 md:px-12 lg:px-12">
             <Carousel
               opts={{
                 align: "start",
@@ -97,7 +97,7 @@ export const LeafCarousel = ({
                     >
                       <div
                         className={cn(
-                          "min-h-[138px] min-w-[138px] p-1",
+                          "min-h-[166px] min-w-[138px] p-1 lg:min-h-[138px]",
                           "group relative cursor-pointer rounded-md border border-transparent",
                           isActive ? "border-blue-500" : "text-gray-400",
                         )}
@@ -131,7 +131,7 @@ export const LeafCarousel = ({
                               />
                               <div
                                 className={cn(
-                                  "mt-2 font-semibold",
+                                  "mt-0 font-semibold lg:mt-2",
                                   isActive
                                     ? "text-sm text-sky-700"
                                     : "text-gray-600",

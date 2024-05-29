@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
-import { FlexboxProps, SpaceProps } from "styled-system";
 import Icon from "@component/icon/Icon";
-// STYLED COMPONENT
+import { FlexboxProps, SpaceProps } from "styled-system";
+
 import { AccordionHeaderWrapper } from "./styles";
+
+// STYLED COMPONENT
 
 // ==================================================================================
 type AccordionHeaderProps = {
@@ -15,13 +17,22 @@ type AccordionHeaderProps = {
 type Props = AccordionHeaderProps & SpaceProps & FlexboxProps;
 // ==================================================================================
 
-export default function AccordionHeader({ open, children, showIcon = true, ...props }: Props) {
+export default function AccordionHeader({
+  open,
+  children,
+  showIcon = true,
+  ...props
+}: Props) {
   return (
-    <AccordionHeaderWrapper open={open as boolean} {...props}>
+    <AccordionHeaderWrapper open={open!} {...props}>
       {children}
 
       {showIcon && (
-        <Icon className="caret-icon" variant="small" defaultcolor="currentColor">
+        <Icon
+          className="caret-icon"
+          variant="small"
+          defaultcolor="currentColor"
+        >
           chevron-right
         </Icon>
       )}

@@ -92,7 +92,7 @@ export const Content = async ({
 
         const data = paginatedGroups[index]!;
         return (
-          <div key={data.id} className="mb-4 rounded-lg bg-white p-4">
+          <div key={data.id} className="mb-4 rounded-lg bg-white md:p-4">
             <div className="flex gap-4 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-md:flex-wrap">
               <Image
                 loading="lazy"
