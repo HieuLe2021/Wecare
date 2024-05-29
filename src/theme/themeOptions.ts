@@ -1,10 +1,15 @@
-import merge from "lodash/merge";
-import shadows from "./shadows/shadows";
-import { colors } from "./colors/colors";
-import { deviceSize } from "@utils/constants";
-import { Breakpoints, ThemeOption } from "./type";
+// @ts-nocheck
 
-const breakpoints: Breakpoints = Object.keys(deviceSize).map((key) => deviceSize[key] + "px");
+import { deviceSize } from "@utils/constants";
+import merge from "lodash/merge";
+
+import type { Breakpoints, ThemeOption } from "./type";
+import { colors } from "./colors/colors";
+import shadows from "./shadows/shadows";
+
+const breakpoints: Breakpoints = Object.keys(deviceSize).map(
+  (key) => deviceSize[key] + "px",
+);
 
 breakpoints.sm = breakpoints[0];
 breakpoints.md = breakpoints[1];
@@ -16,7 +21,7 @@ const THEMES = {
   HEALTH: "HEALTH",
   DEFAULT: "DEFAULT",
   GROCERY: "GROCERY",
-  FURNITURE: "FURNITURE"
+  FURNITURE: "FURNITURE",
 };
 
 const themesOptions = {
@@ -25,18 +30,27 @@ const themesOptions = {
   [THEMES.FURNITURE]: {
     shadows,
     breakpoints,
-    colors: { ...colors, primary: { ...colors.primary, main: colors.paste.main } }
+    colors: {
+      ...colors,
+      primary: { ...colors.primary, main: colors.paste.main },
+    },
   },
   [THEMES.HEALTH]: {
     shadows,
     breakpoints,
-    colors: { ...colors, primary: { ...merge({ ...colors.primary }, { ...colors.blue }) } }
+    colors: {
+      ...colors,
+      primary: { ...merge({ ...colors.primary }, { ...colors.blue }) },
+    },
   },
   [THEMES.GIFT]: {
     shadows,
     breakpoints,
-    colors: { ...colors, primary: { ...colors.primary, main: colors.marron.main } }
-  }
+    colors: {
+      ...colors,
+      primary: { ...colors.primary, main: colors.marron.main },
+    },
+  },
 };
 
 export default function getThemeOptions(themes: any, pathname: string) {

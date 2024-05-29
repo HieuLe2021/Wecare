@@ -19,7 +19,7 @@ export const LeafCarousel = ({
   data,
   leafCount,
 }: {
-  data: NonNullable<Tables<"menu_nodes">["child_nodes"]>;
+  data: Tables<"menu_nodes_matview">["child_nodes"];
   leafCount: number;
 }) => {
   const searchParams = useSearchParams();
@@ -104,7 +104,7 @@ export const LeafCarousel = ({
                       >
                         <Link
                           href={genSelectedGroupsPath(
-                            item.slug!,
+                            item.slug,
                             groupSlugs,
                             currentPath,
                             searchParams,

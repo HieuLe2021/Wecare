@@ -1,18 +1,21 @@
-import { ceil } from "lodash";
-import { differenceInMinutes } from "date-fns";
-import { themeGet } from "@styled-system/theme-get";
+// @ts-nocheck
+
 import emotionIsPropValid from "@emotion/is-prop-valid";
+import { themeGet } from "@styled-system/theme-get";
+import { differenceInMinutes } from "date-fns";
+import { ceil } from "lodash";
 
 export const isValidProp = (prop: string) => emotionIsPropValid(prop);
 
-export const getTheme = (query: string, fallback?: string) => themeGet(query, fallback);
+export const getTheme = (query: string, fallback?: string) =>
+  themeGet(query, fallback);
 
 // CONVERT HEX TO RGB COLOR
 export const convertHexToRGB = (hex: string) => {
   // check if it's a rgba
 
   if (hex.match("rgba")) {
-    let triplet = hex.slice(5).split(",").slice(0, -1).join(",");
+    const triplet = hex.slice(5).split(",").slice(0, -1).join(",");
     return triplet;
   }
   let c: any;
@@ -47,9 +50,9 @@ export const getDateDifference = (date) => {
 export const renderProductCount = (
   page: number,
   productPerPage: number,
-  totalProductLenth: number
+  totalProductLenth: number,
 ) => {
-  let startNumber = page * productPerPage;
+  const startNumber = page * productPerPage;
   let endNumber = (page + 1) * productPerPage;
 
   if (endNumber > totalProductLenth) endNumber = totalProductLenth;
@@ -76,7 +79,7 @@ export function calculateDiscount(price: number, discount: number) {
  * @returns - RETURN PRICE WITH CURRENCY
  */
 
-export function currency(price: number, fraction: number = 2) {
+export function currency(price: number, fraction = 2) {
   // const { publicRuntimeConfig } = getConfig();
   // currency: publicRuntimeConfig.currency,
 
@@ -84,7 +87,7 @@ export function currency(price: number, fraction: number = 2) {
     currency: "USD",
     style: "currency",
     maximumFractionDigits: fraction,
-    minimumFractionDigits: fraction
+    minimumFractionDigits: fraction,
   });
 
   return formatCurrency.format(price);

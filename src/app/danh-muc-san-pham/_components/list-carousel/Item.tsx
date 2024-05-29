@@ -23,7 +23,7 @@ export const Item = ({
   leafCount,
 }: {
   info: MenuItem;
-  data: NonNullable<Tables<"menu_nodes">["child_nodes"]>;
+  data: NonNullable<Tables<"menu_nodes_matview">["child_nodes"]>;
   leafCount: number;
 }) => {
   const searchParams = useSearchParams();
@@ -77,7 +77,7 @@ export const Item = ({
                           href={
                             currentPath +
                             "/" +
-                            item.parent_slug! +
+                            item.parent_slug +
                             "?groups=" +
                             item.slug +
                             (searchParams.get("customer")
