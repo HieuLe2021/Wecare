@@ -38,7 +38,7 @@ export default function MobileCategoryImageBox({
         fontSize="11px"
         lineHeight="1"
         mt="0.5rem"
-        height="13px"
+        height="24px"
       >
         {title}
       </Typography>
