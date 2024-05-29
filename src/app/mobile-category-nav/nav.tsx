@@ -132,7 +132,7 @@ export default function MobileCategoryNav({
                     <Grid container spacing={3}>
                       {item.subCategories?.map((item: any, ind: number) => (
                         <Grid item lg={1} md={2} sm={3} xs={3} key={ind}>
-                          <Link href="/mobile-category-nav">
+                          <Link href={item.href}>
                             <MobileCategoryImageBox {...item} />
                           </Link>
                         </Grid>
