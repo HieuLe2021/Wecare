@@ -1,11 +1,19 @@
 import "server-only";
 
 import { cache } from "react";
+
 import { createClient } from "~/lib/supabase/server";
 
 export const getAllProductGroups = cache(async () => {
   const supabase = createClient();
-  return (await supabase.from("product_groups").select().order("pos", { ascending: true })).data ?? [];
+  return (
+    (
+      await supabase
+        .from("product_groups")
+        .select()
+        .order("pos", { ascending: true })
+    ).data ?? []
+  );
 });
 
 // export const preloadLeafNode = (id: string | null) => {
@@ -37,17 +45,28 @@ export const getMenuNodes = cache(async () => {
   );
 });
 
-export const getCustomerProductPrices = cache(async (customerId: string)  => {
+// export const getCustomerProductPrices = cache(async (customerId: string) => {
+//   const supabase = createClient();
+//   const res =
+//     (
+//       await supabase
+//         .from("customers")
+//         .select("product_prices")
+//         .eq("id", customerId)
+//     ).data ?? [];
+//   if (res.length > 0) {
+//     return res[0]?.product_prices;
+//   }
+//   return {};
+// });
+
+export const getCustomerProductPrices = cache(async (customerId: string) => {
   const supabase = createClient();
   const res =
-    (
-      await supabase
-        .from("customers")
-        .select("product_prices")
-        .eq("id", customerId)
-    ).data ?? [];
+    (await supabase.from("customers_matview").select().eq("id", customerId))
+      .data ?? [];
   if (res.length > 0) {
-    return res[0]?.product_prices as Record<string, number> | null;
+    return res[0]?.products || [];
   }
-  return {} as Record<string, number> | null;
+  return [];
 });

@@ -23,11 +23,25 @@ export const Content = async ({
   params,
   searchParams,
 }: DefaultProductListContentProps) => {
-  const sortBy = searchParams.sort_by ?? "thuong_hieu";
-  const sortOrder = searchParams.sort_order ?? "asc";
-
   const supabase = createClient();
-  const childNodes = await getLeafNode(params.slug!.at(-1)!);
+  // const childNodes = await getLeafNode(params.slug!.at(-1)!);
+  const [customerProducts, childNodes] = await Promise.all([
+    searchParams.customer
+      ? getCustomerProductPrices(searchParams.customer)
+      : ([] as Tables<"customers_matview">["products"]),
+    getLeafNode(params.slug!.at(-1)!),
+  ]);
+  // by customer or not
+  const childNodesFiltered = childNodes.filter((n) =>
+    customerProducts?.map((x) => x.parent_id).includes(n.id),
+  );
+  // console.log(
+  //   "ccc",
+  //   childNodesFiltered,
+  //   // childNodesFiltered.length,
+  //   // customerProducts.map((x) => x.parent_id),
+  // );
+  // .filter((x) => x !== null) as Tables<"menu_nodes_matview">["child_nodes"];
 
   const productsBySlug = (slug: string) => {
     return supabase
@@ -40,21 +54,27 @@ export const Content = async ({
 
   const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
   const groups = searchParams.groups
-    ? childNodes.filter((x) => selectedGroups?.includes(x.slug))
-    : childNodes;
+    ? childNodesFiltered.filter((x) => selectedGroups?.includes(x.slug))
+    : childNodesFiltered;
+  // const groups = searchParams.groups
+  //   ? childNodes.filter((x) => selectedGroups?.includes(x.slug))
+  //   : childNodes;
   const paginatedGroups = groups.slice(from, to);
-  const [customerProductPrices, ...priceTablesQuery] = await Promise.all([
-    searchParams.customer
-      ? getCustomerProductPrices(searchParams.customer)
-      : null,
+  const priceTablesQuery = await Promise.all([
     ...paginatedGroups.map((node) => {
       return productsBySlug(node.slug);
     }),
   ]);
 
+  const cp = customerProducts.map((cp) => cp.id);
+  const filtered = priceTablesQuery
+    .map((t) => ({
+      data: t.data?.filter((r) => cp.includes(r.id)),
+    }))
+    .filter((t) => t.data && t.data.length > 0);
   return (
     <>
-      {priceTablesQuery.map((query, index) => {
+      {filtered.map((query, index) => {
         const products = query.data ?? [];
         const groupedByChatLieu: Record<string, Tables<"products">[]> = {};
         products.forEach((product) => {
@@ -120,9 +140,7 @@ export const Content = async ({
                     key={index}
                     material={key}
                     data={value}
-                    customerProductPrices={customerProductPrices}
-                    sortBy={sortBy}
-                    sortOrder={sortOrder}
+                    customerProducts={customerProducts}
                     img={data.image_url}
                   />
                 );

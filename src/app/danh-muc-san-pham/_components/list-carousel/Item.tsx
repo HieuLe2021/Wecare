@@ -9,7 +9,6 @@ import { ChevronRight } from "lucide-react";
 
 import type { MenuItem } from "~/components/categories/mega-menu/type";
 import type { Tables } from "~/lib/supabase/types";
-import Icon from "~/components/icon/Icon";
 import {
   Carousel,
   CarouselContent,
@@ -31,7 +30,7 @@ export const Item = ({
   const currentPath = usePathname();
 
   return (
-    <div className="mb-4 w-full rounded-md bg-transparent px-2">
+    <div className="mb-4 w-full rounded-md bg-white px-2">
       <div className="flex items-end justify-between pt-4 md:px-6">
         <Link href={info.href} className="flex items-center">
           <Image alt="" src={info.icon} width={24} height={24} />
@@ -48,7 +47,7 @@ export const Item = ({
           <ChevronRight />
         </Link>
       </div>
-      <div className="relative h-40 w-full rounded-md bg-transparent">
+      <div className="relative h-44 w-full rounded-md bg-transparent">
         <div className="absolute left-4 right-4 top-[11px]">
           <div className="flex w-full bg-transparent px-3 md:px-12 lg:px-12">
             <Carousel

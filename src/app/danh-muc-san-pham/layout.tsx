@@ -6,6 +6,7 @@ import Sticky from "@component/sticky";
 import MobileNavigationBar from "~/components/mobile-navigation";
 import Footer from "./_components/footer";
 import { Header } from "./_components/header";
+import { MobileNavigationBar } from "./_components/mobile-navigation";
 import { Sidebar } from "./_components/sidebar";
 import { Topbar } from "./_components/topbar";
 import { getAllProductGroups, getMenuNodes } from "./_utils/server";
