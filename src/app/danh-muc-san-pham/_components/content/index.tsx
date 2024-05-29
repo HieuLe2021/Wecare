@@ -6,7 +6,8 @@ import type { Tables } from "~/lib/supabase/types";
 import Image from "~/components/Image";
 import { Pagination } from "~/components/ui/pagination";
 import { vndFormatter } from "~/utils/vndFormatter";
-import { getCustomerProductPrices, getLeafNode } from "../../_utils/server";
+import { filterLeafNodes } from "../../_utils/client";
+import { getCustomer, getLeafNode } from "../../_utils/server";
 import { PriceTable } from "./PriceTable";
 
 export type DefaultProductListContentProps = {
@@ -24,24 +25,13 @@ export const Content = async ({
   searchParams,
 }: DefaultProductListContentProps) => {
   const supabase = createClient();
-  // const childNodes = await getLeafNode(params.slug!.at(-1)!);
-  const [customerProducts, childNodes] = await Promise.all([
-    searchParams.customer
-      ? getCustomerProductPrices(searchParams.customer)
-      : ([] as Tables<"customers_matview">["products"]),
+  const [customer, childNodes] = await Promise.all([
+    searchParams.customer ? getCustomer(searchParams.customer) : undefined,
     getLeafNode(params.slug!.at(-1)!),
   ]);
+
   // by customer or not
-  const childNodesFiltered = childNodes.filter((n) =>
-    customerProducts?.map((x) => x.parent_id).includes(n.id),
-  );
-  // console.log(
-  //   "ccc",
-  //   childNodesFiltered,
-  //   // childNodesFiltered.length,
-  //   // customerProducts.map((x) => x.parent_id),
-  // );
-  // .filter((x) => x !== null) as Tables<"menu_nodes_matview">["child_nodes"];
+  const childNodesFiltered = filterLeafNodes(childNodes, customer?.products);
 
   const productsBySlug = (slug: string) => {
     return supabase
@@ -66,10 +56,10 @@ export const Content = async ({
     }),
   ]);
 
-  const cp = customerProducts.map((cp) => cp.id);
+  const cp = customer?.products.map((cp) => cp.id);
   const filtered = priceTablesQuery
     .map((t) => ({
-      data: t.data?.filter((r) => cp.includes(r.id)),
+      data: t.data?.filter((r) => !cp || cp.includes(r.id)),
     }))
     .filter((t) => t.data && t.data.length > 0);
   return (
@@ -140,7 +130,7 @@ export const Content = async ({
                     key={index}
                     material={key}
                     data={value}
-                    customerProducts={customerProducts}
+                    customerProducts={customer?.products || []}
                     img={data.image_url}
                   />
                 );

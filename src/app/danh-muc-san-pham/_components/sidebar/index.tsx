@@ -17,15 +17,18 @@ import { getCollections } from "./utils";
 export const Sidebar = ({
   allProductGroups,
   menuNodes,
+  customer,
 }: {
   allProductGroups: Tables<"product_groups">[];
   menuNodes: Tables<"menu_nodes_matview">[];
+  customer: Tables<"customers_matview"> | undefined;
 }) => {
   const searchParams = useSearchParams();
   const collections = getCollections(
     allProductGroups,
     menuNodes,
     searchParams.get("customer"),
+    customer,
   );
   const megaMenu = { MegaMenu1, MegaMenu2 };
   return (

@@ -1,23 +1,57 @@
-import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 import type { MenuItem } from "@component/categories/mega-menu/type";
 import type { Tables } from "@lib/supabase/types";
 
+import { filterLeafNodes } from "../../_utils/client";
+import { DANH_MUC_SAN_PHAM_URL } from "../../config";
+
+const checkNodeHasProductId = (
+  node: Tables<"product_groups">,
+  menuNodes: Tables<"menu_nodes_matview">[],
+  customer: Tables<"customers_matview"> | undefined,
+) => {
+  const childNodes =
+    menuNodes.find((x) => x.slug === node.slug)?.child_nodes ?? [];
+  const filtered = filterLeafNodes(childNodes, customer?.products);
+  if (node.slug === "co") {
+    console.log("cccc", childNodes, filtered);
+  }
+  return filtered.length > 0;
+};
 export function getCollections(
   productGroupsList: Tables<"product_groups">[],
   menuNodes: Tables<"menu_nodes_matview">[],
   customerId: string | null,
+  customer: Tables<"customers_matview"> | undefined,
 ): MenuItem[] {
   const menuItems = productGroupsList
-    .filter((group) => !group.parent_id && group.name)
+    .filter(
+      (root) =>
+        !root.parent_id &&
+        root.name &&
+        checkNodeHasProductId(root, menuNodes, customer),
+    )
     .map((root) => {
       const level_1 = productGroupsList
-        .filter((child) => child.parent_id === root.id)
-        .map((child) => {
+        .filter(
+          (level_1) =>
+            level_1.parent_id === root.id &&
+            checkNodeHasProductId(level_1, menuNodes, customer),
+        )
+        .map((level_1) => {
           const level_2 = productGroupsList
-            .filter((grandChild) => grandChild.parent_id === child.id)
-            .map((grandChild) => {
+            .filter(
+              (level_2) =>
+                level_2.parent_id === level_1.id &&
+                // ,
+                // checkNodeHasProductId(level_2, menuNodes, customer),
+                (customer?.products
+                  .map((x) => x.parent_id)
+                  .includes(level_2.id) ||
+                  checkNodeHasProductId(level_2, menuNodes, customer)),
+            )
+            .map((level_2) => {
               const level_3 = productGroupsList.filter(
-                (level3Child) => level3Child.parent_id === grandChild.id,
+                (level_3) => level_3.parent_id === level_2.id,
               );
               const level2Href =
                 level_3.length === 0
@@ -26,24 +60,24 @@ export function getCollections(
                     "/" +
                     root.slug +
                     "/" +
-                    child.slug +
+                    level_1.slug +
                     (customerId ? `?customer=${customerId}&` : "?") +
                     "groups=" +
-                    grandChild.slug
+                    level_2.slug
                   : "/" +
                     DANH_MUC_SAN_PHAM_URL +
                     "/" +
                     root.slug +
                     "/" +
-                    child.slug +
+                    level_1.slug +
                     "/" +
-                    grandChild.slug +
+                    level_2.slug +
                     (customerId ? `?customer=${customerId}` : "");
 
               const grandChildItem = {
-                title: grandChild.name,
+                title: level_2.name,
                 href: level2Href,
-                imgUrl: grandChild.image_url,
+                imgUrl: level_2.image_url,
               };
               return grandChildItem;
             });
@@ -55,24 +89,31 @@ export function getCollections(
                 "/" +
                 root.slug +
                 "?groups=" +
-                child.slug
+                level_1.slug
               : "/" +
                 DANH_MUC_SAN_PHAM_URL +
                 "/" +
                 root.slug +
                 "/" +
-                child.slug +
+                level_1.slug +
                 (customerId ? `?customer=${customerId}` : "");
           const childItem = {
-            title: child.name,
+            title: level_1.name,
             href,
             subCategories: level_2,
           };
           return childItem;
         });
 
-      const count =
-        menuNodes.find((n) => n.id === root.id)?.child_nodes.length || 0;
+      // const count =
+      //   menuNodes.find((n) => n.id === root.id)?.child_nodes.length || 0;
+      const childNodes =
+        menuNodes.find((x) => x.id === root.id)?.child_nodes ?? [];
+      const childNodesFiltered = filterLeafNodes(
+        childNodes,
+        customer?.products,
+      );
+      const count = childNodesFiltered.length;
 
       const menuItem: MenuItem = {
         id: root.id,

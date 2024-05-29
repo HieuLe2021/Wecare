@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { headers } from "next/headers";
 import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
 import Sticky from "@component/sticky";
@@ -8,15 +9,26 @@ import { Header } from "./_components/header";
 import { MobileNavigationBar } from "./_components/mobile-navigation";
 import { Sidebar } from "./_components/sidebar";
 import { Topbar } from "./_components/topbar";
-import { getAllProductGroups, getMenuNodes } from "./_utils/server";
+import {
+  getAllProductGroups,
+  getCustomer,
+  getMenuNodes,
+} from "./_utils/server";
 import { StyledAppLayout } from "./styles";
 
 export default async function Layout(props: { children: ReactNode }) {
   const { children } = props;
-  const [allProductGroups, menuNodes] = await Promise.all([
+  const customerId = new URLSearchParams(
+    headers().get("x-url")?.split("?").at(-1),
+  ).get("customer");
+  const start = performance.now();
+  const [allProductGroups, menuNodes, customer] = await Promise.all([
     getAllProductGroups(),
     getMenuNodes(),
+    customerId ? getCustomer(customerId) : undefined,
   ]);
+  const end = performance.now();
+  console.log(`Execution time: ${end - start} ms`);
 
   return (
     <StyledAppLayout>
@@ -42,10 +54,15 @@ export default async function Layout(props: { children: ReactNode }) {
             <Sidebar
               allProductGroups={allProductGroups}
               menuNodes={menuNodes}
+              customer={customer}
             />
           </Grid>
           <Grid item md={9} xs={12} className="!px-6 !py-0">
-            <Topbar allProductGroups={allProductGroups} menuNodes={menuNodes} />
+            <Topbar
+              allProductGroups={allProductGroups}
+              menuNodes={menuNodes}
+              customer={customer}
+            />
             <div>{children}</div>
           </Grid>
         </Grid>

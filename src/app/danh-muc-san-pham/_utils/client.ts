@@ -1,21 +1,12 @@
-import { createClient } from "~/lib/supabase/client";
+import type { Tables } from "~/lib/supabase/types";
 
-export const getLeafNode = async (slug: string | null) => {
-  const supabase = createClient();
-  const childNodes = !slug
-    ? (
-        await supabase
-          .from("product_groups")
-          .select()
-          .eq("is_leaf", true)
-          .order("pos", { ascending: true })
-      ).data ?? []
-    : (
-        await supabase
-          .from("menu_nodes")
-          .select("*")
-          .eq("slug", slug)
-          .order("pos", { ascending: true })
-      ).data?.[0]?.child_nodes ?? [];
-  return childNodes;
+export const filterLeafNodes = (
+  allLeaf: Tables<"menu_nodes_matview">["child_nodes"],
+  customerProducts: Tables<"customers_matview">["products"] | undefined,
+) => {
+  return customerProducts
+    ? allLeaf.filter((n) =>
+        customerProducts.map((x) => x.parent_id).includes(n.id),
+      )
+    : allLeaf;
 };
