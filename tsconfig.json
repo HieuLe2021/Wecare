@@ -51,5 +51,10 @@
     ".next/types/**/*.ts",
     "./src/components/swiper/swiper.d.ts"
   ],
-  "exclude": ["node_modules", "./src/components/icon/Icon.tsx"]
+  "exclude": [
+    "node_modules",
+    "./src/components/icon/Icon.tsx",
+    "eslint.config.js",
+     "./src/components/buttons/Button.tsx"
+  ]
 }

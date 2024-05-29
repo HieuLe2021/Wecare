@@ -45,21 +45,6 @@ export const getMenuNodes = cache(async () => {
   );
 });
 
-// export const getCustomerProductPrices = cache(async (customerId: string) => {
-//   const supabase = createClient();
-//   const res =
-//     (
-//       await supabase
-//         .from("customers")
-//         .select("product_prices")
-//         .eq("id", customerId)
-//     ).data ?? [];
-//   if (res.length > 0) {
-//     return res[0]?.product_prices;
-//   }
-//   return {};
-// });
-
 export const getCustomerProducts = cache(async (customerId: string) => {
   const supabase = createClient();
   const res =
@@ -75,8 +60,4 @@ export const getCustomer = cache(async (customerId: string) => {
   return (
     await supabase.from("customers_matview").select().eq("id", customerId)
   ).data?.[0];
-  // if (res.length > 0) {
-  //   return res[0]?.products || [];
-  // }
-  // return [];
 });

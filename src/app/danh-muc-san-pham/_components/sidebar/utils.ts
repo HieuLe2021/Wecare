@@ -12,9 +12,6 @@ const checkNodeHasProductId = (
   const childNodes =
     menuNodes.find((x) => x.slug === node.slug)?.child_nodes ?? [];
   const filtered = filterLeafNodes(childNodes, customer?.products);
-  if (node.slug === "co") {
-    console.log("cccc", childNodes, filtered);
-  }
   return filtered.length > 0;
 };
 export function getCollections(

@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Box from "@component/Box";
-import { IconButton } from "@component/buttons";
-import Categories from "@component/categories/Categories";
 import Container from "@component/Container";
 import FlexBox from "@component/FlexBox";
 import Icon from "@component/icon/Icon";
@@ -17,15 +15,16 @@ import { Tiny } from "@component/Typography";
 import { useAppContext } from "@context/app-context";
 import Login from "@sections/auth/Login";
 
+import { Button } from "~/components/shadcn/button";
 import { cn } from "~/utils";
 import UserLoginDialog from "./LoginDialog";
 import StyledHeader from "./styles";
 
 // ====================================================================
-type HeaderProps = { isFixed?: boolean; className?: string };
+type HeaderProps = { className?: string };
 // =====================================================================
 
-export default function Header({ isFixed, className }: HeaderProps) {
+export default function Header({ className }: HeaderProps) {
   const { state } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
@@ -35,9 +34,7 @@ export default function Header({ isFixed, className }: HeaderProps) {
 
   const CART_HANDLE = (
     <Box ml="20px" position="relative">
-      <IconButton bg="gray.200" p="12px" size="small">
-        <Icon size="20px">bag</Icon>
-      </IconButton>
+      <Button size="sm" icon={<Icon size="20px">bag</Icon>} />
 
       {!!state.cart.length && (
         <FlexBox
@@ -59,11 +56,7 @@ export default function Header({ isFixed, className }: HeaderProps) {
     </Box>
   );
 
-  const LOGIN_HANDLE = (
-    <IconButton ml="1rem" bg="gray.200" p="8px">
-      <Icon size="28px">user</Icon>
-    </IconButton>
-  );
+  const LOGIN_HANDLE = <Button icon={<Icon size="28px">user</Icon>}></Button>;
 
   return (
     <StyledHeader
@@ -75,26 +68,19 @@ export default function Header({ isFixed, className }: HeaderProps) {
         justifyContent="space-between"
         width="100%"
       >
-        <FlexBox className="pl-[2.7rem] pr-20" alignItems="center" mr="1rem">
-          <Link href="/" className="flex items-center">
+        <FlexBox
+          className="justify-center pb-4 lg:pb-0 lg:pl-[2.7rem] lg:pr-20"
+          alignItems="center"
+          mr="1rem"
+        >
+          <Link href="/danh-muc-san-pham" className="flex items-center">
             <Image src="/assets/images/logo.svg" alt="logo" />
             <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
               WECARE
             </h6>
           </Link>
-
-          {isFixed && (
-            <div className="category-holder">
-              <Categories>
-                <FlexBox color="text.hint" alignItems="center" ml="1rem">
-                  <Icon>categories</Icon>
-                  <Icon>arrow-down-filled</Icon>
-                </FlexBox>
-              </Categories>
-            </div>
-          )}
         </FlexBox>
-        <FlexBox justifyContent="center" flex="1 1 0">
+        <FlexBox justifyContent="center" flex="1 1 0" className="px-3">
           <SearchInputWithCategory />
         </FlexBox>
         <FlexBox className="header-right" alignItems="center">
@@ -120,7 +106,7 @@ export default function Header({ isFixed, className }: HeaderProps) {
         alignItems="center"
         justifyContent="space-start"
         width="100%"
-        className="mt-8"
+        className="mt-8 !hidden sm:block"
       >
         <Link
           href={""}

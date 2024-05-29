@@ -115,4 +115,5 @@ export const colors = {
   default: defaultColor,
   primary: primaryColor,
   secondary: secondaryColor,
+  inherit: "inherit",
 };

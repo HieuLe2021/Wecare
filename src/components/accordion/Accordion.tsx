@@ -1,17 +1,29 @@
 "use client";
 
-import { Children, useRef, useState, useEffect, cloneElement, ReactElement } from "react";
-// STYLED COMPONENT
+import {
+  Children,
+  cloneElement,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
 import { AccordionWrapper } from "./styles";
 
 // ==========================================
 type AccordionProps = {
   expanded?: boolean;
   children: ReactElement[] | any;
+  title: any;
 };
 // ==========================================
 
-export default function Accordion({ expanded = false, children }: AccordionProps) {
+export default function Accordion({
+  expanded = false,
+  children,
+  title,
+}: AccordionProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(expanded);
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -22,19 +34,32 @@ export default function Accordion({ expanded = false, children }: AccordionProps
   useEffect(() => {
     let parent = ref.current;
 
-    if (parent) {
-      setHeaderHeight(parent.children[0].scrollHeight);
+    if (parent && !parentHeight) {
+      setHeaderHeight(parent.children[0]?.scrollHeight || 0);
+      if (title === "Vật tư kim khí") {
+        console.log(
+          "hhh",
+          parent.clientHeight,
+          parent.offsetHeight,
+          parent.scrollHeight,
+        );
+      }
+
       setParentHeight(parent.scrollHeight);
     }
-  }, [ref.current]);
+  }, [ref.current, parentHeight]);
 
   const modifiedChildren = Children.map(children, (child, ind) => {
     if (ind === 0) return cloneElement(child, { open, onClick: toggle });
     else return child;
   });
 
+  // console.log("????", ref.current.scrollHeight, parentHeight, headerHeight);
   return (
-    <AccordionWrapper ref={ref} height={open ? parentHeight : headerHeight}>
+    <AccordionWrapper
+      ref={ref}
+      height={open ? ref.current?.scrollHeight : headerHeight}
+    >
       {modifiedChildren}
     </AccordionWrapper>
   );

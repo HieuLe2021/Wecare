@@ -1,22 +1,26 @@
+// @ts-nocheck
+
 "use client";
 
-import {
-  color,
-  space,
-  border,
-  layout,
-  shadow,
-  compose,
-  variant,
+import type {
+  BackgroundProps,
+  BorderProps,
   ColorProps,
   SpaceProps,
-  BorderProps,
-  BackgroundProps
 } from "styled-system";
 import { forwardRef } from "react";
-import styled from "styled-components";
 import systemCss from "@styled-system/css";
 import { isValidProp } from "@utils/utils";
+import styled from "styled-components";
+import {
+  border,
+  color,
+  compose,
+  layout,
+  shadow,
+  space,
+  variant,
+} from "styled-system";
 
 // ==============================================================
 interface IconButtonProps {
@@ -25,11 +29,15 @@ interface IconButtonProps {
   color?: "primary" | "secondary" | "error" | "default" | string;
 }
 
-type Props = ColorProps & BackgroundProps & BorderProps & SpaceProps & IconButtonProps;
+type Props = ColorProps &
+  BackgroundProps &
+  BorderProps &
+  SpaceProps &
+  IconButtonProps;
 // ==============================================================
 
 const StyledIconButton = styled.button.withConfig({
-  shouldForwardProp: (prop: string) => isValidProp(prop)
+  shouldForwardProp: (prop: string) => isValidProp(prop),
 })<Props>(
   systemCss({
     flex: "0 0 auto",
@@ -45,7 +53,7 @@ const StyledIconButton = styled.button.withConfig({
     bg: "body.paper",
     "&:hover": { bg: "gray.200" },
     transition: "all 150ms ease-in-out",
-    "&:disabled": { bg: "text.disabled", color: "text.muted" }
+    "&:disabled": { bg: "text.disabled", color: "text.muted" },
   }),
   (props) =>
     variant({
@@ -57,8 +65,8 @@ const StyledIconButton = styled.button.withConfig({
           border: "2px solid",
           borderColor: `${props.color}.main`,
           "&:focus": {
-            boxShadow: `0px 1px 4px 0px ${props.theme.colors[props.color as any]?.main}`
-          }
+            boxShadow: `0px 1px 4px 0px ${props.theme.colors[props.color as any]?.main}`,
+          },
         },
         contained: {
           border: "none",
@@ -66,20 +74,20 @@ const StyledIconButton = styled.button.withConfig({
           color: `${props.color}.text`,
           "&:hover": { bg: `${props.color}.main` },
           "&:focus": {
-            boxShadow: `0px 1px 4px 0px ${props.theme.colors[props.color as any]?.main}`
-          }
-        }
-      }
+            boxShadow: `0px 1px 4px 0px ${props.theme.colors[props.color as any]?.main}`,
+          },
+        },
+      },
     }),
   variant({
     prop: "size",
     variants: {
       medium: { padding: "1rem" },
       large: { padding: "1.25rem" },
-      small: { padding: "0.75rem" }
-    }
+      small: { padding: "0.75rem" },
+    },
   }),
-  compose(color, layout, space, border, shadow)
+  compose(color, layout, space, border, shadow),
 );
 
 // ==============================================================

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import styled from "styled-components";

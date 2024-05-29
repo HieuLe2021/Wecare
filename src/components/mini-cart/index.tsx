@@ -1,15 +1,15 @@
-import Link from "next/link";
-import Image from "next/image";
 import { Fragment } from "react";
-
+import Image from "next/image";
+import Link from "next/link";
 import Avatar from "@component/avatar";
-import Icon from "@component/icon/Icon";
+import { Button } from "@component/buttons";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
-import { Button } from "@component/buttons";
+import Icon from "@component/icon/Icon";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
 import { useAppContext } from "@context/app-context";
 import { currency } from "@utils/utils";
+
 // STYLED COMPONENT
 import { StyledMiniCart } from "./styles";
 
@@ -17,18 +17,25 @@ import { StyledMiniCart } from "./styles";
 type MiniCartProps = { toggleSidenav?: () => void };
 // ==============================================================
 
-export default function MiniCart({ toggleSidenav = () => {} }: MiniCartProps) {
+export default function MiniCart({
+  toggleSidenav = () => void 0,
+}: MiniCartProps) {
   const { state, dispatch } = useAppContext();
 
   const handleCartAmountChange = (amount: number, product: any) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { ...product, qty: amount }
+      payload: { ...product, qty: amount },
     });
   };
 
   const getTotalPrice = () => {
-    return state.cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
+    return (
+      state.cart.reduce(
+        (accumulator, item) => accumulator + item.price * item.qty,
+        0,
+      ) || 0
+    );
   };
 
   return (
@@ -43,14 +50,25 @@ export default function MiniCart({ toggleSidenav = () => {} }: MiniCartProps) {
 
         <Divider />
 
-        {!!!state.cart.length && (
+        {!state.cart.length && (
           <FlexBox
             alignItems="center"
             flexDirection="column"
             justifyContent="center"
-            height="calc(100% - 80px)">
-            <Image src="/assets/images/logos/shopping-bag.svg" width={90} height={90} alt="bonik" />
-            <Paragraph mt="1rem" color="text.muted" textAlign="center" maxWidth="200px">
+            height="calc(100% - 80px)"
+          >
+            <Image
+              src="/assets/images/logos/shopping-bag.svg"
+              width={90}
+              height={90}
+              alt="bonik"
+            />
+            <Paragraph
+              mt="1rem"
+              color="text.muted"
+              textAlign="center"
+              maxWidth="200px"
+            >
               Your shopping bag is empty. Start shopping
             </Paragraph>
           </FlexBox>
@@ -67,7 +85,8 @@ export default function MiniCart({ toggleSidenav = () => {} }: MiniCartProps) {
                   variant="outlined"
                   borderRadius="300px"
                   borderColor="primary.light"
-                  onClick={handleCartAmountChange(item.qty + 1, item)}>
+                  onClick={handleCartAmountChange(item.qty + 1, item)}
+                >
                   <Icon variant="small">plus</Icon>
                 </Button>
 
@@ -83,7 +102,8 @@ export default function MiniCart({ toggleSidenav = () => {} }: MiniCartProps) {
                   borderRadius="300px"
                   borderColor="primary.light"
                   onClick={handleCartAmountChange(item.qty - 1, item)}
-                  disabled={item.qty === 1}>
+                  disabled={item.qty === 1}
+                >
                   <Icon variant="small">minus</Icon>
                 </Button>
               </FlexBox>
@@ -108,7 +128,12 @@ export default function MiniCart({ toggleSidenav = () => {} }: MiniCartProps) {
                   {currency(item.price, 0)} x {item.qty}
                 </Tiny>
 
-                <Typography fontWeight={600} fontSize="14px" color="primary.main" mt="4px">
+                <Typography
+                  fontWeight={600}
+                  fontSize="14px"
+                  color="primary.main"
+                  mt="4px"
+                >
                   {currency(item.qty * item.price)}
                 </Typography>
               </div>
@@ -117,7 +142,8 @@ export default function MiniCart({ toggleSidenav = () => {} }: MiniCartProps) {
                 size="1rem"
                 ml="1.25rem"
                 className="clear-icon"
-                onClick={handleCartAmountChange(0, item)}>
+                onClick={handleCartAmountChange(0, item)}
+              >
                 close
               </Icon>
             </div>
@@ -129,13 +155,26 @@ export default function MiniCart({ toggleSidenav = () => {} }: MiniCartProps) {
       {!!state.cart.length && (
         <div className="actions">
           <Link href="/checkout">
-            <Button fullwidth color="primary" variant="contained" onClick={toggleSidenav}>
-              <Typography fontWeight={600}>Checkout Now ({currency(getTotalPrice())})</Typography>
+            <Button
+              fullwidth
+              color="primary"
+              variant="contained"
+              onClick={toggleSidenav}
+            >
+              <Typography fontWeight={600}>
+                Checkout Now ({currency(getTotalPrice())})
+              </Typography>
             </Button>
           </Link>
 
           <Link href="/cart">
-            <Button fullwidth color="primary" variant="outlined" mt="1rem" onClick={toggleSidenav}>
+            <Button
+              fullwidth
+              color="primary"
+              variant="outlined"
+              mt="1rem"
+              onClick={toggleSidenav}
+            >
               <Typography fontWeight={600}>View Cart</Typography>
             </Button>
           </Link>

@@ -40,7 +40,7 @@ const StyledHeader = styled.header`
   }
 
   @media only screen and (max-width: 900px) {
-    height: ${layoutConstant.mobileHeaderHeight};
+    // height: ${layoutConstant.mobileHeaderHeight};
 
     .logo,
     .icon-holder,

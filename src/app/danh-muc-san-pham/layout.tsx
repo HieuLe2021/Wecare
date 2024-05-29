@@ -4,6 +4,7 @@ import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
 import Sticky from "@component/sticky";
 
+import MobileNavigationBar from "~/components/mobile-navigation";
 import Footer from "./_components/footer";
 import { Header } from "./_components/header";
 import { MobileNavigationBar } from "./_components/mobile-navigation";
@@ -21,14 +22,14 @@ export default async function Layout(props: { children: ReactNode }) {
   const customerId = new URLSearchParams(
     headers().get("x-url")?.split("?").at(-1),
   ).get("customer");
-  const start = performance.now();
+  // const start = performance.now();
   const [allProductGroups, menuNodes, customer] = await Promise.all([
     getAllProductGroups(),
     getMenuNodes(),
     customerId ? getCustomer(customerId) : undefined,
   ]);
-  const end = performance.now();
-  console.log(`Execution time: ${end - start} ms`);
+  // const end = performance.now();
+  // console.log(`Execution time: ${end - start} ms`);
 
   return (
     <StyledAppLayout>
@@ -40,7 +41,7 @@ export default async function Layout(props: { children: ReactNode }) {
 
       {/* {!navbar ? <div className="section-after-sticky">{children}</div> : children} */}
 
-      <MobileNavigationBar />
+      {/* <MobileNavigationBar /> */}
 
       <Container my="2rem">
         <Grid container spacing={6} className="lg:w-[1280px] lg:px-10">
@@ -48,7 +49,7 @@ export default async function Layout(props: { children: ReactNode }) {
             item
             md={3}
             xs={12}
-            className="rounded-md bg-white"
+            className="hidden rounded-md bg-white sm:block"
             spacing={24}
           >
             <Sidebar
@@ -57,7 +58,7 @@ export default async function Layout(props: { children: ReactNode }) {
               customer={customer}
             />
           </Grid>
-          <Grid item md={9} xs={12} className="!px-6 !py-0">
+          <Grid item md={9} xs={12} className="!px-3 !py-0 md:!px-6">
             <Topbar
               allProductGroups={allProductGroups}
               menuNodes={menuNodes}

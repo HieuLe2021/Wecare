@@ -1,11 +1,12 @@
 "use client";
 
+import type { FlexboxProps } from "styled-system";
 import { Children, cloneElement } from "react";
-import { FlexboxProps } from "styled-system";
+
+// PROPS TYPES
+import type { GridProps } from "./types";
 // STYLED COMPONENT
 import StyledGrid from "./styles";
-// PROPS TYPES
-import { GridProps } from "./types";
 
 export default function Grid({
   children,
@@ -22,7 +23,7 @@ export default function Grid({
       return cloneElement(child, {
         spacing: spacing,
         vertical_spacing: vertical_spacing,
-        horizontal_spacing: horizontal_spacing
+        horizontal_spacing: horizontal_spacing,
       });
     });
   }
@@ -33,7 +34,8 @@ export default function Grid({
       containerHeight={containerHeight}
       vertical_spacing={vertical_spacing}
       horizontal_spacing={horizontal_spacing}
-      {...props}>
+      {...props}
+    >
       {childList}
     </StyledGrid>
   );

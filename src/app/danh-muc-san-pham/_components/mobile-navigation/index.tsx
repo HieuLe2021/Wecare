@@ -49,7 +49,7 @@ export const MobileNavigationBar = () => {
   const width = useWindowSize();
   const { state } = useAppContext();
 
-  if (width <= 900) {
+  if (width && width <= 900) {
     return (
       <Wrapper>
         {list.map((item) => (

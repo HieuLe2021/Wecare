@@ -2,9 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Select from "@component/Select";
 
 import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 import { Tables } from "~/lib/supabase/types";
 import { filterLeafNodes } from "../../_utils/client";
 import { DefaultProductListContentProps } from "../content";
@@ -43,9 +50,9 @@ export const Topbar = ({
 
   return (
     <>
-      <div className="col mb-4 flex justify-between rounded-md bg-white py-4 lg:px-4">
+      <div className="col mb-4 flex justify-center rounded-md bg-white py-4 lg:justify-between lg:px-4 ">
         <Breadcrumb allProductGroups={allProductGroups} />
-        {params.slug && (
+        {(params.slug && (
           <div className="row flex items-center">
             <p className="pr-2">Ngành nghề:</p>
             <Select
@@ -53,6 +60,22 @@ export const Topbar = ({
               defaultValue={sortOptions[0]}
               options={sortOptions}
             />
+          </div>
+        )) || (
+          <div className="row flex items-center">
+            <p className="pr-2">Ngành nghề:</p>
+            <Select defaultValue={sortOptions[0]?.value}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Tất cả" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {sortOptions.map((x) => (
+                    <SelectItem value={x.value}>{x.label}</SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         )}
       </div>

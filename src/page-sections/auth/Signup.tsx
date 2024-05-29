@@ -1,21 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import Box from "@component/Box";
+import { Button, IconButton } from "@component/buttons";
+import CheckBox from "@component/CheckBox";
+import Divider from "@component/Divider";
+import FlexBox from "@component/FlexBox";
+import Icon from "@component/icon/Icon";
+import TextField from "@component/text-field";
+import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-import useVisibility from "./useVisibility";
-
-import Box from "@component/Box";
-import Icon from "@component/icon/Icon";
-import Divider from "@component/Divider";
-import FlexBox from "@component/FlexBox";
-import CheckBox from "@component/CheckBox";
-import TextField from "@component/text-field";
-import { Button, IconButton } from "@component/buttons";
-import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 // STYLED COMPONENT
 import { StyledRoot } from "./styles";
+import useVisibility from "./useVisibility";
 
 export default function Signup() {
   const { passwordVisibility, togglePasswordVisibility } = useVisibility();
@@ -25,7 +24,7 @@ export default function Signup() {
     email: "",
     password: "",
     re_password: "",
-    agreement: false
+    agreement: false,
   };
 
   const formSchema = yup.object().shape({
@@ -34,27 +33,28 @@ export default function Signup() {
     password: yup.string().required("${path} is required"),
     re_password: yup
       .string()
-      .oneOf([yup.ref("password"), null], "Passwords must match")
+      .oneOf([yup.ref("password"), ""], "Passwords must match")
       .required("Please re-type password"),
     agreement: yup
       .bool()
       .test(
         "agreement",
         "You have to agree with our Terms and Conditions!",
-        (value) => value === true
+        (value) => value === true,
       )
-      .required("You have to agree with our Terms and Conditions!")
+      .required("You have to agree with our Terms and Conditions!"),
   });
 
   const handleFormSubmit = async (values: any) => {
     console.log(values);
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues,
-    onSubmit: handleFormSubmit,
-    validationSchema: formSchema
-  });
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues,
+      onSubmit: handleFormSubmit,
+      validationSchema: formSchema,
+    });
 
   return (
     <StyledRoot mx="auto" my="2rem" boxShadow="large" borderRadius={8}>
@@ -63,7 +63,13 @@ export default function Signup() {
           Create Your Account
         </H3>
 
-        <H5 fontWeight="600" fontSize="12px" color="gray.800" textAlign="center" mb="2.25rem">
+        <H5
+          fontWeight="600"
+          fontSize="12px"
+          color="gray.800"
+          textAlign="center"
+          mb="2.25rem"
+        >
           Please fill all forms to continued
         </H5>
 
@@ -109,7 +115,8 @@ export default function Signup() {
               mr="0.25rem"
               type="button"
               color={passwordVisibility ? "gray.700" : "gray.600"}
-              onClick={togglePasswordVisibility}>
+              onClick={togglePasswordVisibility}
+            >
               <Icon variant="small" defaultcolor="currentColor">
                 {passwordVisibility ? "eye-alt" : "eye"}
               </Icon>
@@ -134,7 +141,8 @@ export default function Signup() {
               mr="0.25rem"
               type="button"
               onClick={togglePasswordVisibility}
-              color={passwordVisibility ? "gray.700" : "gray.600"}>
+              color={passwordVisibility ? "gray.700" : "gray.600"}
+            >
               <Icon variant="small" defaultcolor="currentColor">
                 {passwordVisibility ? "eye-alt" : "eye"}
               </Icon>
@@ -160,7 +168,13 @@ export default function Signup() {
           }
         />
 
-        <Button mb="1.65rem" variant="contained" color="primary" type="submit" fullwidth>
+        <Button
+          mb="1.65rem"
+          variant="contained"
+          color="primary"
+          type="submit"
+          fullwidth
+        >
           Create Account
         </Button>
 
@@ -181,7 +195,8 @@ export default function Signup() {
           borderRadius={5}
           cursor="pointer"
           alignItems="center"
-          justifyContent="center">
+          justifyContent="center"
+        >
           <Icon variant="small" defaultcolor="auto" mr="0.5rem">
             facebook-filled-white
           </Icon>
@@ -196,7 +211,8 @@ export default function Signup() {
           borderRadius={5}
           cursor="pointer"
           alignItems="center"
-          justifyContent="center">
+          justifyContent="center"
+        >
           <Icon variant="small" defaultcolor="auto" mr="0.5rem">
             google-1
           </Icon>

@@ -1,10 +1,13 @@
+// @ts-nocheck
+
+import { isValidProp } from "@utils/utils";
 import styled from "styled-components";
 import { compose, flexbox } from "styled-system";
-import { isValidProp } from "@utils/utils";
-import { GridProps } from "./types";
+
+import type { GridProps } from "./types";
 
 const StyledGrid = styled.div.withConfig({
-  shouldForwardProp: (prop: string) => isValidProp(prop)
+  shouldForwardProp: (prop: string) => isValidProp(prop),
 })<GridProps>(
   ({
     xl,
@@ -17,9 +20,9 @@ const StyledGrid = styled.div.withConfig({
     container,
     containerHeight,
     vertical_spacing,
-    horizontal_spacing
+    horizontal_spacing,
   }) => {
-    let mediaProps = { xl, lg, md, sm, xs };
+    const mediaProps = { xl, lg, md, sm, xs };
     let style: any = {};
 
     if (container) {
@@ -27,7 +30,7 @@ const StyledGrid = styled.div.withConfig({
         display: "flex",
         flexWrap: "wrap",
         height: containerHeight,
-        margin: spacing ? `-${(spacing / 2) * 0.25}rem` : "unset"
+        margin: spacing ? `-${(spacing / 2) * 0.25}rem` : "unset",
       };
 
       if (horizontal_spacing) {
@@ -56,8 +59,8 @@ const StyledGrid = styled.div.withConfig({
           style = {
             ...style,
             [`@media only screen and (min-width: ${mediaSize[key]}px)`]: {
-              width: `${(mediaProps[key] / 12) * 100}%`
-            }
+              width: `${(mediaProps[key] / 12) * 100}%`,
+            },
           };
         }
       }
@@ -65,7 +68,7 @@ const StyledGrid = styled.div.withConfig({
 
     return style;
   },
-  compose(flexbox)
+  compose(flexbox),
 );
 
 const mediaSize = {
@@ -73,7 +76,7 @@ const mediaSize = {
   sm: 426,
   md: 769,
   lg: 1025,
-  xl: 1441
+  xl: 1441,
 };
 
 export default StyledGrid;

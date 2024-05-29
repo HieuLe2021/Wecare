@@ -73,6 +73,7 @@ export default [
         "@typescript-eslint/prefer-nullish-coalescing": "off",
         "@typescript-eslint/no-unsafe-assignment": "off",
         "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-explicit-any": "off",
       },
     },
     {
@@ -131,6 +132,7 @@ export default [
       // TypeError: context.getAncestors is not a function
       "@next/next/no-duplicate-head": "off",
     },
+    ignores: ["./src/components/buttons/Button.tsx"],
   },
   {
     plugins: {

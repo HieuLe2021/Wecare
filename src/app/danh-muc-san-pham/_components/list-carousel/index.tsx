@@ -1,21 +1,27 @@
 import { Fragment } from "react";
 
 import type { DefaultProductListContentProps } from "../content";
-import { getAllProductGroups, getMenuNodes } from "../../_utils/server";
+import {
+  getAllProductGroups,
+  getCustomer,
+  getMenuNodes,
+} from "../../_utils/server";
 import { getCollections } from "../sidebar/utils";
 import { Item } from "./Item";
 
 export const ListCarousel = async ({
   searchParams,
 }: DefaultProductListContentProps) => {
-  const [allProductGroups, menuNodes] = await Promise.all([
+  const [allProductGroups, menuNodes, customer] = await Promise.all([
     getAllProductGroups(),
     getMenuNodes(),
+    searchParams.customer ? getCustomer(searchParams.customer) : undefined,
   ]);
   const collections = getCollections(
     allProductGroups,
     menuNodes,
     searchParams.customer ?? null,
+    customer,
   );
 
   return (
