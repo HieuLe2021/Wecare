@@ -1,11 +1,12 @@
-import styled from "styled-components";
-// GLOBAL CUSTOM COMPONENTS
-import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
+// GLOBAL CUSTOM COMPONENTS
+import Image from "@component/Image";
 import NextImage from "@component/NextImage";
 import Typography from "@component/Typography";
+import styled from "styled-components";
 
 // STYLED COMPONENT
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const StyledImage = styled(NextImage)`
   border-radius: 5px;
   object-fit: cover;
@@ -20,24 +21,25 @@ type MobileCategoryImageBoxProps = {
 // ==============================================================
 
 export default function MobileCategoryImageBox({
-  icon,
   title,
-  imgUrl
+  imgUrl,
 }: MobileCategoryImageBoxProps) {
   return (
     <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
-      {imgUrl ? (
-        <StyledImage src={imgUrl} width={69} height={60} alt="bonik" />
-      ) : (
-        icon && <Icon size="48px">{icon}</Icon>
-      )}
+      <Image
+        loading="lazy"
+        srcSet={imgUrl ? imgUrl : "https://placehold.co/400"}
+        className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-110"
+      />
 
       <Typography
         className="ellipsis"
         textAlign="center"
         fontSize="11px"
         lineHeight="1"
-        mt="0.5rem">
+        mt="0.5rem"
+        height="13px"
+      >
         {title}
       </Typography>
     </FlexBox>

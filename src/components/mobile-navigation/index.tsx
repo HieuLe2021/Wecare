@@ -83,8 +83,8 @@ export default function MobileNavigationBar() {
 }
 
 const list = [
-  { title: "Home", icon: "home", href: "/" },
-  { title: "Category", icon: "category", href: "/mobile-category-nav" },
-  { title: "Cart", icon: "bag", href: "/cart" },
-  { title: "Account", icon: "user-2", href: "/profile" },
+  { title: "Trang chủ", icon: "home", href: "/" },
+  { title: "Sản phẩm", icon: "category", href: "/mobile-category-nav" },
+  { title: "Giỏ hàng", icon: "bag", href: "/cart" },
+  { title: "Tài khoản", icon: "user-2", href: "/profile" },
 ];

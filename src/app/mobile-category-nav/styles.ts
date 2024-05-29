@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import { getTheme } from "@utils/utils";
 import { layoutConstant } from "@utils/constants";
+import styled from "styled-components";
 
 export const MobileCategoryNavStyle = styled.div`
   position: relative;
