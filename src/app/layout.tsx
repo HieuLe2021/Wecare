@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { TRPCReactProvider } from "~/trpc/react";
 import { Open_Sans } from "next/font/google";
-// THEME PROVIDER
-import StyledComponentsRegistry from "@lib/registry";
-// APP PROVIDER
 import { AppProvider } from "@context/app-context";
 import StyledContext from "@context/StyledContext";
-import './global.css'
+import StyledComponentsRegistry from "@lib/registry";
+
+import "./global.css";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -15,17 +13,20 @@ export const metadata: Metadata = {
   description:
     "Bonik is a React Next.js E-commerce template. Build SEO friendly Online store, delivery app and Multi vendor store",
   authors: [{ name: "UI-LIB", url: "https://ui-lib.com" }],
-  keywords: ["e-commerce", "e-commerce template", "next.js", "react", "bonik"]
+  keywords: ["e-commerce", "e-commerce template", "next.js", "react", "bonik"],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
+    <html lang="en" className="mdl-js">
       <body className={openSans.className}>
         <StyledComponentsRegistry>
           <AppProvider>
-            <StyledContext>
-              <TRPCReactProvider>{children}</TRPCReactProvider></StyledContext>
+            <StyledContext>{children}</StyledContext>
           </AppProvider>
         </StyledComponentsRegistry>
       </body>

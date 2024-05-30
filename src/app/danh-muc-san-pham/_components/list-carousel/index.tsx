@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 import type { DefaultProductListContentProps } from "../content";
+import { getChildNodes } from "../../_utils/client";
 import {
   getAllProductGroups,
   getCustomer,
@@ -27,8 +28,11 @@ export const ListCarousel = async ({
   return (
     <>
       {collections.map((root) => {
-        const data =
-          menuNodes.find((node) => node.id === root.id)?.child_nodes ?? [];
+        const data = getChildNodes(
+          menuNodes,
+          root.href.split("?")[0]!.split("/"),
+          customer,
+        );
         return (
           <Fragment key={root.id}>
             {data.length === 0 ? null : (

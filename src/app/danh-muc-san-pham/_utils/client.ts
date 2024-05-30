@@ -10,3 +10,15 @@ export const filterLeafNodes = (
       )
     : allLeaf;
 };
+
+export const getChildNodes = (
+  menuNodes: Tables<"menu_nodes_matview">[],
+  slugPrams: string[] | undefined,
+  customer?: Tables<"customers_matview">,
+) => {
+  const slug = slugPrams?.at(-1);
+  const childNodes = menuNodes.find((x) => x.slug === slug)?.child_nodes ?? [];
+  const childNodesFiltered = filterLeafNodes(childNodes, customer?.products);
+
+  return childNodesFiltered;
+};

@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import MegaMenu1 from "@component/categories/mega-menu/MegaMenu1";
 import MegaMenu2 from "@component/categories/mega-menu/MegaMenu2";
 
 import type { Tables } from "~/lib/supabase/types";
 import Icon from "~/components/icon/Icon";
+import { Link } from "~/components/link";
 import Typography from "~/components/Typography";
 import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 import { StyledCategoryDropdown } from "./components";
