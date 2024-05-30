@@ -97,7 +97,7 @@ export const LeafCarousel = ({
                     >
                       <div
                         className={cn(
-                          "min-h-[166px] min-w-[138px] p-1 lg:min-h-[138px]",
+                          "min-h-36 min-w-[138px] p-1",
                           "group relative cursor-pointer rounded-md border border-transparent",
                           isActive ? "border-blue-500" : "text-gray-400",
                         )}
@@ -131,9 +131,9 @@ export const LeafCarousel = ({
                               />
                               <div
                                 className={cn(
-                                  "mt-0 font-semibold lg:mt-2",
+                                  "mt-[2px] font-semibold lg:mt-2",
                                   isActive
-                                    ? "text-sm text-sky-700"
+                                    ? "text-sx text-sky-700 lg:text-sm"
                                     : "text-gray-600",
                                 )}
                               >
