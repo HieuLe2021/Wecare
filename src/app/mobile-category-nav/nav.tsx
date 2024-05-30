@@ -72,7 +72,7 @@ export default function MobileCategoryNav({
     <MobileCategoryNavStyle>
       <Header className="header" />
 
-      <div className="main-category-holder pt-20">
+      <div className="main-category-holder mt-4">
         <Scrollbar>
           {collections.map((item) => (
             <div
@@ -102,7 +102,7 @@ export default function MobileCategoryNav({
         </Scrollbar>
       </div>
 
-      <div className="container mt-20">
+      <div className="container mt-2 w-[calc(100%-90px)]">
         {category?.menuComponent === "MegaMenu1" ? (
           subCategoryList.map((item, ind) => (
             <Fragment key={ind}>
@@ -118,7 +118,7 @@ export default function MobileCategoryNav({
                   <Box mb="2rem" mt="0.5rem">
                     <Grid container spacing={3}>
                       {item.subCategories?.map((item: any, ind: number) => (
-                        <Grid item lg={1} md={2} sm={3} xs={3} key={ind}>
+                        <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
                           <Link href={item.href}>
                             <MobileCategoryImageBox {...item} />
                           </Link>
@@ -141,7 +141,7 @@ export default function MobileCategoryNav({
           <Box mb="2rem">
             <Grid spacing={3}>
               {subCategoryList.map((item, ind) => (
-                <Grid item lg={1} md={2} sm={3} xs={3} key={ind}>
+                <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
                   <Link href="/product/search/423423">
                     <MobileCategoryImageBox {...item} />
                   </Link>

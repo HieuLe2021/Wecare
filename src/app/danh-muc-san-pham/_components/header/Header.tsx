@@ -15,6 +15,7 @@ import { Tiny } from "@component/Typography";
 import { useAppContext } from "@context/app-context";
 import Login from "@sections/auth/Login";
 
+import { IconButton } from "~/components/buttons";
 import { Button } from "~/components/shadcn/button";
 import { cn } from "~/utils";
 import UserLoginDialog from "./LoginDialog";
@@ -34,7 +35,9 @@ export default function Header({ className }: HeaderProps) {
 
   const CART_HANDLE = (
     <Box ml="20px" position="relative">
-      <Button size="sm" icon={<Icon size="20px">bag</Icon>} />
+      <IconButton bg="gray.200" p="12px">
+        <Icon size="20px">bag</Icon>
+      </IconButton>
 
       {!!state.cart.length && (
         <FlexBox
@@ -56,11 +59,20 @@ export default function Header({ className }: HeaderProps) {
     </Box>
   );
 
-  const LOGIN_HANDLE = <Button icon={<Icon size="28px">user</Icon>}></Button>;
+  const LOGIN_HANDLE = (
+    <IconButton ml="1rem" bg="gray.200" p="8px">
+      <Icon className="ml-[2px]" size="28px">
+        user
+      </Icon>
+    </IconButton>
+  );
 
   return (
     <StyledHeader
-      className={cn(className, "bg-gray-500 shadow-lg shadow-gray-300/30")}
+      className={cn(
+        className,
+        "!h-20 !bg-gray-100 shadow-lg shadow-gray-300/30 lg:!h-28 lg:!bg-white",
+      )}
     >
       <Container
         display="flex"
@@ -69,7 +81,7 @@ export default function Header({ className }: HeaderProps) {
         width="100%"
       >
         <FlexBox
-          className="justify-center pb-4 lg:pb-0 lg:pl-[2.7rem] lg:pr-20"
+          className="!hidden justify-center pb-4 lg:!flex lg:pb-0 lg:pl-[2.7rem] lg:pr-20"
           alignItems="center"
           mr="1rem"
         >
@@ -80,7 +92,11 @@ export default function Header({ className }: HeaderProps) {
             </h6>
           </Link>
         </FlexBox>
-        <FlexBox justifyContent="center" flex="1 1 0" className="px-3">
+        <FlexBox
+          justifyContent="center"
+          flex="1 1 0"
+          className="bg-gray-100 px-3 lg:!bg-white"
+        >
           <SearchInputWithCategory />
         </FlexBox>
         <FlexBox className="header-right" alignItems="center">
@@ -106,7 +122,7 @@ export default function Header({ className }: HeaderProps) {
         alignItems="center"
         justifyContent="space-start"
         width="100%"
-        className="mt-8 !hidden sm:block"
+        className="mt-6 !hidden lg:!flex"
       >
         <Link
           href={""}

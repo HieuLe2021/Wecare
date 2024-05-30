@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { Chip } from "@component/Chip";
 import Icon from "@component/icon/Icon";
 import NavLink from "@component/nav-link";
@@ -48,12 +49,18 @@ const Wrapper = styled.div`
 export const MobileNavigationBar = () => {
   const width = useWindowSize();
   const { state } = useAppContext();
+  const searchParams = useSearchParams();
+  const customerId = searchParams.get("customer");
 
   if (width && width <= 900) {
     return (
       <Wrapper>
         {list.map((item) => (
-          <NavLink className="link" href={item.href} key={item.title}>
+          <NavLink
+            className="link"
+            href={item.href + `?customer=${customerId}&`}
+            key={item.title}
+          >
             <Icon className="icon" variant="small">
               {item.icon}
             </Icon>

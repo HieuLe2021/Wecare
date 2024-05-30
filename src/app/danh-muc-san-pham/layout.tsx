@@ -40,7 +40,7 @@ export default async function Layout(props: { children: ReactNode }) {
 
       {/* {!navbar ? <div className="section-after-sticky">{children}</div> : children} */}
 
-      {/* <MobileNavigationBar /> */}
+      <MobileNavigationBar />
 
       <Container my="2rem">
         <Grid container spacing={6} className="lg:w-[1280px] lg:px-10">
