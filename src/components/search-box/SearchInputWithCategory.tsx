@@ -45,6 +45,7 @@ export default function SearchInputWithCategory() {
         </Icon>
 
         <TextField
+          id="search-with-category"
           fullwidth
           onChange={hanldeSearch}
           className="search-field"

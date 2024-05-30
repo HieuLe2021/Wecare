@@ -1,12 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
 import Box from "@component/Box";
 import { Button } from "@component/buttons";
 import Card from "@component/Card";
 import Icon from "@component/icon/Icon";
-import MenuItem from "@component/MenuItem";
 import TextField from "@component/text-field";
-import { Span } from "@component/Typography";
 import { debounce } from "lodash";
 
 import SearchBoxStyle from "./styled";

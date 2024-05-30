@@ -13,21 +13,10 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { Tables } from "~/lib/supabase/types";
-import { filterLeafNodes } from "../../_utils/client";
+import { getChildNodes } from "../../_utils/client";
 import { DefaultProductListContentProps } from "../content";
 import { LeafCarousel } from "../leaf-carousel";
 
-const getChildNodes = (
-  menuNodes: Tables<"menu_nodes_matview">[],
-  slugPrams: string[] | undefined,
-  customer?: Tables<"customers_matview">,
-) => {
-  const slug = slugPrams?.at(-1);
-  const childNodes = menuNodes.find((x) => x.slug === slug)?.child_nodes ?? [];
-  const childNodesFiltered = filterLeafNodes(childNodes, customer?.products);
-
-  return childNodesFiltered;
-};
 export const Topbar = ({
   allProductGroups,
   menuNodes,
@@ -61,7 +50,9 @@ export const Topbar = ({
             <SelectContent>
               <SelectGroup>
                 {sortOptions.map((x) => (
-                  <SelectItem value={x.value}>{x.label}</SelectItem>
+                  <SelectItem key={x.value} value={x.value}>
+                    {x.label}
+                  </SelectItem>
                 ))}
               </SelectGroup>
             </SelectContent>
