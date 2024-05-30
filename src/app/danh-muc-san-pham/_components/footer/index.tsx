@@ -2,9 +2,9 @@ import Link from "next/link";
 import Box from "@component/Box";
 import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
-import Image from "@component/Image";
 import Typography, { Paragraph } from "@component/Typography";
 
+import { Image } from "~/components/image";
 // CUSTOM DATA
 import { aboutLinks, customerCareLinks } from "./data";
 // STYLED COMPONENTS
@@ -81,7 +81,12 @@ export default function Footer() {
 
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/" className="flex items-center">
-                  <Image src="/assets/images/logo.svg" alt="logo" />
+                  <Image
+                    src="/assets/images/logo.svg"
+                    alt="logo"
+                    width={40}
+                    height={40}
+                  />
                   <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
                     WECARE
                   </h6>

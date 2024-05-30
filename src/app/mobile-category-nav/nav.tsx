@@ -7,7 +7,6 @@ import { Accordion, AccordionHeader } from "@component/accordion";
 import Box from "@component/Box";
 import Divider from "@component/Divider";
 import Grid from "@component/grid/Grid";
-import Image from "@component/Image";
 import Scrollbar from "@component/Scrollbar";
 import Typography from "@component/Typography";
 import navigations from "@data/navigations";
@@ -15,6 +14,7 @@ import useWindowSize from "@hook/useWindowSize";
 import clsx from "clsx";
 
 import type { Tables } from "~/lib/supabase/types";
+import { Image } from "~/components/image";
 import Header from "../danh-muc-san-pham/_components/header/Header";
 import { MobileNavigationBar } from "../danh-muc-san-pham/_components/mobile-navigation";
 import { getCollections } from "../danh-muc-san-pham/_components/sidebar/utils";

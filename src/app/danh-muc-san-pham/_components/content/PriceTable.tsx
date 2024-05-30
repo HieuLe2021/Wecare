@@ -17,7 +17,7 @@ import {
 } from "@tanstack/react-table";
 
 import type { Tables } from "~/lib/supabase/types";
-import Image from "~/components/Image";
+import { Image } from "~/components/image";
 import TextField from "~/components/text-field";
 import { Button } from "~/components/ui/button";
 import { Skeleton } from "~/components/ui/skeleton";
