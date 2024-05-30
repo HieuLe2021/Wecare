@@ -76,7 +76,10 @@ export const Content = async ({
           groupedByChatLieu[chatLieu]!.push(product);
         });
 
-        const prices = products.map((i) => i.gia ?? 0);
+        const prices = products.map(
+          (i) =>
+            customer?.products.find((p) => p.id === i.id)?.gia ?? i.gia ?? 0,
+        );
         const priceMin = Math.min(...prices);
         const priceMax = Math.max(...prices);
 
