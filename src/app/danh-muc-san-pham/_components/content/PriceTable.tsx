@@ -6,7 +6,7 @@ import type {
   SortingState,
   Table as TableDef,
 } from "@tanstack/react-table";
-import { Fragment, useMemo } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   flexRender,
@@ -53,6 +53,8 @@ export const PriceTable = ({
   const sorting = useMemo(() => {
     return [{ id: sortBy, desc: sortOrder === "desc" }];
   }, [sortBy, sortOrder]);
+
+  const [dataToRender, setDataToRender] = useState(data.slice(0, 10));
 
   const onRowClick = (
     row: Row<Tables<"products">>,
@@ -102,7 +104,7 @@ export const PriceTable = ({
   ];
 
   const table = useReactTable<Tables<"products">>({
-    data,
+    data: dataToRender,
     columns,
     getRowCanExpand: () => true,
     getCoreRowModel: getCoreRowModel(),
@@ -308,6 +310,17 @@ export const PriceTable = ({
             </TableBody>
           )}
         </Table>
+
+        {data.length > 10 && data.length !== dataToRender.length && (
+          <div className="p-2 text-center">
+            <button
+              className="rounded-2xl bg-sky-500 px-4 py-2 text-white hover:bg-sky-700"
+              onClick={() => setDataToRender(data)}
+            >
+              Xem thêm
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
