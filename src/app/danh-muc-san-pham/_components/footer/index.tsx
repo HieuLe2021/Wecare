@@ -1,15 +1,12 @@
 import Link from "next/link";
-import AppStore from "@component/AppStore";
 import Box from "@component/Box";
 import Container from "@component/Container";
-import FlexBox from "@component/FlexBox";
 import Grid from "@component/grid/Grid";
-import Icon from "@component/icon/Icon";
 import Image from "@component/Image";
 import Typography, { Paragraph } from "@component/Typography";
 
 // CUSTOM DATA
-import { aboutLinks, customerCareLinks, iconList } from "./data";
+import { aboutLinks, customerCareLinks } from "./data";
 // STYLED COMPONENTS
 import { StyledLink } from "./styles";
 
@@ -32,7 +29,7 @@ export default function Footer() {
 
                 <Typography py="0.3rem" color="gray.500">
                   Trụ sở: Lô B39 KCN Phú Tài, Trần Quang Diệu, Quy Nhơn, Bình
-                  Định​
+                  Định
                 </Typography>
 
                 <Typography py="0.3rem" color="gray.500">
@@ -40,7 +37,7 @@ export default function Footer() {
                 </Typography>
 
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
-                  Phone: +84 965 167 350
+                  Phone: +84 378 339 009
                 </Typography>
               </Grid>
 
