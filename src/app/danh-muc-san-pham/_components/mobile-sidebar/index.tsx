@@ -1,9 +1,12 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import { X } from "lucide-react";
 
 import type { Tables } from "~/lib/supabase/types";
 import Icon from "~/components/icon/Icon";
 import { Image } from "~/components/image";
+import { Link } from "~/components/link";
 import { Button } from "~/components/shadcn/button";
 import {
   Sheet,
@@ -23,19 +26,29 @@ export const MobileSidebar = ({
   menuNodes,
   customer,
 }: Props) => {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <Sheet>
+      <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="outline" shape="icon" size="lg">
+          <Button
+            variant="outline"
+            shape="icon"
+            size="lg"
+            className="lg:hidden"
+          >
             <Icon>categories</Icon>
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-full">
           {/* <div className="absolute left-0 top-0 border-b-2 border-red-700 bg-[#E3E9EF] px-[25px] py-[19px]"> */}
-          <SheetClose className="absolute left-6 top-5 flex w-full justify-between rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-secondary">
+          <SheetClose
+            className="absolute left-6 top-5 flex w-full justify-between rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-secondary"
+            asChild
+          >
             <Button variant="outline" shape="icon" size="lg">
               <X className="h-4 w-4" />
+              <span className="sr-only">Close</span>
             </Button>
             <Link href="/danh-muc-san-pham" className="flex">
               <Image
@@ -57,6 +70,7 @@ export const MobileSidebar = ({
               allProductGroups={allProductGroups}
               menuNodes={menuNodes}
               customer={customer}
+              close={() => setOpen(false)}
             />
           </div>
         </SheetContent>

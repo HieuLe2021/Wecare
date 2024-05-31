@@ -2,7 +2,7 @@
 
 import { Fragment, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Accordion, AccordionHeader } from "@component/accordion";
 import Box from "@component/Box";
 import Divider from "@component/Divider";
@@ -25,11 +25,14 @@ export const MobileNav = ({
   allProductGroups,
   menuNodes,
   customer,
+  close,
 }: {
   allProductGroups: Tables<"product_groups">[];
   menuNodes: Tables<"menu_nodes_matview">[];
   customer: Tables<"customers_matview"> | undefined;
+  close: () => void;
 }) => {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const collections = getCollections(
     allProductGroups,
@@ -37,15 +40,18 @@ export const MobileNav = ({
     searchParams.get("customer"),
     customer,
   );
-  const initCollections =
-    collections.find((x) => x.href === searchParams.get("current")) ||
-    collections[0];
-  const [selectedCategory, setSelectedCategory] = useState(initCollections);
 
-  const initSubCollections = initCollections
-    ? initCollections.menuComponent === "MegaMenu1"
-      ? initCollections.menuData.categories
-      : initCollections.menuData
+  const pathnameArr = pathname.split("/");
+  const selectedRootByPathname =
+    collections.find((x) => x.href === pathnameArr.slice(0, 3).join("/")) ||
+    collections[0];
+
+  const [selectedRoot, setSelectedRoot] = useState(selectedRootByPathname);
+
+  const initSubCollections = selectedRootByPathname
+    ? selectedRootByPathname.menuComponent === "MegaMenu1"
+      ? selectedRootByPathname.menuData.categories
+      : selectedRootByPathname.menuData
     : [];
   const [subCategoryList, setSubCategoryList] =
     useState<Category[]>(initSubCollections);
@@ -57,20 +63,36 @@ export const MobileNav = ({
         : root.menuData,
     );
     // else setSubCategoryList([]);
-    setSelectedCategory(root);
+    setSelectedRoot(root);
   };
 
+  const level_2_with_children = subCategoryList.filter(
+    (sc) => sc.subCategories.length > 0,
+  );
+
+  const level_2_without_children = subCategoryList.filter(
+    (sc) => sc.subCategories.length === 0,
+  );
+  if (level_2_without_children.length > 0) {
+    level_2_with_children.push({
+      id: "danh-muc-khac",
+      title: "Danh mục khác",
+      href: "",
+      imgUrl: "",
+      subCategories: level_2_without_children,
+    });
+  }
   return (
     <>
       <MobileCategoryNavStyle>
-        <div className="main-category-holder mt-4">
+        <div className="main-category-holder">
           <Scrollbar>
             {collections.map((item) => (
               <div
                 key={item.title}
                 className={clsx({
                   "main-category-box": true,
-                  active: selectedCategory?.id === item.id,
+                  active: selectedRoot?.id === item.id,
                 })}
                 onClick={handleCategoryClick(item)}
               >
@@ -92,49 +114,61 @@ export const MobileNav = ({
           </Scrollbar>
         </div>
 
-        <div className="container mt-2 w-[calc(100%-90px)]">
-          {selectedCategory?.menuComponent === "MegaMenu1" ? (
+        <div className="container !left-[90px] right-0 w-auto bg-sky-50 !pt-0">
+          {selectedRoot?.menuComponent === "MegaMenu1" ? (
             <>
-              {subCategoryList
-                .filter((sc) => sc.subCategories.length > 0)
-                .map((item, ind) => (
-                  <Fragment key={ind}>
-                    <Divider />
-                    <Accordion>
-                      <AccordionHeader px="0px" py="10px">
-                        <Typography fontWeight="600" fontSize="15px">
-                          {item.title}
-                        </Typography>
-                      </AccordionHeader>
+              {level_2_with_children.map((item) => (
+                <Fragment key={item.id}>
+                  <Divider />
+                  <Accordion
+                    expanded={
+                      (pathnameArr.length > 3 &&
+                        item.href === pathnameArr.slice(0, 4).join("/")) ||
+                      (pathnameArr.length < 4 && item.id === "danh-muc-khac")
+                    }
+                  >
+                    <AccordionHeader px="0px" py="10px">
+                      <Typography fontWeight="600" fontSize="15px">
+                        {item.title}
+                      </Typography>
+                    </AccordionHeader>
 
-                      <Box mb="2rem" mt="0.5rem">
-                        <Grid container spacing={3}>
-                          {item.subCategories.map((item, ind) => (
-                            <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
-                              <Link href={item.href}>
-                                <MobileCategoryImageBox {...item} />
-                              </Link>
-                            </Grid>
-                          ))}
-                        </Grid>
-                      </Box>
-                    </Accordion>
-                  </Fragment>
-                ))}
-
-              <Box mb="2rem" mt="0.5rem">
-                <Grid container spacing={3}>
-                  {subCategoryList
-                    .filter((sc) => sc.subCategories.length === 0)
-                    .map((item, ind) => (
-                      <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
-                        <Link href={item.href}>
-                          <MobileCategoryImageBox {...item} />
-                        </Link>
+                    <Box mb="1rem" mt="0">
+                      <Grid container spacing={3}>
+                        {item.subCategories.map((item, ind) => (
+                          <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
+                            <Link
+                              href={item.href}
+                              onClick={() => {
+                                close();
+                              }}
+                            >
+                              <MobileCategoryImageBox {...item} />
+                            </Link>
+                          </Grid>
+                        ))}
                       </Grid>
-                    ))}
-                </Grid>
-              </Box>
+                    </Box>
+                  </Accordion>
+                </Fragment>
+              ))}
+
+              {/* {level_2_without_children.length > 0 && ( */}
+              {/*   <Box mb="2rem" mt="0.5rem"> */}
+              {/*     <Typography fontWeight="600" fontSize="15px" mb="1rem"> */}
+              {/*       Danh mục khác */}
+              {/*     </Typography> */}
+              {/*     <Grid container spacing={3}> */}
+              {/*       {level_2_without_children.map((item, ind) => ( */}
+              {/*         <Grid item lg={1} md={2} sm={4} xs={4} key={ind}> */}
+              {/*           <Link href={item.href}> */}
+              {/*             <MobileCategoryImageBox {...item} /> */}
+              {/*           </Link> */}
+              {/*         </Grid> */}
+              {/*       ))} */}
+              {/*     </Grid> */}
+              {/*   </Box> */}
+              {/* )} */}
             </>
           ) : (
             <Box mb="2rem">

@@ -1,6 +1,7 @@
 type SubCategory = { href: string; title: string };
 
 export type Category = {
+  id: string;
   title: string;
   href: string;
   imgUrl: string | null;
