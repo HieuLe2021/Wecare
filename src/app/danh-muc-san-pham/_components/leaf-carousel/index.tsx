@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import Image from "@component/Image";
 import { cn } from "@utils";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
+import type { CarouselApi } from "~/components/ui/carousel";
 import type { Tables } from "~/lib/supabase/types";
 import {
   Carousel,
@@ -13,6 +15,8 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  DotButton,
+  useDotButton,
 } from "~/components/ui/carousel";
 
 export const LeafCarousel = ({
@@ -57,6 +61,9 @@ export const LeafCarousel = ({
   const d = f ? data.findIndex((x) => x.id === f.id) : 0;
   const startIndex = d > 4 ? d - 4 : 0;
 
+  const [api, setApi] = useState<CarouselApi>();
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
+
   return (
     <div className="mb-4 w-full rounded-md bg-white">
       <div className="flex items-end justify-between px-3 py-2 md:px-6">
@@ -74,15 +81,17 @@ export const LeafCarousel = ({
           </Link>
         )}
       </div>
-      <div className="relative h-[180px] w-full rounded-md bg-white lg:h-44">
+      <div className="relative h-[180px] w-full rounded-md bg-white lg:h-48">
         <div className="absolute left-4 right-4 top-[11px]">
           <div className="flex w-full px-4 md:px-12 lg:px-12">
             <Carousel
+              setApi={setApi}
               opts={{
                 align: "start",
                 dragFree: true,
                 loop: false,
                 startIndex,
+                slidesToScroll: 5,
               }}
               className="w-full"
               plugins={[WheelGesturesPlugin()]}
@@ -154,6 +163,15 @@ export const LeafCarousel = ({
                 </>
               )}
             </Carousel>
+          </div>
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-1">
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                isActive={index === selectedIndex}
+              />
+            ))}
           </div>
         </div>
       </div>
