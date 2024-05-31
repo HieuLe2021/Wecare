@@ -129,7 +129,15 @@ export const MobileNav = ({
                   >
                     <AccordionHeader px="0px" py="10px">
                       <Typography fontWeight="600" fontSize="15px">
-                        {item.title}
+                        <Link
+                          href={item.href}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            close();
+                          }}
+                        >
+                          {item.title}
+                        </Link>
                       </Typography>
                     </AccordionHeader>
 

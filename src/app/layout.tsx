@@ -9,11 +9,11 @@ import "./global.css";
 const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Bonik - The Best React eCommerce Template",
+  title: "Wecare - Siêu thị công nghiệp",
   description:
-    "Bonik is a React Next.js E-commerce template. Build SEO friendly Online store, delivery app and Multi vendor store",
-  authors: [{ name: "UI-LIB", url: "https://ui-lib.com" }],
-  keywords: ["e-commerce", "e-commerce template", "next.js", "react", "bonik"],
+    "Siêu thị công nghiệp Wecare cung cấp và phân phối hóa chất phục vụ đa ngành nghề. Wecare luôn nâng cao chất lượng sản phẩm và phong cách phục vụ chuyên nghiệp nhằm đáp ứng cao hơn nữa mức độ hài lòng của Quý khách hàng.",
+  authors: [{ name: "Wecare", url: "https://wecare.com.vn/" }],
+  keywords: ["e-commerce", "wecare", "bonik"],
 };
 
 export default function RootLayout({
