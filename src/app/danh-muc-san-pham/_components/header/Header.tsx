@@ -138,7 +138,12 @@ export default function Header({
             </Sidenav>
           </FlexBox>
 
-          <Button variant="outline" shape="icon" size="lg">
+          <Button
+            variant="outline"
+            shape="icon"
+            size="lg"
+            className="lg:hidden"
+          >
             <Icon>bag</Icon>
           </Button>
         </div>

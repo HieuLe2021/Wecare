@@ -96,6 +96,7 @@ export function getCollections(
                 level_1.slug +
                 (customerId ? `?customer=${customerId}` : "");
           const childItem = {
+            id: level_1.id,
             title: level_1.name,
             href,
             subCategories: level_2,
