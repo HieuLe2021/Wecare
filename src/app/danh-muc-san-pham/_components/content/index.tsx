@@ -91,7 +91,7 @@ export const Content = async ({
         return (
           <div key={data.id} className="mb-4 rounded-lg bg-white md:p-4">
             <div className="flex gap-2 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-md:flex-wrap lg:gap-4">
-              <div className="flex">
+              <div className="flex w-full lg:w-24">
                 <div className="relative h-24 w-24">
                   <Image
                     loading="lazy"
@@ -102,7 +102,7 @@ export const Content = async ({
                   />
                 </div>
 
-                <div className="pl-2 pt-2 lg:hidden">
+                <div className="w-[calc(100%-130px)] pl-2 pt-2 lg:hidden">
                   <Link
                     className="text-sx cursor-pointer pb-4 text-blue-500 underline underline-offset-1"
                     href={data.parent_slug}
@@ -121,6 +121,11 @@ export const Content = async ({
                     </div>
                   )}
                 </div>
+                {searchParams.groups && (
+                  <div className="lg:hidden">
+                    <CloseLeafButton leafSlug={data.slug} />
+                  </div>
+                )}
               </div>
 
               <div className="hidden flex-1 lg:block">
@@ -154,7 +159,11 @@ export const Content = async ({
                   nghiệm khách hàng tốt nhất.
                 </div>
               </div>
-              {searchParams.groups && <CloseLeafButton leafSlug={data.slug} />}
+              {searchParams.groups && (
+                <div className="hidden lg:block">
+                  <CloseLeafButton leafSlug={data.slug} />
+                </div>
+              )}
             </div>
             <div className="mb-1 h-[1px] w-full border border-b border-dashed"></div>
             {Object.entries(groupedByChatLieu).length === 0 ? (
