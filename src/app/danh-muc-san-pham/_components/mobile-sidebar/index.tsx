@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { X } from "lucide-react";
 
 import type { Tables } from "~/lib/supabase/types";
 import Icon from "~/components/icon/Icon";
+import { Image } from "~/components/image";
 import { Button } from "~/components/shadcn/button";
 import {
   Sheet,
@@ -31,10 +33,22 @@ export const MobileSidebar = ({
         </SheetTrigger>
         <SheetContent side="left" className="w-full">
           {/* <div className="absolute left-0 top-0 border-b-2 border-red-700 bg-[#E3E9EF] px-[25px] py-[19px]"> */}
-          <SheetClose className="absolute left-4 top-5 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-secondary">
+          <SheetClose className="absolute left-6 top-5 flex w-full justify-between rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-secondary">
             <Button variant="outline" shape="icon" size="lg">
               <X className="h-4 w-4" />
             </Button>
+            <Link href="/danh-muc-san-pham" className="flex">
+              <Image
+                src="/assets/images/logo.svg"
+                alt="logo"
+                width={40}
+                height={40}
+              />
+              <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[40px] text-transparent">
+                WECARE
+              </h6>
+            </Link>
+            <div className="h-10 w-16 bg-transparent"></div>
             <span className="sr-only">Close</span>
           </SheetClose>
           {/* </div> */}

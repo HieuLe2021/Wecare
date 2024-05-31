@@ -98,7 +98,7 @@ export const MobileNavigationBar = () => {
 
 const list = [
   { title: "Trang chủ", icon: "home", href: "/" },
-  { title: "Sản phẩm", icon: "category", href: "/mobile-category-nav" },
+  { title: "Sản phẩm", icon: "category", href: "/danh-muc-san-pham" },
   { title: "Về chúng tôi", icon: "about-us", href: "/ve-chung-toi" },
   { title: "Tin tức", icon: "news", href: "/tin-tuc" },
 ];
