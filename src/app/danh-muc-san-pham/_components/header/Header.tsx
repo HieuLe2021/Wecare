@@ -14,17 +14,28 @@ import { Tiny } from "@component/Typography";
 import { useAppContext } from "@context/app-context";
 import Login from "@sections/auth/Login";
 
+import type { Tables } from "~/lib/supabase/types";
 import { IconButton } from "~/components/buttons";
 import { Image } from "~/components/image";
+import { Button } from "~/components/shadcn/button";
 import { cn } from "~/utils";
+import { MobileSidebar } from "../mobile-sidebar";
 import UserLoginDialog from "./LoginDialog";
 import StyledHeader from "./styles";
 
-// ====================================================================
-type HeaderProps = { className?: string };
-// =====================================================================
+type HeaderProps = {
+  className?: string;
+  allProductGroups: Tables<"product_groups">[];
+  menuNodes: Tables<"menu_nodes_matview">[];
+  customer: Tables<"customers_matview"> | undefined;
+};
 
-export default function Header({ className }: HeaderProps) {
+export default function Header({
+  className,
+  allProductGroups,
+  menuNodes,
+  customer,
+}: HeaderProps) {
   const { state } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
@@ -79,47 +90,58 @@ export default function Header({ className }: HeaderProps) {
         justifyContent="space-between"
         width="100%"
       >
-        <FlexBox
-          className="!hidden justify-center pb-4 lg:!flex lg:pb-0 lg:pl-[2.7rem] lg:pr-20"
-          alignItems="center"
-          mr="1rem"
-        >
-          <Link href="/danh-muc-san-pham" className="flex items-center">
-            <Image
-              src="/assets/images/logo.svg"
-              alt="logo"
-              width={40}
-              height={40}
-            />
-            <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
-              WECARE
-            </h6>
-          </Link>
-        </FlexBox>
-        <FlexBox
-          justifyContent="center"
-          flex="1 1 0"
-          className="bg-white px-3 lg:!bg-white"
-        >
-          <SearchInputWithCategory />
-        </FlexBox>
-        <FlexBox className="header-right" alignItems="center">
-          <UserLoginDialog handle={LOGIN_HANDLE}>
-            <div>
-              <Login />
-            </div>
-          </UserLoginDialog>
-
-          <Sidenav
-            open={open}
-            width={380}
-            position="right"
-            handle={CART_HANDLE}
-            toggleSidenav={toggleSidenav}
+        <div className="flex items-center px-4">
+          <MobileSidebar
+            allProductGroups={allProductGroups}
+            menuNodes={menuNodes}
+            customer={customer}
+          />
+          <FlexBox
+            className="!hidden justify-center pb-4 lg:!flex lg:pb-0 lg:pl-[2.7rem] lg:pr-20"
+            alignItems="center"
+            mr="1rem"
           >
-            <MiniCart toggleSidenav={toggleSidenav} />
-          </Sidenav>
-        </FlexBox>
+            <Link href="/danh-muc-san-pham" className="flex items-center">
+              <Image
+                src="/assets/images/logo.svg"
+                alt="logo"
+                width={40}
+                height={40}
+              />
+              <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
+                WECARE
+              </h6>
+            </Link>
+          </FlexBox>
+          <FlexBox
+            justifyContent="center"
+            flex="1 1 0"
+            className="bg-white px-3 lg:!bg-white"
+          >
+            <SearchInputWithCategory />
+          </FlexBox>
+          <FlexBox className="header-right" alignItems="center">
+            <UserLoginDialog handle={LOGIN_HANDLE}>
+              <div>
+                <Login />
+              </div>
+            </UserLoginDialog>
+
+            <Sidenav
+              open={open}
+              width={380}
+              position="right"
+              handle={CART_HANDLE}
+              toggleSidenav={toggleSidenav}
+            >
+              <MiniCart toggleSidenav={toggleSidenav} />
+            </Sidenav>
+          </FlexBox>
+
+          <Button variant="outline" shape="icon" size="lg">
+            <Icon>bag</Icon>
+          </Button>
+        </div>
       </Container>
       <Container
         display="flex"

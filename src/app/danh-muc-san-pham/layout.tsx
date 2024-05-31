@@ -33,7 +33,11 @@ export default async function Layout(props: { children: ReactNode }) {
   return (
     <StyledAppLayout>
       <Sticky fixedOn={0} scrollDistance={300}>
-        <Header />
+        <Header
+          allProductGroups={allProductGroups}
+          menuNodes={menuNodes}
+          customer={customer}
+        />
       </Sticky>
 
       {/* <div className="section-after-sticky"></div> */}

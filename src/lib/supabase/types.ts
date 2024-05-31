@@ -14,6 +14,11 @@ export type Database = MergeDeep<
             product_prices: Record<string, number> | null;
           };
         };
+        product_groups: {
+          Row: {
+            name: string;
+          };
+        };
       };
       Views: {
         customers_matview: {

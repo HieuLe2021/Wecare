@@ -99,7 +99,7 @@ const buttonVariants = cva(
       {
         size: "lg",
         shape: ["icon", "circle"],
-        className: "w-10",
+        className: "max-w-10 w-10",
       },
       {
         size: "lg",
