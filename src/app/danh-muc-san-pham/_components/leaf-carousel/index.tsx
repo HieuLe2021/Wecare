@@ -133,11 +133,7 @@ export const LeafCarousel = ({
                       )}
                       <Image
                         loading="lazy"
-                        src={
-                          item.image_url
-                            ? item.image_url
-                            : "https://placehold.co/400"
-                        }
+                        src={item.image_url}
                         className="mt-2 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
                         alt={item.name}
                         width={80}

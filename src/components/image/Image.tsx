@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import NextImage from "next/image";
 
 export type ImageProps = ComponentProps<typeof NextImage> & {
+  src: string | undefined;
   fallback?: string;
 };
 export const Image = ({
@@ -22,7 +23,6 @@ export const Image = ({
     setError(null);
   }, [src]);
 
-  console.log("???", src);
   return (
     <NextImage
       alt={alt}
