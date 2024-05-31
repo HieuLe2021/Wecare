@@ -104,47 +104,48 @@ export default function MobileCategoryNav({
 
       <div className="container mt-2 w-[calc(100%-90px)]">
         {category?.menuComponent === "MegaMenu1" ? (
-          subCategoryList.map((item, ind) => (
-            <Fragment key={ind}>
-              <Divider />
-              {item.subCategories.length > 0 && (
-                <Accordion>
-                  <AccordionHeader px="0px" py="10px">
-                    <Typography fontWeight="600" fontSize="15px">
-                      {item.title}
-                    </Typography>
-                  </AccordionHeader>
-
-                  <Box mb="2rem" mt="0.5rem">
-                    <Grid container spacing={3}>
-                      {item.subCategories?.map((item: any, ind: number) => (
-                        <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
-                          <Link href={item.href}>
-                            <MobileCategoryImageBox {...item} />
-                          </Link>
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </Box>
-                </Accordion>
-              )}
-
-              {item.subCategories.length < 1 && (
-                <Accordion>
-                  <AccordionHeader px="0px" py="10px" showIcon={false}>
-                    <Link
-                      href={item.href}
-                      className="hover hover:text-blue-500"
-                    >
+          <>
+            {subCategoryList
+              .filter((sc) => sc.subCategories.length > 0)
+              .map((item, ind) => (
+                <Fragment key={ind}>
+                  <Divider />
+                  <Accordion>
+                    <AccordionHeader px="0px" py="10px">
                       <Typography fontWeight="600" fontSize="15px">
                         {item.title}
                       </Typography>
-                    </Link>
-                  </AccordionHeader>
-                </Accordion>
-              )}
-            </Fragment>
-          ))
+                    </AccordionHeader>
+
+                    <Box mb="2rem" mt="0.5rem">
+                      <Grid container spacing={3}>
+                        {item.subCategories?.map((item: any, ind: number) => (
+                          <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
+                            <Link href={item.href}>
+                              <MobileCategoryImageBox {...item} />
+                            </Link>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Box>
+                  </Accordion>
+                </Fragment>
+              ))}
+
+            <Box mb="2rem" mt="0.5rem">
+              <Grid container spacing={3}>
+                {subCategoryList
+                  .filter((sc) => sc.subCategories.length === 0)
+                  .map((item, ind) => (
+                    <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
+                      <Link href={item.href}>
+                        <MobileCategoryImageBox {...item} />
+                      </Link>
+                    </Grid>
+                  ))}
+              </Grid>
+            </Box>
+          </>
         ) : (
           <Box mb="2rem">
             <Grid spacing={3}>
