@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import Image from "@component/Image";
 import { cn } from "@utils";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
@@ -168,7 +167,6 @@ export const LeafCarousel = ({
             />
           ))}
         </div>
-        {/* </div> */}
       </CardContent>
     </CardRoot>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Chip } from "@component/Chip";
 import Icon from "@component/icon/Icon";
 import NavLink from "@component/nav-link";
@@ -9,6 +9,9 @@ import useWindowSize from "@hook/useWindowSize";
 import { layoutConstant } from "@utils/constants";
 import { getTheme } from "@utils/utils";
 import styled from "styled-components";
+
+import { Link } from "~/components/link";
+import { cn } from "~/utils";
 
 // STYLED COMPONENT
 const Wrapper = styled.div`
@@ -49,16 +52,15 @@ const Wrapper = styled.div`
 export const MobileNavigationBar = () => {
   const width = useWindowSize();
   const { state } = useAppContext();
-  const searchParams = useSearchParams();
-  const customerId = searchParams.get("customer");
+  const pathName = usePathname();
 
   if (width && width <= 900) {
     return (
       <Wrapper>
         {list.map((item) => (
-          <NavLink
-            className="link"
-            href={item.href + `?customer=${customerId}&`}
+          <Link
+            className={cn("link", item.href === pathName && "text-sky-700")}
+            href={item.href + `?current=${pathName}`}
             key={item.title}
           >
             <Icon className="icon" variant="small">
@@ -69,7 +71,7 @@ export const MobileNavigationBar = () => {
 
             {item.title === "Cart" && !!state.cart.length && (
               <Chip
-                top="4px"
+                top="-4px"
                 px="0.25rem"
                 fontWeight="600"
                 bg="primary.main"
@@ -80,7 +82,7 @@ export const MobileNavigationBar = () => {
                 {state.cart.length}
               </Chip>
             )}
-          </NavLink>
+          </Link>
         ))}
       </Wrapper>
     );

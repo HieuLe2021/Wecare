@@ -17,7 +17,7 @@ import {
 } from "@tanstack/react-table";
 
 import type { Tables } from "~/lib/supabase/types";
-import Image from "~/components/Image";
+import { Image } from "~/components/image";
 import TextField from "~/components/text-field";
 import { Button } from "~/components/ui/button";
 import { Skeleton } from "~/components/ui/skeleton";
@@ -314,7 +314,7 @@ export const PriceTable = ({
         {data.length > 10 && data.length !== dataToRender.length && (
           <div className="p-2 text-center">
             <button
-              className="rounded-2xl bg-sky-600 px-4 py-2 text-[13px] text-white hover:bg-sky-800"
+              className="rounded-2xl border border-blue-500 px-2 py-1 text-[13px] text-blue-500 hover:bg-blue-100"
               onClick={() => setDataToRender(data)}
             >
               Xem thêm

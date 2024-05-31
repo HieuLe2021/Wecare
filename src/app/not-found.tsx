@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@component/buttons";
 import FlexBox from "@component/FlexBox";
-import Image from "@component/Image";
+
+import { Image } from "~/components/image";
 
 export default function NotFound() {
   const router = useRouter();
@@ -20,9 +21,10 @@ export default function NotFound() {
     >
       <Image
         src="/assets/images/illustrations/404.svg"
-        maxWidth="320px"
-        width="100%"
-        mb="2rem"
+        height={174}
+        width={320}
+        className="mb-8"
+        alt={""}
       />
 
       <FlexBox flexWrap="wrap">

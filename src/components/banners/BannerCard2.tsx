@@ -1,9 +1,11 @@
 import Link from "next/link";
-import styled from "styled-components";
-// GLOBAL CUSTOM COMPONENTS
-import Image from "@component/Image";
 import { Button } from "@component/buttons";
 import { H1, H3, Paragraph } from "@component/Typography";
+import styled from "styled-components";
+
+import { Image } from "~/components/image";
+
+// GLOBAL CUSTOM COMPONENTS
 
 // STYLED COMPONENTS
 const CardWrapper = styled("div")({
@@ -12,7 +14,7 @@ const CardWrapper = styled("div")({
   borderRadius: "10px",
   position: "relative",
   "& img": { transition: "0.3s" },
-  "&:hover": { img: { transform: "scale(1.1)" } }
+  "&:hover": { img: { transform: "scale(1.1)" } },
 });
 
 const CardContent = styled("div")({
@@ -25,7 +27,7 @@ const CardContent = styled("div")({
   display: "flex",
   position: "absolute",
   alignItems: "center",
-  justifyContent: "space-between"
+  justifyContent: "space-between",
 });
 
 // ========================================================
@@ -38,10 +40,18 @@ type BannerCard2Props = {
 };
 // ========================================================
 
-export default function BannerCard2({ img, url, text1, text2, text3 }: BannerCard2Props) {
+export default function BannerCard2({
+  img,
+  url,
+  text1,
+  text2,
+  text3,
+}: BannerCard2Props) {
   return (
     <CardWrapper>
-      <Image alt="category" height="100%" width="100%" src={img} />
+      <div className="h-full w-full">
+        <Image alt="category" src={img} objectFit="contains" />
+      </div>
 
       <CardContent>
         <div>

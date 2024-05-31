@@ -1,9 +1,10 @@
 import FlexBox from "@component/FlexBox";
-// GLOBAL CUSTOM COMPONENTS
-import Image from "@component/Image";
 import NextImage from "@component/NextImage";
 import Typography from "@component/Typography";
 import styled from "styled-components";
+
+// GLOBAL CUSTOM COMPONENTS
+import { Image } from "~/components/image";
 
 // STYLED COMPONENT
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,8 +29,11 @@ export default function MobileCategoryImageBox({
     <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
       <Image
         loading="lazy"
-        srcSet={imgUrl ? imgUrl : "https://placehold.co/400"}
-        className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-110"
+        src={imgUrl ? imgUrl : "https://placehold.co/400"}
+        className="aspect-[1.11] h-[70px] w-[70px] self-center rounded-lg object-cover pt-1 group-hover:scale-110"
+        width={80}
+        height={80}
+        alt={""}
       />
 
       <Typography

@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import Image from "@component/Image";
 import { cn } from "@utils";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { ChevronRight } from "lucide-react";
@@ -10,6 +9,7 @@ import type { MenuItem } from "~/components/categories/mega-menu/type";
 import type { Tables } from "~/lib/supabase/types";
 import { Link } from "~/components/link";
 import { CardContent, CardRoot } from "~/components/shadcn/card";
+import { Image } from "~/components/image";
 import {
   Carousel,
   CarouselContent,
