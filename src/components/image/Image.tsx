@@ -22,11 +22,12 @@ export const Image = ({
     setError(null);
   }, [src]);
 
+  console.log("???", src);
   return (
     <NextImage
       alt={alt}
       onError={setError}
-      src={error ? fallback : src}
+      src={error || !src ? fallback : src}
       {...props}
     />
   );

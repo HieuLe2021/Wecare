@@ -58,7 +58,7 @@ export const MobileNavigationBar = () => {
         {list.map((item) => (
           <NavLink
             className="link"
-            href={item.href + `?customer=${customerId}&`}
+            href={item.href + `?customer=${customerId}`}
             key={item.title}
           >
             <Icon className="icon" variant="small">

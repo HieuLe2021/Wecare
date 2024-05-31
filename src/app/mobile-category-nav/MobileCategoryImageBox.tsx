@@ -30,7 +30,7 @@ export default function MobileCategoryImageBox({
       <Image
         loading="lazy"
         src={imgUrl ? imgUrl : "https://placehold.co/400"}
-        className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-110"
+        className="aspect-[1.11] h-[80px] w-[80px] self-center rounded-lg object-cover pt-1 group-hover:scale-110"
         width={80}
         height={80}
         alt={""}

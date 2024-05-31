@@ -107,7 +107,7 @@ export default function MobileCategoryNav({
           subCategoryList.map((item, ind) => (
             <Fragment key={ind}>
               <Divider />
-              {item.subCategories.length > 0 ? (
+              {item.subCategories.length > 0 && (
                 <Accordion>
                   <AccordionHeader px="0px" py="10px">
                     <Typography fontWeight="600" fontSize="15px">
@@ -127,13 +127,21 @@ export default function MobileCategoryNav({
                     </Grid>
                   </Box>
                 </Accordion>
-              ) : (
-                // <Link href="/mobile-category-nav">{item.title}</Link>
-                <AccordionHeader px="0px" py="10px">
-                  <Typography fontWeight="600" fontSize="15px">
-                    {item.title}
-                  </Typography>
-                </AccordionHeader>
+              )}
+
+              {item.subCategories.length < 1 && (
+                <Accordion>
+                  <AccordionHeader px="0px" py="10px" showIcon={false}>
+                    <Link
+                      href={item.href}
+                      className="hover hover:text-blue-500"
+                    >
+                      <Typography fontWeight="600" fontSize="15px">
+                        {item.title}
+                      </Typography>
+                    </Link>
+                  </AccordionHeader>
+                </Accordion>
               )}
             </Fragment>
           ))
