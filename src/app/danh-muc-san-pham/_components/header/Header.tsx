@@ -7,7 +7,6 @@ import Box from "@component/Box";
 import Container from "@component/Container";
 import FlexBox from "@component/FlexBox";
 import Icon from "@component/icon/Icon";
-import Image from "@component/Image";
 import MiniCart from "@component/mini-cart";
 import { SearchInputWithCategory } from "@component/search-box";
 import Sidenav from "@component/sidenav/Sidenav";
@@ -16,7 +15,7 @@ import { useAppContext } from "@context/app-context";
 import Login from "@sections/auth/Login";
 
 import { IconButton } from "~/components/buttons";
-import { Button } from "~/components/shadcn/button";
+import { Image } from "~/components/image";
 import { cn } from "~/utils";
 import UserLoginDialog from "./LoginDialog";
 import StyledHeader from "./styles";
@@ -71,7 +70,7 @@ export default function Header({ className }: HeaderProps) {
     <StyledHeader
       className={cn(
         className,
-        "!h-20 !bg-gray-100 shadow-lg shadow-gray-300/30 lg:!h-28 lg:!bg-white",
+        "!h-20 !bg-white shadow-lg shadow-gray-300/30 lg:!h-28 lg:!bg-white",
       )}
     >
       <Container
@@ -86,7 +85,12 @@ export default function Header({ className }: HeaderProps) {
           mr="1rem"
         >
           <Link href="/danh-muc-san-pham" className="flex items-center">
-            <Image src="/assets/images/logo.svg" alt="logo" />
+            <Image
+              src="/assets/images/logo.svg"
+              alt="logo"
+              width={40}
+              height={40}
+            />
             <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[30px] text-transparent">
               WECARE
             </h6>
@@ -95,7 +99,7 @@ export default function Header({ className }: HeaderProps) {
         <FlexBox
           justifyContent="center"
           flex="1 1 0"
-          className="bg-gray-100 px-3 lg:!bg-white"
+          className="bg-white px-3 lg:!bg-white"
         >
           <SearchInputWithCategory />
         </FlexBox>

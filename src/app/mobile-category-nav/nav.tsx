@@ -7,7 +7,6 @@ import { Accordion, AccordionHeader } from "@component/accordion";
 import Box from "@component/Box";
 import Divider from "@component/Divider";
 import Grid from "@component/grid/Grid";
-import Image from "@component/Image";
 import Scrollbar from "@component/Scrollbar";
 import Typography from "@component/Typography";
 import navigations from "@data/navigations";
@@ -15,6 +14,7 @@ import useWindowSize from "@hook/useWindowSize";
 import clsx from "clsx";
 
 import type { Tables } from "~/lib/supabase/types";
+import { Image } from "~/components/image";
 import Header from "../danh-muc-san-pham/_components/header/Header";
 import { MobileNavigationBar } from "../danh-muc-san-pham/_components/mobile-navigation";
 import { getCollections } from "../danh-muc-san-pham/_components/sidebar/utils";
@@ -25,14 +25,6 @@ import { MobileCategoryNavStyle } from "./styles";
 
 // CUSTOM HOOK
 
-// ==============================================================
-interface Suggestion {
-  href: string;
-  title: string;
-  imgUrl: string;
-}
-// ==============================================================
-
 export default function MobileCategoryNav({
   allProductGroups,
   menuNodes,
@@ -42,10 +34,23 @@ export default function MobileCategoryNav({
   menuNodes: Tables<"menu_nodes_matview">[];
   customer: Tables<"customers_matview"> | undefined;
 }) {
+  const searchParams = useSearchParams();
   const width = useWindowSize();
-  const [category, setCategory] = useState<any>(navigations[0]);
-  const [suggestedList, setSuggestedList] = useState<Suggestion[]>([]);
-  const [subCategoryList, setSubCategoryList] = useState<any[]>([]);
+  const collections = getCollections(
+    allProductGroups,
+    menuNodes,
+    searchParams.get("customer"),
+    customer,
+  );
+  const initCollections = collections.find(
+    (x) => x.href === searchParams.get("current"),
+  );
+  const initSubCollections = initCollections?.menuData.categories;
+  const [category, setCategory] = useState(initCollections);
+  console.log("nnn", navigations, searchParams.get("current"));
+
+  const [subCategoryList, setSubCategoryList] =
+    useState<any[]>(initSubCollections);
 
   const handleCategoryClick = (cat: any) => () => {
     let menuData = cat.menuData;
@@ -54,19 +59,10 @@ export default function MobileCategoryNav({
     setCategory(cat);
   };
 
-  useEffect(() => setSuggestedList(suggestion), []);
-
   // HIDDEN IN LARGE DEVICE
   if (width && width > 900) return null;
 
   //
-  const searchParams = useSearchParams();
-  const collections = getCollections(
-    allProductGroups,
-    menuNodes,
-    searchParams.get("customer"),
-    customer,
-  );
 
   return (
     <MobileCategoryNavStyle>
@@ -82,7 +78,6 @@ export default function MobileCategoryNav({
                 active: category?.href === item.href,
               })}
               onClick={handleCategoryClick(item)}
-              // borderLeft={`${category?.href === item.href ? "3" : "0"}px solid`}
             >
               {item.icon && (
                 <Image alt="" src={item.icon} width={38} height={38} />
@@ -104,39 +99,48 @@ export default function MobileCategoryNav({
 
       <div className="container mt-2 w-[calc(100%-90px)]">
         {category?.menuComponent === "MegaMenu1" ? (
-          subCategoryList.map((item, ind) => (
-            <Fragment key={ind}>
-              <Divider />
-              {item.subCategories.length > 0 ? (
-                <Accordion>
-                  <AccordionHeader px="0px" py="10px">
-                    <Typography fontWeight="600" fontSize="15px">
-                      {item.title}
-                    </Typography>
-                  </AccordionHeader>
+          <>
+            {subCategoryList
+              .filter((sc) => sc.subCategories.length > 0)
+              .map((item, ind) => (
+                <Fragment key={ind}>
+                  <Divider />
+                  <Accordion>
+                    <AccordionHeader px="0px" py="10px">
+                      <Typography fontWeight="600" fontSize="15px">
+                        {item.title}
+                      </Typography>
+                    </AccordionHeader>
 
-                  <Box mb="2rem" mt="0.5rem">
-                    <Grid container spacing={3}>
-                      {item.subCategories?.map((item: any, ind: number) => (
-                        <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
-                          <Link href={item.href}>
-                            <MobileCategoryImageBox {...item} />
-                          </Link>
-                        </Grid>
-                      ))}
+                    <Box mb="2rem" mt="0.5rem">
+                      <Grid container spacing={3}>
+                        {item.subCategories?.map((item: any, ind: number) => (
+                          <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
+                            <Link href={item.href}>
+                              <MobileCategoryImageBox {...item} />
+                            </Link>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Box>
+                  </Accordion>
+                </Fragment>
+              ))}
+
+            <Box mb="2rem" mt="0.5rem">
+              <Grid container spacing={3}>
+                {subCategoryList
+                  .filter((sc) => sc.subCategories.length === 0)
+                  .map((item, ind) => (
+                    <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
+                      <Link href={item.href}>
+                        <MobileCategoryImageBox {...item} />
+                      </Link>
                     </Grid>
-                  </Box>
-                </Accordion>
-              ) : (
-                // <Link href="/mobile-category-nav">{item.title}</Link>
-                <AccordionHeader px="0px" py="10px">
-                  <Typography fontWeight="600" fontSize="15px">
-                    {item.title}
-                  </Typography>
-                </AccordionHeader>
-              )}
-            </Fragment>
-          ))
+                  ))}
+              </Grid>
+            </Box>
+          </>
         ) : (
           <Box mb="2rem">
             <Grid spacing={3}>
@@ -156,46 +160,3 @@ export default function MobileCategoryNav({
     </MobileCategoryNavStyle>
   );
 }
-
-const suggestion = [
-  {
-    title: "Belt",
-    href: "/belt",
-    imgUrl: "/assets/images/products/categories/belt.png",
-  },
-  {
-    title: "Hat",
-    href: "/Hat",
-    imgUrl: "/assets/images/products/categories/hat.png",
-  },
-  {
-    title: "Watches",
-    href: "/Watches",
-    imgUrl: "/assets/images/products/categories/watch.png",
-  },
-  {
-    title: "Sunglasses",
-    href: "/Sunglasses",
-    imgUrl: "/assets/images/products/categories/sunglass.png",
-  },
-  {
-    title: "Sneakers",
-    href: "/Sneakers",
-    imgUrl: "/assets/images/products/categories/sneaker.png",
-  },
-  {
-    title: "Sandals",
-    href: "/Sandals",
-    imgUrl: "/assets/images/products/categories/sandal.png",
-  },
-  {
-    title: "Formal",
-    href: "/Formal",
-    imgUrl: "/assets/images/products/categories/shirt.png",
-  },
-  {
-    title: "Casual",
-    href: "/Casual",
-    imgUrl: "/assets/images/products/categories/t-shirt.png",
-  },
-];

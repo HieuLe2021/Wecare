@@ -1,15 +1,17 @@
 import { ReactNode } from "react";
+import Box from "@component/Box";
 import styled from "styled-components";
 import { FlexProps } from "styled-system";
+
+import { Image } from "~/components/image";
+
 // GLOBAL CUSTOM COMPONENTS
-import Box from "@component/Box";
-import Image from "@component/Image";
 
 // STYLED COMPONENTS
 const CardWrapper = styled(Box)({
   width: "100%",
   overflow: "hidden",
-  position: "relative"
+  position: "relative",
 });
 
 const CardContent = styled("div")({
@@ -20,7 +22,7 @@ const CardContent = styled("div")({
   display: "flex",
   position: "absolute",
   flexDirection: "column",
-  justifyContent: "center"
+  justifyContent: "center",
 });
 
 // ===========================================================
@@ -30,10 +32,17 @@ interface BannerCard1Props extends FlexProps {
 }
 // ===========================================================
 
-export default function BannerCard3({ img, children, ...props }: BannerCard1Props) {
+export default function BannerCard3({
+  img,
+  children,
+  ...props
+}: BannerCard1Props) {
   return (
     <CardWrapper {...props}>
-      <Image alt="category" height="100%" width="100%" src={img} />
+      <div className="h-full w-full">
+        <Image alt="category" src={img} objectFit="contains" />
+      </div>
+
       <CardContent>{children}</CardContent>
     </CardWrapper>
   );

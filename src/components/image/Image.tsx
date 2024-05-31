@@ -1,11 +1,13 @@
+"use client";
+
 import type { ComponentProps, SyntheticEvent } from "react";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import NextImage from "next/image";
 
-export type ImageProps = ComponentProps<typeof Image> & {
+export type ImageProps = ComponentProps<typeof NextImage> & {
   fallback?: string;
 };
-export const ImageWithFallback = ({
+export const Image = ({
   fallback = "/placeholder-image.webp",
   alt,
   src,
@@ -20,11 +22,12 @@ export const ImageWithFallback = ({
     setError(null);
   }, [src]);
 
+  console.log("???", src);
   return (
-    <Image
+    <NextImage
       alt={alt}
       onError={setError}
-      src={error ? fallback : src}
+      src={error || !src ? fallback : src}
       {...props}
     />
   );

@@ -1,32 +1,37 @@
+// STYLED COMPONENTS
 import Link from "next/link";
-
+import AppStore from "@component/AppStore";
 import Box from "@component/Box";
-import Image from "@component/Image";
+import FlexBox from "@component/FlexBox";
 import Grid from "@component/grid/Grid";
 import Icon from "@component/icon/Icon";
-import FlexBox from "@component/FlexBox";
-import AppStore from "@component/AppStore";
 import { Paragraph } from "@component/Typography";
 
-// STYLED COMPONENTS
-import { StyledBox, StyledLink, Wrapper } from "./styles";
+import { Image } from "~/components/image";
 // CUSTOM DATA
 import { customerCareLinks, iconList } from "./data";
+import { StyledBox, StyledLink, Wrapper } from "./styles";
 
 export default function Footer2() {
   return (
     <footer>
       <Wrapper>
         <Link href="/">
-          <Image mb="1.5rem" src="/assets/images/logo.svg" alt="logo" />
+          <Image
+            src="/assets/images/logo.svg"
+            alt="logo"
+            width={40}
+            height={40}
+            className="mb-6"
+          />
         </Link>
 
         <Grid container spacing={6}>
           <Grid item md={6} sm={6} xs={12}>
             <Paragraph mb="1.25rem" color="gray.500" maxWidth="370px">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et, in
-              gravida. Sit diam duis mauris nulla cursus. Erat et lectus vel ut sollicitudin elit at
-              amet.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
+              libero id et, in gravida. Sit diam duis mauris nulla cursus. Erat
+              et lectus vel ut sollicitudin elit at amet.
             </Paragraph>
 
             <AppStore />
@@ -51,7 +56,8 @@ export default function Footer2() {
                       size="small"
                       cursor="pointer"
                       borderRadius="50%"
-                      bg="rgba(0,0,0,0.2)">
+                      bg="rgba(0,0,0,0.2)"
+                    >
                       <Icon size="12px" defaultcolor="auto">
                         {item}
                       </Icon>
