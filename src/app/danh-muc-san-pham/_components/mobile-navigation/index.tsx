@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Chip } from "@component/Chip";
 import Icon from "@component/icon/Icon";
 import NavLink from "@component/nav-link";
@@ -9,6 +9,8 @@ import useWindowSize from "@hook/useWindowSize";
 import { layoutConstant } from "@utils/constants";
 import { getTheme } from "@utils/utils";
 import styled from "styled-components";
+
+import { cn } from "~/utils";
 
 // STYLED COMPONENT
 const Wrapper = styled.div`
@@ -51,14 +53,15 @@ export const MobileNavigationBar = () => {
   const { state } = useAppContext();
   const searchParams = useSearchParams();
   const customerId = searchParams.get("customer");
+  const pathName = usePathname();
 
   if (width && width <= 900) {
     return (
       <Wrapper>
         {list.map((item) => (
           <NavLink
-            className="link"
-            href={item.href + `?customer=${customerId}`}
+            className={cn("link", item.href === pathName && "text-sky-700")}
+            href={item.href + (customerId ? `?customer=${customerId}` : "")}
             key={item.title}
           >
             <Icon className="icon" variant="small">

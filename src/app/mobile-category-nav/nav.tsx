@@ -68,6 +68,8 @@ export default function MobileCategoryNav({
     customer,
   );
 
+  console.log("collections", collections[1]);
+
   return (
     <MobileCategoryNavStyle>
       <Header className="header" />
