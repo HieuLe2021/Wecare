@@ -29,7 +29,7 @@ export default function MobileCategoryImageBox({
     <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
       <Image
         loading="lazy"
-        src={imgUrl ? imgUrl : "https://placehold.co/400"}
+        src={imgUrl}
         className="aspect-[1.11] h-[70px] w-[70px] self-center rounded-lg object-cover pt-1 group-hover:scale-110"
         width={80}
         height={80}

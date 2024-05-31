@@ -10,7 +10,6 @@ import type { Tables } from "~/lib/supabase/types";
 import { Image } from "~/components/image";
 import { Link } from "~/components/link";
 import { CardContent, CardRoot } from "~/components/shadcn/card";
-import { Image } from "~/components/image";
 import {
   Carousel,
   CarouselContent,
@@ -94,11 +93,7 @@ export const Item = ({
                     >
                       <Image
                         loading="lazy"
-                        src={
-                          item.image_url
-                            ? item.image_url
-                            : "https://placehold.co/400"
-                        }
+                        src={item.image_url}
                         className="mt-2 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
                         alt={item.name}
                         width={80}
