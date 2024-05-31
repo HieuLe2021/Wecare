@@ -18,7 +18,7 @@ export function Breadcrumb({
   const customerId = searchParams.get("customer");
 
   return (
-    <div className="hidden items-center gap-1 py-1.5 text-sm font-semibold leading-5 text-sky-800 bg-blend-normal max-md:flex-wrap sm:block">
+    <div className=" items-center gap-1 py-1.5 text-sm font-semibold leading-5 text-sky-800 bg-blend-normal max-md:flex-wrap">
       <Link
         className="text-sky-800"
         href={
