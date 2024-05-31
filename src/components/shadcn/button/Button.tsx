@@ -94,7 +94,7 @@ const buttonVariants = cva(
       {
         size: "default",
         shape: ["icon", "circle"],
-        className: "w-8",
+        className: "min-w-8 w-8",
       },
       {
         size: "lg",

@@ -9,6 +9,7 @@ const checkNodeHasProductId = (
   menuNodes: Tables<"menu_nodes_matview">[],
   customer: Tables<"customers_matview"> | undefined,
 ) => {
+  if (!customer) return true;
   const childNodes =
     menuNodes.find((x) => x.slug === node.slug)?.child_nodes ?? [];
   const filtered = filterLeafNodes(childNodes, customer?.products);
