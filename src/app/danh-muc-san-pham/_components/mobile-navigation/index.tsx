@@ -3,7 +3,6 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { Chip } from "@component/Chip";
 import Icon from "@component/icon/Icon";
-import NavLink from "@component/nav-link";
 import { useAppContext } from "@context/app-context";
 import useWindowSize from "@hook/useWindowSize";
 import { layoutConstant } from "@utils/constants";
@@ -53,6 +52,7 @@ export const MobileNavigationBar = () => {
   const width = useWindowSize();
   const { state } = useAppContext();
   const pathName = usePathname();
+  const searchParams = useSearchParams();
 
   if (width && width <= 900) {
     return (
@@ -60,7 +60,12 @@ export const MobileNavigationBar = () => {
         {list.map((item) => (
           <Link
             className={cn("link", item.href === pathName && "text-sky-700")}
-            href={item.href + `?current=${pathName}`}
+            href={
+              pathName === item.href
+                ? pathName
+                : item.href +
+                  `?current=${encodeURIComponent(pathName + (searchParams.toString() ? "?" + searchParams.toString() : ""))}`
+            }
             key={item.title}
           >
             <Icon className="icon" variant="small">

@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Accordion, AccordionHeader } from "@component/accordion";
@@ -9,10 +9,13 @@ import Divider from "@component/Divider";
 import Grid from "@component/grid/Grid";
 import Scrollbar from "@component/Scrollbar";
 import Typography from "@component/Typography";
-import navigations from "@data/navigations";
 import useWindowSize from "@hook/useWindowSize";
 import clsx from "clsx";
 
+import type {
+  Category,
+  MenuItem,
+} from "~/components/categories/mega-menu/type";
 import type { Tables } from "~/lib/supabase/types";
 import { Image } from "~/components/image";
 import Header from "../danh-muc-san-pham/_components/header/Header";
@@ -42,21 +45,27 @@ export default function MobileCategoryNav({
     searchParams.get("customer"),
     customer,
   );
-  const initCollections = collections.find(
-    (x) => x.href === searchParams.get("current"),
-  );
-  const initSubCollections = initCollections?.menuData.categories;
-  const [category, setCategory] = useState(initCollections);
-  console.log("nnn", navigations, searchParams.get("current"));
+  const initCollections =
+    collections.find((x) => x.href === searchParams.get("current")) ||
+    collections[0];
+  const [selectedCategory, setSelectedCategory] = useState(initCollections);
 
+  const initSubCollections = initCollections
+    ? initCollections.menuComponent === "MegaMenu1"
+      ? initCollections.menuData.categories
+      : initCollections.menuData
+    : [];
   const [subCategoryList, setSubCategoryList] =
-    useState<any[]>(initSubCollections);
+    useState<Category[]>(initSubCollections);
 
-  const handleCategoryClick = (cat: any) => () => {
-    let menuData = cat.menuData;
-    if (menuData) setSubCategoryList(menuData.categories || menuData);
-    else setSubCategoryList([]);
-    setCategory(cat);
+  const handleCategoryClick = (root: MenuItem) => () => {
+    setSubCategoryList(
+      root.menuComponent === "MegaMenu1"
+        ? root.menuData.categories
+        : root.menuData,
+    );
+    // else setSubCategoryList([]);
+    setSelectedCategory(root);
   };
 
   // HIDDEN IN LARGE DEVICE
@@ -75,7 +84,7 @@ export default function MobileCategoryNav({
               key={item.title}
               className={clsx({
                 "main-category-box": true,
-                active: category?.href === item.href,
+                active: selectedCategory?.id === item.id,
               })}
               onClick={handleCategoryClick(item)}
             >
@@ -98,7 +107,7 @@ export default function MobileCategoryNav({
       </div>
 
       <div className="container mt-2 w-[calc(100%-90px)]">
-        {category?.menuComponent === "MegaMenu1" ? (
+        {selectedCategory?.menuComponent === "MegaMenu1" ? (
           <>
             {subCategoryList
               .filter((sc) => sc.subCategories.length > 0)
@@ -114,7 +123,7 @@ export default function MobileCategoryNav({
 
                     <Box mb="2rem" mt="0.5rem">
                       <Grid container spacing={3}>
-                        {item.subCategories?.map((item: any, ind: number) => (
+                        {item.subCategories.map((item, ind) => (
                           <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
                             <Link href={item.href}>
                               <MobileCategoryImageBox {...item} />
