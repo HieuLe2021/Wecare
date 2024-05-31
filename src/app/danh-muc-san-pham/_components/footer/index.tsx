@@ -15,7 +15,7 @@ export default function Footer() {
     <footer>
       <Box bg="#0F3460">
         <Container p="1rem" color="white">
-          <Box py="5rem" overflow="hidden">
+          <Box overflow="hidden" className="pb-16 pt-4 lg:py-20">
             <Grid container spacing={6}>
               <Grid item lg={3} md={6} sm={6} xs={12}>
                 <Typography
