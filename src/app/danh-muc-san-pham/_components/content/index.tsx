@@ -3,7 +3,7 @@ import { createClient } from "@lib/supabase/server";
 import { ScanText } from "lucide-react";
 
 import type { Tables } from "~/lib/supabase/types";
-import Image from "~/components/Image";
+import { Image } from "~/components/image";
 import { Pagination } from "~/components/ui/pagination";
 import { vndFormatter } from "~/utils/vndFormatter";
 import { filterLeafNodes } from "../../_utils/client";
@@ -90,16 +90,40 @@ export const Content = async ({
         const data = paginatedGroups[index]!;
         return (
           <div key={data.id} className="mb-4 rounded-lg bg-white md:p-4">
-            <div className="flex gap-4 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-md:flex-wrap">
-              <Image
-                loading="lazy"
-                src={data.image_url}
-                className="aspect-square shrink-0"
-                alt={data.name}
-                width={120}
-                height={120}
-              />
-              <div className="">
+            <div className="flex gap-2 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-md:flex-wrap lg:gap-4">
+              <div className="flex">
+                <div className="relative h-24 w-24">
+                  <Image
+                    loading="lazy"
+                    src={data.image_url}
+                    className="aspect-square"
+                    alt={data.name}
+                    fill
+                  />
+                </div>
+
+                <div className="pl-2 pt-2 lg:hidden">
+                  <Link
+                    className="text-sx cursor-pointer pb-4 text-blue-500 underline underline-offset-1"
+                    href={data.parent_slug}
+                  >
+                    {data.parent_name}
+                  </Link>
+                  <h6 className="mt-4 text-base font-semibold">{data.name}</h6>
+                  {prices.length === 0 ? null : prices.length === 1 ? (
+                    <div className="pt-2 text-sm text-red-500">
+                      {vndFormatter.format(prices[0]!)}
+                    </div>
+                  ) : (
+                    <div className="pt-2 text-sm text-red-500">
+                      {vndFormatter.format(priceMin)} -{" "}
+                      {vndFormatter.format(priceMax)}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="hidden flex-1 lg:block">
                 <Link
                   className="text-sx cursor-pointer pb-2 text-blue-500 underline underline-offset-1"
                   href={data.parent_slug}
@@ -122,6 +146,13 @@ export const Content = async ({
                     {vndFormatter.format(priceMax)}
                   </div>
                 )}
+              </div>
+              <div className="lg:hidden">
+                <div className="self-start pt-1 text-[13px] leading-5 max-md:max-w-full	">
+                  Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng
+                  mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
+                  nghiệm khách hàng tốt nhất.
+                </div>
               </div>
               {searchParams.groups && <CloseLeafButton leafSlug={data.slug} />}
             </div>

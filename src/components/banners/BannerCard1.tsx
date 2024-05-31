@@ -1,12 +1,15 @@
-import Link from "next/link";
 import { CSSProperties } from "react";
-import styled from "styled-components";
-// GLOBAL CUSTOM COMPONENTS
-import Image from "@component/Image";
+import Link from "next/link";
 import Divider from "@component/Divider";
 import { H2, Paragraph, Span } from "@component/Typography";
-// UTILS
 import { isValidProp } from "@utils/utils";
+import styled from "styled-components";
+
+import { Image } from "~/components/image";
+
+// GLOBAL CUSTOM COMPONENTS
+
+// UTILS
 
 // STYLED COMPONENTS
 const CardWrapper = styled("div")({
@@ -15,11 +18,11 @@ const CardWrapper = styled("div")({
   borderRadius: "10px",
   position: "relative",
   "& img": { transition: "0.3s" },
-  "&:hover": { img: { transform: "scale(1.1)" } }
+  "&:hover": { img: { transform: "scale(1.1)" } },
 });
 
 const CardContent = styled("div").withConfig({
-  shouldForwardProp: (prop) => isValidProp(prop)
+  shouldForwardProp: (prop) => isValidProp(prop),
 })<{ contentAlign: "right" | "left" | null }>(({ contentAlign }) => ({
   top: 0,
   zIndex: 1,
@@ -29,7 +32,9 @@ const CardContent = styled("div").withConfig({
   position: "absolute",
   flexDirection: "column",
   justifyContent: "center",
-  ...(contentAlign === "left" ? { left: 32 } : { right: 32, alignItems: "flex-end" })
+  ...(contentAlign === "left"
+    ? { left: 32 }
+    : { right: 32, alignItems: "flex-end" }),
 }));
 
 const CardLink = styled(Span)({
@@ -47,8 +52,8 @@ const CardLink = styled(Span)({
     height: "2px",
     transition: "0.3s",
     position: "absolute",
-    backgroundColor: "white"
-  }
+    backgroundColor: "white",
+  },
 });
 
 // ========================================================
@@ -68,13 +73,18 @@ export default function BannerCard1({
   title,
   subTitle,
   style = {},
-  contentPosition = "left"
+  contentPosition = "left",
 }: BannerCard1Props) {
   return (
     <CardWrapper style={style}>
-      <Image alt="category" height="100%" width="100%" src={img} />
+      <div className="h-full w-full">
+        <Image alt="category" src={img} objectFit="contains" />
+      </div>
 
-      <CardContent contentAlign={contentPosition ? contentPosition : null} className="content">
+      <CardContent
+        contentAlign={contentPosition ? contentPosition : null}
+        className="content"
+      >
         <H2>{title}</H2>
         <Paragraph>{subTitle}</Paragraph>
         <Divider height={2} my="1rem" width={50} />

@@ -1,8 +1,7 @@
+import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 import type { MenuItem } from "@component/categories/mega-menu/type";
 import type { Tables } from "@lib/supabase/types";
-
 import { filterLeafNodes } from "../../_utils/client";
-import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 
 const checkNodeHasProductId = (
   node: Tables<"product_groups">,
@@ -12,7 +11,7 @@ const checkNodeHasProductId = (
   if (!customer) return true;
   const childNodes =
     menuNodes.find((x) => x.slug === node.slug)?.child_nodes ?? [];
-  const filtered = filterLeafNodes(childNodes, customer?.products);
+  const filtered = filterLeafNodes(childNodes, customer.products);
   return filtered.length > 0;
 };
 export function getCollections(
@@ -99,6 +98,8 @@ export function getCollections(
             title: level_1.name,
             href,
             subCategories: level_2,
+            imgUrl: level_1.image_url,
+            
           };
           return childItem;
         });

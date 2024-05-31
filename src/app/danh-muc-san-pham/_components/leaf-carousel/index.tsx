@@ -3,12 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import Image from "@component/Image";
 import { cn } from "@utils";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import type { CarouselApi } from "~/components/ui/carousel";
 import type { Tables } from "~/lib/supabase/types";
+import { Image } from "~/components/image";
 import {
   Carousel,
   CarouselContent,
@@ -124,19 +124,24 @@ export const LeafCarousel = ({
                             <div className="flex grow flex-col bg-white text-center text-xs font-medium leading-4 text-sky-700 max-md:mt-4">
                               {isActive && (
                                 <Image
-                                  className="absolute right-0 top-0 z-10 h-5 w-5"
+                                  className="absolute right-0 top-0 z-10"
                                   src="/assets/images/wc-icon/check-tick.svg"
                                   alt="check-tick"
+                                  height={20}
+                                  width={20}
                                 />
                               )}
                               <Image
                                 loading="lazy"
-                                srcSet={
+                                src={
                                   item.image_url
                                     ? item.image_url
                                     : "https://placehold.co/400"
                                 }
-                                className="aspect-[1.11] h-[80px] w-[80px] self-center object-cover pt-1 group-hover:scale-110"
+                                className="aspect-[1.11] self-center object-cover pt-1 group-hover:scale-110"
+                                width={80}
+                                height={80}
+                                alt={item.name}
                               />
                               <div
                                 className={cn(
