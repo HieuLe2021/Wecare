@@ -25,14 +25,6 @@ import { MobileCategoryNavStyle } from "./styles";
 
 // CUSTOM HOOK
 
-// ==============================================================
-interface Suggestion {
-  href: string;
-  title: string;
-  imgUrl: string;
-}
-// ==============================================================
-
 export default function MobileCategoryNav({
   allProductGroups,
   menuNodes,
@@ -42,10 +34,23 @@ export default function MobileCategoryNav({
   menuNodes: Tables<"menu_nodes_matview">[];
   customer: Tables<"customers_matview"> | undefined;
 }) {
+  const searchParams = useSearchParams();
   const width = useWindowSize();
-  const [category, setCategory] = useState<any>(navigations[0]);
-  const [suggestedList, setSuggestedList] = useState<Suggestion[]>([]);
-  const [subCategoryList, setSubCategoryList] = useState<any[]>([]);
+  const collections = getCollections(
+    allProductGroups,
+    menuNodes,
+    searchParams.get("customer"),
+    customer,
+  );
+  const initCollections = collections.find(
+    (x) => x.href === searchParams.get("current"),
+  );
+  const initSubCollections = initCollections?.menuData.categories;
+  const [category, setCategory] = useState(initCollections);
+  console.log("nnn", navigations, searchParams.get("current"));
+
+  const [subCategoryList, setSubCategoryList] =
+    useState<any[]>(initSubCollections);
 
   const handleCategoryClick = (cat: any) => () => {
     let menuData = cat.menuData;
@@ -54,21 +59,10 @@ export default function MobileCategoryNav({
     setCategory(cat);
   };
 
-  useEffect(() => setSuggestedList(suggestion), []);
-
   // HIDDEN IN LARGE DEVICE
   if (width && width > 900) return null;
 
   //
-  const searchParams = useSearchParams();
-  const collections = getCollections(
-    allProductGroups,
-    menuNodes,
-    searchParams.get("customer"),
-    customer,
-  );
-
-  console.log("collections", collections[1]);
 
   return (
     <MobileCategoryNavStyle>
@@ -84,7 +78,6 @@ export default function MobileCategoryNav({
                 active: category?.href === item.href,
               })}
               onClick={handleCategoryClick(item)}
-              // borderLeft={`${category?.href === item.href ? "3" : "0"}px solid`}
             >
               {item.icon && (
                 <Image alt="" src={item.icon} width={38} height={38} />
@@ -167,46 +160,3 @@ export default function MobileCategoryNav({
     </MobileCategoryNavStyle>
   );
 }
-
-const suggestion = [
-  {
-    title: "Belt",
-    href: "/belt",
-    imgUrl: "/assets/images/products/categories/belt.png",
-  },
-  {
-    title: "Hat",
-    href: "/Hat",
-    imgUrl: "/assets/images/products/categories/hat.png",
-  },
-  {
-    title: "Watches",
-    href: "/Watches",
-    imgUrl: "/assets/images/products/categories/watch.png",
-  },
-  {
-    title: "Sunglasses",
-    href: "/Sunglasses",
-    imgUrl: "/assets/images/products/categories/sunglass.png",
-  },
-  {
-    title: "Sneakers",
-    href: "/Sneakers",
-    imgUrl: "/assets/images/products/categories/sneaker.png",
-  },
-  {
-    title: "Sandals",
-    href: "/Sandals",
-    imgUrl: "/assets/images/products/categories/sandal.png",
-  },
-  {
-    title: "Formal",
-    href: "/Formal",
-    imgUrl: "/assets/images/products/categories/shirt.png",
-  },
-  {
-    title: "Casual",
-    href: "/Casual",
-    imgUrl: "/assets/images/products/categories/t-shirt.png",
-  },
-];
