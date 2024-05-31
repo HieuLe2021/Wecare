@@ -28,25 +28,6 @@ export const CloseLeafButton = ({ leafSlug }: { leafSlug: string }) => {
           pathname +
           (newSearchParams.toString() ? "?" + newSearchParams.toString() : "")
         }
-        // href={{
-        //   search:
-        //     Object.entries(searchParams)
-        //       .map(([k, v]) =>
-        //         k === "groups"
-        //           ? k +
-        //             "=" +
-        //             v
-        //               .split(",")
-        //               .filter((x) => x !== data.slug)
-        //               .join(",")
-        //           : k + "=" + v,
-        //       )
-        //       .filter((x) => {
-        //         console.log("xxxxx", x);
-        //         return x !== "groups=";
-        //       })
-        //       .join("&") || null,
-        // }}
       >
         <X />
       </Link>

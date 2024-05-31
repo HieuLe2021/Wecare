@@ -8,7 +8,7 @@ import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import type { CarouselApi } from "~/components/ui/carousel";
 import type { Tables } from "~/lib/supabase/types";
-import { Image } from "~/components/image";
+import { CardContent, CardRoot } from "~/components/shadcn/card";
 import {
   Carousel,
   CarouselContent,
@@ -65,121 +65,109 @@ export const LeafCarousel = ({
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
 
   return (
-    <div className="mb-4 w-full rounded-md bg-white">
-      <div className="flex items-end justify-between px-3 py-2 md:px-6">
-        <p className="font-medium">{leafCount} nhóm sản phẩm</p>
-        {groupSlugs.length > 0 && (
-          <Link
-            href={
-              currentPath + searchParams.get("customer")
-                ? "?customer=" + searchParams.get("customer")
-                : ""
-            }
-            className="text-xs text-blue-500 hover:text-blue-700"
-          >
-            Xoá mục chọn
-          </Link>
-        )}
-      </div>
-      <div className="relative h-[180px] w-full rounded-md bg-white lg:h-48">
-        <div className="absolute left-4 right-4 top-[11px]">
-          <div className="flex w-full px-4 md:px-12 lg:px-12">
-            <Carousel
-              setApi={setApi}
-              opts={{
-                align: "start",
-                dragFree: true,
-                loop: false,
-                startIndex,
-                slidesToScroll: 5,
-              }}
-              className="w-full"
-              plugins={[WheelGesturesPlugin()]}
+    <CardRoot className="mb-4 border-none">
+      <CardContent>
+        <div className="flex items-end justify-between">
+          <p className="font-medium">{leafCount} nhóm sản phẩm</p>
+          {groupSlugs.length > 0 && (
+            <Link
+              href={
+                currentPath + searchParams.get("customer")
+                  ? "?customer=" + searchParams.get("customer")
+                  : ""
+              }
+              className="text-xs text-blue-500 hover:text-blue-700"
             >
-              <CarouselContent>
-                {data.map((item) => {
-                  const isActive = item.slug && groupSlugs.includes(item.slug);
-                  return (
-                    <CarouselItem
-                      key={item.slug}
-                      className="basis-1/2 md:basis-1/3 lg:basis-1/5"
+              Xoá mục chọn
+            </Link>
+          )}
+        </div>
+        <div className="mt-1 flex w-full px-4 lg:px-12">
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              dragFree: true,
+              loop: false,
+              startIndex,
+              slidesToScroll: 3,
+              breakpoints: {
+                "(min-width: 1024px)": {
+                  slidesToScroll: 5,
+                },
+              },
+            }}
+            className="w-full"
+            plugins={[WheelGesturesPlugin()]}
+          >
+            <CarouselContent>
+              {data.map((item) => {
+                const isActive = item.slug && groupSlugs.includes(item.slug);
+                return (
+                  <CarouselItem
+                    key={item.slug}
+                    className="basis-1/3 lg:basis-1/5"
+                  >
+                    <Link
+                      href={genSelectedGroupsPath(
+                        item.slug,
+                        groupSlugs,
+                        currentPath,
+                        searchParams,
+                      )}
+                      className={cn(
+                        "group relative cursor-pointer rounded-md border border-transparent",
+                        "flex h-full flex-col items-center px-2",
+                        isActive ? "border-blue-500" : "text-gray-400",
+                      )}
                     >
+                      {isActive && (
+                        <Image
+                          className="absolute right-0 top-0 z-10 h-5 w-5"
+                          src="/assets/images/wc-icon/check-tick.svg"
+                          alt="check-tick"
+                        />
+                      )}
+                      <Image
+                        loading="lazy"
+                        srcSet={
+                          item.image_url
+                            ? item.image_url
+                            : "https://placehold.co/400"
+                        }
+                        className="mt-2 aspect-[1.11] h-[80px] w-[80px] self-center object-cover lg:group-hover:scale-110"
+                      />
                       <div
                         className={cn(
-                          "min-h-36 min-w-[138px] p-1",
-                          "group relative cursor-pointer rounded-md border border-transparent",
-                          isActive ? "border-blue-500" : "text-gray-400",
+                          "mb-2 mt-[2px] line-clamp-2 text-center font-semibold lg:mt-2",
+                          isActive ? "text-sky-700" : "text-gray-600",
                         )}
                       >
-                        <Link
-                          href={genSelectedGroupsPath(
-                            item.slug,
-                            groupSlugs,
-                            currentPath,
-                            searchParams,
-                          )}
-                          className="flex justify-center"
-                        >
-                          <div className="flex flex-col">
-                            <div className="flex grow flex-col bg-white text-center text-xs font-medium leading-4 text-sky-700 max-md:mt-4">
-                              {isActive && (
-                                <Image
-                                  className="absolute right-0 top-0 z-10"
-                                  src="/assets/images/wc-icon/check-tick.svg"
-                                  alt="check-tick"
-                                  height={20}
-                                  width={20}
-                                />
-                              )}
-                              <Image
-                                loading="lazy"
-                                src={
-                                  item.image_url
-                                    ? item.image_url
-                                    : "https://placehold.co/400"
-                                }
-                                className="aspect-[1.11] self-center object-cover pt-1 group-hover:scale-110"
-                                width={80}
-                                height={80}
-                                alt={item.name}
-                              />
-                              <div
-                                className={cn(
-                                  "mt-[2px] font-semibold lg:mt-2",
-                                  isActive
-                                    ? "text-sx text-sky-700 lg:text-sm"
-                                    : "text-gray-600",
-                                )}
-                              >
-                                {item.name}
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
+                        {item.name}
                       </div>
-                    </CarouselItem>
-                  );
-                })}
-              </CarouselContent>
-              {data.length > 0 && (
-                <>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </>
-              )}
-            </Carousel>
-          </div>
-          <div className="mt-2 flex flex-wrap items-center justify-center gap-1">
-            {scrollSnaps.map((_, index) => (
-              <DotButton
-                key={index}
-                onClick={() => onDotButtonClick(index)}
-                isActive={index === selectedIndex}
-              />
-            ))}
-          </div>
+                    </Link>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            {data.length > 0 && (
+              <>
+                <CarouselPrevious />
+                <CarouselNext />
+              </>
+            )}
+          </Carousel>
         </div>
-      </div>
-    </div>
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-1">
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              isActive={index === selectedIndex}
+            />
+          ))}
+        </div>
+      </CardContent>
+    </CardRoot>
   );
 };
