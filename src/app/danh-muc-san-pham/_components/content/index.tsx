@@ -8,6 +8,7 @@ import { Pagination } from "~/components/ui/pagination";
 import { vndFormatter } from "~/utils/vndFormatter";
 import { filterLeafNodes } from "../../_utils/client";
 import { getCustomer, getLeafNode } from "../../_utils/server";
+import { CloseLeafButton } from "./CloseLeafButton";
 import { PriceTable } from "./PriceTable";
 
 export type DefaultProductListContentProps = {
@@ -57,11 +58,14 @@ export const Content = async ({
   ]);
 
   const cp = customer?.products.map((cp) => cp.id);
-  const filtered = priceTablesQuery
-    .map((t) => ({
-      data: t.data?.filter((r) => !cp || cp.includes(r.id)),
-    }))
-    .filter((t) => t.data && t.data.length > 0);
+  const filtered = customer
+    ? priceTablesQuery
+        .map((t) => ({
+          data: t.data?.filter((r) => !cp || cp.includes(r.id)),
+        }))
+        .filter((t) => t.data && t.data.length > 0)
+    : priceTablesQuery;
+
   return (
     <>
       {filtered.map((query, index) => {
@@ -76,7 +80,10 @@ export const Content = async ({
           groupedByChatLieu[chatLieu]!.push(product);
         });
 
-        const prices = products.map((i) => i.gia ?? 0);
+        const prices = products.map(
+          (i) =>
+            customer?.products.find((p) => p.id === i.id)?.gia ?? i.gia ?? 0,
+        );
         const priceMin = Math.min(...prices);
         const priceMax = Math.max(...prices);
 
@@ -116,6 +123,7 @@ export const Content = async ({
                   </div>
                 )}
               </div>
+              {searchParams.groups && <CloseLeafButton leafSlug={data.slug} />}
             </div>
             <div className="mb-1 h-[1px] w-full border border-b border-dashed"></div>
             {Object.entries(groupedByChatLieu).length === 0 ? (
@@ -127,7 +135,7 @@ export const Content = async ({
               Object.entries(groupedByChatLieu).map(([key, value]) => {
                 return (
                   <PriceTable
-                    key={index}
+                    key={key}
                     material={key}
                     data={value}
                     customerProducts={customer?.products || []}
