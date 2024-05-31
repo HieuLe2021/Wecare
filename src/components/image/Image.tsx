@@ -1,11 +1,13 @@
 "use client";
 
-import type { ComponentProps, SyntheticEvent } from "react";
+import type { StaticImport } from "next/dist/shared/lib/get-img-props";
+import type { ImageProps as NextImageProps } from "next/image";
+import type { SyntheticEvent } from "react";
 import { useEffect, useState } from "react";
 import NextImage from "next/image";
 
-export type ImageProps = ComponentProps<typeof NextImage> & {
-  src: string | undefined;
+export type ImageProps = Omit<NextImageProps, "src"> & {
+  src: string | StaticImport | undefined | null;
   fallback?: string;
 };
 export const Image = ({

@@ -1,7 +1,8 @@
-import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 import type { MenuItem } from "@component/categories/mega-menu/type";
 import type { Tables } from "@lib/supabase/types";
+
 import { filterLeafNodes } from "../../_utils/client";
+import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 
 const checkNodeHasProductId = (
   node: Tables<"product_groups">,
@@ -99,7 +100,6 @@ export function getCollections(
             href,
             subCategories: level_2,
             imgUrl: level_1.image_url,
-            
           };
           return childItem;
         });
@@ -123,7 +123,7 @@ export function getCollections(
           "/" +
           root.slug +
           (customerId ? `?customer=${customerId}` : ""),
-        title: root.name || "",
+        title: root.name,
         count: count,
         ...(level_1.length > 0
           ? { menuComponent: "MegaMenu1", menuData: { categories: level_1 } }

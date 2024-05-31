@@ -55,7 +55,7 @@ export const Sidebar = ({
               caret={!!item.menuData}
               count={item.count}
             >
-              <MegaMenu data={item.menuData || {}} />
+              <MegaMenu data={item.menuData} />
             </RootItem>
           );
         })}
