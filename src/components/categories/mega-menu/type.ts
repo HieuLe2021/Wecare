@@ -3,7 +3,7 @@ type SubCategory = { href: string; title: string };
 export type Category = {
   title: string;
   href: string;
-  imgUrl?: string;
+  imgUrl: string | null;
   subCategories: SubCategory[];
 };
 

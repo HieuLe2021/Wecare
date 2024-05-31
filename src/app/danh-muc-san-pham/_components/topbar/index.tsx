@@ -39,7 +39,7 @@ export const Topbar = ({
 
   return (
     <>
-      <div className="col mb-4 flex justify-center rounded-md bg-white py-4 lg:justify-between lg:px-4 ">
+      <div className="col mb-4 flex items-center justify-center gap-4 rounded-md bg-white py-4 lg:justify-between lg:px-4 ">
         <Breadcrumb allProductGroups={allProductGroups} />
         <div className="row flex items-center">
           <p className="pr-2">Ngành nghề:</p>
