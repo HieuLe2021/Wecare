@@ -144,7 +144,7 @@ export default function MobileCategoryNav({
         ) : (
           <Box mb="2rem">
             <Grid spacing={3}>
-              {subCategoryList.map((item, ind) => (
+              {subCategoryList?.map((item, ind) => (
                 <Grid item lg={1} md={2} sm={4} xs={4} key={ind}>
                   <Link href="/product/search/423423">
                     <MobileCategoryImageBox {...item} />
