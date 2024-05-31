@@ -8,6 +8,7 @@ import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import type { CarouselApi } from "~/components/ui/carousel";
 import type { Tables } from "~/lib/supabase/types";
+import { Image } from "~/components/image";
 import { CardContent, CardRoot } from "~/components/shadcn/card";
 import {
   Carousel,
@@ -123,19 +124,24 @@ export const LeafCarousel = ({
                     >
                       {isActive && (
                         <Image
-                          className="absolute right-0 top-0 z-10 h-5 w-5"
+                          className="absolute right-0 top-0 z-10"
                           src="/assets/images/wc-icon/check-tick.svg"
                           alt="check-tick"
+                          width={20}
+                          height={20}
                         />
                       )}
                       <Image
                         loading="lazy"
-                        srcSet={
+                        src={
                           item.image_url
                             ? item.image_url
                             : "https://placehold.co/400"
                         }
-                        className="mt-2 aspect-[1.11] h-[80px] w-[80px] self-center object-cover lg:group-hover:scale-110"
+                        className="mt-2 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
+                        alt={item.name}
+                        width={80}
+                        height={80}
                       />
                       <div
                         className={cn(

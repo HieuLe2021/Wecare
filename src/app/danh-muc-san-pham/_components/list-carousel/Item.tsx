@@ -7,9 +7,9 @@ import { ChevronRight } from "lucide-react";
 
 import type { MenuItem } from "~/components/categories/mega-menu/type";
 import type { Tables } from "~/lib/supabase/types";
+import { Image } from "~/components/image";
 import { Link } from "~/components/link";
 import { CardContent, CardRoot } from "~/components/shadcn/card";
-import { Image } from "~/components/image";
 import {
   Carousel,
   CarouselContent,
@@ -93,12 +93,15 @@ export const Item = ({
                     >
                       <Image
                         loading="lazy"
-                        srcSet={
+                        src={
                           item.image_url
                             ? item.image_url
                             : "https://placehold.co/400"
                         }
-                        className="mt-2 aspect-[1.11] h-[80px] w-[80px] self-center object-cover lg:group-hover:scale-110"
+                        className="mt-2 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
+                        alt={item.name}
+                        width={80}
+                        height={80}
                       />
                       <div
                         className={cn(
