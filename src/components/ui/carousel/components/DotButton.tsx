@@ -63,7 +63,7 @@ export const DotButton: React.FC<PropType> = (props) => {
     <button
       type="button"
       className={clsm(
-        "flex h-3 w-3 cursor-pointer touch-manipulation appearance-none rounded-full bg-gray-200",
+        "flex h-2.5 w-2.5 cursor-pointer touch-manipulation appearance-none rounded-full bg-gray-200 lg:h-3 lg:w-3",
         isActive && "bg-gray-700",
         className,
       )}
