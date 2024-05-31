@@ -10,6 +10,7 @@ import type { Tables } from "~/lib/supabase/types";
 import { Image } from "~/components/image";
 import { Link } from "~/components/link";
 import { CardContent, CardRoot } from "~/components/shadcn/card";
+import { Image } from "~/components/image";
 import {
   Carousel,
   CarouselContent,

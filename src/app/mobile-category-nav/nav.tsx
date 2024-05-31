@@ -45,7 +45,6 @@ export default function MobileCategoryNav({
     searchParams.get("customer"),
     customer,
   );
-  console.log("cccc", collections);
   const initCollections =
     collections.find((x) => x.href === searchParams.get("current")) ||
     collections[0];

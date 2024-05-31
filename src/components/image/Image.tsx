@@ -22,6 +22,7 @@ export const Image = ({
     setError(null);
   }, [src]);
 
+  console.log("???", src);
   return (
     <NextImage
       alt={alt}
