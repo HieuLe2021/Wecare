@@ -1,5 +1,3 @@
-"use client";
-
 import Box from "@component/Box";
 import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
