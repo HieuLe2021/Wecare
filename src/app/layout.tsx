@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import { AppProvider } from "@context/app-context";
 import StyledContext from "@context/StyledContext";
 import StyledComponentsRegistry from "@lib/registry";
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./global.css";
@@ -31,6 +32,7 @@ export default function RootLayout({
           </AppProvider>
         </StyledComponentsRegistry>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
