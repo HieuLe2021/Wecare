@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import Box from "@component/Box";
 import Container from "@component/Container";
@@ -17,6 +16,7 @@ import Login from "@sections/auth/Login";
 import type { Tables } from "~/lib/supabase/types";
 import { IconButton } from "~/components/buttons";
 import { Image } from "~/components/image";
+import { Link } from "~/components/link";
 import { Button } from "~/components/shadcn/button";
 import { cn } from "~/utils";
 import { MobileSidebar } from "../mobile-sidebar";
