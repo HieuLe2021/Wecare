@@ -46,7 +46,10 @@ export default async function Layout(props: { children: ReactNode }) {
 
       <MobileNavigationBar />
 
-      <Container my="2rem" className="flex min-h-screen flex-col">
+      <Container
+        my="2rem"
+        className="flex min-h-[calc(100vh-428px-112px-64px)] flex-col"
+      >
         <Grid container spacing={6} className="lg:w-[1280px] lg:px-10">
           <Grid
             item
@@ -61,7 +64,12 @@ export default async function Layout(props: { children: ReactNode }) {
               customer={customer}
             />
           </Grid>
-          <Grid item md={9} xs={12} className="!w-full !px-3 !py-0 lg:!px-6">
+          <Grid
+            item
+            md={9}
+            xs={12}
+            className="!w-full !px-3 !py-0 lg:!w-[680px] lg:!px-6 xl:!w-3/4"
+          >
             <Topbar
               allProductGroups={allProductGroups}
               menuNodes={menuNodes}
