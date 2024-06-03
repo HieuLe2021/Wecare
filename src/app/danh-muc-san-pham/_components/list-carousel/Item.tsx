@@ -36,10 +36,10 @@ export const Item = ({
         <div className="flex items-end justify-between">
           <Link href={info.href} className="flex items-center">
             <Image alt="" src={info.icon} width={24} height={24} />
-            <p className="text-base font-semibold md:text-lg ">
+            <p className="text-base font-semibold lg:text-lg ">
               &nbsp; {info.title}
             </p>
-            <p className="ml-1 text-sm font-normal md:text-base">
+            <p className="ml-1 text-sm font-normal lg:text-base">
               ({leafCount})
             </p>
           </Link>

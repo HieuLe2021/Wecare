@@ -9,7 +9,7 @@ export default function Loading() {
         .map((_, index) => {
           return (
             <div key={index} className="mb-4 rounded-lg bg-white p-4">
-              <div className="flex gap-4 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-md:flex-wrap">
+              <div className="flex gap-4 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-lg:flex-wrap">
                 <Skeleton className="h-[120px] w-[120px] shrink-0" />
                 <div className="flex-1 space-y-2">
                   <Skeleton className="h-4 w-[100px]" />

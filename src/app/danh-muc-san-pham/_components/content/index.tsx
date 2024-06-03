@@ -89,8 +89,8 @@ export const Content = async ({
 
         const data = paginatedGroups[index]!;
         return (
-          <div key={data.id} className="mb-4 rounded-lg bg-white md:p-4">
-            <div className="flex gap-2 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-md:flex-wrap lg:gap-4">
+          <div key={data.id} className="mb-4 rounded-lg bg-white lg:p-4">
+            <div className="flex gap-2 pb-4 text-xs leading-4 text-gray-800 bg-blend-normal max-lg:flex-wrap lg:gap-4">
               <div className="flex w-full lg:w-24">
                 <div className="relative h-24 w-24">
                   <Image
@@ -136,7 +136,7 @@ export const Content = async ({
                   {data.parent_name}
                 </Link>
                 <h6 className="text-base font-semibold">{data.name}</h6>
-                <div className="self-start pt-1 text-[13px] leading-5 max-md:max-w-full	">
+                <div className="self-start pt-1 text-[13px] leading-5 max-lg:max-w-full	">
                   Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng
                   mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
                   nghiệm khách hàng tốt nhất.
@@ -153,7 +153,7 @@ export const Content = async ({
                 )}
               </div>
               <div className="lg:hidden">
-                <div className="self-start pt-1 text-[13px] leading-5 max-md:max-w-full	">
+                <div className="self-start px-2 pt-1 text-[13px] leading-5	max-lg:max-w-full">
                   Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng
                   mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
                   nghiệm khách hàng tốt nhất.
