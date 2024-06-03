@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import { AppProvider } from "@context/app-context";
 import StyledContext from "@context/StyledContext";
 import StyledComponentsRegistry from "@lib/registry";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./global.css";
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             <StyledContext>{children}</StyledContext>
           </AppProvider>
         </StyledComponentsRegistry>
+        <SpeedInsights />
       </body>
     </html>
   );
