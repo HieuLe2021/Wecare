@@ -116,7 +116,7 @@ export default function Header({
           <FlexBox
             justifyContent="center"
             flex="1 1 0"
-            className="bg-white px-3 lg:!bg-white"
+            className="w-[780px] bg-white px-3 lg:!bg-white"
           >
             <SearchInputWithCategory />
           </FlexBox>

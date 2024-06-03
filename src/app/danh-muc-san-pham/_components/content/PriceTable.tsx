@@ -60,7 +60,9 @@ export const PriceTable = ({
     row: Row<Tables<"products">>,
     table: TableDef<Tables<"products">>,
   ) => {
-    table.resetExpanded();
+    if (!row.getIsExpanded()) {
+      table.resetExpanded();
+    }
     row.getToggleExpandedHandler()();
   };
   const columns: ColumnDef<Tables<"products">>[] = [
@@ -86,7 +88,7 @@ export const PriceTable = ({
       cell: ({ getValue }) => getValue() || "Đang cập nhật",
     },
     {
-      header: () => <div className="text-end">Giá</div>,
+      header: () => <div className="pr-2 text-end">Giá</div>,
       accessorKey: "gia",
       cell: ({ row }) => {
         const price =
@@ -94,7 +96,7 @@ export const PriceTable = ({
           row.original.gia;
 
         return (
-          <div className="text-end">
+          <div className="pr-2 text-end">
             {price ? vndFormatter.format(price) : "Đang cập nhật"}
             {row.original.don_vi ? "/" + row.original.don_vi : ""}
           </div>
@@ -312,9 +314,9 @@ export const PriceTable = ({
         </Table>
 
         {data.length > 10 && data.length !== dataToRender.length && (
-          <div className="p-2 text-center">
+          <div className="pb-2 pt-3 text-center">
             <button
-              className="rounded-2xl border border-blue-500 px-6 py-0.5 text-xs text-blue-500 hover:bg-blue-50"
+              className="rounded-2xl border border-blue-500 px-6 py-1 text-xs text-blue-500 hover:bg-blue-50"
               onClick={() => setDataToRender(data)}
             >
               Xem thêm

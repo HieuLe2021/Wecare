@@ -53,6 +53,7 @@ export const MobileNavigationBar = () => {
   const { state } = useAppContext();
   const pathName = usePathname();
   const searchParams = useSearchParams();
+  const customerId = searchParams.get("customer");
 
   if (width && width <= 900) {
     return (
@@ -64,7 +65,7 @@ export const MobileNavigationBar = () => {
               pathName === item.href
                 ? pathName
                 : item.href +
-                  `?current=${encodeURIComponent(pathName + (searchParams.toString() ? "?" + searchParams.toString() : ""))}`
+                  `?current=${encodeURIComponent(pathName + (searchParams.toString() + customerId ? "?" + searchParams.toString() + customerId : ""))}`
             }
             key={item.title}
           >

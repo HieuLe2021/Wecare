@@ -124,7 +124,7 @@ export const LeafCarousel = ({
                     >
                       {isActive && (
                         <Image
-                          className="absolute right-0 top-0 z-10"
+                          className="absolute right-0.5 top-0.5 z-10"
                           src="/assets/images/wc-icon/check-tick.svg"
                           alt="check-tick"
                           width={20}
