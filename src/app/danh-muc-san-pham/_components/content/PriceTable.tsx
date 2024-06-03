@@ -245,7 +245,7 @@ export const PriceTable = ({
                               key={cell.id}
                               // className="p-2 text-[13px]"
                               className={cn(
-                                "p-2 pr-0 text-[13px]",
+                                "p-2 text-[13px]",
                                 cell.column.id === "chat_lieu" &&
                                   "hidden sm:table-cell",
                               )}
@@ -303,7 +303,7 @@ export const PriceTable = ({
                       <TableCell className="px-0 py-2 text-end">
                         <Skeleton className="h-4 w-full" />
                       </TableCell>
-                      <TableCell className="py-2 pl-1 pr-0">
+                      <TableCell className="py-2 pl-1">
                         <Skeleton className="h-4 w-full" />
                       </TableCell>
                     </TableRow>
@@ -314,7 +314,7 @@ export const PriceTable = ({
         </Table>
 
         {data.length > 10 && data.length !== dataToRender.length && (
-          <div className="pb-2 pt-3 text-center">
+          <div className="p-1.5 text-center">
             <button
               className="rounded-2xl border border-blue-500 px-6 py-1 text-xs text-blue-500 hover:bg-blue-50"
               onClick={() => setDataToRender(data)}
