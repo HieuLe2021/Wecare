@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 import type { Tables } from "~/lib/supabase/types";
@@ -14,6 +14,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "~/components/ui/sheet";
+import useWindowSize from "~/hooks/useWindowSize";
 import { MobileNav } from "./MobileNav";
 
 type Props = {
@@ -27,6 +28,13 @@ export const MobileSidebar = ({
   customer,
 }: Props) => {
   const [open, setOpen] = useState(false);
+  const width = useWindowSize();
+  useEffect(() => {
+    if (width && width >= 1024) {
+      setOpen(false);
+    }
+  }, [width]);
+
   return (
     <>
       <Sheet open={open} onOpenChange={setOpen}>
@@ -40,7 +48,11 @@ export const MobileSidebar = ({
             <Icon>categories</Icon>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-full sm:max-w-full">
+        <SheetContent
+          side="left"
+          className="w-full sm:max-w-full lg:hidden"
+          overlayClassName="lg:hidden"
+        >
           {/* <div className="absolute left-0 top-0 border-b-2 border-red-700 bg-[#E3E9EF] px-[25px] py-[19px]"> */}
           <div className="absolute left-6 top-3 flex w-full justify-between">
             <SheetClose
