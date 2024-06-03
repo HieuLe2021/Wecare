@@ -101,6 +101,7 @@ export function getCollections(
             href,
             subCategories: level_2,
             imgUrl: level_1.image_url,
+            icon: "",
           };
           return childItem;
         });

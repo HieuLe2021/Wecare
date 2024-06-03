@@ -30,7 +30,6 @@ export const Sidebar = ({
     searchParams.get("customer"),
     customer,
   );
-  const megaMenu = { MegaMenu1, MegaMenu2 };
   return (
     <>
       <Link
@@ -44,8 +43,6 @@ export const Sidebar = ({
       </Link>
       <StyledCategoryDropdown open={true} position={"relative"}>
         {collections.map((item) => {
-          const MegaMenu = megaMenu[item.menuComponent];
-
           return (
             <RootItem
               key={item.title}
@@ -55,7 +52,12 @@ export const Sidebar = ({
               caret={!!item.menuData}
               count={item.count}
             >
-              <MegaMenu data={item.menuData} />
+              {item.menuComponent === "MegaMenu1" && (
+                <MegaMenu1 data={item.menuData} />
+              )}
+              {item.menuComponent === "MegaMenu2" && (
+                <MegaMenu2 data={item.menuData} />
+              )}
             </RootItem>
           );
         })}

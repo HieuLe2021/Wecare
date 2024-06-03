@@ -5,7 +5,9 @@ export type Category = {
   title: string;
   href: string;
   imgUrl: string | null;
+  icon: string;
   subCategories: SubCategory[];
+  menuData?: MegaMenu3;
 };
 
 type MegaMenu1 = {
@@ -15,14 +17,14 @@ type MegaMenu1 = {
   };
 };
 
-export type MegaMenu1Props = { data: MegaMenu1; minWidth?: string };
+export type MegaMenu1Props = { data: MegaMenu1["menuData"]; minWidth?: string };
 
 type MegaMenu2 = {
   menuComponent: "MegaMenu2";
   menuData: Category[];
 };
 
-export type MegaMenu2Props = { data: MegaMenu2[] };
+export type MegaMenu2Props = { data: MegaMenu2["menuData"] };
 
 type MegaMenu3 = {
   categories: Category[];

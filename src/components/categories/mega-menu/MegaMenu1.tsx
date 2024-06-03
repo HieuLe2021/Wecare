@@ -1,10 +1,8 @@
-import Link from "next/link";
 import Box from "@component/Box";
 import Card from "@component/Card";
 import FlexBox from "@component/FlexBox";
 import Grid from "@component/grid/Grid";
 import NavLink from "@component/nav-link";
-import NextImage from "@component/NextImage";
 import { SemiSpan } from "@component/Typography";
 
 import { StyledMegaMenu1 } from "./styles";

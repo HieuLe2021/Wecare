@@ -1,5 +1,3 @@
-"use client";
-
 import { Fragment, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -79,6 +77,7 @@ export const MobileNav = ({
       title: "Danh mục khác",
       href: "",
       imgUrl: "",
+      icon: "",
       subCategories: level_2_without_children,
     });
   }
