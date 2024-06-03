@@ -52,7 +52,7 @@ export default async function Layout(props: { children: ReactNode }) {
             item
             md={3}
             xs={12}
-            className="hidden rounded-md bg-white sm:block"
+            className="hidden rounded-md bg-white lg:block"
             spacing={24}
           >
             <Sidebar
@@ -61,7 +61,7 @@ export default async function Layout(props: { children: ReactNode }) {
               customer={customer}
             />
           </Grid>
-          <Grid item md={9} xs={12} className="!px-3 !py-0 md:!px-6">
+          <Grid item md={9} xs={12} className="!w-full !px-3 !py-0 lg:!px-6">
             <Topbar
               allProductGroups={allProductGroups}
               menuNodes={menuNodes}
