@@ -1,3 +1,5 @@
+"use client";
+
 import type { LinkProps } from "next/link";
 import type { ForwardedRef } from "react";
 import { forwardRef } from "react";

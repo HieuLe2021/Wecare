@@ -1,10 +1,10 @@
-import Link from "next/link";
 import Box from "@component/Box";
 import Container from "@component/Container";
 import Grid from "@component/grid/Grid";
 import Typography, { Paragraph } from "@component/Typography";
 
 import { Image } from "~/components/image";
+import { Link } from "~/components/link";
 // CUSTOM DATA
 import { aboutLinks, customerCareLinks } from "./data";
 // STYLED COMPONENTS
@@ -80,7 +80,7 @@ export default function Footer() {
               </Grid>
 
               <Grid item lg={4} md={6} sm={6} xs={12}>
-                <Link href="/" className="flex items-center">
+                <Link href="/danh-muc-san-pham" className="flex items-center">
                   <Image
                     src="/assets/images/logo.svg"
                     alt="logo"
