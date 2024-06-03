@@ -88,7 +88,7 @@ export const PriceTable = ({
       cell: ({ getValue }) => getValue() || "Đang cập nhật",
     },
     {
-      header: () => <div className="text-end">Giá</div>,
+      header: () => <div className="pr-2 text-end">Giá</div>,
       accessorKey: "gia",
       cell: ({ row }) => {
         const price =
