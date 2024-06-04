@@ -77,7 +77,7 @@ export const LeafCarousel = ({
                   ? "?customer=" + searchParams.get("customer")
                   : ""
               }
-              className="text-xs text-blue-500 hover:text-blue-700"
+              className="text-xs text-blue-600 hover:text-blue-700"
             >
               Xoá mục chọn
             </Link>

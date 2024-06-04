@@ -316,7 +316,7 @@ export const PriceTable = ({
         {data.length > 10 && data.length !== dataToRender.length && (
           <div className="p-1.5 text-center">
             <button
-              className="rounded-2xl border border-blue-500 px-6 py-1 text-xs text-blue-500 hover:bg-blue-50"
+              className="rounded-2xl border border-blue-600 px-6 py-1 text-xs text-blue-600 hover:bg-blue-50"
               onClick={() => setDataToRender(data)}
             >
               Xem thêm

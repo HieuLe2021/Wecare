@@ -45,7 +45,7 @@ export const Item = ({
           </Link>
           <Link
             href={info.href}
-            className="-mr-1 flex items-center text-xs text-blue-500 hover:text-blue-700"
+            className="-mr-1 flex items-center text-xs text-blue-600 hover:text-blue-700"
           >
             Xem tất cả
             <ChevronRight />
