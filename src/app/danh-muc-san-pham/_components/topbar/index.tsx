@@ -40,7 +40,7 @@ export const Topbar = ({
   return (
     <>
       <div className="mb-4 gap-4 rounded-md bg-white px-4 py-4 ">
-        <div className="mb-2 hidden text-left xl:block">
+        <div className="mb-2 hidden text-left lg:block">
           <span className="text-2xl font-semibold">{customer?.name}</span>
         </div>
         <div className="flex items-center justify-center lg:justify-between ">
