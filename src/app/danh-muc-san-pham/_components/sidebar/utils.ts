@@ -43,7 +43,7 @@ export function getCollections(
                 // ,
                 // checkNodeHasProductId(level_2, menuNodes, customer),
                 (customer?.products
-                  .map((x) => x.parent_id)
+                  ?.map((x) => x.parent_id)
                   .includes(level_2.id) ||
                   checkNodeHasProductId(level_2, menuNodes, customer)),
             )

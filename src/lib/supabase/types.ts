@@ -23,12 +23,14 @@ export type Database = MergeDeep<
       Views: {
         customers_matview: {
           Row: {
-            products: {
-              id: string;
-              gia: number;
-              parent_id?: string;
-              parent_slug?: string;
-            }[];
+            products:
+              | null
+              | {
+                  id: string;
+                  gia: number;
+                  parent_id?: string;
+                  parent_slug?: string;
+                }[];
           };
         };
         menu_nodes_matview: {

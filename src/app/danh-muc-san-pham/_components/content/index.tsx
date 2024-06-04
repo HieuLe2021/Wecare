@@ -57,7 +57,7 @@ export const Content = async ({
     }),
   ]);
 
-  const cp = customer?.products.map((cp) => cp.id);
+  const cp = customer?.products?.map((cp) => cp.id);
   const filtered =
     customer && cp && cp.length > 0
       ? priceTablesQuery
@@ -83,7 +83,7 @@ export const Content = async ({
 
         const prices = products.map(
           (i) =>
-            customer?.products.find((p) => p.id === i.id)?.gia ?? i.gia ?? 0,
+            customer?.products?.find((p) => p.id === i.id)?.gia ?? i.gia ?? 0,
         );
         const priceMin = Math.min(...prices);
         const priceMax = Math.max(...prices);
