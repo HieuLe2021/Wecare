@@ -93,6 +93,7 @@ export const Item = ({
                     >
                       <div className="relative h-24 w-24">
                         <Image
+                          loading="lazy"
                           src={item.image_url}
                           className="mt-2 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
                           alt={item.name}
