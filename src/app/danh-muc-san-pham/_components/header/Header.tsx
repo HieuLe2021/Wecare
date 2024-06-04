@@ -76,7 +76,7 @@ export default function Header({
     <StyledHeader
       className={cn(
         className,
-        "!h-20 !bg-white shadow-lg shadow-gray-300/30 lg:!h-28 lg:!bg-white",
+        "!h-auto !bg-white !py-4 shadow-lg shadow-gray-300/30 lg:!bg-white",
       )}
     >
       <Container
@@ -85,7 +85,7 @@ export default function Header({
         justifyContent="space-between"
         width="100%"
       >
-        <div className="flex items-center px-4">
+        <div className="flex items-center px-4 pb-2">
           <MobileSidebar
             allProductGroups={allProductGroups}
             menuNodes={menuNodes}
@@ -133,6 +133,9 @@ export default function Header({
           >
             <Icon>bag</Icon>
           </Button>
+        </div>
+        <div className="mt-1 text-center lg:hidden">
+          <span className="text-lg font-semibold">{customer?.name}</span>
         </div>
       </Container>
       <Container

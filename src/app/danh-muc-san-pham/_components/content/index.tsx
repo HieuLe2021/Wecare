@@ -137,11 +137,11 @@ export const Content = async ({
                   {data.parent_name}
                 </Link>
                 <h6 className="text-base font-semibold">{data.name}</h6>
-                <div className="self-start pt-1 text-[13px] leading-5 max-lg:max-w-full	">
+                {/* <div className="self-start pt-1 text-[13px] leading-5 max-lg:max-w-full	">
                   Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng
                   mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
                   nghiệm khách hàng tốt nhất.
-                </div>
+                </div> */}
                 {prices.length === 0 ? null : prices.length === 1 ? (
                   <div className="pt-2 text-sm text-red-500">
                     {vndFormatter.format(prices[0]!)}
@@ -154,11 +154,11 @@ export const Content = async ({
                 )}
               </div>
               <div className="lg:hidden">
-                <div className="self-start px-2 pt-1 text-[13px] leading-5	max-lg:max-w-full">
+                {/* <div className="self-start px-2 pt-1 text-[13px] leading-5	max-lg:max-w-full">
                   Siêu thị công nghiệp Wecare chuyên cung cấp sản phẩm đa dạng
                   mẫu mã, phục vụ đa ngành nghề. Giá cả cạnh tranh, đảm bảo trải
                   nghiệm khách hàng tốt nhất.
-                </div>
+                </div> */}
               </div>
               {searchParams.groups && (
                 <div className="hidden lg:block">
