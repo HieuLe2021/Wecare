@@ -53,7 +53,10 @@ export default function Sticky(props: StickyProps) {
 
   return (
     <StyledBox fixedOn={fixedOn} componentHeight={height} fixed={fixed}>
-      <div className={clsx({ hold: !fixed, fixed: fixed })} ref={elementRef}>
+      <div
+        className={clsx({ hold: !fixed, fixed: fixed }, "!z-40")}
+        ref={elementRef}
+      >
         {children}
       </div>
     </StyledBox>
