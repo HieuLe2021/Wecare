@@ -1,14 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Box from "@component/Box";
 import Container from "@component/Container";
 import FlexBox from "@component/FlexBox";
 import Icon from "@component/icon/Icon";
-import MiniCart from "@component/mini-cart";
 import { SearchInputWithCategory } from "@component/search-box";
-import Sidenav from "@component/sidenav/Sidenav";
 import { Tiny } from "@component/Typography";
 import { useAppContext } from "@context/app-context";
 import Login from "@sections/auth/Login";
@@ -37,8 +34,6 @@ export default function Header({
   customer,
 }: HeaderProps) {
   const { state } = useAppContext();
-  const [open, setOpen] = useState(false);
-  const toggleSidenav = () => setOpen(!open);
   const searchParams = useSearchParams();
   const customerId = searchParams.get("customer");
   const pathSplited = usePathname().split("/");
@@ -127,15 +122,7 @@ export default function Header({
               </div>
             </UserLoginDialog>
 
-            <Sidenav
-              open={open}
-              width={380}
-              position="right"
-              handle={CART_HANDLE}
-              toggleSidenav={toggleSidenav}
-            >
-              <MiniCart toggleSidenav={toggleSidenav} />
-            </Sidenav>
+            {CART_HANDLE}
           </FlexBox>
 
           <Button
