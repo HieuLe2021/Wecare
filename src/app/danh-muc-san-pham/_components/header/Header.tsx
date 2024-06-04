@@ -115,7 +115,10 @@ export default function Header({
           >
             <SearchInputWithCategory />
           </FlexBox>
-          <FlexBox className="header-right" alignItems="center">
+          <FlexBox
+            className="header-right !hidden lg:!flex"
+            alignItems="center"
+          >
             <UserLoginDialog handle={LOGIN_HANDLE}>
               <div>
                 <Login />
