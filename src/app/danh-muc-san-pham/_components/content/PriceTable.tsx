@@ -92,7 +92,7 @@ export const PriceTable = ({
       accessorKey: "gia",
       cell: ({ row }) => {
         const price =
-          customerProducts.find((x) => x.id === row.original.id)?.gia ??
+          customerProducts?.find((x) => x.id === row.original.id)?.gia ??
           row.original.gia;
 
         return (
@@ -393,7 +393,7 @@ const privatePrice = (
   customerProducts: Tables<"customers_matview">["products"],
 ) => {
   const price =
-    customerProducts.find((x) => x.id === record.id)?.gia ?? record.gia;
+    customerProducts?.find((x) => x.id === record.id)?.gia ?? record.gia;
 
   return (
     <div className="text-end text-sm font-medium">

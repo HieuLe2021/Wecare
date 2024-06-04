@@ -57,14 +57,15 @@ export const Content = async ({
     }),
   ]);
 
-  const cp = customer?.products.map((cp) => cp.id);
-  const filtered = customer
-    ? priceTablesQuery
-        .map((t) => ({
-          data: t.data?.filter((r) => !cp || cp.includes(r.id)),
-        }))
-        .filter((t) => t.data && t.data.length > 0)
-    : priceTablesQuery;
+  const cp = customer?.products?.map((cp) => cp.id);
+  const filtered =
+    customer && cp && cp.length > 0
+      ? priceTablesQuery
+          .map((t) => ({
+            data: t.data?.filter((r) => !cp || cp.includes(r.id)),
+          }))
+          .filter((t) => t.data && t.data.length > 0)
+      : priceTablesQuery;
 
   return (
     <>
@@ -82,7 +83,7 @@ export const Content = async ({
 
         const prices = products.map(
           (i) =>
-            customer?.products.find((p) => p.id === i.id)?.gia ?? i.gia ?? 0,
+            customer?.products?.find((p) => p.id === i.id)?.gia ?? i.gia ?? 0,
         );
         const priceMin = Math.min(...prices);
         const priceMax = Math.max(...prices);
@@ -97,7 +98,7 @@ export const Content = async ({
                     loading="lazy"
                     src={data.image_url}
                     className="aspect-square"
-                    alt={data.name}
+                    alt={"Ảnh đại diện - " + data.name}
                     fill
                     sizes="96px"
                   />
