@@ -131,14 +131,15 @@ export const LeafCarousel = ({
                           height={20}
                         />
                       )}
-                      <Image
-                        loading="lazy"
-                        src={item.image_url}
-                        className="mt-2 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
-                        alt={item.name}
-                        width={80}
-                        height={80}
-                      />
+                      <div className="relative h-24 w-24">
+                        <Image
+                          src={item.image_url}
+                          className="mt-2 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
+                          alt={item.name}
+                          fill
+                          sizes="96px"
+                        />
+                      </div>
                       <div
                         className={cn(
                           "mb-2 mt-[2px] line-clamp-2 text-center text-xs font-semibold lg:mt-2 lg:text-sm",

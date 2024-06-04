@@ -99,6 +99,7 @@ export const Content = async ({
                     className="aspect-square"
                     alt={data.name}
                     fill
+                    sizes="96px"
                   />
                 </div>
 
