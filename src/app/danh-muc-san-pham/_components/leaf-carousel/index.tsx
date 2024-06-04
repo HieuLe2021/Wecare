@@ -143,7 +143,7 @@ export const LeafCarousel = ({
                       </div>
                       <div
                         className={cn(
-                          "mb-2 mt-2 line-clamp-2 text-center text-xs font-semibold lg:mt-2 lg:text-sm",
+                          "mb-2 mt-3 line-clamp-2 text-center text-xs font-semibold lg:mt-2 lg:text-sm",
                           isActive ? "text-sky-700" : "text-gray-600",
                         )}
                       >
