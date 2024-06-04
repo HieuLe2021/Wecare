@@ -44,8 +44,10 @@ export const MobileSidebar = ({
             shape="icon"
             size="lg"
             className="lg:hidden"
+            aria-label="Open Navigation"
           >
             <Icon>categories</Icon>
+            <span className="sr-only">Categories</span>
           </Button>
         </SheetTrigger>
         <SheetContent

@@ -130,8 +130,10 @@ export default function Header({
             shape="icon"
             size="lg"
             className="lg:hidden"
+            aria-label="Cart"
           >
             <Icon>bag</Icon>
+            <span className="sr-only">Cart</span>
           </Button>
         </div>
         <div className="mt-1 text-center lg:hidden">
