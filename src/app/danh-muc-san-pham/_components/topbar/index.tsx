@@ -40,12 +40,12 @@ export const Topbar = ({
   return (
     <>
       <div className="mb-4 gap-4 rounded-md bg-white px-4 py-4 ">
-        <div className="mb-2 hidden text-center xl:block">
+        <div className="mb-2 hidden text-left xl:block">
           <span className="text-2xl font-semibold">{customer?.name}</span>
         </div>
         <div className="flex items-center justify-center lg:justify-between ">
           <Breadcrumb allProductGroups={allProductGroups} />
-          <div className="row hidden items-center lg:flex">
+          {/* <div className="row hidden items-center lg:flex">
             <p className="pr-2">Ngành nghề:</p>
             <Select defaultValue={sortOptions[0]?.value}>
               <SelectTrigger className="w-[180px]">
@@ -61,7 +61,7 @@ export const Topbar = ({
                 </SelectGroup>
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
         </div>
       </div>
       {params.slug && <LeafCarousel data={childNodes} leafCount={leafCount} />}
