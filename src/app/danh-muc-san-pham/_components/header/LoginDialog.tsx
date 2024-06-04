@@ -14,9 +14,7 @@ export default function LoginDialog({ handle, children }: Props) {
     <Fragment>
       {cloneElement(handle, { onClick: toggleDialog })}
 
-      <Modal open={open} onClose={toggleDialog}>
-        {children}
-      </Modal>
+      <Modal onClose={toggleDialog}>{children}</Modal>
     </Fragment>
   );
 }
