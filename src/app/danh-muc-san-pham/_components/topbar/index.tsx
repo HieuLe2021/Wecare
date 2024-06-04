@@ -39,24 +39,29 @@ export const Topbar = ({
 
   return (
     <>
-      <div className="col mb-4 flex items-center justify-center gap-4 rounded-md bg-white px-4 py-4 lg:justify-between ">
-        <Breadcrumb allProductGroups={allProductGroups} />
-        <div className="row hidden items-center lg:flex">
-          <p className="pr-2">Ngành nghề:</p>
-          <Select defaultValue={sortOptions[0]?.value}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Tất cả" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {sortOptions.map((x) => (
-                  <SelectItem key={x.value} value={x.value}>
-                    {x.label}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+      <div className="mb-4 gap-4 rounded-md bg-white px-4 py-4 ">
+        <div className="mb-2 hidden text-center xl:block">
+          <span className="text-2xl font-semibold">{customer?.name}</span>
+        </div>
+        <div className="flex items-center justify-center lg:justify-between ">
+          <Breadcrumb allProductGroups={allProductGroups} />
+          <div className="row hidden items-center lg:flex">
+            <p className="pr-2">Ngành nghề:</p>
+            <Select defaultValue={sortOptions[0]?.value}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Tất cả" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {sortOptions.map((x) => (
+                    <SelectItem key={x.value} value={x.value}>
+                      {x.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
       {params.slug && <LeafCarousel data={childNodes} leafCount={leafCount} />}

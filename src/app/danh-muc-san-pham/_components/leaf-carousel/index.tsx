@@ -131,7 +131,7 @@ export const LeafCarousel = ({
                           height={20}
                         />
                       )}
-                      <div className="relative h-24 w-24">
+                      <div className="relative h-20 w-20 lg:h-24 lg:w-24 ">
                         <Image
                           loading="lazy"
                           src={item.image_url}
@@ -143,7 +143,7 @@ export const LeafCarousel = ({
                       </div>
                       <div
                         className={cn(
-                          "mb-2 mt-[2px] line-clamp-2 text-center text-xs font-semibold lg:mt-2 lg:text-sm",
+                          "mb-2 mt-2 line-clamp-2 text-center text-xs font-semibold lg:mt-2 lg:text-sm",
                           isActive ? "text-sky-700" : "text-gray-600",
                         )}
                       >

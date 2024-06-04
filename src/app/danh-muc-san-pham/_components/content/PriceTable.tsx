@@ -69,12 +69,12 @@ export const PriceTable = ({
     {
       header: "Thương hiệu",
       accessorKey: "thuong_hieu",
-      cell: ({ getValue }) => getValue() || "Đang cập nhật",
+      cell: ({ getValue }) => getValue() || "Đang c.nhật",
     },
     {
       header: "Quy cách",
       accessorKey: "quy_cach",
-      cell: ({ getValue }) => getValue() || "Đang cập nhật",
+      cell: ({ getValue }) => getValue() || "Đang c.nhật",
     },
     {
       header: "Chất liệu",
@@ -85,7 +85,7 @@ export const PriceTable = ({
     {
       header: "Hoàn thiện",
       accessorKey: "hoan_thien",
-      cell: ({ getValue }) => getValue() || "Đang cập nhật",
+      cell: ({ getValue }) => getValue() || "Đang c.nhật",
     },
     {
       header: () => <div className="pr-2 text-end">Giá</div>,
@@ -96,8 +96,8 @@ export const PriceTable = ({
           row.original.gia;
 
         return (
-          <div className="text-end">
-            {price ? vndFormatter.format(price) : "Đang cập nhật"}
+          <div className="text-end text-sm font-medium">
+            {price ? vndFormatter.format(price) : "Đang c.nhật"}
             {row.original.don_vi ? "/" + row.original.don_vi : ""}
           </div>
         );
@@ -358,11 +358,11 @@ const renderSubComponent = ({
               <p className="w-24 font-normal text-gray-400">
                 Thương hiệu:&nbsp;
               </p>
-              {record.thuong_hieu || "Đang cập nhật"}
+              {record.thuong_hieu || "Đang c.nhật"}
             </div>
             <div className=" mb-1 flex text-[13px] font-normal">
               <p className="w-24 font-normal text-gray-400">Quy cách:&nbsp;</p>
-              {record.quy_cach || "Đang cập nhật"}
+              {record.quy_cach || "Đang c.nhật"}
             </div>
             <div className="mb-1 flex text-[13px] font-normal">
               <p className="w-24 font-normal text-gray-400">Chất liệu:&nbsp;</p>
@@ -370,7 +370,7 @@ const renderSubComponent = ({
             </div>
             <div className="flex text-[13px] font-normal">
               <p className="w-24 font-normal text-gray-400">Giá:&nbsp;</p>
-              {/* {record.gia ? vndFormatter.format(record.gia) : "Đang cập nhật"} */}
+              {/* {record.gia ? vndFormatter.format(record.gia) : "Đang c.nhật"} */}
               {privatePrice(record, customerProducts)}
             </div>
           </div>
@@ -396,8 +396,8 @@ const privatePrice = (
     customerProducts?.find((x) => x.id === record.id)?.gia ?? record.gia;
 
   return (
-    <div className="text-end">
-      {price ? vndFormatter.format(price) : "Đang cập nhật"}
+    <div className="text-end text-sm font-medium">
+      {price ? vndFormatter.format(price) : "Đang c.nhật"}
       {record.don_vi ? "/" + record.don_vi : ""}
     </div>
   );
