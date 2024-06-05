@@ -9,6 +9,7 @@ import MenuItem from "@component/MenuItem";
 import TextField from "@component/text-field";
 import { Span } from "@component/Typography";
 import { debounce } from "lodash";
+import { ChevronDown } from "lucide-react";
 
 import StyledSearchBox from "./styled";
 
@@ -58,7 +59,7 @@ export default function SearchInputWithCategory() {
           handler={
             <FlexBox className="dropdown-handler" alignItems="center">
               <span>{category}</span>
-              <Icon variant="small">chevron-down</Icon>
+              <ChevronDown className="h-5 w-5" />
             </FlexBox>
           }
         >
