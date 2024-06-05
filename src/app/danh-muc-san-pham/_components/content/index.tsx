@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { createClient } from "@lib/supabase/server";
 import { ScanText } from "lucide-react";
 
 import type { Tables } from "~/lib/supabase/types";
@@ -7,7 +6,7 @@ import { Image } from "~/components/image";
 import { Pagination } from "~/components/ui/pagination";
 import { vndFormatter } from "~/utils/vndFormatter";
 import { filterLeafNodes } from "../../_utils/client";
-import { getCustomer, getLeafNode } from "../../_utils/server";
+import { getCustomer, getMenuNodes, productsBySlug } from "../../_utils/server";
 import { CloseLeafButton } from "./CloseLeafButton";
 import { PriceTable } from "./PriceTable";
 
@@ -25,46 +24,43 @@ export const Content = async ({
   params,
   searchParams,
 }: DefaultProductListContentProps) => {
-  const supabase = createClient();
-  const [customer, childNodes] = await Promise.all([
-    searchParams.customer ? getCustomer(searchParams.customer) : undefined,
-    getLeafNode(params.slug!.at(-1)!),
+  const customerId = searchParams.customer;
+  const selectedGroups = searchParams.groups?.split(",");
+
+  const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
+
+  const [menuNodes, customer] = await Promise.all([
+    getMenuNodes(),
+    customerId ? getCustomer(customerId) : undefined,
   ]);
+
+  const childNodes =
+    menuNodes.find((n) => n.slug === params.slug?.at(-1))?.child_nodes || [];
 
   // by customer or not
   const childNodesFiltered = filterLeafNodes(childNodes, customer?.products);
 
-  const productsBySlug = (slug: string) => {
-    return supabase
-      .from("products")
-      .select("*")
-      .eq("product_group_slug", slug)
-      .order("id", { ascending: true });
-  };
-  const selectedGroups = searchParams.groups?.split(",");
-
-  const { from, to } = getPagination(parseInt(searchParams.page ?? "1"), 10);
   const groups = searchParams.groups
     ? childNodesFiltered.filter((x) => selectedGroups?.includes(x.slug))
     : childNodesFiltered;
-  // const groups = searchParams.groups
-  //   ? childNodes.filter((x) => selectedGroups?.includes(x.slug))
-  //   : childNodes;
   const paginatedGroups = groups.slice(from, to);
-  const priceTablesQuery = await Promise.all([
+
+  const [...priceTablesQuery] = await Promise.all([
     ...paginatedGroups.map((node) => {
       return productsBySlug(node.slug);
     }),
   ]);
 
-  const cp = customer?.products?.map((cp) => cp.id);
   const filtered =
-    customer && cp && cp.length > 0
-      ? priceTablesQuery
-          .map((t) => ({
-            data: t.data?.filter((r) => !cp || cp.includes(r.id)),
-          }))
-          .filter((t) => t.data && t.data.length > 0)
+    customer?.products && customer.products.length > 0
+      ? (() => {
+          const cp = customer.products.map((cp) => cp.id);
+          return priceTablesQuery
+            .map((t) => ({
+              data: t.data?.filter((r) => cp.includes(r.id)),
+            }))
+            .filter((t) => t.data && t.data.length > 0);
+        })()
       : priceTablesQuery;
 
   return (

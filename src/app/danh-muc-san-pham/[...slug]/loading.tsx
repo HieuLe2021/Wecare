@@ -1,5 +1,5 @@
 import { Skeleton } from "~/components/ui/skeleton";
-import { PriceTable } from "./_components/content/PriceTable";
+import { PriceTable } from "../_components/content/PriceTable";
 
 export default function Loading() {
   return (

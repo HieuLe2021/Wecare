@@ -2,7 +2,7 @@ import { Fragment, Suspense } from "react";
 
 import type { DefaultProductListContentProps } from "./_components/content";
 import { ListCarousel } from "./_components/list-carousel";
-import Loading from "./loading";
+import Loading from "./[...slug]/loading";
 
 export default async function Page({
   params,

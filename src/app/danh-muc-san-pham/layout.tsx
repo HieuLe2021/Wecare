@@ -21,14 +21,11 @@ export default async function Layout(props: { children: ReactNode }) {
   const customerId = new URLSearchParams(
     headers().get("x-url")?.split("?").at(-1),
   ).get("customer");
-  // const start = performance.now();
   const [allProductGroups, menuNodes, customer] = await Promise.all([
     getAllProductGroups(),
     getMenuNodes(),
     customerId ? getCustomer(customerId) : undefined,
   ]);
-  // const end = performance.now();
-  // console.log(`Execution time: ${end - start} ms`);
 
   return (
     <StyledAppLayout>
