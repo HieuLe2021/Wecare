@@ -5,7 +5,7 @@ import type { Tables } from "~/lib/supabase/types";
 import { Image } from "~/components/image";
 import { Pagination } from "~/components/ui/pagination";
 import { vndFormatter } from "~/utils/vndFormatter";
-import { filterLeafNodes } from "../../_utils/client";
+import { getChildNodes } from "../../_utils/client";
 import { getCustomer, getMenuNodes, productsBySlug } from "../../_utils/server";
 import { CloseLeafButton } from "./CloseLeafButton";
 import { PriceTable } from "./PriceTable";
@@ -34,11 +34,7 @@ export const Content = async ({
     customerId ? getCustomer(customerId) : undefined,
   ]);
 
-  const childNodes =
-    menuNodes.find((n) => n.slug === params.slug?.at(-1))?.child_nodes || [];
-
-  // by customer or not
-  const childNodesFiltered = filterLeafNodes(childNodes, customer?.products);
+  const childNodesFiltered = getChildNodes(menuNodes, params.slug, customer);
 
   const groups = searchParams.groups
     ? childNodesFiltered.filter((x) => selectedGroups?.includes(x.slug))
