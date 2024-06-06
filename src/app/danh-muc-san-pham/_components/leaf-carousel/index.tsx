@@ -60,7 +60,7 @@ export const LeafCarousel = ({
 
   const f = data.filter((x) => x.slug && groupSlugs.includes(x.slug))[0];
   const d = f ? data.findIndex((x) => x.id === f.id) : 0;
-  const startIndex = d > 4 ? d - 4 : 0;
+  const startIndex = d > 4 ? Math.floor(d / 5) : 0;
 
   const [api, setApi] = useState<CarouselApi>();
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
@@ -135,7 +135,7 @@ export const LeafCarousel = ({
                         <Image
                           loading="lazy"
                           src={item.image_url}
-                          className="mt-2 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
+                          className="mt-3 aspect-[1.11] self-center object-cover lg:group-hover:scale-110"
                           alt={"Ảnh đại diện - " + item.name}
                           fill
                           sizes="96px"
