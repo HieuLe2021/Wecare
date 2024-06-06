@@ -33,7 +33,7 @@ export default function Header({
   menuNodes,
   customer,
 }: HeaderProps) {
-  const { state } = useAppContext();
+  // const { state } = useAppContext();
   const searchParams = useSearchParams();
   const customerId = searchParams.get("customer");
   const pathSplited = usePathname().split("/");
@@ -44,7 +44,7 @@ export default function Header({
         <Icon size="20px">bag</Icon>
       </IconButton>
 
-      {!!state.cart.length && (
+      {/* {!!state.cart.length && (
         <FlexBox
           top={-5}
           right={-5}
@@ -60,7 +60,7 @@ export default function Header({
             {state.cart.length}
           </Tiny>
         </FlexBox>
-      )}
+      )} */}
     </Box>
   );
 
