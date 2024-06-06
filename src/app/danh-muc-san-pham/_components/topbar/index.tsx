@@ -64,7 +64,7 @@ export const Topbar = ({
           </div> */}
         </div>
       </div>
-      {params.slug && <LeafCarousel data={childNodes} leafCount={leafCount} />}
+      <LeafCarousel data={childNodes} leafCount={leafCount} />
     </>
   );
 };
