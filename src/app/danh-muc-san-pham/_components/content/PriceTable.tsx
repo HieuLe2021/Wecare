@@ -12,6 +12,7 @@ import {
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -48,13 +49,13 @@ export const PriceTable = ({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const sortBy = searchParams.get("sort_by") ?? "thuong_hieu";
+  const sortBy = searchParams.get("sort_by") ?? "quy_cach";
   const sortOrder = searchParams.get("sort_order") ?? "asc";
   const sorting = useMemo(() => {
     return [{ id: sortBy, desc: sortOrder === "desc" }];
   }, [sortBy, sortOrder]);
 
-  const [dataToRender, setDataToRender] = useState(data.slice(0, 10));
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
 
   const onRowClick = (
     row: Row<Tables<"products">>,
@@ -106,11 +107,13 @@ export const PriceTable = ({
   ];
 
   const table = useReactTable<Tables<"products">>({
-    data: dataToRender,
+    data,
     columns,
     getRowCanExpand: () => true,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination,
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: (
       old: SortingState | ((old: SortingState) => SortingState),
@@ -141,6 +144,7 @@ export const PriceTable = ({
     },
     enableSortingRemoval: false,
     state: {
+      pagination,
       sorting,
     },
   });
@@ -313,11 +317,13 @@ export const PriceTable = ({
           )}
         </Table>
 
-        {data.length > 10 && data.length !== dataToRender.length && (
+        {data.length > 10 && pagination.pageSize === 10 && (
           <div className="p-1.5 text-center">
             <button
               className="rounded-2xl border border-blue-600 px-6 py-1 text-xs text-blue-600 hover:bg-blue-50"
-              onClick={() => setDataToRender(data)}
+              onClick={() => {
+                table.setPageSize(data.length);
+              }}
             >
               Xem thêm
             </button>
