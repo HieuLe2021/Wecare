@@ -1,12 +1,13 @@
-import Link from "next/link";
 import { ScanText } from "lucide-react";
 
 import type { Tables } from "~/lib/supabase/types";
 import { Image } from "~/components/image";
+import { Link } from "~/components/link";
 import { Pagination } from "~/components/ui/pagination";
 import { vndFormatter } from "~/utils/vndFormatter";
 import { getChildNodes } from "../../_utils/client";
 import { getCustomer, getMenuNodes, productsBySlug } from "../../_utils/server";
+import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 import { CloseLeafButton } from "./CloseLeafButton";
 import { PriceTable } from "./PriceTable";
 
@@ -99,7 +100,7 @@ export const Content = async ({
                 <div className="w-[calc(100%-130px)] pl-2 pt-2 lg:hidden">
                   <Link
                     className="text-sx cursor-pointer pb-4 text-blue-500 underline underline-offset-1"
-                    href={data.parent_slug}
+                    href={DANH_MUC_SAN_PHAM_URL + "/" + data.parent_slug}
                   >
                     {data.parent_name}
                   </Link>
@@ -125,7 +126,7 @@ export const Content = async ({
               <div className="hidden flex-1 lg:block">
                 <Link
                   className="text-sx cursor-pointer pb-2 text-blue-500 underline underline-offset-1"
-                  href={data.parent_slug}
+                  href={DANH_MUC_SAN_PHAM_URL + "/" + data.parent_slug}
                 >
                   {data.parent_name}
                 </Link>
