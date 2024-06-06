@@ -19,6 +19,7 @@ import {
   DotButton,
   useDotButton,
 } from "~/components/ui/carousel";
+import useWindowSize from "~/hooks/useWindowSize";
 
 export const LeafCarousel = ({
   data,
@@ -27,6 +28,7 @@ export const LeafCarousel = ({
   data: Tables<"menu_nodes_matview">["child_nodes"];
   leafCount: number;
 }) => {
+  const width = useWindowSize();
   const searchParams = useSearchParams();
 
   const currentPath = usePathname();
@@ -60,7 +62,7 @@ export const LeafCarousel = ({
 
   const f = data.filter((x) => x.slug && groupSlugs.includes(x.slug))[0];
   const d = f ? data.findIndex((x) => x.id === f.id) : 0;
-  const startIndex = d > 4 ? Math.floor(d / 5) : 0;
+  const startIndex = d > 4 ? Math.floor(d / (width >= 1024 ? 5 : 3)) : 0;
 
   const [api, setApi] = useState<CarouselApi>();
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
