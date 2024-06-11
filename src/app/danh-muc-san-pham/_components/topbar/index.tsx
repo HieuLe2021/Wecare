@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 import { Breadcrumb } from "~/app/danh-muc-san-pham/_components/breadcrumbs";
 import {
@@ -14,6 +14,7 @@ import {
 } from "~/components/ui/select";
 import { Tables } from "~/lib/supabase/types";
 import { getChildNodes } from "../../_utils/client";
+import { DANH_MUC_SAN_PHAM_URL } from "../../config";
 import { DefaultProductListContentProps } from "../content";
 import { LeafCarousel } from "../leaf-carousel";
 
@@ -26,6 +27,7 @@ export const Topbar = ({
   menuNodes: Tables<"menu_nodes_matview">[];
   customer: Tables<"customers_matview"> | undefined;
 }) => {
+  const pathname = usePathname();
   const params = useParams<DefaultProductListContentProps["params"]>();
   const [childNodes, setChildNodes] = useState<
     Tables<"menu_nodes_matview">["child_nodes"]
@@ -64,7 +66,9 @@ export const Topbar = ({
           </div> */}
         </div>
       </div>
-      <LeafCarousel data={childNodes} leafCount={leafCount} />
+      {(pathname !== "/" + DANH_MUC_SAN_PHAM_URL || customer) && (
+        <LeafCarousel data={childNodes} leafCount={leafCount} />
+      )}
     </>
   );
 };
