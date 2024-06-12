@@ -41,12 +41,12 @@ export const env = createEnv({
   experimental__runtimeEnv: {
     VERCEL_ENV: process.env.VERCEL_ENV,
     NODE_ENV: process.env.NODE_ENV,
-    // NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    // NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     //Hoang tran
-    NEXT_PUBLIC_SUPABASE_URL: "https://iqkpkflvnqkpltoszjrl.supabase.co",
-    NEXT_PUBLIC_SUPABASE_ANON_KEY:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlxa3BrZmx2bnFrcGx0b3N6anJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgwODc0NTksImV4cCI6MjAzMzY2MzQ1OX0.Bcu2MAnjpVY8i4bBA6n2Yt2WPu9aCajT8REIADKtU8g",
+    // NEXT_PUBLIC_SUPABASE_URL: "https://iqkpkflvnqkpltoszjrl.supabase.co",
+    // NEXT_PUBLIC_SUPABASE_ANON_KEY:
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlxa3BrZmx2bnFrcGx0b3N6anJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgwODc0NTksImV4cCI6MjAzMzY2MzQ1OX0.Bcu2MAnjpVY8i4bBA6n2Yt2WPu9aCajT8REIADKtU8g",
     //hieu le
     // NEXT_PUBLIC_SUPABASE_URL: "https://awustmvkxviqvsumbcyk.supabase.co",
     // NEXT_PUBLIC_SUPABASE_ANON_KEY:
