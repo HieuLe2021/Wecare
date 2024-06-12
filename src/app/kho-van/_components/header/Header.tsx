@@ -96,7 +96,7 @@ export default function Header({
             alignItems="center"
             mr="1rem"
           >
-            <Link href="/danh-muc-san-pham" className="flex items-center">
+            <Link href="/kho-van" className="flex items-center">
               <Image
                 src="/assets/images/logo.svg"
                 alt="logo"
@@ -166,6 +166,12 @@ export default function Header({
           SẢN PHẨM
         </Link>
         <Link
+          href={"/danh-muc-san-pham"}
+          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
+        >
+          DANH MỤC SẢN PHẨM
+        </Link>
+        <Link
           href={""}
           className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
@@ -176,12 +182,6 @@ export default function Header({
           className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
           TIN TỨC
-        </Link>
-        <Link
-          href={"/kho-van"}
-          className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
-        >
-          KHO VẬN
         </Link>
       </Container>
     </StyledHeader>
