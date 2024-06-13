@@ -96,7 +96,7 @@ export default function Header({
             alignItems="center"
             mr="1rem"
           >
-            <Link href="/kho-van" className="flex items-center">
+            <Link href="/khach-hang" className="flex items-center">
               <Image
                 src="/assets/images/logo.svg"
                 alt="logo"

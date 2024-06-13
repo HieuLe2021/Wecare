@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, usePathname } from "next/navigation";
 
-import { Breadcrumb } from "~/app/kho-van/_components/breadcrumbs";
+import { Breadcrumb } from "~/app/khach-hang/_components/breadcrumbs";
 import {
   Select,
   SelectContent,

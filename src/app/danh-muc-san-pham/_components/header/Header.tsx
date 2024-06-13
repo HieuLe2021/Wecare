@@ -178,10 +178,10 @@ export default function Header({
           TIN TỨC
         </Link>
         <Link
-          href={"/kho-van"}
+          href={"/khach-hang"}
           className="pl-11 text-base font-medium text-sky-700 hover:text-blue-500"
         >
-          KHO VẬN
+          KHÁCH HÀNG
         </Link>
       </Container>
     </StyledHeader>

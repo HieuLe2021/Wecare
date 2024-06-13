@@ -55,7 +55,6 @@ export const MobileSidebar = ({
           className="w-full sm:max-w-full lg:hidden"
           overlayClassName="lg:hidden"
         >
-          {/* <div className="absolute left-0 top-0 border-b-2 border-red-700 bg-[#E3E9EF] px-[25px] py-[19px]"> */}
           <div className="absolute left-6 top-3 flex w-full justify-between">
             <SheetClose
               className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-secondary"
@@ -66,20 +65,7 @@ export const MobileSidebar = ({
                 <span className="sr-only">Close</span>
               </Button>
             </SheetClose>
-            {/* <Link href="/danh-muc-san-pham">
-              <div className="flex">
-                <Image
-                  src="/assets/images/logo.svg"
-                  alt="logo"
-                  width={40}
-                  height={40}
-                />
-                <h6 className="bg-gradient-to-r from-sky-400 to-sky-800 bg-clip-text pl-2 text-3xl font-bold leading-[40px] text-transparent">
-                  WECARE
-                </h6>
-              </div>
-            </Link> */}
-            <Link href="/kho-van">
+            <Link href="/khach-hang">
               <div className="flex">
                 <Image
                   src="/assets/images/logo.svg"

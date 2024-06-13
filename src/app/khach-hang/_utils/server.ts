@@ -4,6 +4,18 @@ import { cache } from "react";
 
 import { createClient } from "~/lib/supabase/server";
 
+export const getAllCustomer = cache(async () => {
+  const supabase = createClient();
+  return (
+    (
+      await supabase
+        .from("customers")
+        .select()
+        .order("name", { ascending: true })
+    ).data ?? []
+  );
+});
+
 export const getAllProductGroups = cache(async () => {
   const supabase = createClient();
   return (

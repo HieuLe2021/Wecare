@@ -33,7 +33,6 @@ export default function Header({
   menuNodes,
   customer,
 }: HeaderProps) {
-  // const { state } = useAppContext();
   const searchParams = useSearchParams();
   const customerId = searchParams.get("customer");
   const pathSplited = usePathname().split("/");
@@ -43,24 +42,6 @@ export default function Header({
       <IconButton bg="gray.200" p="12px">
         <Icon size="20px">bag</Icon>
       </IconButton>
-
-      {/* {!!state.cart.length && (
-        <FlexBox
-          top={-5}
-          right={-5}
-          height={20}
-          minWidth={20}
-          bg="primary.main"
-          borderRadius="50%"
-          alignItems="center"
-          position="absolute"
-          justifyContent="center"
-        >
-          <Tiny color="white" fontWeight="600" lineHeight={1}>
-            {state.cart.length}
-          </Tiny>
-        </FlexBox>
-      )} */}
     </Box>
   );
 
@@ -96,7 +77,7 @@ export default function Header({
             alignItems="center"
             mr="1rem"
           >
-            <Link href="/kho-van" className="flex items-center">
+            <Link href="/khach-hang" className="flex items-center">
               <Image
                 src="/assets/images/logo.svg"
                 alt="logo"
