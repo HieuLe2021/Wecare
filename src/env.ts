@@ -14,15 +14,15 @@ export const env = createEnv({
    * Specify your server-side environment variables schema here.
    * This way you can ensure the app isn't built with invalid env vars.
    */
-  server: {
-    // Database
-    DATABASE_URL: z.string().url(),
-    // POSTGRES_URL: z.string().url(),
-    // POSTGRES_URL_NON_POOLING: z.string().url(),
+  // server: {
+  //   // Database
+  //   DATABASE_URL: z.string().url(),
+  //   // POSTGRES_URL: z.string().url(),
+  //   // POSTGRES_URL_NON_POOLING: z.string().url(),
 
-    // OpenAI
-    // OPENAI_API_KEY: z.string(),
-  },
+  //   // OpenAI
+  //   // OPENAI_API_KEY: z.string(),
+  // },
 
   /**
    * Specify your client-side environment variables schema here. This way you can ensure the app
@@ -43,6 +43,14 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    //Hoang tran
+    // NEXT_PUBLIC_SUPABASE_URL: "https://iqkpkflvnqkpltoszjrl.supabase.co",
+    // NEXT_PUBLIC_SUPABASE_ANON_KEY:
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlxa3BrZmx2bnFrcGx0b3N6anJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgwODc0NTksImV4cCI6MjAzMzY2MzQ1OX0.Bcu2MAnjpVY8i4bBA6n2Yt2WPu9aCajT8REIADKtU8g",
+    //hieu le
+    // NEXT_PUBLIC_SUPABASE_URL: "https://awustmvkxviqvsumbcyk.supabase.co",
+    // NEXT_PUBLIC_SUPABASE_ANON_KEY:
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXN0bXZreHZpcXZzdW1iY3lrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc4MTY0MjksImV4cCI6MjAzMzM5MjQyOX0.hxlyeMkgBWYqDTmYtrXUr1M_S9SDvz5ouSyW8S4ctLo",
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   skipValidation:

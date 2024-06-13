@@ -95,4 +95,5 @@ const list = [
   { title: "Sản phẩm", icon: "category", href: "/danh-muc-san-pham" },
   { title: "Về chúng tôi", icon: "about-us", href: "/ve-chung-toi" },
   { title: "Tin tức", icon: "news", href: "/tin-tuc" },
+  { title: "Khách Hàng", icon: "news", href: "/khach-hang" },
 ];
